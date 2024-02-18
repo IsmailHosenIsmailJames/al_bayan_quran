@@ -56,8 +56,8 @@ class _ChoiceTafseerBookState extends State<ChoiceTafseerBook> {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: index % 2 == 0
-                      ? const Color.fromARGB(30, 76, 175, 79)
-                      : const Color.fromARGB(30, 33, 149, 243)),
+                      ? const Color.fromARGB(30, 131, 240, 255)
+                      : const Color.fromARGB(30, 139, 255, 128)),
               child: ListTile(
                 titleAlignment: ListTileTitleAlignment.center,
                 title: Column(
