@@ -38,10 +38,15 @@ class _TafseerLanguageState extends State<TafseerLanguage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Choice a Tafseer Language")),
+      appBar: AppBar(
+        title: const Text(
+          "Tafseer",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+        ),
+      ),
       body: ListView.builder(
-        padding:
-            const EdgeInsets.only(bottom: 100, top: 10, left: 10, right: 10),
+        scrollDirection: Axis.vertical,
+        padding: const EdgeInsets.only(bottom: 100, top: 10, left: 3, right: 3),
         itemCount: language.length,
         itemBuilder: (context, index) {
           return GestureDetector(

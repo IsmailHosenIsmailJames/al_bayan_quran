@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../theme/theme_icon_button.dart';
 import 'init.dart';
 import 'pages/choice_recitations.dart';
 import 'pages/choice_tafseer_book.dart';
@@ -11,15 +12,15 @@ import 'pages/choice_tranlation_book.dart';
 import 'pages/tafseer_language.dart';
 import 'pages/translation_language.dart';
 
-class CollectInfo extends StatefulWidget {
+class CollectInfoMobile extends StatefulWidget {
   final int pageNumber;
-  const CollectInfo({super.key, required this.pageNumber});
+  const CollectInfoMobile({super.key, required this.pageNumber});
 
   @override
-  State<CollectInfo> createState() => _CollectInfoState();
+  State<CollectInfoMobile> createState() => _CollectInfoMobileState();
 }
 
-class _CollectInfoState extends State<CollectInfo> {
+class _CollectInfoMobileState extends State<CollectInfoMobile> {
   late PageController pageController;
   late int indexPage;
   String nextButtonText = "Next";
@@ -47,7 +48,30 @@ class _CollectInfoState extends State<CollectInfo> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     return Scaffold(
+      appBar: AppBar(
+        title: Row(
+          children: [
+            const Text(
+              "Al Bayan Quran",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const Spacer(),
+            if (width > 430)
+              const Center(
+                child: Text(
+                  "Choice your preferance",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                ),
+              ),
+            const Spacer(),
+          ],
+        ),
+        actions: [themeIconButton],
+      ),
       body: Stack(
         children: [
           PageView(

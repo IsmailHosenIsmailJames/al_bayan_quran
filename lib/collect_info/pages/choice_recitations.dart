@@ -94,13 +94,16 @@ class _RecitaionChoiceState extends State<RecitaionChoice> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Choice Recitation"),
+        title: const Text(
+          "Choice Recitation",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+        ),
       ),
       body: Column(
         children: [
           Padding(
             padding:
-                const EdgeInsets.only(left: 20.0, right: 20, bottom: 5, top: 5),
+                const EdgeInsets.only(left: 5.0, right: 5, bottom: 5, top: 5),
             child: TextFormField(
               autofocus: true,
               onChanged: (value) => search(value),
@@ -115,7 +118,7 @@ class _RecitaionChoiceState extends State<RecitaionChoice> {
           Expanded(
             child: ListView.builder(
               padding: const EdgeInsets.only(
-                  bottom: 100, top: 10, left: 10, right: 10),
+                  bottom: 100, top: 10, left: 3, right: 3),
               itemCount: allRecitationSearch.length,
               itemBuilder: (context, index) {
                 return GestureDetector(

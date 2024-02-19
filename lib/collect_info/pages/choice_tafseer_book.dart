@@ -37,11 +37,13 @@ class _ChoiceTafseerBookState extends State<ChoiceTafseerBook> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title:
-              Text("Tafseer Book for ${infoController.tafseerLanguage.value}")),
+          title: const Text(
+        "Tafseer Book",
+        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+      )),
       body: ListView.builder(
-        padding:
-            const EdgeInsets.only(bottom: 100, top: 10, left: 10, right: 10),
+        scrollDirection: Axis.vertical,
+        padding: const EdgeInsets.only(bottom: 100, top: 10, left: 3, right: 3),
         itemCount: books.length,
         itemBuilder: (context, index) {
           return GestureDetector(
@@ -66,7 +68,7 @@ class _ChoiceTafseerBookState extends State<ChoiceTafseerBook> {
                   children: [
                     Text(
                       books[index][1],
-                      style: const TextStyle(fontSize: 24),
+                      style: const TextStyle(fontSize: 18),
                     ),
                     Text(
                       books[index][0],

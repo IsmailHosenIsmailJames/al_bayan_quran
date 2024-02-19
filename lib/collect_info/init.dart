@@ -1,4 +1,4 @@
-import 'package:al_bayan_quran/collect_info/collect_info.dart';
+import 'package:al_bayan_quran/collect_info/collect_info_layout_responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 
@@ -19,7 +19,7 @@ class _InItState extends State<InIt> {
     final info = box.get("info", defaultValue: false);
     final dataBox = Hive.box("data");
     if (info == false) {
-      return const CollectInfo(pageNumber: 0);
+      return const CollectInfoResponsive(pageNumber: 0);
     }
 
     if (!(dataBox.get('quran_info', defaultValue: false) &&
