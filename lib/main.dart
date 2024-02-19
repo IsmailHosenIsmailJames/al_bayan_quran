@@ -13,7 +13,7 @@ void main() async {
       .setEndpoint('https://cloud.appwrite.io/v1')
       .setProject('albayanquran')
       .setSelfSigned(status: true);
-  await Hive.initFlutter();
+  await Hive.initFlutter("al_bayan_quran");
   await Hive.openBox("info");
   await Hive.openBox("data");
   await Hive.openBox("accountInfo");

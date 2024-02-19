@@ -37,7 +37,6 @@ dependencies:
   cupertino_icons: ^1.0.2
   appwrite: ^11.0.1
   font_awesome_flutter: ^10.7.0
-  flutter_tts: ^3.8.5
   flutter_widget_from_html_core: ^0.14.11
   archive: ^3.4.10
   google_fonts: ^6.1.0
@@ -69,6 +68,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^3.0.1
+  msix: ^3.16.7
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
