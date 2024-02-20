@@ -1,9 +1,9 @@
 import 'package:al_bayan_quran/collect_info/collect_info_layout_responsive.dart';
+import 'package:al_bayan_quran/screens/home_responsive_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import '../data/download/download.dart';
-import '../screens/home.dart';
 
 class InIt extends StatefulWidget {
   const InIt({super.key});
@@ -28,6 +28,6 @@ class _InItState extends State<InIt> {
         dataBox.get('tafseer', defaultValue: false))) {
       return const DownloadData();
     }
-    return const Home();
+    return const HomeResponsiveLayout();
   }
 }

@@ -18,6 +18,7 @@ class PagesList extends StatelessWidget {
       thumbVisibility: true,
       thickness: 10,
       child: ListView.builder(
+        scrollDirection: Axis.vertical,
         itemCount: allPages.length,
         itemBuilder: (context, index) {
           final current = allPages[index];

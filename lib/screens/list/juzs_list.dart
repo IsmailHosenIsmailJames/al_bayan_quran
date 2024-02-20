@@ -52,6 +52,7 @@ class _JuzsListState extends State<JuzsList> with TickerProviderStateMixin {
       radius: const Radius.circular(10),
       controller: scrollController,
       child: ListView.builder(
+        scrollDirection: Axis.vertical,
         controller: scrollController,
         padding: const EdgeInsets.only(bottom: 50),
         itemCount: byJuzs.length,

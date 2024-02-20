@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:al_bayan_quran/screens/home.dart';
+import 'package:al_bayan_quran/screens/home_responsive_layout.dart';
 import 'package:al_bayan_quran/theme/theme_controller.dart';
 import 'package:appwrite/appwrite.dart';
 import 'package:email_validator/email_validator.dart';
@@ -70,7 +70,7 @@ class _LogInState extends State<LogIn> {
         box.put(boxKeyForTitle, singleNote.data['title']);
       }
 
-      Get.offAll(() => const Home());
+      Get.offAll(() => const HomeResponsiveLayout());
     } else {
       // print("Failed while login");
     }

@@ -4,14 +4,14 @@ import 'package:al_bayan_quran/screens/list/pages_list.dart';
 import 'package:al_bayan_quran/screens/list/sura_list.dart';
 import 'package:flutter/material.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+class HomeMobile extends StatefulWidget {
+  const HomeMobile({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<HomeMobile> createState() => _HomeMobileState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeMobileState extends State<HomeMobile> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(

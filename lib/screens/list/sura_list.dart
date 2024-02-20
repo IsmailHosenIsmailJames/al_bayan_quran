@@ -39,6 +39,7 @@ class _SuraListState extends State<SuraList> {
       thumbVisibility: true,
       thickness: 10,
       child: ListView(
+        scrollDirection: Axis.vertical,
         padding: const EdgeInsets.only(bottom: 50),
         controller: scrollController,
         children: listSurahProvider(114),
