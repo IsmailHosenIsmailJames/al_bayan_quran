@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:al_bayan_quran/data/download/links.dart';
 import 'package:al_bayan_quran/screens/home_responsive_layout.dart';
-import 'package:archive/archive.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
@@ -61,46 +60,35 @@ class _DownloadDataState extends State<DownloadData> {
             progressValue = 0.02;
           });
           final quraninforbox = await Hive.openBox("quran_info");
-          for (int i = 1; i < 115; i++) {
-            var url = Uri.parse(
-                "https://api.quran.com/api/v4/chapters/$i/info?language=${preferance['translation_language']!.toLowerCase()}");
-            var headers = {"Accept": "application/json"};
+          var url = Uri.parse(
+              "https://raw.githubusercontent.com/IsmailHosenIsmailJames/quran_backend/main/public/infos.txt");
+          var headers = {"Accept": "application/json"};
 
-            var response = await http.get(url, headers: headers);
-            if (response.statusCode == 200) {
-              setState(() {
-                progressValue += 0.005877;
-              });
-              final jsonBody = jsonDecode(response.body);
-              Map<String, dynamic> infomationChapter =
-                  Map<String, dynamic>.from(jsonBody["chapter_info"]);
-
-              GZipEncoder encoder = GZipEncoder();
-              List<int>? encoded =
-                  encoder.encode(utf8.encode(infomationChapter['text']));
-
-              if (encoded != null) {
-                infomationChapter['text'] = base64Encode(encoded);
-                quraninforbox.put(
-                  "info_${preferance['translation_book_ID']}/$i/text",
-                  infomationChapter,
-                );
-              } else {
-                quraninforbox.put(
-                  "info_${preferance['translation_book_ID']}/$i/text",
-                  "Nothing Found",
-                );
-              }
-            }
+          var response = await http.get(url, headers: headers);
+          if (response.statusCode == 200) {
+            setState(() {
+              progressValue += 0.40;
+            });
+            Map<String, String> jsonBody = Map<String, String>.from(
+              jsonDecode(
+                jsonDecode(response.body),
+              ),
+            );
+            jsonBody.forEach((key, value) {
+              quraninforbox.put(
+                "info_${preferance['translation_book_ID']}/$key/text",
+                jsonDecode(value),
+              );
+            });
+            final dataBoox = Hive.box("data");
+            dataBoox.put("quran_info", true);
+            infoBox.put('quran_info', true);
           }
-          final dataBoox = Hive.box("data");
-          dataBoox.put("quran_info", true);
-          infoBox.put('quran_info', true);
         }
 
         if (infoBox.get('quran', defaultValue: false) == false) {
           setState(() {
-            progressValue = 0.60;
+            progressValue = 0.45;
           });
           var url = Uri.parse(
               "https://api.quran.com/api/v4/quran/verses/uthmani_tajweed");
@@ -109,7 +97,7 @@ class _DownloadDataState extends State<DownloadData> {
           var response = await http.get(url, headers: headers);
           if (response.statusCode == 200) {
             setState(() {
-              progressValue = 0.61;
+              progressValue = 0.65;
             });
             List<Map<String, dynamic>> listMap =
                 List<Map<String, dynamic>>.from(
@@ -126,7 +114,7 @@ class _DownloadDataState extends State<DownloadData> {
 
           if (response.statusCode == 200) {
             setState(() {
-              progressValue = 0.63;
+              progressValue = 0.70;
             });
             List<Map<String, dynamic>> listMap =
                 List<Map<String, dynamic>>.from(
@@ -136,7 +124,7 @@ class _DownloadDataState extends State<DownloadData> {
               quranTajweed.put("$i", listMap[i]['text_uthmani']);
             }
             setState(() {
-              progressValue = 0.64;
+              progressValue = 0.74;
             });
           }
 
@@ -145,7 +133,7 @@ class _DownloadDataState extends State<DownloadData> {
           infoBox.put('quran', true);
         } else {
           setState(() {
-            progressValue = 0.64;
+            progressValue = 0.74;
           });
         }
 
@@ -160,7 +148,7 @@ class _DownloadDataState extends State<DownloadData> {
 
           if (response.statusCode == 200) {
             setState(() {
-              progressValue = 0.65;
+              progressValue = 0.80;
             });
 
             List<Map<String, dynamic>> translation =
@@ -168,7 +156,7 @@ class _DownloadDataState extends State<DownloadData> {
                     json.decode(response.body)['translations']);
 
             setState(() {
-              progressValue = 0.67;
+              progressValue = 0.82;
             });
             final translationBox = await Hive.openBox("translation");
 
@@ -179,7 +167,7 @@ class _DownloadDataState extends State<DownloadData> {
               );
             }
             setState(() {
-              progressValue = 0.68;
+              progressValue = 0.85;
             });
 
             final dataBoox = Hive.box("data");
@@ -190,14 +178,14 @@ class _DownloadDataState extends State<DownloadData> {
           }
         } else {
           setState(() {
-            progressValue = 0.69;
+            progressValue = 0.88;
           });
         }
         if (infoBox.get('tafseer', defaultValue: false) == false ||
             infoBox.get('tafseer', defaultValue: false) !=
                 preferance['tafseer_book_ID']) {
           setState(() {
-            progressValue = 0.75;
+            progressValue = 0.90;
           });
 
           final tafseerBox = await Hive.openBox("tafseer");
@@ -205,7 +193,7 @@ class _DownloadDataState extends State<DownloadData> {
           final headers = {"Accept": "application/json"};
           final response = await http.get(url, headers: headers);
           setState(() {
-            progressValue = 0.95;
+            progressValue = 0.99;
           });
           if (response.statusCode == 200) {
             final tafseer = json.decode(response.body);

@@ -2,7 +2,7 @@
 <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:usesCleartextTraffic="true"
-        android:label="al_bayan_quran"
+        android:label="Al Bayan Quran"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity android:name="com.linusu.flutter_web_auth_2.CallbackActivity" android:exported="true">

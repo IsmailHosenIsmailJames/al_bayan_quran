@@ -15,7 +15,14 @@ class _HomeDesktopState extends State<HomeDesktop> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Al Bayan Quran"),
+        title: const Row(
+          children: [
+            Text("Al Bayan Quran"),
+            Spacer(),
+            Text("Surah - Juzs - Pages"),
+            Spacer(),
+          ],
+        ),
       ),
       body: Row(
         children: [
