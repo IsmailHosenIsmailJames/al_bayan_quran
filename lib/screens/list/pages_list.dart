@@ -10,14 +10,18 @@ class PagesList extends StatelessWidget {
   const PagesList({super.key});
   @override
   Widget build(BuildContext context) {
+    ScrollController scrollController = ScrollController();
     List<MapEntry<String, Map<String, dynamic>>> allPages =
         byPages.entries.toList();
     return Scrollbar(
+      controller: scrollController,
       interactive: true,
       radius: const Radius.circular(10),
       thumbVisibility: true,
       thickness: 10,
       child: ListView.builder(
+        controller: scrollController,
+        padding: const EdgeInsets.only(bottom: 50),
         scrollDirection: Axis.vertical,
         itemCount: allPages.length,
         itemBuilder: (context, index) {
@@ -86,7 +90,7 @@ class PagesList extends StatelessWidget {
                   margin: const EdgeInsets.only(
                       left: 5, right: 5, top: 2, bottom: 2),
                   decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey, width: 1),
+                      color: const Color.fromARGB(30, 125, 125, 125),
                       borderRadius: BorderRadius.circular(20)),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -182,7 +186,7 @@ class PagesList extends StatelessWidget {
                   margin: const EdgeInsets.only(
                       left: 5, right: 5, top: 2, bottom: 2),
                   decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey, width: 1),
+                      color: const Color.fromARGB(30, 125, 125, 125),
                       borderRadius: BorderRadius.circular(20)),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -282,8 +286,8 @@ class PagesList extends StatelessWidget {
                     margin: const EdgeInsets.only(
                         left: 5, right: 5, top: 2, bottom: 2),
                     decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey, width: 1),
-                        borderRadius: BorderRadius.circular(20)),
+                        color: const Color.fromARGB(30, 125, 125, 125),
+                        borderRadius: BorderRadius.circular(15)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -371,7 +375,7 @@ class PagesList extends StatelessWidget {
               margin:
                   const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
               decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey, width: 1),
+                  color: const Color.fromARGB(30, 125, 125, 125),
                   borderRadius: BorderRadius.circular(20)),
               child: Column(
                 children: [

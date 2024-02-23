@@ -12,6 +12,7 @@ class HomeMobile extends StatefulWidget {
 }
 
 class _HomeMobileState extends State<HomeMobile> {
+  ScrollController scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -19,6 +20,7 @@ class _HomeMobileState extends State<HomeMobile> {
       child: Scaffold(
         drawer: const MyDrawer(),
         body: NestedScrollView(
+          controller: scrollController,
           floatHeaderSlivers: true,
           headerSliverBuilder: (context, innerBoxIsScrolled) => [
             SliverAppBar(

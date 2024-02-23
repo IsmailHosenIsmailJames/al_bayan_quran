@@ -40,150 +40,139 @@ class _JuzsListState extends State<JuzsList> with TickerProviderStateMixin {
     super.dispose();
   }
 
-  ScrollController scrollController = ScrollController();
-
   @override
   Widget build(BuildContext context) {
-    return Scrollbar(
-      interactive: true,
-      trackVisibility: true,
-      thickness: 10,
-      thumbVisibility: true,
-      radius: const Radius.circular(10),
-      controller: scrollController,
-      child: ListView.builder(
-        scrollDirection: Axis.vertical,
-        controller: scrollController,
-        padding: const EdgeInsets.only(bottom: 50),
-        itemCount: byJuzs.length,
-        itemBuilder: (context, index) {
-          int firstVerseId = byJuzs[index]['fvi'];
-          int lastVerseId = byJuzs[index]['lvi'];
+    return ListView.builder(
+      scrollDirection: Axis.vertical,
+      padding: const EdgeInsets.only(bottom: 50),
+      itemCount: byJuzs.length,
+      itemBuilder: (context, index) {
+        int firstVerseId = byJuzs[index]['fvi'];
+        int lastVerseId = byJuzs[index]['lvi'];
 
-          String allSurahName = "";
-          String lastSurahName = "";
+        String allSurahName = "";
+        String lastSurahName = "";
 
-          Map<String, String> myMap =
-              Map<String, String>.from(byJuzs[index]['vm']);
+        Map<String, String> myMap =
+            Map<String, String>.from(byJuzs[index]['vm']);
 
-          myMap.forEach((key, value) {
-            int i = int.parse(key) - 1;
+        myMap.forEach((key, value) {
+          int i = int.parse(key) - 1;
 
-            if (allSurahName.isNotEmpty) {
-              lastSurahName = allChaptersInfo[i]['name_simple'];
-            } else {
-              allSurahName += allChaptersInfo[i]['name_simple'];
-            }
-          });
-          if (lastSurahName.isNotEmpty) {
-            allSurahName = "$allSurahName - $lastSurahName";
+          if (allSurahName.isNotEmpty) {
+            lastSurahName = allChaptersInfo[i]['name_simple'];
+          } else {
+            allSurahName += allChaptersInfo[i]['name_simple'];
           }
-          allSurahName = allSurahName.replaceRange(
-              allSurahName.length - 2, allSurahName.length - 1, "");
+        });
+        if (lastSurahName.isNotEmpty) {
+          allSurahName = "$allSurahName - $lastSurahName";
+        }
+        allSurahName = allSurahName.replaceRange(
+            allSurahName.length - 2, allSurahName.length - 1, "");
 
-          return Container(
-            padding: const EdgeInsets.all(10),
-            margin:
-                const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
-            decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey, width: 1),
-                borderRadius: BorderRadius.circular(20)),
-            child: Column(
-              children: [
-                GestureDetector(
-                  behavior: HitTestBehavior.translucent,
-                  onTap: () {
-                    setState(() {
-                      expandedPosition[index] == index
-                          ? {
-                              expandedPosition[index] = -1,
-                              controller[index].reverse()
-                            }
-                          : {
-                              expandedPosition[index] = index,
-                              controller[index].forward()
-                            };
-                    });
-                  },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          CircleAvatar(
-                            radius: 25,
-                            child: Center(
-                              child: Text(
-                                (index + 1).toString(),
-                              ),
+        return Container(
+          padding: const EdgeInsets.all(10),
+          margin: const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
+          decoration: BoxDecoration(
+            color: const Color.fromARGB(30, 125, 125, 125),
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: Column(
+            children: [
+              GestureDetector(
+                behavior: HitTestBehavior.translucent,
+                onTap: () {
+                  setState(() {
+                    expandedPosition[index] == index
+                        ? {
+                            expandedPosition[index] = -1,
+                            controller[index].reverse()
+                          }
+                        : {
+                            expandedPosition[index] = index,
+                            controller[index].forward()
+                          };
+                  });
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        CircleAvatar(
+                          radius: 25,
+                          child: Center(
+                            child: Text(
+                              (index + 1).toString(),
                             ),
                           ),
-                          const SizedBox(
-                            width: 10,
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              allSurahName,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              "Total ${myMap.length} Surah",
+                              style: const TextStyle(
+                                  fontSize: 13,
+                                  color: Colors.grey,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          "${lastVerseId - firstVerseId} Ayahs",
+                          style: const TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 136, 136, 136),
                           ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                allSurahName,
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(5),
+                          child: index == expandedPosition[index]
+                              ? const Icon(
+                                  Icons.arrow_drop_down,
+                                  key: Key("1"),
+                                )
+                              : const Icon(
+                                  Icons.arrow_drop_up,
+                                  key: Key("2"),
                                 ),
-                              ),
-                              Text(
-                                "Total ${myMap.length} Surah",
-                                style: const TextStyle(
-                                    fontSize: 13,
-                                    color: Colors.grey,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text(
-                            "${lastVerseId - firstVerseId} Ayahs",
-                            style: const TextStyle(
-                              fontSize: 11,
-                              fontWeight: FontWeight.bold,
-                              color: Color.fromARGB(255, 136, 136, 136),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(5),
-                            child: index == expandedPosition[index]
-                                ? const Icon(
-                                    Icons.arrow_drop_down,
-                                    key: Key("1"),
-                                  )
-                                : const Icon(
-                                    Icons.arrow_drop_up,
-                                    key: Key("2"),
-                                  ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-                SizeTransition(
-                  sizeFactor: sizeAnimation[index],
-                  axis: Axis.vertical,
-                  child: Column(
-                    key: const Key("2"),
-                    children: surahUnderJuzs(index),
-                  ),
-                )
-              ],
-            ),
-          );
-        },
-      ),
+              ),
+              SizeTransition(
+                sizeFactor: sizeAnimation[index],
+                axis: Axis.vertical,
+                child: Column(
+                  key: const Key("2"),
+                  children: surahUnderJuzs(index),
+                ),
+              )
+            ],
+          ),
+        );
+      },
     );
   }
 
@@ -228,8 +217,8 @@ class _JuzsListState extends State<JuzsList> with TickerProviderStateMixin {
           padding: const EdgeInsets.all(10),
           margin: const EdgeInsets.only(left: 5, right: 5, top: 5, bottom: 5),
           decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey, width: 1),
-              borderRadius: BorderRadius.circular(20)),
+              color: const Color.fromARGB(30, 125, 125, 125),
+              borderRadius: BorderRadius.circular(15)),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

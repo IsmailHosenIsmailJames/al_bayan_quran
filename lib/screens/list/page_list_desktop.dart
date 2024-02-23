@@ -13,6 +13,7 @@ class PagesListDesktop extends StatelessWidget {
     List<MapEntry<String, Map<String, dynamic>>> allPages =
         byPages.entries.toList();
     return ListView.builder(
+      padding: const EdgeInsets.only(bottom: 50),
       scrollDirection: Axis.vertical,
       itemCount: allPages.length,
       itemBuilder: (context, index) {
@@ -81,7 +82,7 @@ class PagesListDesktop extends StatelessWidget {
                 margin:
                     const EdgeInsets.only(left: 5, right: 5, top: 2, bottom: 2),
                 decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey, width: 1),
+                    color: const Color.fromARGB(30, 125, 125, 125),
                     borderRadius: BorderRadius.circular(20)),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -177,7 +178,7 @@ class PagesListDesktop extends StatelessWidget {
                 margin:
                     const EdgeInsets.only(left: 5, right: 5, top: 2, bottom: 2),
                 decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey, width: 1),
+                    color: const Color.fromARGB(30, 125, 125, 125),
                     borderRadius: BorderRadius.circular(20)),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -277,8 +278,8 @@ class PagesListDesktop extends StatelessWidget {
                   margin: const EdgeInsets.only(
                       left: 5, right: 5, top: 2, bottom: 2),
                   decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey, width: 1),
-                      borderRadius: BorderRadius.circular(20)),
+                      color: const Color.fromARGB(30, 125, 125, 125),
+                      borderRadius: BorderRadius.circular(15)),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -366,7 +367,7 @@ class PagesListDesktop extends StatelessWidget {
             margin:
                 const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
             decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey, width: 1),
+                color: const Color.fromARGB(30, 125, 125, 125),
                 borderRadius: BorderRadius.circular(20)),
             child: Column(
               children: [

@@ -4,26 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
-class SuraList extends StatefulWidget {
-  const SuraList({super.key});
+class SuraListDesktop extends StatefulWidget {
+  const SuraListDesktop({super.key});
 
   @override
-  State<SuraList> createState() => _SuraListState();
+  State<SuraListDesktop> createState() => _SuraListDesktopState();
 }
 
-class _SuraListState extends State<SuraList> {
+class _SuraListDesktopState extends State<SuraListDesktop> {
   @override
   Widget build(BuildContext context) {
-    return Scrollbar(
-      interactive: true,
-      radius: const Radius.circular(10),
-      thumbVisibility: true,
-      thickness: 10,
-      child: ListView(
-        scrollDirection: Axis.vertical,
-        padding: const EdgeInsets.only(bottom: 50),
-        children: listSurahProvider(114),
-      ),
+    return ListView(
+      scrollDirection: Axis.vertical,
+      padding: const EdgeInsets.only(bottom: 50),
+      children: listSurahProvider(114),
     );
   }
 

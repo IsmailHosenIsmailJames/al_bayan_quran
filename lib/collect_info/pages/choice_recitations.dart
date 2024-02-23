@@ -105,7 +105,7 @@ class _RecitaionChoiceState extends State<RecitaionChoice> {
             padding:
                 const EdgeInsets.only(left: 5.0, right: 5, bottom: 5, top: 5),
             child: TextFormField(
-              autofocus: true,
+              autofocus: false,
               onChanged: (value) => search(value),
               decoration: InputDecoration(
                 prefixIcon: const Icon(Icons.search),

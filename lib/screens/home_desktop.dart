@@ -1,6 +1,6 @@
 import 'package:al_bayan_quran/screens/list/juzs_list.dart';
 import 'package:al_bayan_quran/screens/list/page_list_desktop.dart';
-import 'package:al_bayan_quran/screens/list/sura_list.dart';
+import 'package:al_bayan_quran/screens/list/surah_list_desktop.dart';
 import 'package:flutter/material.dart';
 
 class HomeDesktop extends StatefulWidget {
@@ -11,6 +11,7 @@ class HomeDesktop extends StatefulWidget {
 }
 
 class _HomeDesktopState extends State<HomeDesktop> {
+  ScrollController scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +28,7 @@ class _HomeDesktopState extends State<HomeDesktop> {
       body: Row(
         children: [
           const Expanded(
-            child: SuraList(),
+            child: SuraListDesktop(),
           ),
           const Expanded(
             child: JuzsList(),
