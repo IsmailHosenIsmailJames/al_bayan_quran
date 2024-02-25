@@ -1,9 +1,9 @@
 import 'package:al_bayan_quran/api/some_api_response.dart';
 import 'package:al_bayan_quran/screens/getx_controller.dart';
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
+import 'package:just_audio/just_audio.dart';
 
 class SurahWithReading extends StatefulWidget {
   final int surahNumber;
@@ -38,18 +38,6 @@ class _SurahWithReadingState extends State<SurahWithReading> {
       listOfAyah.add(i);
       listOfkey.add(GlobalKey());
     }
-
-    player.onPlayerStateChanged.listen((event) {
-      if (event == PlayerState.playing) {
-        setState(() {
-          isPlaying = true;
-        });
-      } else {
-        setState(() {
-          isPlaying = false;
-        });
-      }
-    });
     super.initState();
   }
 

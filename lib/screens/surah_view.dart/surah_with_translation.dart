@@ -4,13 +4,12 @@ import 'package:al_bayan_quran/api/some_api_response.dart';
 import 'package:al_bayan_quran/screens/getx_controller.dart';
 import 'package:al_bayan_quran/screens/surah_view.dart/tafseer/tafseer.dart';
 import 'package:archive/archive.dart';
-import 'package:audioplayers/audioplayers.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
+import 'package:just_audio/just_audio.dart';
 
 import 'notes/notes.dart';
 
@@ -35,11 +34,9 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
   late String? surahNameSimple;
   late String? surahNameArabic;
   late String? relavencePlace;
-  final player = AudioPlayer();
 
   List<int> listOfAyah = [];
   List<GlobalKey> listOfkey = [];
-  List<String> listOfAudioURL = [];
 
   @override
   void initState() {
@@ -52,51 +49,48 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
     for (int i = start; i < end; i++) {
       listOfAyah.add(i);
       listOfkey.add(GlobalKey());
-      listOfAudioURL.add(getFullURL(i + 1));
     }
 
-    player.onPlayerStateChanged.listen((event) {
-      if (event == PlayerState.playing) {
+    player.currentIndexStream.listen((event) {
+      if (player.playing && event != null && isSinglePlaying == false) {
         setState(() {
-          isPlaying = true;
-          showFloatingControllers = true;
+          playingIndex = event;
         });
-      } else {
-        setState(() {
-          isPlaying = false;
-        });
+        if (listOfkey[playingIndex].currentContext != null &&
+            player.playing &&
+            playingIndex > -1) {
+          Scrollable.ensureVisible(
+            listOfkey[playingIndex].currentContext!,
+            duration: const Duration(milliseconds: 500),
+            alignment: 0.5,
+            curve: Curves.ease,
+          );
+        }
       }
     });
 
-    player.onPlayerComplete.listen((event) async {
-      if (toContinue) {
+    player.playerStateStream.listen((event) {
+      if (event.processingState == ProcessingState.completed) {
         setState(() {
-          playingIndex++;
+          isPlaying = false;
         });
-        if (playingIndex >= totalAyahInSuarh) {
-          setState(() {
-            isPlaying = false;
-            showFloatingControllers = false;
-          });
-        } else {
-          await player.play(UrlSource(listOfAudioURL[playingIndex]));
-          if (listOfkey[playingIndex].currentContext != null) {
-            Scrollable.ensureVisible(
-              listOfkey[playingIndex].currentContext!,
-              duration: const Duration(milliseconds: 500),
-              curve: Curves.ease,
-            );
-          }
-          setState(() {
-            showFloatingControllers = true;
-          });
-        }
-      } else {
+      } else if (event.processingState == ProcessingState.loading) {
         setState(() {
+          isLoading = true;
+        });
+      } else if (event.playing) {
+        setState(() {
+          isPlaying = true;
+        });
+      } else if (event.playing == false) {
+        setState(() {
+          isPlaying = false;
+          isLoading = false;
           showFloatingControllers = false;
         });
       }
     });
+
     super.initState();
   }
 
@@ -109,10 +103,46 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
   final ScrollController scrollController = ScrollController();
   bool isPlaying = false;
   int playingIndex = -1;
-  bool toContinue = false;
-  int currentPlayingIndex = -1;
+  bool isLoading = false;
   bool showFloatingControllers = false;
   bool expandFloatingControllers = true;
+  bool isSinglePlaying = false;
+  AudioPlayer player = AudioPlayer();
+
+  void playAudioList(
+      List<String> listOfAudioURL, int index, bool toContinue) async {
+    List<AudioSource> audioResourceSource = [];
+    for (String x in listOfAudioURL) {
+      audioResourceSource.add(LockCachingAudioSource(Uri.parse(x)));
+    }
+    final playlist = ConcatenatingAudioSource(
+      // Start loading next item just before reaching it
+      useLazyPreparation: true,
+      // Customise the shuffle algorithm
+      shuffleOrder: DefaultShuffleOrder(),
+      // Specify the playlist items
+
+      children: audioResourceSource,
+    );
+    if (toContinue) {
+      await player.setAudioSource(playlist,
+          initialIndex: index, initialPosition: Duration.zero);
+    } else {
+      await player.setAudioSource(playlist[index]);
+    }
+
+    await player.play();
+  }
+
+  List<String> getAllAudioUrl() {
+    int start = widget.start ?? 0;
+    int end = widget.end ?? allChaptersInfo[widget.surahNumber]['verses_count'];
+    List<String> listOfURL = [];
+    for (int i = start; i < end; i++) {
+      listOfURL.add(getFullURL(i + 1));
+    }
+    return listOfURL;
+  }
 
   String getBaseURLOfAudio(String recitor) {
     List<String> splited = recitor.split("(");
@@ -297,27 +327,14 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
                   ? Row(
                       children: [
                         IconButton(
-                          onPressed: playingIndex > 0
-                              ? () async {
-                                  setState(() {
-                                    playingIndex--;
-                                  });
-                                  await player.play(
-                                      UrlSource(listOfAudioURL[playingIndex]));
-                                  if (listOfkey[playingIndex].currentContext !=
-                                      null) {
-                                    Scrollable.ensureVisible(
-                                      listOfkey[playingIndex].currentContext!,
-                                      duration:
-                                          const Duration(milliseconds: 500),
-                                      curve: Curves.ease,
-                                    );
-                                  }
-                                  setState(() {
-                                    showFloatingControllers = true;
-                                  });
-                                }
-                              : null,
+                          onPressed: () {
+                            if (isSinglePlaying) {
+                              playAudioList(
+                                  getAllAudioUrl(), playingIndex, true);
+                            } else {
+                              player.seekToPrevious();
+                            }
+                          },
                           icon: const Icon(
                             Icons.skip_previous,
                           ),
@@ -328,10 +345,10 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
                         IconButton(
                           color: Colors.white,
                           onPressed: () {
-                            if (isPlaying) {
+                            if (player.playing) {
                               player.pause();
                             } else {
-                              player.resume();
+                              player.play();
                             }
                           },
                           style: const ButtonStyle(
@@ -347,27 +364,9 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
                           width: 5,
                         ),
                         IconButton(
-                          onPressed: playingIndex < totalAyahInSuarh - 1
-                              ? () async {
-                                  setState(() {
-                                    playingIndex++;
-                                  });
-                                  await player.play(
-                                      UrlSource(listOfAudioURL[playingIndex]));
-                                  if (listOfkey[playingIndex].currentContext !=
-                                      null) {
-                                    Scrollable.ensureVisible(
-                                      listOfkey[playingIndex].currentContext!,
-                                      duration:
-                                          const Duration(milliseconds: 500),
-                                      curve: Curves.ease,
-                                    );
-                                  }
-                                  setState(() {
-                                    showFloatingControllers = true;
-                                  });
-                                }
-                              : null,
+                          onPressed: () {
+                            player.seekToNext();
+                          },
                           icon: const Icon(
                             Icons.skip_next,
                           ),
@@ -376,31 +375,7 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
                           width: 5,
                         ),
                         IconButton(
-                          onPressed: () {
-                            setState(() {
-                              toContinue = !toContinue;
-                            });
-                          },
-                          icon: toContinue
-                              ? const Icon(FontAwesomeIcons.lock)
-                              : const Icon(FontAwesomeIcons.unlock),
-                        ),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            if (isPlaying) {
-                              setState(() {
-                                expandFloatingControllers = false;
-                              });
-                            } else {
-                              player.release();
-                              setState(() {
-                                showFloatingControllers = false;
-                              });
-                            }
-                          },
+                          onPressed: () {},
                           icon: const Icon(
                             Icons.close,
                           ),
@@ -537,21 +512,13 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
                           color: Colors.white,
                           onPressed: () {
                             setState(() {
-                              toContinue = true;
+                              showFloatingControllers = true;
+                              isSinglePlaying = false;
+                              playingIndex = 0;
+                              isPlaying = true;
                             });
-                            if (isPlaying) {
-                              currentPlayingIndex = playingIndex;
-                              player.pause();
-                            } else {
-                              if (currentPlayingIndex != -1) {
-                                player.resume();
-                              } else {
-                                setState(() {
-                                  playingIndex = 0;
-                                });
-                                player.play(UrlSource(listOfAudioURL[0]));
-                              }
-                            }
+                            List<String> listOfAudioURL = getAllAudioUrl();
+                            playAudioList(listOfAudioURL, 0, true);
                           },
                           icon: isPlaying
                               ? const Icon(Icons.pause)
@@ -629,12 +596,30 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
                                   surahName: widget.surahName,
                                 ));
                           }
+                          if (value == "continuePlay") {
+                            setState(() {
+                              isSinglePlaying = false;
+                            });
+                            playAudioList(getAllAudioUrl(), index - 1, true);
+                          }
                         },
                         icon: const Icon(
                           Icons.more_horiz,
                         ),
                         itemBuilder: (BuildContext bc) {
                           return const [
+                            PopupMenuItem(
+                              value: 'continuePlay',
+                              child: Row(
+                                children: [
+                                  Icon(Icons.audiotrack_outlined),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text("Contionue Play"),
+                                ],
+                              ),
+                            ),
                             PopupMenuItem(
                               value: 'note',
                               child: Row(
@@ -647,18 +632,6 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
                                 ],
                               ),
                             ),
-                            // PopupMenuItem(
-                            //   value: 'bookmark',
-                            //   child: Row(
-                            //     children: [
-                            //       Icon(Icons.star),
-                            //       SizedBox(
-                            //         width: 10,
-                            //       ),
-                            //       Text("Book Mark"),
-                            //     ],
-                            //   ),
-                            // ),
                             PopupMenuItem(
                               value: 'copy',
                               child: Row(
@@ -698,28 +671,13 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
                           ),
                         ),
                         onPressed: () {
-                          if (index != playingIndex + 1) {
-                            player.play(UrlSource(listOfAudioURL[index - 1]));
-                            setState(() {
-                              playingIndex = index - 1;
-                            });
-                          }
-                          if (isPlaying) {
-                            player.pause();
-                          } else {
-                            setState(() {
-                              showFloatingControllers = true;
-                            });
-                            if (toContinue) {
-                              player.resume();
-                            } else {
-                              player.play(UrlSource(listOfAudioURL[index - 1]));
-                              setState(() {
-                                playingIndex = index - 1;
-                                toContinue = false;
-                              });
-                            }
-                          }
+                          setState(() {
+                            isSinglePlaying = true;
+                            showFloatingControllers = true;
+                            isPlaying = true;
+                            playingIndex = index - 1;
+                          });
+                          playAudioList(getAllAudioUrl(), index - 1, false);
                         },
                         icon: index == playingIndex + 1 && isPlaying
                             ? const Icon(Icons.pause)

@@ -1,6 +1,7 @@
-import 'package:audioplayers/audioplayers.dart';
+// import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:just_audio/just_audio.dart';
 
 import '../../api/all_recitation.dart';
 import '../getx/get_controller.dart';
@@ -14,22 +15,12 @@ class RecitaionChoice extends StatefulWidget {
 
 class _RecitaionChoiceState extends State<RecitaionChoice> {
   final infoController = Get.put(InfoController());
-  final player = AudioPlayer()..setReleaseMode(ReleaseMode.stop);
+  final player = AudioPlayer();
   late List<String> allRecitationSearch = [];
 
   @override
   void initState() {
     allRecitationSearch.addAll(allRecitation);
-    player.onPlayerComplete.listen((state) {
-      if (playing >= 6) {
-        setState(() {
-          playingIndex = -1;
-        });
-      } else {
-        playing++;
-        player.play(UrlSource(listUrl[playing]));
-      }
-    });
     super.initState();
   }
 
@@ -63,12 +54,27 @@ class _RecitaionChoiceState extends State<RecitaionChoice> {
       listUrl;
     });
 
-    player.play(UrlSource(listUrl[0]));
+    List<AudioSource> audioResourceSource = [];
+    for (int i = 0; i < 7; i++) {
+      audioResourceSource.add(LockCachingAudioSource(Uri.parse(listUrl[i])));
+    }
+    final playlist = ConcatenatingAudioSource(
+      // Start loading next item just before reaching it
+      useLazyPreparation: true,
+      // Customise the shuffle algorithm
+      shuffleOrder: DefaultShuffleOrder(),
+      // Specify the playlist items
+
+      children: audioResourceSource,
+    );
+    await player.setAudioSource(playlist,
+        initialIndex: 0, initialPosition: Duration.zero);
+    await player.play();
   }
 
   void resumeOrPuseAudio(bool isPlay) {
     if (isPlay) {
-      player.resume();
+      player.play();
     } else {
       player.pause();
     }
