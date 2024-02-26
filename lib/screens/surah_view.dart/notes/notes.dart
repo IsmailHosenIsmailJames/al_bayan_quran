@@ -182,7 +182,22 @@ class _NotesState extends State<Notes> {
           isUploaded = true;
         });
       } catch (e) {
-        print(e);
+        showDialog(
+          // ignore: use_build_context_synchronously
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text("An Error Occured"),
+            content: Text(e.toString()),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text("OK"),
+              ),
+            ],
+          ),
+        );
       }
       setState(() {
         cludUploadIdicator = IconButton(

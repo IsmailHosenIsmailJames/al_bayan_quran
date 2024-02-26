@@ -1,6 +1,5 @@
 import 'package:al_bayan_quran/screens/drawer/drawer.dart';
 import 'package:al_bayan_quran/screens/list/juzs_list.dart';
-import 'package:al_bayan_quran/screens/list/pages_list.dart';
 import 'package:al_bayan_quran/screens/list/sura_list.dart';
 import 'package:flutter/material.dart';
 
@@ -16,18 +15,18 @@ class _HomeMobileState extends State<HomeMobile> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: Scaffold(
         drawer: const MyDrawer(),
         body: NestedScrollView(
           controller: scrollController,
           floatHeaderSlivers: true,
           headerSliverBuilder: (context, innerBoxIsScrolled) => [
-            SliverAppBar(
+            const SliverAppBar(
               floating: true,
-              snap: true,
-              title: const Text("Al Bayan Quran"),
-              bottom: const TabBar(
+              // snap: true,
+              title: Text("Al Bayan Quran"),
+              bottom: TabBar(
                 tabs: [
                   Tab(
                     text: "Sura",
@@ -35,59 +34,56 @@ class _HomeMobileState extends State<HomeMobile> {
                   Tab(
                     text: "Juzs",
                   ),
-                  Tab(
-                    text: "Pages",
-                  ),
                 ],
               ),
               actions: [
-                IconButton(
-                    onPressed: () {
-                      showDialog(
-                        useSafeArea: true,
-                        context: context,
-                        builder: (context) => AlertDialog(
-                          title: const Row(
-                            children: [
-                              Icon(Icons.search),
-                              SizedBox(
-                                width: 15,
-                              ),
-                              Text("Search")
-                            ],
-                          ),
-                          content: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              TextFormField(
-                                autofocus: true,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 8.0),
-                                child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      TextButton(
-                                        child: const Text("Quran"),
-                                        onPressed: () {},
-                                      ),
-                                      TextButton(
-                                          child: const Text("Translation"),
-                                          onPressed: () {}),
-                                      TextButton(
-                                          child: const Text("Tafseer"),
-                                          onPressed: () {}),
-                                    ]),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                    icon: const Icon(Icons.search))
+                // IconButton(
+                //     onPressed: () {
+                //       showDialog(
+                //         useSafeArea: true,
+                //         context: context,
+                //         builder: (context) => AlertDialog(
+                //           title: const Row(
+                //             children: [
+                //               Icon(Icons.search),
+                //               SizedBox(
+                //                 width: 15,
+                //               ),
+                //               Text("Search")
+                //             ],
+                //           ),
+                //           content: Column(
+                //             mainAxisAlignment: MainAxisAlignment.center,
+                //             crossAxisAlignment: CrossAxisAlignment.center,
+                //             mainAxisSize: MainAxisSize.min,
+                //             children: [
+                //               TextFormField(
+                //                 autofocus: true,
+                //               ),
+                //               Padding(
+                //                 padding: const EdgeInsets.only(top: 8.0),
+                //                 child: Row(
+                //                     mainAxisAlignment:
+                //                         MainAxisAlignment.spaceAround,
+                //                     children: [
+                //                       TextButton(
+                //                         child: const Text("Quran"),
+                //                         onPressed: () {},
+                //                       ),
+                //                       TextButton(
+                //                           child: const Text("Translation"),
+                //                           onPressed: () {}),
+                //                       TextButton(
+                //                           child: const Text("Tafseer"),
+                //                           onPressed: () {}),
+                //                     ]),
+                //               ),
+                //             ],
+                //           ),
+                //         ),
+                //       );
+                //     },
+                //     icon: const Icon(Icons.search))
               ],
             )
           ],
@@ -95,7 +91,6 @@ class _HomeMobileState extends State<HomeMobile> {
             children: [
               SuraList(),
               JuzsList(),
-              PagesList(),
             ],
           ),
         ),

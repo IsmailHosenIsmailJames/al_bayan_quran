@@ -15,7 +15,7 @@ class RecitaionChoice extends StatefulWidget {
 
 class _RecitaionChoiceState extends State<RecitaionChoice> {
   final infoController = Get.put(InfoController());
-  final player = AudioPlayer();
+
   late List<String> allRecitationSearch = [];
 
   @override
@@ -79,6 +79,8 @@ class _RecitaionChoiceState extends State<RecitaionChoice> {
       player.pause();
     }
   }
+
+  AudioPlayer player = AudioPlayer();
 
   String getBaseURLOfAudio(int value) {
     String recitor = allRecitationSearch[value];

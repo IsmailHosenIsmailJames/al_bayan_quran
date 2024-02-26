@@ -1,5 +1,4 @@
 import 'package:al_bayan_quran/screens/list/juzs_list.dart';
-import 'package:al_bayan_quran/screens/list/page_list_desktop.dart';
 import 'package:al_bayan_quran/screens/list/surah_list_desktop.dart';
 import 'package:flutter/material.dart';
 
@@ -25,99 +24,16 @@ class _HomeDesktopState extends State<HomeDesktop> {
           ],
         ),
       ),
-      body: Row(
+      body: const Row(
         children: [
-          const Expanded(
+          Expanded(
             child: SuraListDesktop(),
           ),
-          const Expanded(
+          Expanded(
             child: JuzsList(),
           ),
-          if (MediaQuery.of(context).size.width > 1000)
-            const Expanded(
-              child: PagesListDesktop(),
-            ),
         ],
       ),
     );
-    // DefaultTabController(
-    //   length: 3,
-    //   child: Scaffold(
-    //     drawer: const MyDrawer(),
-    //     body: NestedScrollView(
-    //       floatHeaderSlivers: true,
-    //       headerSliverBuilder: (context, innerBoxIsScrolled) => [
-    //         SliverAppBar(
-    //           floating: true,
-    //           snap: true,
-    //           title: const Text("Al Bayan Quran"),
-    //           bottom: const TabBar(
-    //             tabs: [
-    //               Tab(
-    //                 text: "Sura",
-    //               ),
-    //               Tab(
-    //                 text: "Juzs",
-    //               ),
-    //               Tab(
-    //                 text: "Pages",
-    //               ),
-    //             ],
-    //           ),
-    //           actions: [
-    //             IconButton(
-    //                 onPressed: () {
-    //                   showDialog(
-    //                     useSafeArea: true,
-    //                     context: context,
-    //                     builder: (context) => AlertDialog(
-    //                       title: const Row(
-    //                         children: [
-    //                           Icon(Icons.search),
-    //                           SizedBox(
-    //                             width: 15,
-    //                           ),
-    //                           Text("Search")
-    //                         ],
-    //                       ),
-    //                       content: Column(
-    //                         mainAxisAlignment: MainAxisAlignment.center,
-    //                         crossAxisAlignment: CrossAxisAlignment.center,
-    //                         mainAxisSize: MainAxisSize.min,
-    //                         children: [
-    //                           TextFormField(
-    //                             autofocus: true,
-    //                           ),
-    //                           Padding(
-    //                             padding: const EdgeInsets.only(top: 8.0),
-    //                             child: Row(
-    //                                 mainAxisAlignment:
-    //                                     MainAxisAlignment.spaceAround,
-    //                                 children: [
-    //                                   TextButton(
-    //                                     child: const Text("Quran"),
-    //                                     onPressed: () {},
-    //                                   ),
-    //                                   TextButton(
-    //                                       child: const Text("Translation"),
-    //                                       onPressed: () {}),
-    //                                   TextButton(
-    //                                       child: const Text("Tafseer"),
-    //                                       onPressed: () {}),
-    //                                 ]),
-    //                           ),
-    //                         ],
-    //                       ),
-    //                     ),
-    //                   );
-    //                 },
-    //                 icon: const Icon(Icons.search))
-    //           ],
-    //         )
-    //       ],
-    //       body:
-    //     ),
-    //   ),
-    // );
   }
 }

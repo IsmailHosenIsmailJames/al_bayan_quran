@@ -34,6 +34,7 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
   late String? surahNameSimple;
   late String? surahNameArabic;
   late String? relavencePlace;
+  AudioPlayer player = AudioPlayer();
 
   List<int> listOfAyah = [];
   List<GlobalKey> listOfkey = [];
@@ -70,23 +71,34 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
     });
 
     player.playerStateStream.listen((event) {
-      if (event.processingState == ProcessingState.completed) {
+      if (event.processingState == ProcessingState.completed &&
+          playingIndex >= end - 1) {
+        setState(() {
+          showFloatingControllers = false;
+          isLoading = false;
+          isPlaying = false;
+        });
+      } else if (event.processingState == ProcessingState.completed) {
         setState(() {
           isPlaying = false;
+          isLoading = false;
+          showFloatingControllers = false;
         });
       } else if (event.processingState == ProcessingState.loading) {
         setState(() {
           isLoading = true;
+          showFloatingControllers = true;
         });
       } else if (event.playing) {
         setState(() {
           isPlaying = true;
+          isLoading = false;
+          showFloatingControllers = true;
         });
       } else if (event.playing == false) {
         setState(() {
           isPlaying = false;
           isLoading = false;
-          showFloatingControllers = false;
         });
       }
     });
@@ -95,7 +107,8 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
   }
 
   @override
-  void dispose() async {
+  void dispose() {
+    player.dispose();
     super.dispose();
   }
 
@@ -107,31 +120,48 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
   bool showFloatingControllers = false;
   bool expandFloatingControllers = true;
   bool isSinglePlaying = false;
-  AudioPlayer player = AudioPlayer();
-
   void playAudioList(
       List<String> listOfAudioURL, int index, bool toContinue) async {
-    List<AudioSource> audioResourceSource = [];
-    for (String x in listOfAudioURL) {
-      audioResourceSource.add(LockCachingAudioSource(Uri.parse(x)));
-    }
-    final playlist = ConcatenatingAudioSource(
-      // Start loading next item just before reaching it
-      useLazyPreparation: true,
-      // Customise the shuffle algorithm
-      shuffleOrder: DefaultShuffleOrder(),
-      // Specify the playlist items
+    try {
+      List<AudioSource> audioResourceSource = [];
+      for (String x in listOfAudioURL) {
+        audioResourceSource.add(LockCachingAudioSource(Uri.parse(x)));
+      }
+      final playlist = ConcatenatingAudioSource(
+        // Start loading next item just before reaching it
+        useLazyPreparation: true,
+        // Customise the shuffle algorithm
+        shuffleOrder: DefaultShuffleOrder(),
+        // Specify the playlist items
 
-      children: audioResourceSource,
-    );
-    if (toContinue) {
-      await player.setAudioSource(playlist,
-          initialIndex: index, initialPosition: Duration.zero);
-    } else {
-      await player.setAudioSource(playlist[index]);
-    }
+        children: audioResourceSource,
+      );
+      if (toContinue) {
+        await player.setAudioSource(playlist,
+            initialIndex: index, initialPosition: Duration.zero);
+      } else {
+        await player.setAudioSource(playlist[index]);
+      }
 
-    await player.play();
+      await player.play();
+    } catch (e) {
+      showDialog(
+        // ignore: use_build_context_synchronously
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text("Need Internet Connection"),
+          content: const Text(
+              "Note: When you play any ayah for the first time it will get downloaded from internet. Then it will stored as cached data in your local memory. You need internet connection now for play this audio."),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text("OK"))
+          ],
+        ),
+      );
+    }
   }
 
   List<String> getAllAudioUrl() {
@@ -375,7 +405,15 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
                           width: 5,
                         ),
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            if (player.playing) {
+                              showFloatingControllers = false;
+                            } else {
+                              setState(() {
+                                expandFloatingControllers = false;
+                              });
+                            }
+                          },
                           icon: const Icon(
                             Icons.close,
                           ),
@@ -429,7 +467,7 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
             margin: const EdgeInsets.all(8),
             padding: const EdgeInsets.all(10),
             decoration: const BoxDecoration(
-              color: Color.fromARGB(60, 120, 120, 120),
+              color: Color.fromARGB(30, 120, 120, 120),
               borderRadius: BorderRadius.all(
                 Radius.circular(10),
               ),
@@ -553,7 +591,7 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
               margin: const EdgeInsets.all(8),
               padding: const EdgeInsets.all(10),
               decoration: const BoxDecoration(
-                color: Color.fromARGB(60, 120, 120, 120),
+                color: Color.fromARGB(30, 120, 120, 120),
                 borderRadius: BorderRadius.all(
                   Radius.circular(10),
                 ),
@@ -671,13 +709,19 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
                           ),
                         ),
                         onPressed: () {
-                          setState(() {
-                            isSinglePlaying = true;
-                            showFloatingControllers = true;
-                            isPlaying = true;
-                            playingIndex = index - 1;
-                          });
-                          playAudioList(getAllAudioUrl(), index - 1, false);
+                          if (playingIndex + 1 == index && player.playing) {
+                            player.pause();
+                          } else if (playingIndex + 1 == index) {
+                            player.play();
+                          } else {
+                            setState(() {
+                              isSinglePlaying = true;
+                              showFloatingControllers = true;
+                              isPlaying = true;
+                              playingIndex = index - 1;
+                            });
+                            playAudioList(getAllAudioUrl(), index - 1, false);
+                          }
                         },
                         icon: index == playingIndex + 1 && isPlaying
                             ? const Icon(Icons.pause)

@@ -3,7 +3,6 @@ import 'package:al_bayan_quran/screens/surah_view.dart/sura_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
-import 'package:just_audio/just_audio.dart';
 
 class SuraList extends StatefulWidget {
   const SuraList({super.key});
@@ -13,46 +12,10 @@ class SuraList extends StatefulWidget {
 }
 
 class _SuraListState extends State<SuraList> {
-  final player = AudioPlayer();
-
-//   void abc() async {
-//     // Define the playlist
-//     final playlist = ConcatenatingAudioSource(
-//       // Start loading next item just before reaching it
-//       useLazyPreparation: true,
-//       // Customise the shuffle algorithm
-//       shuffleOrder: DefaultShuffleOrder(),
-//       // Specify the playlist items
-
-//       children: [
-//         LockCachingAudioSource(Uri.parse(
-//             'https://everyayah.com/data/AbdulSamad_64kbps_QuranExplorer.Com/001001.mp3')),
-//         LockCachingAudioSource(Uri.parse(
-//             'https://everyayah.com/data/AbdulSamad_64kbps_QuranExplorer.Com/001002.mp3')),
-//         LockCachingAudioSource(Uri.parse(
-//             'https://everyayah.com/data/AbdulSamad_64kbps_QuranExplorer.Com/001003.mp3')),
-//         LockCachingAudioSource(Uri.parse(
-//             'https://everyayah.com/data/AbdulSamad_64kbps_QuranExplorer.Com/001004.mp3')),
-//         LockCachingAudioSource(Uri.parse(
-//             'https://everyayah.com/data/AbdulSamad_64kbps_QuranExplorer.Com/001005.mp3')),
-//         LockCachingAudioSource(Uri.parse(
-//             'https://everyayah.com/data/AbdulSamad_64kbps_QuranExplorer.Com/001006.mp3')),
-//         LockCachingAudioSource(Uri.parse(
-//             'https://everyayah.com/data/AbdulSamad_64kbps_QuranExplorer.Com/001007.mp3')),
-//       ],
-//     );
-
-// // Load and play the playlist
-//     await player.setAudioSource(playlist,
-//         initialIndex: 0, initialPosition: Duration.zero);
-//     await player.play();
-//   }
-
-//   @override
-//   void initState() {
-//     abc();
-//     super.initState();
-//   }
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
