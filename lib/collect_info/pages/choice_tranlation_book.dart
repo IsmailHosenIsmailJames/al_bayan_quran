@@ -56,10 +56,9 @@ class _ChoiceTranslationStateBook extends State<ChoiceTranslationBook> {
             child: Container(
               margin: const EdgeInsets.all(2),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: index % 2 == 0
-                      ? const Color.fromARGB(30, 131, 240, 255)
-                      : const Color.fromARGB(30, 139, 255, 128)),
+                borderRadius: BorderRadius.circular(10),
+                color: const Color.fromARGB(30, 145, 255, 160),
+              ),
               child: ListTile(
                 titleAlignment: ListTileTitleAlignment.center,
                 title: Column(
@@ -78,6 +77,7 @@ class _ChoiceTranslationStateBook extends State<ChoiceTranslationBook> {
                 ),
                 leading: Obx(
                   () => Radio(
+                    activeColor: Colors.green,
                     value: index,
                     groupValue: infoController.bookNameIndex.value,
                     onChanged: (value) {

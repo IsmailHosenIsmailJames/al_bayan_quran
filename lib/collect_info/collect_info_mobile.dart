@@ -87,88 +87,90 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
           ),
           Container(
             alignment: const Alignment(0, 0.85),
-            child: Container(
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(100)),
-                color: Color.fromARGB(100, 125, 125, 125),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  const SizedBox(
-                    width: 50,
-                  ),
-                  SmoothPageIndicator(
-                    controller: pageController,
-                    count: 5,
-                    onDotClicked: (index) {
-                      pageController.jumpToPage(
-                        index,
-                      );
-                      checkPageNumber(index);
-                    },
-                  ),
-                  TextButton(
-                    onPressed: () async {
-                      if (pageController.page! == 0) {
-                        if (infoController.selectedOptionTranslation.value ==
-                            -1) {
-                          return;
-                        }
-                      } else if (pageController.page! == 1) {
-                        if (infoController.bookNameIndex.value == -1) {
-                          return;
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                const SizedBox(
+                  width: 50,
+                ),
+                SmoothPageIndicator(
+                  controller: pageController,
+                  count: 5,
+                  effect: const WormEffect(
+                      dotColor: Colors.grey,
+                      activeDotColor: Colors.green,
+                      paintStyle: PaintingStyle.stroke),
+                  onDotClicked: (index) {
+                    pageController.jumpToPage(
+                      index,
+                    );
+                    checkPageNumber(index);
+                  },
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    if (pageController.page! == 0) {
+                      if (infoController.selectedOptionTranslation.value ==
+                          -1) {
+                        return;
+                      }
+                    } else if (pageController.page! == 1) {
+                      if (infoController.bookNameIndex.value == -1) {
+                        return;
+                      }
+                    }
+                    if (pageController.page! == 2) {
+                      if (infoController.tafseerIndex.value == -1) {
+                        return;
+                      }
+                    } else if (pageController.page! == 3) {
+                      if (infoController.tafseerBookIndex.value == -1) {
+                        return;
+                      }
+                    } else if (pageController.page! == 4) {
+                      if (infoController.recitationIndex.value != -1 &&
+                          infoController.tafseerBookIndex.value != -1 &&
+                          infoController.tafseerIndex.value != -1 &&
+                          infoController.bookNameIndex.value != -1 &&
+                          infoController.selectedOptionTranslation.value !=
+                              -1) {
+                        Map<String, String> info = {
+                          "translation_language":
+                              infoController.translationLanguage.value,
+                          "translation_book_ID":
+                              infoController.bookIDTranslation.value,
+                          "tafseer_language":
+                              infoController.tafseerLanguage.value,
+                          "tafseer_book_ID": infoController.tafseerBookID.value,
+                          "recitation_ID": infoController.recitationName.value,
+                        };
+                        if (Hive.isBoxOpen("info")) {
+                          final box = Hive.box("info");
+
+                          box.put("info", info);
+                          Get.offAll(() => const InIt());
+                        } else {
+                          final box = await Hive.openBox("info");
+
+                          box.put("info", info);
+                          Get.offAll(() => const InIt());
                         }
                       }
-                      if (pageController.page! == 2) {
-                        if (infoController.tafseerIndex.value == -1) {
-                          return;
-                        }
-                      } else if (pageController.page! == 3) {
-                        if (infoController.tafseerBookIndex.value == -1) {
-                          return;
-                        }
-                      } else if (pageController.page! == 4) {
-                        if (infoController.recitationIndex.value != -1 &&
-                            infoController.tafseerBookIndex.value != -1 &&
-                            infoController.tafseerIndex.value != -1 &&
-                            infoController.bookNameIndex.value != -1 &&
-                            infoController.selectedOptionTranslation.value !=
-                                -1) {
-                          Map<String, String> info = {
-                            "translation_language":
-                                infoController.translationLanguage.value,
-                            "translation_book_ID":
-                                infoController.bookIDTranslation.value,
-                            "tafseer_language":
-                                infoController.tafseerLanguage.value,
-                            "tafseer_book_ID":
-                                infoController.tafseerBookID.value,
-                            "recitation_ID":
-                                infoController.recitationName.value,
-                          };
-                          if (Hive.isBoxOpen("info")) {
-                            final box = Hive.box("info");
-
-                            box.put("info", info);
-                            Get.offAll(() => const InIt());
-                          } else {
-                            final box = await Hive.openBox("info");
-
-                            box.put("info", info);
-                            Get.offAll(() => const InIt());
-                          }
-                        }
-                      }
-                      pageController.nextPage(
-                          duration: const Duration(milliseconds: 200),
-                          curve: Curves.bounceIn);
-                      checkPageNumber(pageController.page!.toInt() + 1);
-                    },
-                    child: Text(nextButtonText),
+                    }
+                    pageController.nextPage(
+                        duration: const Duration(milliseconds: 200),
+                        curve: Curves.bounceIn);
+                    checkPageNumber(pageController.page!.toInt() + 1);
+                  },
+                  child: Text(
+                    nextButtonText,
+                    style: const TextStyle(
+                      color: Colors.green,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ],
