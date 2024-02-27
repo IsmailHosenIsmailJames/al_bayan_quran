@@ -24,7 +24,20 @@ class _SuraListDesktopState extends State<SuraListDesktop> {
   List<Widget> listSurahProvider(length) {
     List<Widget> listSurah = [];
 
-    for (int index = 0; index < length; index++) {
+    for (int index = -1; index < length; index++) {
+      if (index == -1) {
+        listSurah.add(
+          const Center(
+            child: Text(
+              "Surah",
+              style: TextStyle(
+                fontSize: 20,
+              ),
+            ),
+          ),
+        );
+        continue;
+      }
       String revelationPlace = allChaptersInfo[index]['revelation_place'];
       String nameSimple = allChaptersInfo[index]['name_simple'];
       String nameArabic = allChaptersInfo[index]['name_arabic'];

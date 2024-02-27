@@ -5,6 +5,7 @@ import 'package:al_bayan_quran/theme/theme_controller.dart';
 import 'package:appwrite/appwrite.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 
 import '../../theme/theme_icon_button.dart';
 
@@ -158,7 +159,9 @@ class _MyDrawerState extends State<MyDrawer> {
             height: 10,
           ),
           ElevatedButton(
-            onPressed: () {
+            onPressed: () async {
+              await Hive.openBox("translation");
+
               Get.to(
                 () => Scaffold(
                   appBar: AppBar(

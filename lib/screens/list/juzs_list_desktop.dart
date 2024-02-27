@@ -6,14 +6,15 @@ import 'package:hive/hive.dart';
 
 import '../../api/by_juzs.dart';
 
-class JuzsList extends StatefulWidget {
-  const JuzsList({super.key});
+class JuzsListDesktop extends StatefulWidget {
+  const JuzsListDesktop({super.key});
 
   @override
-  State<JuzsList> createState() => _JuzsListState();
+  State<JuzsListDesktop> createState() => _JuzsListDesktopState();
 }
 
-class _JuzsListState extends State<JuzsList> with TickerProviderStateMixin {
+class _JuzsListDesktopState extends State<JuzsListDesktop>
+    with TickerProviderStateMixin {
   List<int> expandedPosition = [];
   List<AnimationController> controller = [];
   List<Animation<double>> sizeAnimation = [];
@@ -45,37 +46,53 @@ class _JuzsListState extends State<JuzsList> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return ListView(
       controller: scrollController,
       scrollDirection: Axis.vertical,
       padding: const EdgeInsets.only(bottom: 50),
-      itemCount: byJuzs.length,
-      itemBuilder: (context, index) {
-        int firstVerseId = byJuzs[index]['fvi'];
-        int lastVerseId = byJuzs[index]['lvi'];
+      children: buildJuzs(byJuzs.length),
+    );
+  }
 
-        String allSurahName = "";
-        String lastSurahName = "";
+  List<Widget> buildJuzs(int length) {
+    List<Widget> toReturn = [];
+    for (int index = -1; index < length; index++) {
+      if (index == -1) {
+        toReturn.add(const Center(
+          child: Text(
+            "Juzs",
+            style: TextStyle(
+              fontSize: 20,
+            ),
+          ),
+        ));
+        continue;
+      }
+      int firstVerseId = byJuzs[index]['fvi'];
+      int lastVerseId = byJuzs[index]['lvi'];
 
-        Map<String, String> myMap =
-            Map<String, String>.from(byJuzs[index]['vm']);
+      String allSurahName = "";
+      String lastSurahName = "";
 
-        myMap.forEach((key, value) {
-          int i = int.parse(key) - 1;
+      Map<String, String> myMap = Map<String, String>.from(byJuzs[index]['vm']);
 
-          if (allSurahName.isNotEmpty) {
-            lastSurahName = allChaptersInfo[i]['name_simple'];
-          } else {
-            allSurahName += allChaptersInfo[i]['name_simple'];
-          }
-        });
-        if (lastSurahName.isNotEmpty) {
-          allSurahName = "$allSurahName - $lastSurahName";
+      myMap.forEach((key, value) {
+        int i = int.parse(key) - 1;
+
+        if (allSurahName.isNotEmpty) {
+          lastSurahName = allChaptersInfo[i]['name_simple'];
+        } else {
+          allSurahName += allChaptersInfo[i]['name_simple'];
         }
-        allSurahName = allSurahName.replaceRange(
-            allSurahName.length - 2, allSurahName.length - 1, "");
+      });
+      if (lastSurahName.isNotEmpty) {
+        allSurahName = "$allSurahName - $lastSurahName";
+      }
+      allSurahName = allSurahName.replaceRange(
+          allSurahName.length - 2, allSurahName.length - 1, "");
 
-        return Container(
+      toReturn.add(
+        Container(
           padding: const EdgeInsets.all(10),
           margin: const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
           decoration: BoxDecoration(
@@ -176,9 +193,10 @@ class _JuzsListState extends State<JuzsList> with TickerProviderStateMixin {
               )
             ],
           ),
-        );
-      },
-    );
+        ),
+      );
+    }
+    return toReturn;
   }
 
   List<Widget> surahUnderJuzs(int index) {

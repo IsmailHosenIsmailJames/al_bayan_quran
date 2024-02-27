@@ -2,6 +2,7 @@ import 'package:al_bayan_quran/screens/drawer/drawer.dart';
 import 'package:al_bayan_quran/screens/list/juzs_list.dart';
 import 'package:al_bayan_quran/screens/list/sura_list.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 import 'profile/profile.dart';
@@ -23,14 +24,14 @@ class _HomeMobileState extends State<HomeMobile> {
         onTap: (i) => setState(() => currentIndex = i),
         items: [
           SalomonBottomBarItem(
-            icon: const Icon(Icons.book),
-            title: const Text("Home"),
-            selectedColor: Colors.purple,
+            icon: const Icon(FontAwesomeIcons.book),
+            title: const Text("Quran"),
+            selectedColor: Colors.green,
           ),
           SalomonBottomBarItem(
             icon: const Icon(Icons.person),
             title: const Text("Profile"),
-            selectedColor: Colors.teal,
+            selectedColor: Colors.green,
           ),
         ],
       ),
@@ -113,13 +114,26 @@ class _HomeMobileState extends State<HomeMobile> {
                       ),
                     ),
                   ),
+                  // Tab(
+                  //   child: Text(
+                  //     'Pages',
+                  //     style: TextStyle(
+                  //       fontSize: 20,
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             ),
-            body: const TabBarView(children: [
-              SuraList(),
-              JuzsList(),
-            ]),
+            body: const TabBarView(
+              children: [
+                SuraList(),
+                JuzsList(),
+                // Center(
+                //   child: Text("Pages"),
+                // ),
+              ],
+            ),
           ),
         ),
         const Profile(),

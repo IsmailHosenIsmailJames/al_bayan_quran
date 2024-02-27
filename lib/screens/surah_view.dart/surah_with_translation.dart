@@ -83,6 +83,7 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
           isPlaying = false;
           isLoading = false;
           showFloatingControllers = false;
+          playingIndex = -1;
         });
       } else if (event.processingState == ProcessingState.loading) {
         setState(() {
@@ -145,6 +146,12 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
 
       await player.play();
     } catch (e) {
+      setState(() {
+        isLoading = false;
+        isPlaying = false;
+        showFloatingControllers = false;
+        playingIndex = -1;
+      });
       showDialog(
         // ignore: use_build_context_synchronously
         context: context,
@@ -406,8 +413,10 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
                         ),
                         IconButton(
                           onPressed: () {
-                            if (player.playing) {
-                              showFloatingControllers = false;
+                            if (!player.playing) {
+                              setState(() {
+                                showFloatingControllers = false;
+                              });
                             } else {
                               setState(() {
                                 expandFloatingControllers = false;
@@ -446,6 +455,7 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
         thickness: 10,
         child: ListView(
           controller: scrollController,
+          padding: const EdgeInsets.only(bottom: 40),
           children: listOfWidgetOfAyah(listOfAyah.length + 1),
         ),
       ),
@@ -549,14 +559,20 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
                           ),
                           color: Colors.white,
                           onPressed: () {
-                            setState(() {
-                              showFloatingControllers = true;
-                              isSinglePlaying = false;
-                              playingIndex = 0;
-                              isPlaying = true;
-                            });
-                            List<String> listOfAudioURL = getAllAudioUrl();
-                            playAudioList(listOfAudioURL, 0, true);
+                            if (!player.playing && playingIndex == -1) {
+                              setState(() {
+                                showFloatingControllers = true;
+                                isSinglePlaying = false;
+                                playingIndex = 0;
+                                isPlaying = true;
+                              });
+                              List<String> listOfAudioURL = getAllAudioUrl();
+                              playAudioList(listOfAudioURL, 0, true);
+                            } else if (!player.playing) {
+                              player.play();
+                            } else {
+                              player.pause();
+                            }
                           },
                           icon: isPlaying
                               ? const Icon(Icons.pause)
