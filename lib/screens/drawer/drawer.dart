@@ -1,5 +1,6 @@
 import 'package:al_bayan_quran/auth/account_info/account_info.dart';
 import 'package:al_bayan_quran/auth/login/login.dart';
+import 'package:al_bayan_quran/screens/settings/settings.dart';
 import 'package:al_bayan_quran/theme/theme_controller.dart';
 import 'package:appwrite/appwrite.dart';
 import 'package:flutter/material.dart';
@@ -156,21 +157,35 @@ class _MyDrawerState extends State<MyDrawer> {
           const SizedBox(
             height: 10,
           ),
-          //   ElevatedButton(
-          //     onPressed: () {},
-          //     child: const Row(
-          //       children: [
-          //         Icon(Icons.settings),
-          //         SizedBox(
-          //           width: 20,
-          //         ),
-          //         Text("Settings")
-          //       ],
-          //     ),
-          //   ),
-          //   const SizedBox(
-          //     height: 10,
-          //   ),
+          ElevatedButton(
+            onPressed: () {
+              Get.to(
+                () => Scaffold(
+                  appBar: AppBar(
+                    title: const Text(
+                      "Settings",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  body: const Settings(),
+                ),
+              );
+            },
+            child: const Row(
+              children: [
+                Icon(Icons.settings),
+                SizedBox(
+                  width: 20,
+                ),
+                Text("Settings")
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
           //   ElevatedButton(
           //     onPressed: () {},
           //     child: const Row(

@@ -22,7 +22,6 @@ class _SuraListState extends State<SuraList> {
     return Scrollbar(
       interactive: true,
       radius: const Radius.circular(10),
-      thumbVisibility: true,
       thickness: 10,
       child: ListView(
         scrollDirection: Axis.vertical,

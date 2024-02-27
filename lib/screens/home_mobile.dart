@@ -2,6 +2,9 @@ import 'package:al_bayan_quran/screens/drawer/drawer.dart';
 import 'package:al_bayan_quran/screens/list/juzs_list.dart';
 import 'package:al_bayan_quran/screens/list/sura_list.dart';
 import 'package:flutter/material.dart';
+import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+
+import 'profile/profile.dart';
 
 class HomeMobile extends StatefulWidget {
   const HomeMobile({super.key});
@@ -11,32 +14,39 @@ class HomeMobile extends StatefulWidget {
 }
 
 class _HomeMobileState extends State<HomeMobile> {
-  ScrollController scrollController = ScrollController();
+  int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        drawer: const MyDrawer(),
-        body: NestedScrollView(
-          controller: scrollController,
-          floatHeaderSlivers: true,
-          headerSliverBuilder: (context, innerBoxIsScrolled) => [
-            const SliverAppBar(
-              floating: true,
-              // snap: true,
-              title: Text("Al Bayan Quran"),
-              bottom: TabBar(
-                tabs: [
-                  Tab(
-                    text: "Sura",
-                  ),
-                  Tab(
-                    text: "Juzs",
-                  ),
-                ],
+    return Scaffold(
+      bottomNavigationBar: SalomonBottomBar(
+        currentIndex: currentIndex,
+        onTap: (i) => setState(() => currentIndex = i),
+        items: [
+          SalomonBottomBarItem(
+            icon: const Icon(Icons.book),
+            title: const Text("Home"),
+            selectedColor: Colors.purple,
+          ),
+          SalomonBottomBarItem(
+            icon: const Icon(Icons.person),
+            title: const Text("Profile"),
+            selectedColor: Colors.teal,
+          ),
+        ],
+      ),
+      body: [
+        DefaultTabController(
+          length: 2,
+          child: Scaffold(
+            drawer: const MyDrawer(),
+            appBar: AppBar(
+              title: const Text(
+                "Al Bayan Quran",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              actions: [
+              actions: const [
                 // IconButton(
                 //     onPressed: () {
                 //       showDialog(
@@ -85,16 +95,35 @@ class _HomeMobileState extends State<HomeMobile> {
                 //     },
                 //     icon: const Icon(Icons.search))
               ],
-            )
-          ],
-          body: const TabBarView(
-            children: [
+              bottom: const TabBar(
+                tabs: [
+                  Tab(
+                    child: Text(
+                      "Surah",
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                  Tab(
+                    child: Text(
+                      'Juzs',
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            body: const TabBarView(children: [
               SuraList(),
               JuzsList(),
-            ],
+            ]),
           ),
         ),
-      ),
+        const Profile(),
+      ].elementAt(currentIndex),
     );
   }
 }

@@ -37,12 +37,16 @@ class _JuzsListState extends State<JuzsList> with TickerProviderStateMixin {
     for (int i = 0; i < 30; i++) {
       controller[i].dispose();
     }
+    scrollController.dispose();
     super.dispose();
   }
+
+  ScrollController scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      controller: scrollController,
       scrollDirection: Axis.vertical,
       padding: const EdgeInsets.only(bottom: 50),
       itemCount: byJuzs.length,

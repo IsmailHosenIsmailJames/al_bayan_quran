@@ -54,6 +54,8 @@ dependencies:
   dart_appwrite: ^10.1.1
   just_audio: ^0.9.36
   just_audio_mpv: ^0.1.7
+  salomon_bottom_bar: ^3.3.2
+  font_awesome_flutter: ^10.7.0
 
   # google_fonts: ^6.1.0
 
