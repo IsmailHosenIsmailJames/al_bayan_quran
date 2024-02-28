@@ -97,7 +97,7 @@ class _CollectInfoDesktopState extends State<CollectInfoDesktop> {
         title: const Row(
           children: [
             Text(
-              "Al Bayan Quran",
+              "Al Quran",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
               ),

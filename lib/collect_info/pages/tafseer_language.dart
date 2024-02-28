@@ -60,7 +60,7 @@ class _TafseerLanguageState extends State<TafseerLanguage> {
               margin: const EdgeInsets.all(2),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: const Color.fromARGB(30, 145, 255, 160),
+                color: const Color.fromARGB(10, 145, 255, 160),
               ),
               child: ListTile(
                 title: Text(language[index]),

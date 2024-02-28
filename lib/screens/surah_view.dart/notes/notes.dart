@@ -28,9 +28,27 @@ class _NotesState extends State<Notes> {
   FocusNode focusNode2 = FocusNode();
   bool isUploaded = false;
   late Widget cludUploadIdicator;
+  late final String keyOfAyah;
+  late final String keyOfAyahWithClone;
 
   @override
   void initState() {
+    String part1 = "${widget.surahNumber + 1}";
+    if (part1.length == 1) {
+      part1 = "00$part1";
+    } else if (part1.length == 2) {
+      part1 = "0$part1";
+    }
+
+    String part2 = "${widget.ayahNumber + 1}";
+    if (part2.length == 1) {
+      part2 = "00$part2";
+    } else if (part2.length == 2) {
+      part2 = "0$part2";
+    }
+    keyOfAyah = "$part1$part2";
+    keyOfAyahWithClone = "$part1:$part2";
+
     cludUploadIdicator = IconButton(
       onPressed: () {
         uploadNotes();
@@ -39,7 +57,6 @@ class _NotesState extends State<Notes> {
         Icons.cloud_upload_sharp,
       ),
     );
-    String keyOfAyah = "${widget.surahNumber + 1}${widget.ayahNumber + 1}";
 
     final box = Hive.box("notes");
     String boxKeyForTitle = "${keyOfAyah}title";
@@ -56,8 +73,7 @@ class _NotesState extends State<Notes> {
         controller1.text = title;
       });
     }
-    String boxKeyForNoteUpload =
-        "${widget.surahNumber + 1}:${widget.ayahNumber + 1}upload";
+    String boxKeyForNoteUpload = "${keyOfAyahWithClone}upload";
 
     final isUploadedData = box.get(boxKeyForNoteUpload, defaultValue: null);
     if (isUploadedData != null && isUploadedData != false) {
@@ -70,8 +86,6 @@ class _NotesState extends State<Notes> {
   }
 
   void autoSave() {
-    String keyOfAyah = "${widget.surahNumber + 1}${widget.ayahNumber + 1}";
-
     final box = Hive.box("notes");
     String boxKeyForTitle = "${keyOfAyah}title";
     String boxKeyForNote = "${keyOfAyah}note";
@@ -85,7 +99,6 @@ class _NotesState extends State<Notes> {
   }
 
   void uploadNotes() async {
-    String keyOfAyah = "${widget.surahNumber + 1}${widget.ayahNumber + 1}";
     if (isLoogedIn == false) {
       showDialog(
         context: context,
@@ -217,7 +230,7 @@ class _NotesState extends State<Notes> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Notes for ${widget.surahName} (    ${widget.surahNumber + 1}${widget.ayahNumber + 1})",
+          "Notes for ${widget.surahName} (    $keyOfAyah)",
           style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
         actions: [
@@ -242,8 +255,7 @@ class _NotesState extends State<Notes> {
               },
               focusNode: focusNode1,
               onChanged: (value) {
-                String boxKeyForNoteUpload =
-                    "${widget.surahNumber + 1}${widget.ayahNumber + 1}upload";
+                String boxKeyForNoteUpload = "${keyOfAyah}upload";
                 final box = Hive.box("notes");
                 box.put(boxKeyForNoteUpload, false);
                 setState(() {
@@ -267,8 +279,7 @@ class _NotesState extends State<Notes> {
               focusNode: focusNode2,
               onFieldSubmitted: (value) => autoSave(),
               onChanged: (value) {
-                String boxKeyForNoteUpload =
-                    "${widget.surahNumber + 1}${widget.ayahNumber + 1}upload";
+                String boxKeyForNoteUpload = "${keyOfAyah}upload";
                 final box = Hive.box("notes");
                 box.put(boxKeyForNoteUpload, false);
                 setState(() {
@@ -277,9 +288,11 @@ class _NotesState extends State<Notes> {
                 autoSave();
               },
               decoration: InputDecoration(
-                  labelText: "Your note",
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10))),
+                labelText: "Your note",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
               controller: controller2,
             ),
             const SizedBox(

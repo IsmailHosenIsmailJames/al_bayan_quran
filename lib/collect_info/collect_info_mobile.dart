@@ -54,7 +54,7 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
         title: Row(
           children: [
             const Text(
-              "Al Bayan Quran",
+              "Al Quran",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
               ),
