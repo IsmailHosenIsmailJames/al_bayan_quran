@@ -31,7 +31,7 @@ class _ProfileState extends State<Profile> {
             ? Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     ElevatedButton.icon(
                       onPressed: () {
@@ -54,6 +54,7 @@ class _ProfileState extends State<Profile> {
                 ),
               )
             : Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CircleAvatar(
                     radius: 25,

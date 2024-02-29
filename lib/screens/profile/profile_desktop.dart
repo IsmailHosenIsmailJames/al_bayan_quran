@@ -29,7 +29,7 @@ class _ProfileState extends State<ProfileDesktop> {
             ? Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     ElevatedButton.icon(
                       onPressed: () {
@@ -52,6 +52,7 @@ class _ProfileState extends State<ProfileDesktop> {
                 ),
               )
             : Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CircleAvatar(
                     radius: 25,

@@ -1,6 +1,7 @@
 import 'package:al_bayan_quran/screens/drawer/drawer.dart';
 import 'package:al_bayan_quran/screens/list/juzs_list.dart';
 import 'package:al_bayan_quran/screens/list/sura_list.dart';
+import 'package:al_bayan_quran/screens/surah_view.dart/audio/audio.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
@@ -20,18 +21,24 @@ class _HomeMobileState extends State<HomeMobile> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: SalomonBottomBar(
+        selectedItemColor: Colors.green,
         currentIndex: currentIndex,
         onTap: (i) => setState(() => currentIndex = i),
         items: [
           SalomonBottomBarItem(
-            icon: const Icon(FontAwesomeIcons.book),
+            icon: const Icon(
+              FontAwesomeIcons.bookOpen,
+              size: 20,
+            ),
             title: const Text("Quran"),
-            selectedColor: Colors.green,
+          ),
+          SalomonBottomBarItem(
+            icon: const Icon(Icons.audiotrack_outlined),
+            title: const Text("Audio"),
           ),
           SalomonBottomBarItem(
             icon: const Icon(Icons.person),
             title: const Text("Profile"),
-            selectedColor: Colors.green,
           ),
         ],
       ),
@@ -42,7 +49,7 @@ class _HomeMobileState extends State<HomeMobile> {
             drawer: const MyDrawer(),
             appBar: AppBar(
               title: const Text(
-                "Al Bayan Quran",
+                "Al Quran",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
@@ -136,6 +143,7 @@ class _HomeMobileState extends State<HomeMobile> {
             ),
           ),
         ),
+        const Audio(),
         const Profile(),
       ].elementAt(currentIndex),
     );

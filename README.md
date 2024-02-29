@@ -1,16 +1,9 @@
-# al_bayan_quran
+# Al Quran (Tafsir & Audio)
 
-A new Flutter project.
+A new Quran App with Translation, Tafsir, Audio.
 
-## Getting Started
+## Whats inside
 
-This project is a starting point for a Flutter application.
+All in one Al Quran App with Translation, Tefsir, Quran Audiobook & Notes Backup
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Al Quran App has Translation, Tefsir, Quran Offline Audio & Notes with Cloud Backup services all together. Al Quran app contains Translation of Quran in 69 languages. Al Quran App has 250+ books of Translation of Quran in different languages. Al Quran App has Tafsir of Quran in 6 languages with 30+ different books. Al Quran App has over 40 Reciter's Recitations. Al Quran App support audio caching and it helps to improve audio playback performance and ability to play offline audio. Al Quran App support background audio. This app have minimalistic and clean interface that is easy to  navigate. This app is smaller size but have lot of documents. This is developed just for pleasure of Allah.

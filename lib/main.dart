@@ -1,18 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 
 import 'collect_info/init.dart';
 import 'theme/theme_controller.dart';
 import 'package:appwrite/appwrite.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Client client = Client();
   client
       .setEndpoint('https://cloud.appwrite.io/v1')
       .setProject('albayanquran')
       .setSelfSigned(status: true);
+  await JustAudioBackground.init(
+    androidNotificationChannelId: 'com.ryanheise.bg_demo.channel.audio',
+    androidNotificationChannelName: 'Audio playback',
+    androidNotificationOngoing: true,
+  );
   await Hive.initFlutter("al_bayan_quran");
   await Hive.openBox("info");
   await Hive.openBox("data");

@@ -93,19 +93,29 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
                 const SizedBox(
                   width: 50,
                 ),
-                SmoothPageIndicator(
-                  controller: pageController,
-                  count: 5,
-                  effect: const WormEffect(
-                      dotColor: Colors.grey,
-                      activeDotColor: Colors.green,
-                      paintStyle: PaintingStyle.stroke),
-                  onDotClicked: (index) {
-                    pageController.jumpToPage(
-                      index,
-                    );
-                    checkPageNumber(index);
-                  },
+                Container(
+                  padding: const EdgeInsets.only(
+                      left: 10, right: 10, top: 5, bottom: 5),
+                  decoration: const BoxDecoration(
+                    color: Colors.grey,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(20),
+                    ),
+                  ),
+                  child: SmoothPageIndicator(
+                    controller: pageController,
+                    count: 5,
+                    effect: const WormEffect(
+                        dotColor: Colors.black,
+                        activeDotColor: Color.fromARGB(255, 0, 146, 5),
+                        paintStyle: PaintingStyle.stroke),
+                    onDotClicked: (index) {
+                      pageController.jumpToPage(
+                        index,
+                      );
+                      checkPageNumber(index);
+                    },
+                  ),
                 ),
                 ElevatedButton(
                   onPressed: () async {

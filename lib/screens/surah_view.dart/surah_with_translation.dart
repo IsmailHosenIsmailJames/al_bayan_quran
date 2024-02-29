@@ -10,6 +10,7 @@ import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 
 import 'notes/notes.dart';
 
@@ -124,17 +125,26 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
   void playAudioList(
       List<String> listOfAudioURL, int index, bool toContinue) async {
     try {
+      final infoBox = Hive.box("info");
+      final info = infoBox.get("info");
+      String recitorChoice = info['recitation_ID'];
       List<AudioSource> audioResourceSource = [];
-      for (String x in listOfAudioURL) {
-        audioResourceSource.add(LockCachingAudioSource(Uri.parse(x)));
+      for (int i = 0; i < listOfAudioURL.length; i++) {
+        audioResourceSource.add(
+          LockCachingAudioSource(
+            Uri.parse(listOfAudioURL[i]),
+            tag: MediaItem(
+              displayTitle: "$surahNameSimple - ${i + 1}",
+              displaySubtitle: recitorChoice.split("(")[0],
+              id: "$i",
+              title: recitorChoice.split('(')[0],
+              displayDescription: listOfAudioURL[i],
+            ),
+          ),
+        );
       }
       final playlist = ConcatenatingAudioSource(
-        // Start loading next item just before reaching it
-        useLazyPreparation: true,
-        // Customise the shuffle algorithm
         shuffleOrder: DefaultShuffleOrder(),
-        // Specify the playlist items
-
         children: audioResourceSource,
       );
       if (toContinue) {
@@ -788,7 +798,7 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
                         ),
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
             ),

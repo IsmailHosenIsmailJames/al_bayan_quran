@@ -25,7 +25,7 @@ class _SuraListState extends State<SuraList> {
       thickness: 10,
       child: ListView(
         scrollDirection: Axis.vertical,
-        padding: const EdgeInsets.only(bottom: 50),
+        padding: const EdgeInsets.only(bottom: 50, top: 5),
         children: listSurahProvider(114),
       ),
     );
@@ -54,7 +54,7 @@ class _SuraListState extends State<SuraList> {
           child: Container(
             padding: const EdgeInsets.all(10),
             margin:
-                const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
+                const EdgeInsets.only(left: 10, right: 10, top: 2, bottom: 2),
             decoration: BoxDecoration(
                 color: const Color.fromARGB(30, 125, 125, 125),
                 borderRadius: BorderRadius.circular(15)),
@@ -64,7 +64,7 @@ class _SuraListState extends State<SuraList> {
                 Row(
                   children: [
                     CircleAvatar(
-                      radius: 25,
+                      radius: 20,
                       backgroundColor: const Color.fromARGB(195, 0, 133, 4),
                       child: Center(
                         child: Text(

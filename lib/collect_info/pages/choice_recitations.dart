@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 
 import '../../api/all_recitation.dart';
 import '../getx/get_controller.dart';
@@ -21,6 +22,13 @@ class _RecitaionChoiceState extends State<RecitaionChoice> {
   @override
   void initState() {
     allRecitationSearch.addAll(allRecitation);
+    player.playerStateStream.listen((event) {
+      if (event.processingState == ProcessingState.completed) {
+        setState(() {
+          playingIndex = -1;
+        });
+      }
+    });
     super.initState();
   }
 
@@ -56,15 +64,18 @@ class _RecitaionChoiceState extends State<RecitaionChoice> {
 
     List<AudioSource> audioResourceSource = [];
     for (int i = 0; i < 7; i++) {
-      audioResourceSource.add(LockCachingAudioSource(Uri.parse(listUrl[i])));
+      audioResourceSource.add(LockCachingAudioSource(
+        Uri.parse(listUrl[i]),
+        tag: MediaItem(
+          displayTitle: "Surah Fateha",
+          id: "$i",
+          displaySubtitle: allRecitationSearch[i].split('(')[0],
+          title: allRecitationSearch[i].split('(')[0],
+        ),
+      ));
     }
     final playlist = ConcatenatingAudioSource(
-      // Start loading next item just before reaching it
-      useLazyPreparation: true,
-      // Customise the shuffle algorithm
       shuffleOrder: DefaultShuffleOrder(),
-      // Specify the playlist items
-
       children: audioResourceSource,
     );
     await player.setAudioSource(playlist,

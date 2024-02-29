@@ -41,34 +41,38 @@ class _LogInState extends State<LogIn> {
       );
       final user = await account.get();
       if (user.status) {
-        accountInfo.name.value = user.name;
-        accountInfo.uid.value = user.$id;
-        accountInfo.email.value = user.email;
+        try {
+          accountInfo.name.value = user.name;
+          accountInfo.uid.value = user.$id;
+          accountInfo.email.value = user.email;
 
-        final accountInfoHiveBox = await Hive.openBox("accountInfo");
-        accountInfoHiveBox.put("name", user.name.trim());
-        accountInfoHiveBox.put("uid", user.$id);
-        accountInfoHiveBox.put("email", email.trim());
-        setState(() {
-          isLoogedIn = true;
-        });
-        Databases databases = Databases(client);
-        final document = await databases.getDocument(
-            databaseId: "65bf585cdf62317b4d91",
-            collectionId: "65bfa12aa542dc981ea8",
-            documentId: user.$id);
-        List listOfKey = jsonDecode(document.data['allnotes']);
-        final box = await Hive.openBox("notes");
-        for (final key in listOfKey) {
-          final singleNote = await databases.getDocument(
+          final accountInfoHiveBox = await Hive.openBox("accountInfo");
+          accountInfoHiveBox.put("name", user.name.trim());
+          accountInfoHiveBox.put("uid", user.$id);
+          accountInfoHiveBox.put("email", email.trim());
+          setState(() {
+            isLoogedIn = true;
+          });
+          Databases databases = Databases(client);
+          final document = await databases.getDocument(
               databaseId: "65bf585cdf62317b4d91",
-              collectionId: "65d1ca40a427099b17f1",
-              documentId: user.$id + key);
-          String boxKeyForTitle = "${key}title";
-          String boxKeyForNote = "${key}note";
+              collectionId: "65bfa12aa542dc981ea8",
+              documentId: user.$id);
+          List listOfKey = jsonDecode(document.data['allnotes']);
+          final box = await Hive.openBox("notes");
+          for (final key in listOfKey) {
+            final singleNote = await databases.getDocument(
+                databaseId: "65bf585cdf62317b4d91",
+                collectionId: "65d1ca40a427099b17f1",
+                documentId: user.$id + key);
+            String boxKeyForTitle = "${key}title";
+            String boxKeyForNote = "${key}note";
 
-          box.put(boxKeyForNote, singleNote.data['note']);
-          box.put(boxKeyForTitle, singleNote.data['title']);
+            box.put(boxKeyForNote, singleNote.data['note']);
+            box.put(boxKeyForTitle, singleNote.data['title']);
+          }
+        } catch (e) {
+          Get.offAll(() => const HomeResponsiveLayout());
         }
 
         Get.offAll(() => const HomeResponsiveLayout());
