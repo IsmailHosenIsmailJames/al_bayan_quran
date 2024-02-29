@@ -46,9 +46,13 @@ class _AudioState extends State<Audio> {
         });
       }
       if (player.processingState == ProcessingState.completed) {
-        setState(() {
-          playingIndex = -1;
-        });
+        if (playingIndex >= 113) {
+          setState(() {
+            playingIndex = -1;
+          });
+        } else {
+          playAudio(playingIndex + 1, wait: true);
+        }
       }
     });
 
@@ -259,13 +263,16 @@ class _AudioState extends State<Audio> {
     );
   }
 
-  void playAudio(int index, {bool start = false}) async {
+  void playAudio(int index, {bool start = false, bool wait = false}) async {
     setState(() {
       surahNumber = index;
     });
 
     List<String> listOfURL = getAllAudioUrl();
     if (playingIndex != index || start) {
+      if (wait) {
+        await Future.delayed(Duration(seconds: 1));
+      }
       try {
         List<AudioSource> audioResourceSource = [];
         final surahNameSimple = allChaptersInfo[surahNumber]['name_simple'];
