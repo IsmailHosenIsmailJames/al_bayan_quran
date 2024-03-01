@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:al_bayan_quran/screens/home_responsive_layout.dart';
+import 'package:al_bayan_quran/screens/home_mobile.dart';
 import 'package:al_bayan_quran/theme/theme_controller.dart';
 import 'package:appwrite/appwrite.dart';
 import 'package:email_validator/email_validator.dart';
@@ -72,10 +72,10 @@ class _LogInState extends State<LogIn> {
             box.put(boxKeyForTitle, singleNote.data['title']);
           }
         } catch (e) {
-          Get.offAll(() => const HomeResponsiveLayout());
+          Get.offAll(() => const HomeMobile());
         }
 
-        Get.offAll(() => const HomeResponsiveLayout());
+        Get.offAll(() => const HomeMobile());
       } else {
         // print("Failed while login");
       }

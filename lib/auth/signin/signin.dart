@@ -1,5 +1,5 @@
 import 'package:al_bayan_quran/auth/account_info/account_info.dart';
-import 'package:al_bayan_quran/screens/home_responsive_layout.dart';
+import 'package:al_bayan_quran/screens/home_mobile.dart';
 import 'package:al_bayan_quran/theme/theme_icon_button.dart';
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart' as models;
@@ -62,7 +62,7 @@ class _SignInState extends State<SignIn> {
           isLoogedIn = true;
         });
 
-        Get.offAll(() => const HomeResponsiveLayout());
+        Get.offAll(() => const HomeMobile());
       }
     }
   }

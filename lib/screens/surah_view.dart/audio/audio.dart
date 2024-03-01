@@ -120,6 +120,32 @@ class _AudioState extends State<Audio> {
 
   @override
   Widget build(BuildContext context) {
+    Widget dropdown = Padding(
+      padding: const EdgeInsets.only(
+        left: 10,
+        right: 10,
+        bottom: 5,
+        top: 5,
+      ),
+      child: DropdownMenu(
+        inputDecorationTheme: InputDecorationTheme(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+        ),
+        menuHeight: 300,
+        label: const Text("All Reciters List"),
+        onSelected: (value) {
+          setState(() {
+            currentReciter = value.toString();
+          });
+          if (playingIndex != -1) {
+            playAudio(playingIndex, start: true);
+          }
+        },
+        dropdownMenuEntries: dropdownList,
+      ),
+    );
     return Scaffold(
       drawer: const MyDrawer(),
       appBar: AppBar(
@@ -134,48 +160,38 @@ class _AudioState extends State<Audio> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(
-              left: 10,
-              right: 10,
-              bottom: 5,
-              top: 5,
+          if (MediaQuery.of(context).size.width <= 720) dropdown,
+          if (MediaQuery.of(context).size.width <= 720)
+            Expanded(
+              child: ListView(children: listSurahProvider(114)),
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                DropdownMenu(
-                  inputDecorationTheme: InputDecorationTheme(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
+          if (MediaQuery.of(context).size.width > 720)
+            Expanded(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: dropdown,
+                  ),
+                  Expanded(
+                    flex: 3,
+                    child: ListView(
+                      children: listSurahProvider(114),
                     ),
                   ),
-                  menuHeight: 300,
-                  width: MediaQuery.of(context).size.width - 20,
-                  label: const Text("All Reciters List"),
-                  onSelected: (value) {
-                    setState(() {
-                      currentReciter = value.toString();
-                    });
-                    if (playingIndex != -1) {
-                      playAudio(playingIndex, start: true);
-                    }
-                  },
-                  dropdownMenuEntries: dropdownList,
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          Expanded(
-            child: ListView(children: listSurahProvider(114)),
-          ),
           Text(currentReciter.split("(")[0]),
           Container(
+            margin: const EdgeInsets.only(left: 10, right: 10),
             height: 80,
             decoration: const BoxDecoration(
               color: Color.fromARGB(30, 125, 125, 125),
               borderRadius: BorderRadius.all(
-                Radius.circular(100),
+                Radius.circular(50),
               ),
             ),
             child: Row(
@@ -271,7 +287,7 @@ class _AudioState extends State<Audio> {
     List<String> listOfURL = getAllAudioUrl();
     if (playingIndex != index || start) {
       if (wait) {
-        await Future.delayed(Duration(seconds: 1));
+        await Future.delayed(const Duration(seconds: 1));
       }
       try {
         List<AudioSource> audioResourceSource = [];

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:al_bayan_quran/data/download/links.dart';
-import 'package:al_bayan_quran/screens/home_responsive_layout.dart';
+import 'package:al_bayan_quran/screens/home_mobile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
@@ -212,7 +212,7 @@ class _DownloadDataState extends State<DownloadData> {
           }
         }
 
-        Get.offAll(() => const HomeResponsiveLayout());
+        Get.offAll(() => const HomeMobile());
       }
     }
   }
