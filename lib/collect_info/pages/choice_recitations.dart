@@ -69,8 +69,7 @@ class _RecitaionChoiceState extends State<RecitaionChoice> {
         tag: MediaItem(
           displayTitle: "Surah Fateha",
           id: "$i",
-          displaySubtitle: allRecitationSearch[i].split('(')[0],
-          title: allRecitationSearch[i].split('(')[0],
+          title: url,
         ),
       ));
     }

@@ -1,12 +1,14 @@
 import 'dart:convert';
 
 import 'package:al_bayan_quran/api/some_api_response.dart';
+import 'package:al_bayan_quran/core/show_twoested_message.dart';
 import 'package:al_bayan_quran/screens/getx_controller.dart';
 import 'package:al_bayan_quran/screens/surah_view.dart/tafseer/tafseer.dart';
 import 'package:archive/archive.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:just_audio/just_audio.dart';
@@ -19,12 +21,13 @@ class SurahWithTranslation extends StatefulWidget {
   final int? start;
   final int? end;
   final String? surahName;
-  const SurahWithTranslation(
-      {super.key,
-      required this.surahNumber,
-      this.start,
-      this.end,
-      required this.surahName});
+  const SurahWithTranslation({
+    super.key,
+    required this.surahNumber,
+    this.start,
+    this.end,
+    required this.surahName,
+  });
 
   @override
   State<SurahWithTranslation> createState() => _SurahWithTranslationState();
@@ -39,6 +42,8 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
 
   List<int> listOfAyah = [];
   List<GlobalKey> listOfkey = [];
+  List<String> bookmarkSurahKey = [];
+  List<String> favoriteSurahKey = [];
 
   @override
   void initState() {
@@ -51,6 +56,17 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
     for (int i = start; i < end; i++) {
       listOfAyah.add(i);
       listOfkey.add(GlobalKey());
+    }
+
+    final box = Hive.box("info");
+    final bookmark = box.get("bookmark", defaultValue: false);
+    if (bookmark != false) {
+      bookmarkSurahKey = bookmark;
+    }
+
+    final favo = box.get("favorite", defaultValue: false);
+    if (favo != false) {
+      favoriteSurahKey = favo;
     }
 
     player.currentIndexStream.listen((event) {
@@ -104,7 +120,6 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
         });
       }
     });
-
     super.initState();
   }
 
@@ -611,6 +626,20 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
               bookName = element['name'];
             }
           }
+          String surahNumber = widget.surahNumber.toString();
+          if (surahNumber.length == 1) {
+            surahNumber = "00$surahNumber";
+          } else if (surahNumber.length == 2) {
+            surahNumber = "0$surahNumber";
+          }
+          String ayahNumberString = ayahNumber.toString();
+          if (ayahNumberString.length == 1) {
+            ayahNumberString = "00$ayahNumberString";
+          } else if (ayahNumberString.length == 2) {
+            ayahNumberString = "0$ayahNumberString";
+          }
+          String ayahKey = "$surahNumber:$ayahNumberString";
+
           listAyahWidget.add(
             Container(
               key: listOfkey[index - 1],
@@ -666,17 +695,72 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
                             });
                             playAudioList(getAllAudioUrl(), index - 1, true);
                           }
+                          if (value == "bookmark") {
+                            if (!(bookmarkSurahKey.contains(ayahKey))) {
+                              setState(() {
+                                bookmarkSurahKey.add(ayahKey);
+                              });
+                              final infoBox = Hive.box("info");
+                              infoBox.put(value, bookmarkSurahKey);
+                              showTwoestedMessage("Added to Book Mark");
+                            } else {
+                              setState(() {
+                                bookmarkSurahKey.remove(ayahKey);
+                              });
+                              final infoBox = Hive.box("info");
+                              infoBox.put(value, bookmarkSurahKey);
+                              showTwoestedMessage("Removed from Book Mark");
+                            }
+                          }
+                          if (value == "favorite") {
+                            if (!(favoriteSurahKey.contains(ayahKey))) {
+                              setState(() {
+                                favoriteSurahKey.add(ayahKey);
+                              });
+                              final infoBox = Hive.box("info");
+                              infoBox.put(value, favoriteSurahKey);
+                              showTwoestedMessage("Added to favorite");
+                            } else {
+                              setState(() {
+                                favoriteSurahKey.remove(ayahKey);
+                              });
+                              final infoBox = Hive.box("info");
+                              infoBox.put(value, favoriteSurahKey);
+                              showTwoestedMessage("Removed from favorite");
+                            }
+                          }
+                          if (value == 'tafsir') {
+                            showTafseerOfAyah(index, surahNameArabic, true);
+                          }
                         },
                         icon: const Icon(
                           Icons.more_horiz,
                         ),
                         itemBuilder: (BuildContext bc) {
-                          return const [
-                            PopupMenuItem(
+                          return [
+                            const PopupMenuItem(
+                              value: 'tafsir',
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    FontAwesomeIcons.bookOpen,
+                                    color: Colors.green,
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text('See Tafsir'),
+                                ],
+                              ),
+                            ),
+                            const PopupMenuItem(
                               value: 'continuePlay',
                               child: Row(
                                 children: [
-                                  Icon(Icons.audiotrack_outlined),
+                                  Icon(
+                                    Icons.audiotrack_outlined,
+                                    color: Colors.green,
+                                  ),
                                   SizedBox(
                                     width: 10,
                                   ),
@@ -685,10 +769,35 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
                               ),
                             ),
                             PopupMenuItem(
+                              value: 'favorite',
+                              child: Row(
+                                children: [
+                                  favoriteSurahKey.contains(ayahKey)
+                                      ? const Icon(
+                                          Icons.favorite,
+                                          color: Colors.green,
+                                        )
+                                      : const Icon(
+                                          Icons.favorite_border,
+                                          color: Colors.grey,
+                                        ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(favoriteSurahKey.contains(ayahKey)
+                                      ? "Remove Favorite"
+                                      : "Add Favorite"),
+                                ],
+                              ),
+                            ),
+                            const PopupMenuItem(
                               value: 'note',
                               child: Row(
                                 children: [
-                                  Icon(Icons.note_add),
+                                  Icon(
+                                    Icons.note_add,
+                                    color: Colors.green,
+                                  ),
                                   SizedBox(
                                     width: 10,
                                   ),
@@ -697,10 +806,35 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
                               ),
                             ),
                             PopupMenuItem(
+                              value: 'bookmark',
+                              child: Row(
+                                children: [
+                                  bookmarkSurahKey.contains(ayahKey)
+                                      ? const Icon(
+                                          Icons.bookmark_added_rounded,
+                                          color: Colors.green,
+                                        )
+                                      : const Icon(
+                                          Icons.bookmark,
+                                          color: Colors.grey,
+                                        ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(bookmarkSurahKey.contains(ayahKey)
+                                      ? "Remove BookMark"
+                                      : "Add BookMark"),
+                                ],
+                              ),
+                            ),
+                            const PopupMenuItem(
                               value: 'copy',
                               child: Row(
                                 children: [
-                                  Icon(Icons.copy),
+                                  Icon(
+                                    Icons.copy,
+                                    color: Colors.green,
+                                  ),
                                   SizedBox(
                                     width: 10,
                                   ),
@@ -708,11 +842,14 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
                                 ],
                               ),
                             ),
-                            PopupMenuItem(
+                            const PopupMenuItem(
                               value: 'copyWithTafseer',
                               child: Row(
                                 children: [
-                                  Icon(Icons.copy),
+                                  Icon(
+                                    Icons.copy,
+                                    color: Colors.green,
+                                  ),
                                   SizedBox(
                                     width: 10,
                                   ),

@@ -1,5 +1,6 @@
 import 'package:al_bayan_quran/auth/account_info/account_info.dart';
 import 'package:al_bayan_quran/auth/login/login.dart';
+import 'package:al_bayan_quran/screens/favorite_bookmark_notes/favorite.dart';
 import 'package:al_bayan_quran/screens/settings/settings.dart';
 import 'package:al_bayan_quran/theme/theme_controller.dart';
 import 'package:appwrite/appwrite.dart';
@@ -158,7 +159,7 @@ class _MyDrawerState extends State<MyDrawer> {
           const SizedBox(
             height: 10,
           ),
-          ElevatedButton(
+          TextButton(
             onPressed: () async {
               await Hive.openBox("translation");
 
@@ -178,7 +179,10 @@ class _MyDrawerState extends State<MyDrawer> {
             },
             child: const Row(
               children: [
-                Icon(Icons.settings),
+                Icon(
+                  Icons.settings,
+                  color: Colors.green,
+                ),
                 SizedBox(
                   width: 20,
                 ),
@@ -189,36 +193,90 @@ class _MyDrawerState extends State<MyDrawer> {
           const SizedBox(
             height: 10,
           ),
-          //   ElevatedButton(
-          //     onPressed: () {},
-          //     child: const Row(
-          //       children: [
-          //         Icon(Icons.more),
-          //         SizedBox(
-          //           width: 20,
-          //         ),
-          //         Text("More Apps")
-          //       ],
-          //     ),
+          TextButton(
+            onPressed: () async {
+              await Hive.openBox('quran');
+              await Hive.openBox("translation");
+
+              Get.to(
+                () => Scaffold(
+                  appBar: AppBar(
+                    title: const Text("Favorite"),
+                  ),
+                  drawer: const MyDrawer(),
+                  body: const Favorite(
+                    name: "favorite",
+                  ),
+                ),
+              );
+            },
+            child: const Row(
+              children: [
+                Icon(
+                  Icons.favorite_rounded,
+                  color: Colors.green,
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Text("Favorite")
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          TextButton(
+            onPressed: () async {
+              await Hive.openBox('quran');
+              await Hive.openBox("translation");
+
+              Get.to(
+                () => Scaffold(
+                  appBar: AppBar(
+                    title: const Text("BookMark"),
+                  ),
+                  drawer: const MyDrawer(),
+                  body: const Favorite(
+                    name: "bookmark",
+                  ),
+                ),
+              );
+            },
+            child: const Row(
+              children: [
+                Icon(
+                  Icons.bookmark_added,
+                  color: Colors.green,
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Text("Book Mark")
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          // TextButton(
+          //   onPressed: () {},
+          //   child: const Row(
+          //     children: [
+          //       Icon(
+          //         Icons.note_add,
+          //         color: Colors.green,
+          //       ),
+          //       SizedBox(
+          //         width: 20,
+          //       ),
+          //       Text("About Us")
+          //     ],
           //   ),
-          //   const SizedBox(
-          //     height: 10,
-          //   ),
-          //   ElevatedButton(
-          //     onPressed: () {},
-          //     child: const Row(
-          //       children: [
-          //         Icon(FontAwesomeIcons.circleInfo),
-          //         SizedBox(
-          //           width: 20,
-          //         ),
-          //         Text("About Us")
-          //       ],
-          //     ),
-          //   ),
-          //   const SizedBox(
-          //     height: 10,
-          //   ),
+          // ),
+          const SizedBox(
+            height: 10,
+          ),
           //   ElevatedButton(
           //     style: const ButtonStyle(
           //       alignment: Alignment.center,
