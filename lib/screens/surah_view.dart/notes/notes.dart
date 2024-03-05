@@ -61,8 +61,11 @@ class _NotesState extends State<Notes> {
     final box = Hive.box("notes");
     String boxKeyForTitle = "${keyOfAyah}title";
     String boxKeyForNote = "${keyOfAyah}note";
-    final note = box.get(boxKeyForNote, defaultValue: null);
-    final title = box.get(boxKeyForTitle, defaultValue: null);
+    isUploaded = box.get("${keyOfAyah}upload", defaultValue: false);
+    final note = box.get(boxKeyForNote, defaultValue: "");
+    previousN = note;
+    final title = box.get(boxKeyForTitle, defaultValue: "");
+    previousT = title;
     if (note != null) {
       setState(() {
         controller2.text = note;
@@ -85,16 +88,24 @@ class _NotesState extends State<Notes> {
     super.initState();
   }
 
+  String previousT = "";
+  String previousN = "";
+
   void autoSave() {
     final box = Hive.box("notes");
     String boxKeyForTitle = "${keyOfAyah}title";
     String boxKeyForNote = "${keyOfAyah}note";
+    String boxKeyForNoteUpload = "${keyOfAyah}upload";
 
-    if (controller2.text.isNotEmpty) {
-      box.put(boxKeyForNote, controller2.text);
-    }
-    if (controller1.text.isNotEmpty) {
+    if (controller1.text.isNotEmpty && previousT != controller1.text) {
       box.put(boxKeyForTitle, controller1.text);
+      previousT = controller1.text;
+      box.put(boxKeyForNoteUpload, false);
+    }
+    if (controller2.text.isNotEmpty && previousN != controller2.text) {
+      box.put(boxKeyForNote, controller2.text);
+      previousN = controller2.text;
+      box.put(boxKeyForNoteUpload, false);
     }
   }
 

@@ -23,6 +23,9 @@ Future<void> main() async {
   await Hive.openBox("info");
   await Hive.openBox("data");
   await Hive.openBox("accountInfo");
+  await Hive.openBox("notes");
+  await Hive.openBox("quran");
+  await Hive.openBox("translation");
   runApp(const MyApp());
 }
 

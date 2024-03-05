@@ -58,7 +58,18 @@ class _LogInState extends State<LogIn> {
               databaseId: "65bf585cdf62317b4d91",
               collectionId: "65bfa12aa542dc981ea8",
               documentId: user.$id);
-          List listOfKey = jsonDecode(document.data['allnotes']);
+          List listOfKey = jsonDecode(document.data['allnotes'] ?? "[]") ?? [];
+          List<String> favorite = List<String>.from(
+              jsonDecode(document.data['favorite'] ?? "[]") ?? []);
+          List<String> bookmaek = List<String>.from(
+              jsonDecode(document.data['bookmark'] ?? "[]") ?? []);
+
+          final boxinf = Hive.box("info");
+          boxinf.put("favorite", favorite);
+          boxinf.put("bookmark", bookmaek);
+          boxinf.put("bookmarkUploaded", true);
+          boxinf.put("favoriteUploaded", true);
+
           final box = await Hive.openBox("notes");
           for (final key in listOfKey) {
             final singleNote = await databases.getDocument(
@@ -67,11 +78,14 @@ class _LogInState extends State<LogIn> {
                 documentId: user.$id + key);
             String boxKeyForTitle = "${key}title";
             String boxKeyForNote = "${key}note";
+            String boxKeyForUpload = "${key}upload";
 
             box.put(boxKeyForNote, singleNote.data['note']);
             box.put(boxKeyForTitle, singleNote.data['title']);
+            box.put(boxKeyForUpload, true);
           }
         } catch (e) {
+          print(e);
           Get.offAll(() => const HomeMobile());
         }
 

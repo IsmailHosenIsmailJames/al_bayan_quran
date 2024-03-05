@@ -619,7 +619,8 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
 
           String arbicAyah = quran.get("${ayahNumber + firstAyahNumber}");
           String ayahTranslation = translation.get(
-              "${info["translation_book_ID"]}/${firstAyahNumber + listOfAyah[index - 1]}");
+              "${info["translation_book_ID"]}/${firstAyahNumber + listOfAyah[index - 1]}",
+              defaultValue: "No Found");
           String bookName = "";
           for (var element in allTranslationLanguage) {
             if (element['id'].toString() == info['translation_book_ID']) {
@@ -696,6 +697,7 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
                             playAudioList(getAllAudioUrl(), index - 1, true);
                           }
                           if (value == "bookmark") {
+                            infoBox.put("bookmarkUploaded", false);
                             if (!(bookmarkSurahKey.contains(ayahKey))) {
                               setState(() {
                                 bookmarkSurahKey.add(ayahKey);
@@ -713,6 +715,7 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
                             }
                           }
                           if (value == "favorite") {
+                            infoBox.put("favoriteUploaded", false);
                             if (!(favoriteSurahKey.contains(ayahKey))) {
                               setState(() {
                                 favoriteSurahKey.add(ayahKey);

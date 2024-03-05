@@ -2,7 +2,6 @@ import 'package:al_bayan_quran/auth/account_info/account_info.dart';
 import 'package:al_bayan_quran/auth/login/login.dart';
 import 'package:al_bayan_quran/screens/favorite_bookmark_notes/book_mark.dart';
 import 'package:al_bayan_quran/screens/favorite_bookmark_notes/notes_v.dart';
-import 'package:al_bayan_quran/screens/favorite_bookmark_notes/notes_get_data.dart';
 import 'package:al_bayan_quran/screens/settings/settings.dart';
 import 'package:al_bayan_quran/theme/theme_controller.dart';
 import 'package:appwrite/appwrite.dart';
@@ -12,7 +11,6 @@ import 'package:hive/hive.dart';
 
 import '../../theme/theme_icon_button.dart';
 import '../favorite_bookmark_notes/favorite.dart';
-import '../favorite_bookmark_notes/get_data.dart';
 
 class MyDrawer extends StatefulWidget {
   const MyDrawer({super.key});
@@ -136,32 +134,79 @@ class _MyDrawerState extends State<MyDrawer> {
             ),
           ),
           const SizedBox(
-            height: 20,
-          ),
-          if (isLoogedIn)
-            ElevatedButton(
-              onPressed: () async {
-                Client client = Client()
-                    .setEndpoint("https://cloud.appwrite.io/v1")
-                    .setProject("albayanquran");
-                Account account = Account(client);
-                await account.deleteSession(sessionId: 'current');
-                setState(() {
-                  isLoogedIn = false;
-                });
-              },
-              child: const Row(
-                children: [
-                  Icon(Icons.logout),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Text("Log Out")
-                ],
-              ),
-            ),
-          const SizedBox(
             height: 10,
+          ),
+
+          TextButton(
+            onPressed: () async {
+              await Hive.openBox('quran');
+              await Hive.openBox("translation");
+
+              Get.to(
+                () => const Favorite(),
+              );
+            },
+            child: const Row(
+              children: [
+                Icon(
+                  Icons.favorite_rounded,
+                  color: Colors.green,
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Text("Favorite")
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          TextButton(
+            onPressed: () async {
+              await Hive.openBox('quran');
+              await Hive.openBox("translation");
+
+              Get.to(() => const BookMark());
+            },
+            child: const Row(
+              children: [
+                Icon(
+                  Icons.bookmark_added,
+                  color: Colors.green,
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Text("Book Mark")
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          TextButton(
+            onPressed: () async {
+              await Hive.openBox('quran');
+              await Hive.openBox("translation");
+              await Hive.openBox("notes");
+              Get.to(() => const NotesView());
+            },
+            child: const Row(
+              children: [
+                Icon(
+                  Icons.note_add,
+                  color: Colors.green,
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Text("Notes")
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 5,
           ),
           TextButton(
             onPressed: () async {
@@ -195,76 +240,33 @@ class _MyDrawerState extends State<MyDrawer> {
             ),
           ),
           const SizedBox(
-            height: 10,
+            height: 5,
           ),
-          TextButton(
-            onPressed: () async {
-              await Hive.openBox('quran');
-              await Hive.openBox("translation");
-
-              Get.to(
-                () => const Favorite(),
-              );
-            },
-            child: const Row(
-              children: [
-                Icon(
-                  Icons.favorite_rounded,
-                  color: Colors.green,
-                ),
-                SizedBox(
-                  width: 20,
-                ),
-                Text("Favorite")
-              ],
+          if (isLoogedIn)
+            TextButton(
+              onPressed: () async {
+                Client client = Client()
+                    .setEndpoint("https://cloud.appwrite.io/v1")
+                    .setProject("albayanquran");
+                Account account = Account(client);
+                await account.deleteSession(sessionId: 'current');
+                setState(() {
+                  isLoogedIn = false;
+                });
+              },
+              child: const Row(
+                children: [
+                  Icon(
+                    Icons.logout,
+                    color: Colors.green,
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Text("Log Out")
+                ],
+              ),
             ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          TextButton(
-            onPressed: () async {
-              await Hive.openBox('quran');
-              await Hive.openBox("translation");
-
-              Get.to(() => const BookMark());
-            },
-            child: const Row(
-              children: [
-                Icon(
-                  Icons.bookmark_added,
-                  color: Colors.green,
-                ),
-                SizedBox(
-                  width: 20,
-                ),
-                Text("Book Mark")
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          TextButton(
-            onPressed: () async {
-              await Hive.openBox('quran');
-              await Hive.openBox("translation");
-              await Hive.openBox("notes");
-              Get.to(() => const NotesView());
-            },
-            child: const Row(
-              children: [
-                Icon(
-                  Icons.note_add,
-                  color: Colors.green,
-                ),
-                SizedBox(
-                  width: 20,
-                ),
-                Text("Notes")
-              ],
-            ),
-          ),
           const SizedBox(
             height: 10,
           ),

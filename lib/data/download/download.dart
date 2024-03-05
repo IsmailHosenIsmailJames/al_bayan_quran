@@ -34,7 +34,7 @@ class _DownloadDataState extends State<DownloadData> {
           actions: [
             TextButton(
               onPressed: () {
-                getData();
+                Get.offAll(() => DownloadData());
               },
               child: const Icon(
                 Icons.restart_alt_outlined,
