@@ -1,7 +1,8 @@
 import 'package:al_bayan_quran/auth/account_info/account_info.dart';
 import 'package:al_bayan_quran/auth/login/login.dart';
-import 'package:al_bayan_quran/screens/favorite_bookmark_notes/favorite.dart';
-import 'package:al_bayan_quran/screens/favorite_bookmark_notes/notes_view.dart';
+import 'package:al_bayan_quran/screens/favorite_bookmark_notes/book_mark.dart';
+import 'package:al_bayan_quran/screens/favorite_bookmark_notes/notes_v.dart';
+import 'package:al_bayan_quran/screens/favorite_bookmark_notes/notes_get_data.dart';
 import 'package:al_bayan_quran/screens/settings/settings.dart';
 import 'package:al_bayan_quran/theme/theme_controller.dart';
 import 'package:appwrite/appwrite.dart';
@@ -10,6 +11,8 @@ import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
 import '../../theme/theme_icon_button.dart';
+import '../favorite_bookmark_notes/favorite.dart';
+import '../favorite_bookmark_notes/get_data.dart';
 
 class MyDrawer extends StatefulWidget {
   const MyDrawer({super.key});
@@ -200,15 +203,7 @@ class _MyDrawerState extends State<MyDrawer> {
               await Hive.openBox("translation");
 
               Get.to(
-                () => Scaffold(
-                  appBar: AppBar(
-                    title: const Text("Favorite"),
-                  ),
-                  drawer: const MyDrawer(),
-                  body: const Favorite(
-                    name: "favorite",
-                  ),
-                ),
+                () => const Favorite(),
               );
             },
             child: const Row(
@@ -232,17 +227,7 @@ class _MyDrawerState extends State<MyDrawer> {
               await Hive.openBox('quran');
               await Hive.openBox("translation");
 
-              Get.to(
-                () => Scaffold(
-                  appBar: AppBar(
-                    title: const Text("BookMark"),
-                  ),
-                  drawer: const MyDrawer(),
-                  body: const Favorite(
-                    name: "bookmark",
-                  ),
-                ),
-              );
+              Get.to(() => const BookMark());
             },
             child: const Row(
               children: [

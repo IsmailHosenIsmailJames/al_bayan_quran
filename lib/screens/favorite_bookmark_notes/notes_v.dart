@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
 import '../drawer/drawer.dart';
-import 'get_data.dart';
+import 'notes_get_data.dart';
 
-class Favorite extends StatelessWidget {
-  const Favorite({super.key});
+class NotesView extends StatelessWidget {
+  const NotesView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: MyDrawer(),
       appBar: AppBar(
-        title: const Text("Favorite"),
+        title: Text("Notes"),
       ),
-      drawer: const MyDrawer(),
       body: ListView(
-        children: buildWidgetForFavBook("favorite"),
+        children: buildListOfWidgetForNotes(),
       ),
     );
   }

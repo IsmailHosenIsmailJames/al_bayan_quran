@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:al_bayan_quran/screens/surah_view.dart/tafseer/tafseer.dart';
 import 'package:archive/archive.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,43 +7,7 @@ import 'package:hive/hive.dart';
 
 import '../../api/some_api_response.dart';
 import '../getx_controller.dart';
-
-List<Map<String, String>> getAllFavoriteWithData(String name) {
-  final box = Hive.box("info");
-  final tem = box.get(name, defaultValue: false);
-  if (tem == false) {
-    return [];
-  } else {
-    final quran = Hive.box('quran');
-    List<Map<String, String>> toReturn = [];
-    List<String> myFavorite = tem;
-    final translation = Hive.box("translation");
-    final info = box.get("info", defaultValue: false);
-
-    for (String ayahKey in myFavorite) {
-      List<String> splitedAyahKey = ayahKey.split(":");
-      int surahNumber = int.parse(splitedAyahKey[0]);
-      int ayahNumber = int.parse(splitedAyahKey[1]);
-      Map<String, dynamic> surahInfo = allChaptersInfo[surahNumber];
-      String surahNameSimple = surahInfo['name_simple'];
-      String surahNameArabic = surahInfo["name_arabic"];
-      String arbicAyah =
-          quran.get("${getAyahCountFromStart(ayahNumber, surahNumber)}");
-      String ayahTranslation = translation.get(
-          "${info["translation_book_ID"]}/${getAyahCountFromStart(ayahNumber, surahNumber)}");
-      toReturn.add({
-        "name": surahNameSimple,
-        "arabicName": surahNameArabic,
-        "surahNumber": surahNumber.toString(),
-        "ayahNumber": ayahNumber.toString(),
-        "ayahKey": ayahKey,
-        "arabicAyah": arbicAyah,
-        "translation": ayahTranslation,
-      });
-    }
-    return toReturn;
-  }
-}
+import '../surah_view.dart/tafseer/tafseer.dart';
 
 int getAyahCountFromStart(int ayahNumber, int surahNumber) {
   for (int i = 0; i < surahNumber; i++) {
@@ -54,9 +17,57 @@ int getAyahCountFromStart(int ayahNumber, int surahNumber) {
   return ayahNumber;
 }
 
-List<Widget> buildWidgetForFavBook(String name) {
-  List<Map<String, String>> list = getAllFavoriteWithData(name);
+List<Map<String, String>> getNotesData() {
+  final notesBox = Hive.box("notes");
+  final quranBox = Hive.box("quran");
+  final translationBox = Hive.box("translation");
+  List<Map<String, String>> notesMapList = [];
+  final box = Hive.box("info");
+
+  for (String key in notesBox.keys) {
+    if (key.endsWith("note")) {
+      String note = notesBox.get(key, defaultValue: null) ?? "";
+      String title =
+          notesBox.get(key.replaceAll("note", "title"), defaultValue: null) ??
+              "";
+      String ayahKey = key.replaceAll("note", "");
+      String surahNumber = (int.parse(ayahKey.substring(0, 3)) - 1).toString();
+      String ayahNumber = (int.parse(ayahKey.substring(3)) - 1).toString();
+
+      String ayahCount =
+          getAyahCountFromStart(int.parse(ayahNumber), int.parse(surahNumber))
+              .toString();
+      print([surahNumber, ayahNumber, ayahCount]);
+      final info = box.get("info", defaultValue: false);
+      Map<String, dynamic> surahInfo = allChaptersInfo[int.parse(surahNumber)];
+      String surahNameSimple = surahInfo['name_simple'];
+      String surahNameArabic = surahInfo["name_arabic"];
+
+      String quranAyah = quranBox.get(ayahCount) ?? "";
+      String transltionOfAyah =
+          translationBox.get("${info["translation_book_ID"]}/$ayahCount") ?? "";
+
+      notesMapList.add({
+        "ayahKey": ayahKey,
+        "title": title,
+        "note": note,
+        "name": surahNameSimple,
+        "arabicName": surahNameArabic,
+        "surahNumber": surahNumber,
+        "ayahNumber": ayahNumber,
+        "ayahCount": ayahCount,
+        "arabicAyah": quranAyah,
+        "translation": transltionOfAyah
+      });
+    }
+  }
+  return notesMapList;
+}
+
+List<Widget> buildListOfWidgetForNotes() {
   final controller = Get.put(ScreenGetxController());
+
+  List<Map<String, String>> list = getNotesData();
   List<Widget> toReturn = [];
   for (int index = 0; index < list.length; index++) {
     toReturn.add(
@@ -128,6 +139,28 @@ List<Widget> buildWidgetForFavBook(String name) {
                   ),
                 ),
               ),
+              Divider(),
+              const Center(
+                child: Text(
+                  "Notes",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.green,
+                  ),
+                ),
+              ),
+              const Divider(),
+              Text(
+                list[index]['title'] ?? "",
+                style: TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const Divider(),
+              Text(list[index]['note'] ?? ""),
+              const Divider(),
             ],
           ),
         ),
