@@ -1,6 +1,7 @@
 import 'package:al_bayan_quran/auth/account_info/account_info.dart';
 import 'package:al_bayan_quran/auth/login/login.dart';
 import 'package:al_bayan_quran/screens/favorite_bookmark_notes/favorite.dart';
+import 'package:al_bayan_quran/screens/favorite_bookmark_notes/notes_view.dart';
 import 'package:al_bayan_quran/screens/settings/settings.dart';
 import 'package:al_bayan_quran/theme/theme_controller.dart';
 import 'package:appwrite/appwrite.dart';
@@ -259,21 +260,26 @@ class _MyDrawerState extends State<MyDrawer> {
           const SizedBox(
             height: 10,
           ),
-          // TextButton(
-          //   onPressed: () {},
-          //   child: const Row(
-          //     children: [
-          //       Icon(
-          //         Icons.note_add,
-          //         color: Colors.green,
-          //       ),
-          //       SizedBox(
-          //         width: 20,
-          //       ),
-          //       Text("About Us")
-          //     ],
-          //   ),
-          // ),
+          TextButton(
+            onPressed: () async {
+              await Hive.openBox('quran');
+              await Hive.openBox("translation");
+              await Hive.openBox("notes");
+              Get.to(() => const NotesView());
+            },
+            child: const Row(
+              children: [
+                Icon(
+                  Icons.note_add,
+                  color: Colors.green,
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Text("Notes")
+              ],
+            ),
+          ),
           const SizedBox(
             height: 10,
           ),

@@ -1,6 +1,7 @@
 import 'package:al_bayan_quran/collect_info/collect_info_layout_responsive.dart';
 import 'package:al_bayan_quran/screens/home_mobile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import '../data/download/download.dart';
@@ -13,6 +14,12 @@ class InIt extends StatefulWidget {
 }
 
 class _InItState extends State<InIt> {
+  @override
+  void initState() {
+    FlutterNativeSplash.remove();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final box = Hive.box("info");

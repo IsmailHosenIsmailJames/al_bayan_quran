@@ -46,7 +46,7 @@ List<Map<String, String>> getAllFavoriteWithData(String name) {
   }
 }
 
-int getAyahCountFromStart(int ayahNumber, surahNumber) {
+int getAyahCountFromStart(int ayahNumber, int surahNumber) {
   for (int i = 0; i < surahNumber; i++) {
     int verseCount = allChaptersInfo[i]['verses_count'];
     ayahNumber += verseCount;
