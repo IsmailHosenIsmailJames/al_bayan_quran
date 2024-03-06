@@ -1,6 +1,8 @@
 import 'package:al_bayan_quran/screens/settings/settings.dart';
 import 'package:al_bayan_quran/screens/surah_view.dart/surah_with_translation.dart';
+import 'package:al_bayan_quran/theme/theme_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
 class SuraView extends StatelessWidget {
   final int surahNumber;
@@ -26,7 +28,8 @@ class SuraView extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () {
+            onPressed: () async {
+              await Hive.openBox(quranScriptType);
               showModalBottomSheet(
                 context: context,
                 useSafeArea: true,
@@ -37,7 +40,9 @@ class SuraView extends StatelessWidget {
                     minChildSize: 0.25,
                     maxChildSize: 1,
                     builder: (context, scrollController) {
-                      return const Settings();
+                      return const Settings(
+                        showNavigator: true,
+                      );
                     },
                   );
                 },

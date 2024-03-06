@@ -78,6 +78,13 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
       sizeAnimation.add(CurvedAnimation(parent: tem, curve: Curves.easeInOut));
       expandedPosition.add(-1);
     }
+    openBoxes();
+  }
+
+  void openBoxes() async {
+    final tem = Hive.box("info");
+    await Hive.openBox(
+        tem.get("quranScriptType", defaultValue: "quran_tajweed"));
   }
 
   List<Widget> listSurahProviderDesktop(length) {
@@ -106,6 +113,9 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
           onTap: () async {
             await Hive.openBox("translation");
             await Hive.openBox("quran");
+            final tem = Hive.box("info");
+            await Hive.openBox(
+                tem.get("quranScriptType", defaultValue: "quran_tajweed"));
             player.dispose();
             setState(() {
               isPlaying = false;
@@ -237,14 +247,14 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
           padding: const EdgeInsets.all(10),
           margin: const EdgeInsets.only(left: 5, right: 5, top: 2, bottom: 2),
           decoration: BoxDecoration(
-            color: const Color.fromARGB(30, 125, 125, 125),
+            color: const Color.fromARGB(20, 125, 125, 125),
             borderRadius: BorderRadius.circular(15),
           ),
           child: Column(
             children: [
               GestureDetector(
                 behavior: HitTestBehavior.translucent,
-                onTap: () {
+                onTap: () async {
                   setState(() {
                     expandedPosition[index] == index
                         ? {
@@ -436,7 +446,7 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
             padding: const EdgeInsets.all(10),
             margin: const EdgeInsets.only(left: 5, right: 5, top: 2, bottom: 2),
             decoration: BoxDecoration(
-                color: const Color.fromARGB(30, 125, 125, 125),
+                color: const Color.fromARGB(20, 125, 125, 125),
                 borderRadius: BorderRadius.circular(15)),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -606,7 +616,7 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
             margin:
                 const EdgeInsets.only(left: 10, right: 10, top: 2, bottom: 2),
             decoration: BoxDecoration(
-                color: const Color.fromARGB(30, 125, 125, 125),
+                color: const Color.fromARGB(20, 125, 125, 125),
                 borderRadius: BorderRadius.circular(15)),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -725,7 +735,7 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
           padding: const EdgeInsets.all(10),
           margin: const EdgeInsets.only(left: 5, right: 5, top: 2, bottom: 2),
           decoration: BoxDecoration(
-              color: const Color.fromARGB(30, 125, 125, 125),
+              color: const Color.fromARGB(20, 125, 125, 125),
               borderRadius: BorderRadius.circular(15)),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -1042,7 +1052,7 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
                             margin: const EdgeInsets.only(
                                 left: 10, right: 10, top: 5, bottom: 5),
                             decoration: BoxDecoration(
-                              color: const Color.fromARGB(30, 125, 125, 125),
+                              color: const Color.fromARGB(20, 125, 125, 125),
                               borderRadius: BorderRadius.circular(15),
                             ),
                             child: Column(

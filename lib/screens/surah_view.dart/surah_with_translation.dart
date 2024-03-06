@@ -14,6 +14,8 @@ import 'package:hive/hive.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 
+import '../../api/colors_tazweed.dart';
+import '../settings/settings.dart';
 import 'notes/notes.dart';
 
 class SurahWithTranslation extends StatefulWidget {
@@ -502,7 +504,7 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
             margin: const EdgeInsets.all(8),
             padding: const EdgeInsets.all(10),
             decoration: const BoxDecoration(
-              color: Color.fromARGB(30, 120, 120, 120),
+              color: Color.fromARGB(15, 120, 120, 120),
               borderRadius: BorderRadius.all(
                 Radius.circular(10),
               ),
@@ -647,7 +649,7 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
               margin: const EdgeInsets.all(8),
               padding: const EdgeInsets.all(10),
               decoration: const BoxDecoration(
-                color: Color.fromARGB(30, 120, 120, 120),
+                color: Color.fromARGB(15, 120, 120, 120),
                 borderRadius: BorderRadius.all(
                   Radius.circular(10),
                 ),
@@ -663,6 +665,7 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
                           (listOfAyah[index - 1] + 1).toString(),
                           style: const TextStyle(
                             fontSize: 16,
+                            color: Colors.white,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -909,13 +912,10 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
                         Container(
                           alignment: Alignment.topRight,
                           child: Obx(
-                            () => Text(
-                              arbicAyah,
-                              textAlign: TextAlign.end,
-                              style: TextStyle(
-                                fontSize: controller.fontSizeArabic.value,
-                              ),
-                            ),
+                            () => buildArabicText(
+                                controller.quranScriptTypeGetx.value,
+                                "${ayahNumber + firstAyahNumber}",
+                                ayahNumber),
                           ),
                         ),
                         const SizedBox(
@@ -947,5 +947,74 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
       }
     }
     return listAyahWidget;
+  }
+
+  Widget buildArabicText(String styleType, String ayahKey, int ayahNumber) {
+    final box = Hive.box(styleType);
+    if (styleType == "quran_tajweed") {
+      return getTazweedTexSpan(
+        box.get(ayahKey, defaultValue: ""),
+      );
+    }
+    return Obx(
+      () {
+        int valueOf1 = "١".codeUnitAt(0);
+
+        return Text(
+          box.get(ayahKey, defaultValue: "") +
+              " "
+                  "۝" +
+              String.fromCharCode(valueOf1 + ayahNumber),
+          style: TextStyle(
+            fontSize: controller.fontSizeArabic.value,
+          ),
+        );
+      },
+    );
+  }
+
+  Widget getTazweedTexSpan(String ayah) {
+    List<Map<String, String?>> tazweeds = extractWordsGetTazweeds(ayah);
+    List<InlineSpan> spanText = [];
+    for (Map<String, String?> taz in tazweeds) {
+      String word = taz['word'] ?? "";
+      String className = taz['class'] ?? "null";
+      String tag = taz['tag'] ?? "null";
+      if (className == 'null' || tag == "null") {
+        spanText.add(
+          TextSpan(text: word),
+        );
+      } else {
+        if (className == "end") {
+          spanText.add(
+            TextSpan(
+              text: "۝" + word,
+              style: TextStyle(),
+            ),
+          );
+        } else {
+          Color textColor =
+              colorsForTazweed[className] ?? Color.fromARGB(255, 121, 85, 72);
+          spanText.add(
+            TextSpan(
+              text: word,
+              style: TextStyle(
+                color: textColor,
+              ),
+            ),
+          );
+        }
+      }
+    }
+    return Obx(
+      () => Text.rich(
+        TextSpan(
+          style: TextStyle(
+            fontSize: controller.fontSizeArabic.value,
+          ),
+          children: spanText,
+        ),
+      ),
+    );
   }
 }

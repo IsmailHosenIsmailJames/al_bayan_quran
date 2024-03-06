@@ -211,6 +211,7 @@ class _MyDrawerState extends State<MyDrawer> {
           TextButton(
             onPressed: () async {
               await Hive.openBox("translation");
+              await Hive.openBox(quranScriptType);
 
               Get.to(
                 () => Scaffold(
@@ -222,7 +223,9 @@ class _MyDrawerState extends State<MyDrawer> {
                       ),
                     ),
                   ),
-                  body: const Settings(),
+                  body: const Settings(
+                    showNavigator: false,
+                  ),
                 ),
               );
             },

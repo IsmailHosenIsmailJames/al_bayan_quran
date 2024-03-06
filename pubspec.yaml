@@ -2,7 +2,7 @@ name: al_bayan_quran
 description: "A new Flutter project."
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.6.1+13
+version: 1.7.0+14
 
 environment:
   sdk: '>=3.2.3 <4.0.0'
@@ -38,6 +38,7 @@ dependencies:
   just_audio_background: ^0.0.1-beta.11
   audio_video_progress_bar: ^2.0.1
   fluttertoast: ^8.2.4
+  regexpattern: ^2.6.0
 
   # google_fonts: ^6.1.0
 
@@ -58,10 +59,10 @@ flutter:
     - assets/img/madina.jpeg
 
  
-  fonts:
-    - family: Majeed-Quranic
-      fonts:
-        - asset: assets/fonts/Al Qalam Quran.ttf
+  # fonts:
+  #   - family: Majeed-Quranic
+  #     fonts:
+  #       - asset: assets/fonts/Al Qalam Quran.ttf
 
 flutter_launcher_icons:
   android: "launcher_icon"

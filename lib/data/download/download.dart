@@ -86,46 +86,112 @@ class _DownloadDataState extends State<DownloadData> {
           }
         }
 
-        if (infoBox.get('quran', defaultValue: false) == false) {
+        if (infoBox.get('quran_tajweed', defaultValue: false) == false &&
+            infoBox.get('quran', defaultValue: false) == false &&
+            infoBox.get('quran_indopak', defaultValue: false) == false &&
+            infoBox.get('quran_uthmani_simple', defaultValue: false) == false &&
+            infoBox.get('quran_imlaei', defaultValue: false) == false) {
           setState(() {
-            progressValue = 0.45;
+            progressValue = 0.41;
           });
           var url = Uri.parse(
               "https://api.quran.com/api/v4/quran/verses/uthmani_tajweed");
           var headers = {"Accept": "application/json"};
 
-          var response = await http.get(url, headers: headers);
-          if (response.statusCode == 200) {
-            setState(() {
-              progressValue = 0.65;
-            });
-            List<Map<String, dynamic>> listMap =
-                List<Map<String, dynamic>>.from(
-                    jsonDecode(response.body)['verses']);
-            final quranTajweed = await Hive.openBox("quran_tajweed");
-            for (int i = 0; i < listMap.length; i++) {
-              quranTajweed.put("$i", listMap[i]['text_uthmani_tajweed']);
+          var response;
+          if (infoBox.get('quran_tajweed', defaultValue: false) == false) {
+            response = await http.get(url, headers: headers);
+            if (response.statusCode == 200) {
+              setState(() {
+                progressValue = 0.45;
+              });
+              List<Map<String, dynamic>> listMap =
+                  List<Map<String, dynamic>>.from(
+                      jsonDecode(response.body)['verses']);
+              final quranTajweed = await Hive.openBox("quran_tajweed");
+              for (int i = 0; i < listMap.length; i++) {
+                quranTajweed.put("$i", listMap[i]['text_uthmani_tajweed']);
+              }
+              infoBox.put('quran_tajweed', true);
             }
           }
           url = Uri.parse("https://api.quran.com/api/v4/quran/verses/uthmani");
           headers = {"Accept": "application/json"};
 
-          response = await http.get(url, headers: headers);
+          if (infoBox.get('quran', defaultValue: false) == false) {
+            response = await http.get(url, headers: headers);
 
-          if (response.statusCode == 200) {
-            setState(() {
-              progressValue = 0.70;
-            });
-            List<Map<String, dynamic>> listMap =
-                List<Map<String, dynamic>>.from(
-                    jsonDecode(response.body)['verses']);
-            final quranTajweed = await Hive.openBox("quran");
-            for (int i = 0; i < listMap.length; i++) {
-              quranTajweed.put("$i", listMap[i]['text_uthmani']);
+            if (response.statusCode == 200) {
+              setState(() {
+                progressValue = 0.50;
+              });
+              List<Map<String, dynamic>> listMap =
+                  List<Map<String, dynamic>>.from(
+                      jsonDecode(response.body)['verses']);
+              final quranTajweed = await Hive.openBox("quran");
+              for (int i = 0; i < listMap.length; i++) {
+                quranTajweed.put("$i", listMap[i]['text_uthmani']);
+              }
+              infoBox.put('quran', true);
             }
-            setState(() {
-              progressValue = 0.74;
-            });
+          }
+
+          if (infoBox.get('quran_indopak', defaultValue: false) == false) {
+            url =
+                Uri.parse("https://api.quran.com/api/v4/quran/verses/indopak");
+            headers = {"Accept": "application/json"};
+            response = await http.get(url, headers: headers);
+            if (response.statusCode == 200) {
+              setState(() {
+                progressValue = 0.55;
+              });
+              List<Map<String, dynamic>> listMap =
+                  List<Map<String, dynamic>>.from(
+                      jsonDecode(response.body)['verses']);
+              final quranTajweed = await Hive.openBox("quran_indopak");
+              for (int i = 0; i < listMap.length; i++) {
+                quranTajweed.put("$i", listMap[i]['text_indopak']);
+              }
+              infoBox.put('quran_indopak', true);
+            }
+          }
+          if (infoBox.get('quran_uthmani_simple', defaultValue: false) ==
+              false) {
+            url = Uri.parse(
+                "https://api.quran.com/api/v4/quran/verses/uthmani_simple");
+            headers = {"Accept": "application/json"};
+            response = await http.get(url, headers: headers);
+            if (response.statusCode == 200) {
+              setState(() {
+                progressValue = 0.55;
+              });
+              List<Map<String, dynamic>> listMap =
+                  List<Map<String, dynamic>>.from(
+                      jsonDecode(response.body)['verses']);
+              final quranTajweed = await Hive.openBox("quran_uthmani_simple");
+              for (int i = 0; i < listMap.length; i++) {
+                quranTajweed.put("$i", listMap[i]['text_uthmani_simple']);
+              }
+              infoBox.put('quran_uthmani_simple', true);
+            }
+          }
+          if (infoBox.get('quran_imlaei', defaultValue: false) == false) {
+            url = Uri.parse("https://api.quran.com/api/v4/quran/verses/imlaei");
+            headers = {"Accept": "application/json"};
+            response = await http.get(url, headers: headers);
+            if (response.statusCode == 200) {
+              setState(() {
+                progressValue = 0.65;
+              });
+              List<Map<String, dynamic>> listMap =
+                  List<Map<String, dynamic>>.from(
+                      jsonDecode(response.body)['verses']);
+              final quranTajweed = await Hive.openBox("quran_imlaei");
+              for (int i = 0; i < listMap.length; i++) {
+                quranTajweed.put("$i", listMap[i]['text_imlaei']);
+              }
+              infoBox.put('quran_imlaei', true);
+            }
           }
 
           final dataBoox = Hive.box("data");

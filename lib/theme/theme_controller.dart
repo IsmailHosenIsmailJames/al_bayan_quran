@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
 bool isLoogedIn = false;
+String quranScriptType = "quran_tajweed";
 
 class AppThemeData extends GetxController {
   RxString themeModeName = 'system'.obs;
@@ -25,6 +26,10 @@ class AppThemeData extends GetxController {
         infoBox.get("fontSizeArabic", defaultValue: 24.0);
     fonsize.fontSizeTranslation.value =
         infoBox.get("fontSizeTranslation", defaultValue: 15.0);
+    quranScriptType =
+        infoBox.get("quranScriptType", defaultValue: "quran_tajweed");
+    fonsize.quranScriptTypeGetx.value =
+        infoBox.get("quranScriptType", defaultValue: "quran_tajweed");
 
     final themePrefer = await Hive.openBox("theme");
     final String? userTheme = themePrefer.get('theme_preference');
