@@ -1,3 +1,4 @@
+import 'package:al_bayan_quran/collect_info/getx/get_controller.dart';
 import 'package:al_bayan_quran/screens/drawer/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -35,6 +36,9 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
   List<AnimationController> controller = [];
   List<Animation<double>> sizeAnimation = [];
 
+  final infoController = Get.put(InfoController());
+  final infoBox = Hive.box("info");
+
   @override
   void initState() {
     for (String recitor in allRecitation) {
@@ -45,7 +49,6 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
         ),
       );
     }
-    final infoBox = Hive.box("info");
     final info = infoBox.get("info", defaultValue: false);
 
     currentReciter = info['recitation_ID'];
@@ -61,6 +64,7 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
         if (playingIndex >= 113) {
           setState(() {
             playingIndex = -1;
+            isPlaying = false;
           });
         } else {
           playAudio(playingIndex + 1, wait: true);
@@ -579,7 +583,8 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
   }
 
   String getFullURL(int ayahNumber) {
-    String recitorChoice = currentReciter;
+    String recitorChoice =
+        infoBox.get("info")['recitation_ID'] ?? currentReciter;
     String baseURL = getBaseURLOfAudio(recitorChoice);
     String audioID = getIdOfAudio(ayahNumber);
     return "$baseURL/$audioID.mp3";
@@ -835,6 +840,10 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
         menuHeight: 300,
         label: const Text("All Reciters List"),
         onSelected: (value) {
+          Map<String, String> temInfoMap =
+              Map<String, String>.from(infoBox.get("info"));
+          temInfoMap['recitation_ID'] = value.toString();
+          infoBox.put("info", temInfoMap);
           setState(() {
             currentReciter = value.toString();
           });

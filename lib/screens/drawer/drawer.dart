@@ -39,7 +39,7 @@ class _MyDrawerState extends State<MyDrawer> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            ElevatedButton.icon(
+                            TextButton.icon(
                               onPressed: () {
                                 Get.to(() => const LogIn());
                               },
@@ -50,7 +50,10 @@ class _MyDrawerState extends State<MyDrawer> {
                                   fontSize: 30,
                                 ),
                               ),
-                              icon: const Icon(Icons.login),
+                              icon: const Icon(
+                                Icons.login,
+                                color: Colors.green,
+                              ),
                             ),
                             const Text(
                               "You Need to login for more Features.\nFor Example, you can save your notes in\ncloud and access it from any places.",
@@ -136,7 +139,31 @@ class _MyDrawerState extends State<MyDrawer> {
           const SizedBox(
             height: 10,
           ),
+          // TextButton(
+          //   onPressed: () async {
+          //     await Hive.openBox('quran');
+          //     await Hive.openBox("translation");
 
+          //     Get.to(
+          //       () => const Favorite(),
+          //     );
+          //   },
+          //   child: const Row(
+          //     children: [
+          //       Icon(
+          //         FontAwesomeIcons.shuffle,
+          //         color: Colors.green,
+          //       ),
+          //       SizedBox(
+          //         width: 20,
+          //       ),
+          //       Text("Jump to Ayah")
+          //     ],
+          //   ),
+          // ),
+          // const SizedBox(
+          //   height: 5,
+          // ),
           TextButton(
             onPressed: () async {
               await Hive.openBox('quran');
@@ -273,21 +300,6 @@ class _MyDrawerState extends State<MyDrawer> {
           const SizedBox(
             height: 10,
           ),
-          //   ElevatedButton(
-          //     style: const ButtonStyle(
-          //       alignment: Alignment.center,
-          //     ),
-          //     onPressed: () {},
-          //     child: const Row(
-          //       children: [
-          //         Icon(Icons.feedback),
-          //         SizedBox(
-          //           width: 20,
-          //         ),
-          //         Text("Feed Back")
-          //       ],
-          //     ),
-          //   ),
         ],
       ),
     );

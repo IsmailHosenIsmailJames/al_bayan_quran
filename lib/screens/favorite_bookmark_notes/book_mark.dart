@@ -8,15 +8,22 @@ class BookMark extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> list = buildWidgetForFavBook(
+      "bookmark",
+    );
     return Scaffold(
       appBar: AppBar(
         title: const Text("BookMark"),
       ),
       drawer: const MyDrawer(),
       body: ListView(
-        children: buildWidgetForFavBook(
-          "bookmark",
-        ),
+        children: list.length == 0
+            ? [
+                Center(
+                  child: Text("No Book Mark Found"),
+                )
+              ]
+            : list,
       ),
     );
   }

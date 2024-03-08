@@ -231,7 +231,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    ElevatedButton.icon(
+                    TextButton.icon(
                       onPressed: () {
                         Get.to(() => const LogIn());
                       },
@@ -242,11 +242,19 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                           fontSize: 30,
                         ),
                       ),
-                      icon: const Icon(Icons.login),
+                      icon: const Icon(
+                        Icons.login,
+                        color: Colors.green,
+                      ),
                     ),
-                    const Text(
-                      "You Need to login for more Features.\nFor Example, you can save your notes in\ncloud and access it from any places. Your Favorite and Book Mark can be uploaded to Cloud and download them after login.",
-                      style: TextStyle(fontSize: 10),
+                    Center(
+                      child: const Text(
+                        "You Need to login for more Features.\nFor Example, you can save your notes in\ncloud and access it from any places.\nYour Favorite and Book Mark can be uploaded\nto Cloud and download them after login.",
+                        style: TextStyle(
+                          fontSize: 12,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
                     )
                   ],
                 )

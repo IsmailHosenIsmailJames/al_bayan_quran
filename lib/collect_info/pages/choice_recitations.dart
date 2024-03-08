@@ -1,6 +1,7 @@
 // import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 
@@ -8,7 +9,8 @@ import '../../api/all_recitation.dart';
 import '../getx/get_controller.dart';
 
 class RecitaionChoice extends StatefulWidget {
-  const RecitaionChoice({super.key});
+  final Map<String, String>? previousInfo;
+  const RecitaionChoice({super.key, this.previousInfo});
 
   @override
   State<RecitaionChoice> createState() => _RecitaionChoiceState();
@@ -29,6 +31,14 @@ class _RecitaionChoiceState extends State<RecitaionChoice> {
         });
       }
     });
+    if (widget.previousInfo != null) {
+      Map<String, String> temInfo = widget.previousInfo!;
+      int index = allRecitationSearch.indexOf(temInfo['recitation_ID'] ?? "");
+      if (index != -1) {
+        infoController.recitationIndex.value = index;
+        infoController.recitationName.value = allRecitationSearch[index];
+      }
+    }
     super.initState();
   }
 
@@ -44,6 +54,12 @@ class _RecitaionChoiceState extends State<RecitaionChoice> {
   void select() {
     infoController.recitationIndex.value =
         allRecitationSearch.indexOf(infoController.recitationName.value);
+    if (widget.previousInfo != null) {
+      Map<String, String> temInfo = widget.previousInfo!;
+      temInfo["recitation_ID"] = infoController.recitationName.value;
+      final temInfoBox = Hive.box("info");
+      temInfoBox.put("info", temInfo);
+    }
   }
 
   List<String> listUrl = [];
@@ -121,7 +137,7 @@ class _RecitaionChoiceState extends State<RecitaionChoice> {
         children: [
           Padding(
             padding:
-                const EdgeInsets.only(left: 5.0, right: 5, bottom: 5, top: 5),
+                const EdgeInsets.only(left: 5.0, right: 5, bottom: 2, top: 2),
             child: TextFormField(
               autofocus: false,
               onChanged: (value) => search(value),
@@ -136,7 +152,7 @@ class _RecitaionChoiceState extends State<RecitaionChoice> {
           Expanded(
             child: ListView.builder(
               padding: const EdgeInsets.only(
-                  bottom: 100, top: 10, left: 3, right: 3),
+                  bottom: 100, top: 10, left: 1, right: 1),
               itemCount: allRecitationSearch.length,
               itemBuilder: (context, index) {
                 return GestureDetector(
@@ -160,7 +176,7 @@ class _RecitaionChoiceState extends State<RecitaionChoice> {
                         child: Row(
                           children: [
                             Container(
-                              margin: const EdgeInsets.only(right: 10),
+                              margin: const EdgeInsets.only(right: 5),
                               child: IconButton(
                                 onPressed: () async {
                                   if (playingIndex != index) {

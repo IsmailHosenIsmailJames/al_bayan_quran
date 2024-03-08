@@ -20,8 +20,9 @@ class AppThemeData extends GetxController {
         accountBox.get("email") != "" && accountBox.get("email") != null;
     accountController.name.value = accountBox.get("name") ?? "";
     accountController.uid.value = accountBox.get("uid") ?? "";
-    final fonsize = Get.put(ScreenGetxController());
     final infoBox = Hive.box("info");
+    final fonsize = Get.put(ScreenGetxController());
+
     fonsize.fontSizeArabic.value =
         infoBox.get("fontSizeArabic", defaultValue: 24.0);
     fonsize.fontSizeTranslation.value =
@@ -48,10 +49,7 @@ class AppThemeData extends GetxController {
       } else if (userTheme == 'system') {
         Get.changeThemeMode(ThemeMode.system);
         themeModeName.value = 'system';
-        WidgetsBinding.instance.platformDispatcher.platformBrightness ==
-                Brightness.dark
-            ? {isDark.value = true, Get.changeThemeMode(ThemeMode.dark)}
-            : {isDark.value = false, Get.changeThemeMode(ThemeMode.dark)};
+        Get.changeThemeMode(ThemeMode.system);
       }
     } else {
       await themePrefer.put('theme_preference', 'system');
@@ -76,10 +74,6 @@ class AppThemeData extends GetxController {
     } else if (themeToChange == 'system') {
       themeModeName.value = 'system';
       Get.changeThemeMode(ThemeMode.system);
-      WidgetsBinding.instance.platformDispatcher.platformBrightness ==
-              Brightness.dark
-          ? {isDark.value = true, Get.changeThemeMode(ThemeMode.dark)}
-          : {isDark.value = false, Get.changeThemeMode(ThemeMode.light)};
       await themePrefer.put('theme_preference', 'system');
     }
   }

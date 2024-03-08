@@ -8,13 +8,20 @@ class NotesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> list = buildListOfWidgetForNotes();
     return Scaffold(
       drawer: MyDrawer(),
       appBar: AppBar(
         title: Text("Notes"),
       ),
       body: ListView(
-        children: buildListOfWidgetForNotes(),
+        children: list.length == 0
+            ? [
+                Center(
+                  child: Text("No Notes found"),
+                )
+              ]
+            : list,
       ),
     );
   }

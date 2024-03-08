@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:al_bayan_quran/screens/surah_view.dart/sura_view.dart';
 import 'package:al_bayan_quran/screens/surah_view.dart/tafseer/tafseer.dart';
 import 'package:archive/archive.dart';
 import 'package:flutter/material.dart';
@@ -94,7 +95,7 @@ List<Widget> buildWidgetForFavBook(String name) {
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
                     "Surah: ${list[index]['name']} - (${int.parse(list[index]["ayahNumber"] ?? "0") + 1} : ${int.parse(list[index]['surahNumber'] ?? "0") + 1})",
@@ -103,6 +104,22 @@ List<Widget> buildWidgetForFavBook(String name) {
                   Text(
                     list[index]['arabicName'] ?? "",
                     style: const TextStyle(fontSize: 16),
+                  ),
+                  IconButton(
+                    style: IconButton.styleFrom(backgroundColor: Colors.green),
+                    onPressed: () {
+                      Get.to(
+                        () => SuraView(
+                          surahNumber:
+                              int.parse(list[index]['surahNumber'] ?? "0"),
+                          surahName: list[index]['name'],
+                          scrollToAyah:
+                              int.parse(list[index]["ayahNumber"] ?? "0") + 1,
+                        ),
+                      );
+                    },
+                    icon:
+                        Icon(Icons.arrow_forward_rounded, color: Colors.white),
                   ),
                 ],
               ),

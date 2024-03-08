@@ -1,3 +1,5 @@
+import 'package:al_bayan_quran/collect_info/pages/choice_tafseer_book.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -5,7 +7,8 @@ import '../../api/some_api_response.dart';
 import '../getx/get_controller.dart';
 
 class TafseerLanguage extends StatefulWidget {
-  const TafseerLanguage({super.key});
+  final bool? showAppBarNextButton;
+  const TafseerLanguage({super.key, this.showAppBarNextButton});
 
   @override
   State<TafseerLanguage> createState() => _TafseerLanguageState();
@@ -43,6 +46,31 @@ class _TafseerLanguageState extends State<TafseerLanguage> {
           "Tafseer",
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
         ),
+        actions: [
+          if (widget.showAppBarNextButton == true)
+            TextButton(
+              onPressed: () {
+                tafseerLanguage.tafseerBookIndex.value = -1;
+                Navigator.pop(context);
+                showCupertinoModalPopup(
+                  context: context,
+                  builder: (context) {
+                    return ChoiceTafseerBook(
+                      showDownloadOnAppbar: true,
+                    );
+                  },
+                );
+              },
+              child: Text(
+                "NEXT",
+                style: TextStyle(
+                  color: Colors.green,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            )
+        ],
       ),
       body: ListView.builder(
         scrollDirection: Axis.vertical,

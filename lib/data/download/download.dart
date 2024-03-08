@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:al_bayan_quran/data/download/links.dart';
 import 'package:al_bayan_quran/screens/home_mobile.dart';
+import 'package:al_bayan_quran/theme/theme_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
@@ -277,7 +278,7 @@ class _DownloadDataState extends State<DownloadData> {
             infoBox.put('tafseer', preferance['tafseer_book_ID']);
           }
         }
-
+        AppThemeData().initTheme();
         Get.offAll(() => const HomeMobile());
       }
     }

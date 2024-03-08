@@ -7,6 +7,7 @@ import 'package:hive/hive.dart';
 
 import '../../api/some_api_response.dart';
 import '../getx_controller.dart';
+import '../surah_view.dart/sura_view.dart';
 import '../surah_view.dart/tafseer/tafseer.dart';
 
 int getAyahCountFromStart(int ayahNumber, int surahNumber) {
@@ -105,7 +106,7 @@ List<Widget> buildListOfWidgetForNotes() {
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
                     "Surah: ${list[index]['name']} - (${int.parse(list[index]["ayahNumber"] ?? "0") + 1} : ${int.parse(list[index]['surahNumber'] ?? "0") + 1})",
@@ -114,6 +115,22 @@ List<Widget> buildListOfWidgetForNotes() {
                   Text(
                     list[index]['arabicName'] ?? "",
                     style: const TextStyle(fontSize: 16),
+                  ),
+                  IconButton(
+                    style: IconButton.styleFrom(backgroundColor: Colors.green),
+                    onPressed: () {
+                      Get.to(
+                        () => SuraView(
+                          surahNumber:
+                              int.parse(list[index]['surahNumber'] ?? "0"),
+                          surahName: list[index]['name'],
+                          scrollToAyah:
+                              int.parse(list[index]["ayahNumber"] ?? "0") + 1,
+                        ),
+                      );
+                    },
+                    icon:
+                        Icon(Icons.arrow_forward_rounded, color: Colors.white),
                   ),
                 ],
               ),

@@ -1,3 +1,5 @@
+import 'package:al_bayan_quran/collect_info/pages/choice_tranlation_book.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -5,7 +7,8 @@ import '../../api/some_api_response.dart';
 import '../getx/get_controller.dart';
 
 class TranslationLanguage extends StatefulWidget {
-  const TranslationLanguage({super.key});
+  final bool? showNextButtonOnAppBar;
+  const TranslationLanguage({super.key, this.showNextButtonOnAppBar});
 
   @override
   State<TranslationLanguage> createState() => _TranslationLanguageState();
@@ -39,10 +42,36 @@ class _TranslationLanguageState extends State<TranslationLanguage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text(
-        "Translation",
-        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-      )),
+        title: const Text(
+          "Translation",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+        ),
+        actions: [
+          if (widget.showNextButtonOnAppBar == true)
+            TextButton(
+              onPressed: () {
+                translationLanguageController.bookNameIndex.value = -1;
+                Navigator.pop(context);
+                showCupertinoModalPopup(
+                  context: context,
+                  builder: (context) {
+                    return ChoiceTranslationBook(
+                      showDownloadOnAppbar: true,
+                    );
+                  },
+                );
+              },
+              child: Text(
+                "NEXT",
+                style: TextStyle(
+                  color: Colors.green,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            )
+        ],
+      ),
       body: ListView.builder(
         scrollDirection: Axis.vertical,
         padding: const EdgeInsets.only(bottom: 100, top: 10, left: 3, right: 3),

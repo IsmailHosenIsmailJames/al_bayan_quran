@@ -23,12 +23,14 @@ class SurahWithTranslation extends StatefulWidget {
   final int? start;
   final int? end;
   final String? surahName;
+  final int? scrollToAyah;
   const SurahWithTranslation({
     super.key,
     required this.surahNumber,
     this.start,
     this.end,
     required this.surahName,
+    this.scrollToAyah,
   });
 
   @override
@@ -122,7 +124,21 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
         });
       }
     });
+    if (widget.scrollToAyah != null) scrollToAyahInit(widget.scrollToAyah!);
     super.initState();
+  }
+
+  void scrollToAyahInit(int ayah) async {
+    for (int i = 0; i < ayah; i++) {
+      await Future.delayed(Duration(milliseconds: 2));
+
+      if (listOfkey[i].currentContext != null) {
+        await Scrollable.ensureVisible(
+          listOfkey[i].currentContext!,
+          alignment: 0.5,
+        );
+      }
+    }
   }
 
   @override
@@ -381,6 +397,8 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
     return decodedTafseer;
   }
 
+  late List<Widget> listOfWidgetsInListView =
+      listOfWidgetOfAyah(listOfAyah.length + 1);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -478,12 +496,11 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
         interactive: true,
         controller: scrollController,
         radius: const Radius.circular(10),
-        thumbVisibility: true,
         thickness: 10,
         child: ListView(
           controller: scrollController,
           padding: const EdgeInsets.only(bottom: 40),
-          children: listOfWidgetOfAyah(listOfAyah.length + 1),
+          children: listOfWidgetsInListView,
         ),
       ),
     );
@@ -586,6 +603,17 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
                           ),
                           color: Colors.white,
                           onPressed: () {
+                            if (player.playerState.processingState ==
+                                ProcessingState.completed) {
+                              setState(() {
+                                showFloatingControllers = true;
+                                isSinglePlaying = false;
+                                playingIndex = 0;
+                                isPlaying = true;
+                              });
+                              List<String> listOfAudioURL = getAllAudioUrl();
+                              playAudioList(listOfAudioURL, 0, true);
+                            }
                             if (!player.playing && playingIndex == -1) {
                               setState(() {
                                 showFloatingControllers = true;

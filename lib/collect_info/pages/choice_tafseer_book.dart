@@ -1,11 +1,19 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
+import 'package:http/http.dart' as http;
 
 import '../../api/some_api_response.dart';
+import '../../core/show_twoested_message.dart';
+import '../../data/download/links.dart';
+import '../../screens/home_mobile.dart';
 import '../getx/get_controller.dart';
 
 class ChoiceTafseerBook extends StatefulWidget {
-  const ChoiceTafseerBook({super.key});
+  final bool? showDownloadOnAppbar;
+  const ChoiceTafseerBook({super.key, this.showDownloadOnAppbar});
 
   @override
   State<ChoiceTafseerBook> createState() => _ChoiceTafseerBookState();
@@ -33,14 +41,122 @@ class _ChoiceTafseerBookState extends State<ChoiceTafseerBook> {
     super.initState();
   }
 
+  bool downloading = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text(
-        "Tafseer Book",
-        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-      )),
+        title: const Text(
+          "Tafseer Book",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+        ),
+        actions: [
+          if (widget.showDownloadOnAppbar == true)
+            downloading
+                ? CircularProgressIndicator()
+                : TextButton.icon(
+                    onPressed: () async {
+                      if (infoController.tafseerBookIndex.value != -1) {
+                        String tafsirBookID =
+                            infoController.tafseerBookID.value;
+                        print(tafsirBookID);
+                        // return;
+                        final dataBoox = Hive.box("data");
+                        final infoBox = Hive.box("info");
+                        if (tafsirBookID ==
+                            infoBox.get("info")['tafseer_book_ID']) {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: Text("Worng Selection"),
+                                content: Text(
+                                    "Your selection can't matched with the previous selection."),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text("OK"),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                          return;
+                        }
+
+                        dataBoox.put("tafseer", false);
+                        setState(() {
+                          downloading = true;
+                        });
+
+                        var url = Uri.parse(
+                            tafseerLinks[infoController.tafseerBookID.value]!);
+                        print(tafseerLinks[infoController.tafseerBookID.value]);
+
+                        var headers = {"Accept": "application/json"};
+
+                        var response = await http.get(url, headers: headers);
+                        final tafseerBox = await Hive.openBox("tafseer");
+
+                        if (response.statusCode == 200) {
+                          final tafseer = json.decode(response.body);
+                          for (int i = 0; i < 6236; i++) {
+                            String? ayah = tafseer['$i'];
+                            if (ayah != null) {
+                              tafseerBox.put(
+                                "$tafsirBookID/$i",
+                                tafseer["$i"],
+                              );
+                            }
+                          }
+                          final info = infoBox.get("info", defaultValue: false);
+                          info['tafseer_book_ID'] = tafsirBookID;
+                          info['tafseer_language'] =
+                              infoController.tafseerLanguage.value;
+                          infoBox.put("info", info);
+                          dataBoox.put("tafseer", true);
+                          infoBox.put(
+                              'tafseer', infoController.tafseerBookID.value);
+
+                          Get.offAll(() => const HomeMobile());
+                          showTwoestedMessage("Successful");
+                        } else {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: Text("Select a Book First"),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text("OK"),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        }
+                      }
+                    },
+                    icon: Icon(
+                      Icons.done,
+                      color: Colors.green,
+                    ),
+                    label: Text(
+                      "Done",
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.green,
+                      ),
+                    ),
+                  ),
+        ],
+      ),
       body: ListView.builder(
         scrollDirection: Axis.vertical,
         padding: const EdgeInsets.only(bottom: 100, top: 10, left: 3, right: 3),

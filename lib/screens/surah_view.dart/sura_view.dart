@@ -9,12 +9,14 @@ class SuraView extends StatelessWidget {
   final String? surahName;
   final int? start;
   final int? end;
+  final int? scrollToAyah;
   const SuraView(
       {super.key,
       required this.surahNumber,
       this.start,
       this.end,
-      this.surahName});
+      this.surahName,
+      this.scrollToAyah});
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +62,7 @@ class SuraView extends StatelessWidget {
         start: start,
         end: end,
         surahName: surahName,
+        scrollToAyah: scrollToAyah,
       ),
     );
   }

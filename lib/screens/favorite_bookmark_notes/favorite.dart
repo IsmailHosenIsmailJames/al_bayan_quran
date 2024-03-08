@@ -8,13 +8,20 @@ class Favorite extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> list = buildWidgetForFavBook("favorite");
     return Scaffold(
       appBar: AppBar(
         title: const Text("Favorite"),
       ),
       drawer: const MyDrawer(),
       body: ListView(
-        children: buildWidgetForFavBook("favorite"),
+        children: list.length == 0
+            ? [
+                Center(
+                  child: Text("No Favorite Found."),
+                )
+              ]
+            : list,
       ),
     );
   }
