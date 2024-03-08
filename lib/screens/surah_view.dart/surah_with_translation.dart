@@ -102,7 +102,6 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
       } else if (event.processingState == ProcessingState.completed) {
         setState(() {
           isPlaying = false;
-          isLoading = false;
           showFloatingControllers = false;
           playingIndex = -1;
         });
@@ -129,8 +128,8 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
   }
 
   void scrollToAyahInit(int ayah) async {
-    for (int i = 0; i < ayah; i++) {
-      await Future.delayed(Duration(milliseconds: 2));
+    for (int i = 1; i < ayah; i++) {
+      await Future.delayed(Duration(milliseconds: 5));
 
       if (listOfkey[i].currentContext != null) {
         await Scrollable.ensureVisible(
@@ -397,8 +396,6 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
     return decodedTafseer;
   }
 
-  late List<Widget> listOfWidgetsInListView =
-      listOfWidgetOfAyah(listOfAyah.length + 1);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -500,7 +497,7 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
         child: ListView(
           controller: scrollController,
           padding: const EdgeInsets.only(bottom: 40),
-          children: listOfWidgetsInListView,
+          children: listOfWidgetOfAyah(listOfAyah.length + 1),
         ),
       ),
     );
