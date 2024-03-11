@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
 Map<String, Color> colorsForTazweed = {
-  "ham_wasl": Color.fromARGB(255, 91, 91, 91),
-  "laam_shamsiyah": Color.fromARGB(255, 105, 105, 106),
-  "madda_normal": Color.fromARGB(255, 134, 58, 156),
-  "madda_permissible": Color.fromARGB(255, 188, 76, 195),
-  "madda_necessary": Color.fromARGB(255, 215, 111, 208),
-  "idgham_wo_ghunnah": Color.fromARGB(255, 33, 102, 215),
-  "ghunnah": Color.fromARGB(255, 11, 169, 22),
-  "slnt": Color.fromARGB(255, 106, 106, 106),
-  "qalaqah": Color.fromARGB(255, 155, 212, 91),
-  "ikhafa": Color.fromARGB(255, 235, 127, 29),
-  "madda_obligatory": Color.fromARGB(255, 240, 114, 206),
-  "idgham_ghunnah": Color.fromARGB(255, 39, 100, 209),
+  "ham_wasl": const Color.fromARGB(200, 145, 145, 145),
+  "laam_shamsiyah": const Color.fromARGB(200, 149, 149, 255),
+  "madda_normal": const Color.fromARGB(255, 200, 0, 255),
+  "madda_permissible": const Color.fromARGB(255, 246, 123, 255),
+  "madda_necessary": const Color.fromARGB(200, 255, 0, 238),
+  "idgham_wo_ghunnah": const Color.fromARGB(255, 72, 142, 255),
+  "ghunnah": const Color.fromARGB(255, 11, 169, 22),
+  "slnt": const Color.fromARGB(200, 114, 114, 114),
+  "qalaqah": const Color.fromARGB(255, 155, 212, 91),
+  "ikhafa": const Color.fromARGB(255, 255, 140, 32),
+  "madda_obligatory": const Color.fromARGB(255, 192, 90, 165),
+  "idgham_ghunnah": const Color.fromARGB(255, 0, 79, 216),
 };

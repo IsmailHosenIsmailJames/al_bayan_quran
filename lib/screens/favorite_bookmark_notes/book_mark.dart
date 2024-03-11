@@ -17,9 +17,9 @@ class BookMark extends StatelessWidget {
       ),
       drawer: const MyDrawer(),
       body: ListView(
-        children: list.length == 0
+        children: list.isEmpty
             ? [
-                Center(
+                const Center(
                   child: Text("No Book Mark Found"),
                 )
               ]

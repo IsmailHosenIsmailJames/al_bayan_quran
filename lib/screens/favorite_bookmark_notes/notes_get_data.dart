@@ -38,7 +38,6 @@ List<Map<String, String>> getNotesData() {
       String ayahCount =
           getAyahCountFromStart(int.parse(ayahNumber), int.parse(surahNumber))
               .toString();
-      print([surahNumber, ayahNumber, ayahCount]);
       final info = box.get("info", defaultValue: false);
       Map<String, dynamic> surahInfo = allChaptersInfo[int.parse(surahNumber)];
       String surahNameSimple = surahInfo['name_simple'];
@@ -129,8 +128,8 @@ List<Widget> buildListOfWidgetForNotes() {
                         ),
                       );
                     },
-                    icon:
-                        Icon(Icons.arrow_forward_rounded, color: Colors.white),
+                    icon: const Icon(Icons.arrow_forward_rounded,
+                        color: Colors.white),
                   ),
                 ],
               ),
@@ -156,7 +155,7 @@ List<Widget> buildListOfWidgetForNotes() {
                   ),
                 ),
               ),
-              Divider(),
+              const Divider(),
               const Center(
                 child: Text(
                   "Notes",
@@ -170,7 +169,7 @@ List<Widget> buildListOfWidgetForNotes() {
               const Divider(),
               Text(
                 list[index]['title'] ?? "",
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.bold,
                 ),

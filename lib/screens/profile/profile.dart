@@ -160,9 +160,9 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
           if (!(notesBox.get("${ayahKey}upload", defaultValue: false))) {
             await uploadNotes(ayahKey, t, n);
           } else {
-            print("object");
+            debugPrint("object");
           }
-          print("");
+          debugPrint("");
         }
       }
     }
@@ -191,7 +191,9 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
         setState(() {
           favoriteDone = true;
         });
-      } catch (e) {}
+      } catch (e) {
+        debugPrint(e.toString());
+      }
     }
     if (bookmarkDone != true) {
       await databases.updateDocument(
@@ -224,7 +226,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
         ),
       ),
       body: ListView(
-        padding: EdgeInsets.all(5),
+        padding: const EdgeInsets.all(5),
         children: [
           !isLoogedIn
               ? Column(
@@ -247,8 +249,8 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                         color: Colors.green,
                       ),
                     ),
-                    Center(
-                      child: const Text(
+                    const Center(
+                      child: Text(
                         "You Need to login for more Features.\nFor Example, you can save your notes in\ncloud and access it from any places.\nYour Favorite and Book Mark can be uploaded\nto Cloud and download them after login.",
                         style: TextStyle(
                           fontSize: 12,
@@ -313,7 +315,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     TextButton(
@@ -326,7 +328,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                     ),
                   ],
                 ),
-          Divider(),
+          const Divider(),
           GestureDetector(
             behavior: HitTestBehavior.translucent,
             onTap: () {
@@ -337,8 +339,8 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
               });
             },
             child: Container(
-              padding: EdgeInsets.all(5),
-              decoration: BoxDecoration(
+              padding: const EdgeInsets.all(5),
+              decoration: const BoxDecoration(
                 color: Color.fromARGB(50, 119, 119, 119),
                 borderRadius: BorderRadius.all(
                   Radius.circular(10),
@@ -347,7 +349,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     "Notes",
                     style: TextStyle(
                       fontSize: 30,
@@ -356,17 +358,17 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                     ),
                   ),
                   expandedPosition[0] == 0
-                      ? Icon(Icons.arrow_upward)
-                      : Icon(Icons.arrow_downward),
+                      ? const Icon(Icons.arrow_upward)
+                      : const Icon(Icons.arrow_downward),
                 ],
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(
                 Radius.circular(10),
               ),
@@ -375,13 +377,13 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
               sizeFactor: sizeAnimation[0],
               axis: Axis.vertical,
               child: Column(
-                children: notes.length == 0
-                    ? [Center(child: Text("No Notes Found"))]
+                children: notes.isEmpty
+                    ? [const Center(child: Text("No Notes Found"))]
                     : notes,
               ),
             ),
           ),
-          Divider(),
+          const Divider(),
           GestureDetector(
             behavior: HitTestBehavior.translucent,
             onTap: () {
@@ -392,8 +394,8 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
               });
             },
             child: Container(
-              padding: EdgeInsets.all(5),
-              decoration: BoxDecoration(
+              padding: const EdgeInsets.all(5),
+              decoration: const BoxDecoration(
                 color: Color.fromARGB(50, 119, 119, 119),
                 borderRadius: BorderRadius.all(
                   Radius.circular(10),
@@ -402,7 +404,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     "Favorite",
                     style: TextStyle(
                       fontSize: 30,
@@ -411,17 +413,17 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                     ),
                   ),
                   expandedPosition[1] == 1
-                      ? Icon(Icons.arrow_upward)
-                      : Icon(Icons.arrow_downward),
+                      ? const Icon(Icons.arrow_upward)
+                      : const Icon(Icons.arrow_downward),
                 ],
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(
                 Radius.circular(10),
               ),
@@ -430,13 +432,13 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
               sizeFactor: sizeAnimation[1],
               axis: Axis.vertical,
               child: Column(
-                children: favorite.length == 0
-                    ? [Center(child: Text("No Favorite Found"))]
+                children: favorite.isEmpty
+                    ? [const Center(child: Text("No Favorite Found"))]
                     : favorite,
               ),
             ),
           ),
-          Divider(),
+          const Divider(),
           GestureDetector(
             behavior: HitTestBehavior.translucent,
             onTap: () {
@@ -447,8 +449,8 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
               });
             },
             child: Container(
-              padding: EdgeInsets.all(5),
-              decoration: BoxDecoration(
+              padding: const EdgeInsets.all(5),
+              decoration: const BoxDecoration(
                 color: Color.fromARGB(50, 119, 119, 119),
                 borderRadius: BorderRadius.all(
                   Radius.circular(10),
@@ -457,7 +459,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     "Book Mark",
                     style: TextStyle(
                       fontSize: 30,
@@ -466,17 +468,17 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                     ),
                   ),
                   expandedPosition[2] == 2
-                      ? Icon(Icons.arrow_upward)
-                      : Icon(Icons.arrow_downward),
+                      ? const Icon(Icons.arrow_upward)
+                      : const Icon(Icons.arrow_downward),
                 ],
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(
                 Radius.circular(10),
               ),
@@ -485,8 +487,8 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
               sizeFactor: sizeAnimation[2],
               axis: Axis.vertical,
               child: Column(
-                children: bookmark.length == 0
-                    ? [Center(child: Text("No Book Mark Found"))]
+                children: bookmark.isEmpty
+                    ? [const Center(child: Text("No Book Mark Found"))]
                     : bookmark,
               ),
             ),

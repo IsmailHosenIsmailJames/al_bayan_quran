@@ -35,7 +35,7 @@ class _DownloadDataState extends State<DownloadData> {
           actions: [
             TextButton(
               onPressed: () {
-                Get.offAll(() => DownloadData());
+                Get.offAll(() => const DownloadData());
               },
               child: const Icon(
                 Icons.restart_alt_outlined,
@@ -99,7 +99,7 @@ class _DownloadDataState extends State<DownloadData> {
               "https://api.quran.com/api/v4/quran/verses/uthmani_tajweed");
           var headers = {"Accept": "application/json"};
 
-          var response;
+          http.Response response;
           if (infoBox.get('quran_tajweed', defaultValue: false) == false) {
             response = await http.get(url, headers: headers);
             if (response.statusCode == 200) {

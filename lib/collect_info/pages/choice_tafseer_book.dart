@@ -54,13 +54,13 @@ class _ChoiceTafseerBookState extends State<ChoiceTafseerBook> {
         actions: [
           if (widget.showDownloadOnAppbar == true)
             downloading
-                ? CircularProgressIndicator()
+                ? const CircularProgressIndicator()
                 : TextButton.icon(
                     onPressed: () async {
                       if (infoController.tafseerBookIndex.value != -1) {
                         String tafsirBookID =
                             infoController.tafseerBookID.value;
-                        print(tafsirBookID);
+                        debugPrint(tafsirBookID);
                         // return;
                         final dataBoox = Hive.box("data");
                         final infoBox = Hive.box("info");
@@ -70,15 +70,15 @@ class _ChoiceTafseerBookState extends State<ChoiceTafseerBook> {
                             context: context,
                             builder: (context) {
                               return AlertDialog(
-                                title: Text("Worng Selection"),
-                                content: Text(
+                                title: const Text("Worng Selection"),
+                                content: const Text(
                                     "Your selection can't matched with the previous selection."),
                                 actions: [
                                   TextButton(
                                     onPressed: () {
                                       Navigator.pop(context);
                                     },
-                                    child: Text("OK"),
+                                    child: const Text("OK"),
                                   ),
                                 ],
                               );
@@ -94,7 +94,8 @@ class _ChoiceTafseerBookState extends State<ChoiceTafseerBook> {
 
                         var url = Uri.parse(
                             tafseerLinks[infoController.tafseerBookID.value]!);
-                        print(tafseerLinks[infoController.tafseerBookID.value]);
+                        debugPrint(
+                            tafseerLinks[infoController.tafseerBookID.value]);
 
                         var headers = {"Accept": "application/json"};
 
@@ -125,16 +126,17 @@ class _ChoiceTafseerBookState extends State<ChoiceTafseerBook> {
                           showTwoestedMessage("Successful");
                         } else {
                           showDialog(
+                            // ignore: use_build_context_synchronously
                             context: context,
                             builder: (context) {
                               return AlertDialog(
-                                title: Text("Select a Book First"),
+                                title: const Text("Select a Book First"),
                                 actions: [
                                   TextButton(
                                     onPressed: () {
                                       Navigator.pop(context);
                                     },
-                                    child: Text("OK"),
+                                    child: const Text("OK"),
                                   ),
                                 ],
                               );
@@ -143,11 +145,11 @@ class _ChoiceTafseerBookState extends State<ChoiceTafseerBook> {
                         }
                       }
                     },
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.done,
                       color: Colors.green,
                     ),
-                    label: Text(
+                    label: const Text(
                       "Done",
                       style: TextStyle(
                         fontSize: 20,

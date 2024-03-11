@@ -55,7 +55,7 @@ class _ChoiceTranslationStateBook extends State<ChoiceTranslationBook> {
         actions: [
           if (widget.showDownloadOnAppbar == true)
             downloading
-                ? CircularProgressIndicator()
+                ? const CircularProgressIndicator()
                 : TextButton.icon(
                     onPressed: () async {
                       if (infoController.selectedOptionTranslation.value !=
@@ -70,15 +70,15 @@ class _ChoiceTranslationStateBook extends State<ChoiceTranslationBook> {
                             context: context,
                             builder: (context) {
                               return AlertDialog(
-                                title: Text("Worng Selection"),
-                                content: Text(
+                                title: const Text("Worng Selection"),
+                                content: const Text(
                                     "Your selection can't matched with the previous selection."),
                                 actions: [
                                   TextButton(
                                     onPressed: () {
                                       Navigator.pop(context);
                                     },
-                                    child: Text("OK"),
+                                    child: const Text("OK"),
                                   )
                                 ],
                               );
@@ -108,7 +108,7 @@ class _ChoiceTranslationStateBook extends State<ChoiceTranslationBook> {
 
                           for (int i = 0; i < translation.length; i++) {
                             translationBox.put(
-                              "${bookTranslationID}/$i",
+                              "$bookTranslationID/$i",
                               translation[i]['text'].toString(),
                             );
                           }
@@ -129,13 +129,13 @@ class _ChoiceTranslationStateBook extends State<ChoiceTranslationBook> {
                           context: context,
                           builder: (context) {
                             return AlertDialog(
-                              title: Text("Select a Book First"),
+                              title: const Text("Select a Book First"),
                               actions: [
                                 TextButton(
                                   onPressed: () {
                                     Navigator.pop(context);
                                   },
-                                  child: Text("OK"),
+                                  child: const Text("OK"),
                                 ),
                               ],
                             );
@@ -143,11 +143,11 @@ class _ChoiceTranslationStateBook extends State<ChoiceTranslationBook> {
                         );
                       }
                     },
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.done,
                       color: Colors.green,
                     ),
-                    label: Text(
+                    label: const Text(
                       "Done",
                       style: TextStyle(
                         fontSize: 20,

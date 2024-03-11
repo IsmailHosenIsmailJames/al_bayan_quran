@@ -118,8 +118,8 @@ List<Widget> buildWidgetForFavBook(String name) {
                         ),
                       );
                     },
-                    icon:
-                        Icon(Icons.arrow_forward_rounded, color: Colors.white),
+                    icon: const Icon(Icons.arrow_forward_rounded,
+                        color: Colors.white),
                   ),
                 ],
               ),

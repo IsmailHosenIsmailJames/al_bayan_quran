@@ -33,6 +33,7 @@ class SuraView extends StatelessWidget {
             onPressed: () async {
               await Hive.openBox(quranScriptType);
               showModalBottomSheet(
+                // ignore: use_build_context_synchronously
                 context: context,
                 useSafeArea: true,
                 builder: (context) {

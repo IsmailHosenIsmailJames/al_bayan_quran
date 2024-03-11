@@ -85,7 +85,7 @@ class _LogInState extends State<LogIn> {
             box.put(boxKeyForUpload, true);
           }
         } catch (e) {
-          print(e);
+          debugPrint(e.toString());
           Get.offAll(() => const HomeMobile());
         }
 

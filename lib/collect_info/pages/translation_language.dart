@@ -55,13 +55,13 @@ class _TranslationLanguageState extends State<TranslationLanguage> {
                 showCupertinoModalPopup(
                   context: context,
                   builder: (context) {
-                    return ChoiceTranslationBook(
+                    return const ChoiceTranslationBook(
                       showDownloadOnAppbar: true,
                     );
                   },
                 );
               },
-              child: Text(
+              child: const Text(
                 "NEXT",
                 style: TextStyle(
                   color: Colors.green,

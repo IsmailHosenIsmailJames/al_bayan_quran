@@ -129,7 +129,7 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
 
   void scrollToAyahInit(int ayah) async {
     for (int i = 1; i < ayah; i++) {
-      await Future.delayed(Duration(milliseconds: 5));
+      await Future.delayed(const Duration(milliseconds: 5));
 
       if (listOfkey[i].currentContext != null) {
         await Scrollable.ensureVisible(
@@ -685,7 +685,8 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
                   Row(
                     children: [
                       CircleAvatar(
-                        backgroundColor: Colors.green,
+                        backgroundColor:
+                            const Color.fromARGB(180, 134, 134, 134),
                         child: Text(
                           (listOfAyah[index - 1] + 1).toString(),
                           style: const TextStyle(
@@ -983,16 +984,12 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
     }
     return Obx(
       () {
-        int valueOf1 = "١".codeUnitAt(0);
-
         return Text(
-          box.get(ayahKey, defaultValue: "") +
-              " "
-                  "۝" +
-              String.fromCharCode(valueOf1 + ayahNumber),
+          box.get(ayahKey, defaultValue: ""),
           style: TextStyle(
             fontSize: controller.fontSizeArabic.value,
           ),
+          textAlign: TextAlign.right,
         );
       },
     );
@@ -1013,13 +1010,12 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
         if (className == "end") {
           spanText.add(
             TextSpan(
-              text: "۝" + word,
-              style: TextStyle(),
+              text: "۝$word",
             ),
           );
         } else {
-          Color textColor =
-              colorsForTazweed[className] ?? Color.fromARGB(255, 121, 85, 72);
+          Color textColor = colorsForTazweed[className] ??
+              const Color.fromARGB(255, 121, 85, 72);
           spanText.add(
             TextSpan(
               text: word,

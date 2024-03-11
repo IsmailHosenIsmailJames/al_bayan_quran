@@ -55,13 +55,13 @@ class _TafseerLanguageState extends State<TafseerLanguage> {
                 showCupertinoModalPopup(
                   context: context,
                   builder: (context) {
-                    return ChoiceTafseerBook(
+                    return const ChoiceTafseerBook(
                       showDownloadOnAppbar: true,
                     );
                   },
                 );
               },
-              child: Text(
+              child: const Text(
                 "NEXT",
                 style: TextStyle(
                   color: Colors.green,

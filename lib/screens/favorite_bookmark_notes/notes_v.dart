@@ -10,14 +10,14 @@ class NotesView extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> list = buildListOfWidgetForNotes();
     return Scaffold(
-      drawer: MyDrawer(),
+      drawer: const MyDrawer(),
       appBar: AppBar(
-        title: Text("Notes"),
+        title: const Text("Notes"),
       ),
       body: ListView(
-        children: list.length == 0
+        children: list.isEmpty
             ? [
-                Center(
+                const Center(
                   child: Text("No Notes found"),
                 )
               ]

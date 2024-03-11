@@ -119,7 +119,7 @@ class _SettingsState extends State<Settings> {
             ),
           ],
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         const Text(
@@ -153,15 +153,15 @@ class _SettingsState extends State<Settings> {
             ),
           ],
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
-        Text(
+        const Text(
           "Script Type",
           style: TextStyle(
               fontSize: 18, color: Colors.green, fontWeight: FontWeight.bold),
         ),
-        SizedBox(
+        const SizedBox(
           height: 8,
         ),
         DropdownButtonFormField(
@@ -171,7 +171,7 @@ class _SettingsState extends State<Settings> {
               borderRadius: BorderRadius.circular(20),
             ),
           ),
-          items: [
+          items: const [
             DropdownMenuItem(
               value: "quran_tajweed",
               child: Text("Uthmani Tajweed Script"),
@@ -219,7 +219,7 @@ class _SettingsState extends State<Settings> {
         const SizedBox(
           height: 10,
         ),
-        Divider(),
+        const Divider(),
         const SizedBox(
           height: 10,
         ),
@@ -242,7 +242,7 @@ class _SettingsState extends State<Settings> {
             ),
           ],
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         const Text(
@@ -291,16 +291,16 @@ class _SettingsState extends State<Settings> {
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
-        Divider(),
+        const Divider(),
         if (widget.showNavigator == false)
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
         if (widget.showNavigator == false)
-          Row(
+          const Row(
             children: [
               Icon(
                 Icons.speaker,
@@ -320,7 +320,7 @@ class _SettingsState extends State<Settings> {
             ],
           ),
         if (widget.showNavigator == false)
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
         if (widget.showNavigator == false)
@@ -329,13 +329,13 @@ class _SettingsState extends State<Settings> {
               color: const Color.fromARGB(20, 120, 120, 120),
               borderRadius: BorderRadius.circular(10),
             ),
-            padding: EdgeInsets.all(5),
+            padding: const EdgeInsets.all(5),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   recitor.split("(")[0],
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
@@ -352,7 +352,7 @@ class _SettingsState extends State<Settings> {
                       },
                     );
                   },
-                  child: Text(
+                  child: const Text(
                     "Change",
                     style: TextStyle(
                       fontSize: 18,
@@ -365,12 +365,12 @@ class _SettingsState extends State<Settings> {
             ),
           ),
         if (widget.showNavigator == false)
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
-        if (widget.showNavigator == false) Divider(),
+        if (widget.showNavigator == false) const Divider(),
         if (widget.showNavigator == false)
-          Row(
+          const Row(
             children: [
               Icon(
                 Icons.translate_rounded,
@@ -390,7 +390,7 @@ class _SettingsState extends State<Settings> {
             ],
           ),
         if (widget.showNavigator == false)
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
         if (widget.showNavigator == false)
@@ -399,7 +399,7 @@ class _SettingsState extends State<Settings> {
               color: const Color.fromARGB(20, 120, 120, 120),
               borderRadius: BorderRadius.circular(10),
             ),
-            padding: EdgeInsets.all(5),
+            padding: const EdgeInsets.all(5),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -410,16 +410,16 @@ class _SettingsState extends State<Settings> {
                   children: [
                     Text(
                       "Language : ${info['translation_language']}",
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 3,
                     ),
                     Text(
-                      "Book Name : ${bookName.length > 20 ? bookName.substring(0, 18) + "..." : bookName}",
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      "Book Name : ${bookName.length > 20 ? "${bookName.substring(0, 18)}..." : bookName}",
+                      style: const TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
@@ -428,13 +428,13 @@ class _SettingsState extends State<Settings> {
                     showCupertinoModalPopup(
                       context: context,
                       builder: (context) {
-                        return TranslationLanguage(
+                        return const TranslationLanguage(
                           showNextButtonOnAppBar: true,
                         );
                       },
                     );
                   },
-                  child: Text(
+                  child: const Text(
                     "Change",
                     style: TextStyle(
                       fontSize: 18,
@@ -447,12 +447,12 @@ class _SettingsState extends State<Settings> {
             ),
           ),
         if (widget.showNavigator == false)
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
-        if (widget.showNavigator == false) Divider(),
+        if (widget.showNavigator == false) const Divider(),
         if (widget.showNavigator == false)
-          Row(
+          const Row(
             children: [
               Icon(
                 FontAwesomeIcons.bookOpen,
@@ -472,7 +472,7 @@ class _SettingsState extends State<Settings> {
             ],
           ),
         if (widget.showNavigator == false)
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
         if (widget.showNavigator == false)
@@ -481,7 +481,7 @@ class _SettingsState extends State<Settings> {
               color: const Color.fromARGB(20, 120, 120, 120),
               borderRadius: BorderRadius.circular(10),
             ),
-            padding: EdgeInsets.all(5),
+            padding: const EdgeInsets.all(5),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -492,16 +492,16 @@ class _SettingsState extends State<Settings> {
                   children: [
                     Text(
                       "Language : ${info['tafseer_language']}",
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 3,
                     ),
                     Text(
-                      "Book Name : ${tafsirBookName.length > 20 ? tafsirBookName.substring(0, 18) + "..." : tafsirBookName}",
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      "Book Name : ${tafsirBookName.length > 20 ? "${tafsirBookName.substring(0, 18)}..." : tafsirBookName}",
+                      style: const TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
@@ -509,12 +509,12 @@ class _SettingsState extends State<Settings> {
                   onPressed: () {
                     showCupertinoModalPopup(
                       context: context,
-                      builder: (context) => TafseerLanguage(
+                      builder: (context) => const TafseerLanguage(
                         showAppBarNextButton: true,
                       ),
                     );
                   },
-                  child: Text(
+                  child: const Text(
                     "Change",
                     style: TextStyle(
                       fontSize: 18,
@@ -562,13 +562,13 @@ class _SettingsState extends State<Settings> {
         if (className == "end") {
           spanText.add(
             TextSpan(
-              text: "۝" + word,
-              style: TextStyle(),
+              text: "۝$word",
+              style: const TextStyle(),
             ),
           );
         } else {
-          Color textColor =
-              colorsForTazweed[className] ?? Color.fromARGB(255, 121, 85, 72);
+          Color textColor = colorsForTazweed[className] ??
+              const Color.fromARGB(255, 121, 85, 72);
           spanText.add(
             TextSpan(
               text: word,
@@ -600,7 +600,7 @@ List<Map<String, String?>> extractWordsGetTazweeds(String text) {
   List<Map<String, String?>> tazweeds = [];
   for (String word in allWords) {
     List<Map<String, String?>> tem = getTagAndWord(word);
-    if (tem.length == 0) {
+    if (tem.isEmpty) {
       tazweeds.add({
         "tag": "null",
         "class": "null",
