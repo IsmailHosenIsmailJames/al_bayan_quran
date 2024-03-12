@@ -14,3 +14,18 @@ Map<String, Color> colorsForTazweed = {
   "madda_obligatory": const Color.fromARGB(255, 192, 90, 165),
   "idgham_ghunnah": const Color.fromARGB(255, 0, 79, 216),
 };
+
+Map<String, String> detailsOfTazwed = {
+  "ham_wasl": "",
+  "laam_shamsiyah": "",
+  "madda_normal": "",
+  "madda_permissible": "",
+  "madda_necessary": "",
+  "idgham_wo_ghunnah": "",
+  "ghunnah": "",
+  "slnt": "",
+  "qalaqah": "",
+  "ikhafa": "",
+  "madda_obligatory": "",
+  "idgham_ghunnah": "",
+};

@@ -2,6 +2,7 @@ import 'package:al_bayan_quran/collect_info/pages/choice_recitations.dart';
 import 'package:al_bayan_quran/collect_info/pages/tafseer_language.dart';
 import 'package:al_bayan_quran/collect_info/pages/translation_language.dart';
 import 'package:al_bayan_quran/theme/theme_controller.dart';
+import 'package:al_bayan_quran/theme/theme_icon_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -34,7 +35,7 @@ class _SettingsState extends State<Settings> {
 
   late Widget review = Obx(
     () => Text(
-      quranInitialStyleBox.get("0",
+      quranInitialStyleBox.get("10",
           defaultValue: "بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ"),
       style: TextStyle(
         fontSize: fontSize.fontSizeArabic.value,
@@ -49,7 +50,7 @@ class _SettingsState extends State<Settings> {
   }
 
   getWidgetsInit() async {
-    final tem = await buildArabicText(quranScriptType, "0");
+    final tem = await buildArabicText(quranScriptType, "10");
     setState(() {
       review = tem;
     });
@@ -91,6 +92,10 @@ class _SettingsState extends State<Settings> {
                 ),
               ),
               const Spacer(),
+              Padding(
+                padding: const EdgeInsets.only(left: 10, right: 10),
+                child: themeIconButton,
+              ),
               IconButton(
                 iconSize: 20,
                 onPressed: () {
@@ -194,7 +199,7 @@ class _SettingsState extends State<Settings> {
             ),
           ],
           onChanged: (value) async {
-            review = await buildArabicText(value ?? "quran_tajweed", "0");
+            review = await buildArabicText(value ?? "quran_tajweed", "10");
             final box = Hive.box("info");
             box.put("quranScriptType", value ?? quranScriptType);
             fontSize.quranScriptTypeGetx.value = value ?? "quran_tajweed";
@@ -295,237 +300,226 @@ class _SettingsState extends State<Settings> {
           height: 10,
         ),
         const Divider(),
-        if (widget.showNavigator == false)
-          const SizedBox(
-            height: 10,
-          ),
-        if (widget.showNavigator == false)
-          const Row(
-            children: [
-              Icon(
-                Icons.speaker,
+        const SizedBox(
+          height: 10,
+        ),
+        const Row(
+          children: [
+            Icon(
+              Icons.speaker,
+              color: Colors.green,
+            ),
+            SizedBox(
+              width: 5,
+            ),
+            Text(
+              "Quran Reciter",
+              style: TextStyle(
+                fontSize: 22,
                 color: Colors.green,
+                fontWeight: FontWeight.bold,
               ),
-              SizedBox(
-                width: 5,
-              ),
+            ),
+          ],
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+        Container(
+          decoration: BoxDecoration(
+            color: const Color.fromARGB(20, 120, 120, 120),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          padding: const EdgeInsets.all(5),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
               Text(
-                "Quran Reciter",
-                style: TextStyle(
-                  fontSize: 22,
-                  color: Colors.green,
+                recitor.split("(")[0],
+                style: const TextStyle(
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-            ],
-          ),
-        if (widget.showNavigator == false)
-          const SizedBox(
-            height: 5,
-          ),
-        if (widget.showNavigator == false)
-          Container(
-            decoration: BoxDecoration(
-              color: const Color.fromARGB(20, 120, 120, 120),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            padding: const EdgeInsets.all(5),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  recitor.split("(")[0],
-                  style: const TextStyle(
-                    fontSize: 20,
+              ElevatedButton(
+                onPressed: () {
+                  showCupertinoModalPopup(
+                    context: context,
+                    builder: (context) {
+                      return RecitaionChoice(
+                        previousInfo:
+                            Map<String, String>.from(infoBox.get("info")),
+                      );
+                    },
+                  );
+                },
+                child: const Text(
+                  "Change",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.green,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    showCupertinoModalPopup(
-                      context: context,
-                      builder: (context) {
-                        return RecitaionChoice(
-                          previousInfo:
-                              Map<String, String>.from(infoBox.get("info")),
-                        );
-                      },
-                    );
-                  },
-                  child: const Text(
-                    "Change",
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.green,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ],
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        const Divider(),
+        const Row(
+          children: [
+            Icon(
+              Icons.translate_rounded,
+              color: Colors.green,
             ),
-          ),
-        if (widget.showNavigator == false)
-          const SizedBox(
-            height: 10,
-          ),
-        if (widget.showNavigator == false) const Divider(),
-        if (widget.showNavigator == false)
-          const Row(
-            children: [
-              Icon(
-                Icons.translate_rounded,
+            SizedBox(
+              width: 5,
+            ),
+            Text(
+              "Quran Translation Language & Book",
+              style: TextStyle(
+                fontSize: 20,
                 color: Colors.green,
+                fontWeight: FontWeight.bold,
               ),
-              SizedBox(
-                width: 5,
+            ),
+          ],
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        Container(
+          decoration: BoxDecoration(
+            color: const Color.fromARGB(20, 120, 120, 120),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          padding: const EdgeInsets.all(5),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Language : ${info['translation_language']}",
+                    style: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(
+                    height: 3,
+                  ),
+                  Text(
+                    "Book Name : ${bookName.length > 20 ? "${bookName.substring(0, 18)}..." : bookName}",
+                    style: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                ],
               ),
-              Text(
-                "Quran Translation Language & Book",
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.green,
-                  fontWeight: FontWeight.bold,
+              ElevatedButton(
+                onPressed: () {
+                  showCupertinoModalPopup(
+                    context: context,
+                    builder: (context) {
+                      return const TranslationLanguage(
+                        showNextButtonOnAppBar: true,
+                      );
+                    },
+                  );
+                },
+                child: const Text(
+                  "Change",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.green,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],
           ),
-        if (widget.showNavigator == false)
-          const SizedBox(
-            height: 10,
-          ),
-        if (widget.showNavigator == false)
-          Container(
-            decoration: BoxDecoration(
-              color: const Color.fromARGB(20, 120, 120, 120),
-              borderRadius: BorderRadius.circular(10),
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        const Divider(),
+        const Row(
+          children: [
+            Icon(
+              FontAwesomeIcons.bookOpen,
+              color: Colors.green,
+              size: 22,
             ),
-            padding: const EdgeInsets.all(5),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Language : ${info['translation_language']}",
-                      style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(
-                      height: 3,
-                    ),
-                    Text(
-                      "Book Name : ${bookName.length > 20 ? "${bookName.substring(0, 18)}..." : bookName}",
-                      style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    showCupertinoModalPopup(
-                      context: context,
-                      builder: (context) {
-                        return const TranslationLanguage(
-                          showNextButtonOnAppBar: true,
-                        );
-                      },
-                    );
-                  },
-                  child: const Text(
-                    "Change",
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.green,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ],
+            SizedBox(
+              width: 10,
             ),
-          ),
-        if (widget.showNavigator == false)
-          const SizedBox(
-            height: 10,
-          ),
-        if (widget.showNavigator == false) const Divider(),
-        if (widget.showNavigator == false)
-          const Row(
-            children: [
-              Icon(
-                FontAwesomeIcons.bookOpen,
+            Text(
+              "Quran Tafsir Language & Book",
+              style: TextStyle(
+                fontSize: 20,
                 color: Colors.green,
+                fontWeight: FontWeight.bold,
               ),
-              SizedBox(
-                width: 5,
+            ),
+          ],
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        Container(
+          decoration: BoxDecoration(
+            color: const Color.fromARGB(20, 120, 120, 120),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          padding: const EdgeInsets.all(5),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Language : ${info['tafseer_language']}",
+                    style: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(
+                    height: 3,
+                  ),
+                  Text(
+                    "Book Name : ${tafsirBookName.length > 20 ? "${tafsirBookName.substring(0, 18)}..." : tafsirBookName}",
+                    style: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                ],
               ),
-              Text(
-                "Quran Tafsir Language & Book",
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.green,
-                  fontWeight: FontWeight.bold,
+              ElevatedButton(
+                onPressed: () {
+                  showCupertinoModalPopup(
+                    context: context,
+                    builder: (context) => const TafseerLanguage(
+                      showAppBarNextButton: true,
+                    ),
+                  );
+                },
+                child: const Text(
+                  "Change",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.green,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],
           ),
-        if (widget.showNavigator == false)
-          const SizedBox(
-            height: 10,
-          ),
-        if (widget.showNavigator == false)
-          Container(
-            decoration: BoxDecoration(
-              color: const Color.fromARGB(20, 120, 120, 120),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            padding: const EdgeInsets.all(5),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Language : ${info['tafseer_language']}",
-                      style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(
-                      height: 3,
-                    ),
-                    Text(
-                      "Book Name : ${tafsirBookName.length > 20 ? "${tafsirBookName.substring(0, 18)}..." : tafsirBookName}",
-                      style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    showCupertinoModalPopup(
-                      context: context,
-                      builder: (context) => const TafseerLanguage(
-                        showAppBarNextButton: true,
-                      ),
-                    );
-                  },
-                  child: const Text(
-                    "Change",
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.green,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          )
+        )
       ],
     );
   }

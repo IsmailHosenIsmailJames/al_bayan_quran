@@ -216,15 +216,17 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const MyDrawer(),
-      appBar: AppBar(
-        title: const Text(
-          "Profile",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
+      drawer: MediaQuery.of(context).size.width > 800 ? null : const MyDrawer(),
+      appBar: MediaQuery.of(context).size.width > 800
+          ? null
+          : AppBar(
+              title: const Text(
+                "Profile",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
       body: ListView(
         padding: const EdgeInsets.all(5),
         children: [

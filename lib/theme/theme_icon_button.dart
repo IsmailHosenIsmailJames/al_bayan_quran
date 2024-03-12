@@ -5,6 +5,7 @@ import 'theme_controller.dart';
 
 Widget themeIconButton = GetX<AppThemeData>(
   builder: (controller) => IconButton(
+    color: Colors.green.shade600,
     tooltip: "Change Theme",
     onPressed: () {
       if (controller.themeModeName.value == "dark") {

@@ -1,16 +1,26 @@
 import 'package:al_bayan_quran/collect_info/getx/get_controller.dart';
 import 'package:al_bayan_quran/screens/drawer/drawer.dart';
+import 'package:al_bayan_quran/screens/drawer/settings_with_appbar.dart';
+import 'package:al_bayan_quran/screens/favorite_bookmark_notes/book_mark.dart';
+import 'package:al_bayan_quran/screens/favorite_bookmark_notes/favorite.dart';
+import 'package:al_bayan_quran/screens/favorite_bookmark_notes/notes_v.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+import 'package:sidebarx/sidebarx.dart';
 
 import '../api/all_recitation.dart';
 import '../api/by_juzs.dart';
 import '../api/some_api_response.dart';
+import '../auth/account_info/account_info.dart';
+import '../auth/login/login.dart';
+import '../theme/theme_controller.dart';
+import '../theme/theme_icon_button.dart';
 import 'profile/profile.dart';
 import 'surah_view.dart/sura_view.dart';
 
@@ -24,6 +34,8 @@ class HomeMobile extends StatefulWidget {
 int currentIndex = 0;
 
 class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
+  final SidebarXController _sidebarXController =
+      SidebarXController(selectedIndex: 0);
   bool isPlaying = false;
   AudioPlayer player = AudioPlayer();
   String currentReciter = "";
@@ -82,13 +94,25 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
       sizeAnimation.add(CurvedAnimation(parent: tem, curve: Curves.easeInOut));
       expandedPosition.add(-1);
     }
+
+    _sidebarXController.extendStream.listen((event) {
+      setState(() {
+        isExtended = event;
+      });
+    });
     openBoxes();
   }
 
-  void openBoxes() async {
+  bool isExtended = false;
+
+  Future<void> openBoxes() async {
     final tem = Hive.box("info");
-    await Hive.openBox(
-        tem.get("quranScriptType", defaultValue: "quran_tajweed"));
+    if (Hive.isBoxOpen(
+            tem.get("quranScriptType", defaultValue: "quran_tajweed")) ==
+        false) {
+      await Hive.openBox(
+          tem.get("quranScriptType", defaultValue: "quran_tajweed"));
+    }
   }
 
   List<Widget> listSurahProviderDesktop(length) {
@@ -115,6 +139,7 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
       listSurah.add(
         GestureDetector(
           onTap: () async {
+            await openBoxes();
             await Hive.openBox("translation");
             await Hive.openBox("quran");
             final tem = Hive.box("info");
@@ -259,6 +284,8 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
               GestureDetector(
                 behavior: HitTestBehavior.translucent,
                 onTap: () async {
+                  await openBoxes();
+
                   setState(() {
                     expandedPosition[index] == index
                         ? {
@@ -608,6 +635,7 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
             });
             await Hive.openBox("translation");
             await Hive.openBox("quran");
+            await openBoxes();
             await Get.to(() {
               return SuraView(
                 surahNumber: index,
@@ -854,6 +882,12 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
         dropdownMenuEntries: dropdownList,
       ),
     );
+
+    if (MediaQuery.of(context).size.width > 1000) {
+      _sidebarXController.setExtended(true);
+    } else {
+      _sidebarXController.setExtended(false);
+    }
     return Scaffold(
       bottomNavigationBar: MediaQuery.of(context).size.width > 720
           ? null
@@ -901,100 +935,106 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
         DefaultTabController(
           length: 2,
           child: Scaffold(
-            drawer: const MyDrawer(),
-            appBar: AppBar(
-              title: const Text(
-                "Al Quran",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              actions: const [
-                // IconButton(
-                //     onPressed: () {
-                //       showDialog(
-                //         useSafeArea: true,
-                //         context: context,
-                //         builder: (context) => AlertDialog(
-                //           title: const Row(
-                //             children: [
-                //               Icon(Icons.search),
-                //               SizedBox(
-                //                 width: 15,
-                //               ),
-                //               Text("Search")
-                //             ],
-                //           ),
-                //           content: Column(
-                //             mainAxisAlignment: MainAxisAlignment.center,
-                //             crossAxisAlignment: CrossAxisAlignment.center,
-                //             mainAxisSize: MainAxisSize.min,
-                //             children: [
-                //               TextFormField(
-                //                 autofocus: true,
-                //               ),
-                //               Padding(
-                //                 padding: const EdgeInsets.only(top: 8.0),
-                //                 child: Row(
-                //                     mainAxisAlignment:
-                //                         MainAxisAlignment.spaceAround,
-                //                     children: [
-                //                       TextButton(
-                //                         child: const Text("Quran"),
-                //                         onPressed: () {},
-                //                       ),
-                //                       TextButton(
-                //                           child: const Text("Translation"),
-                //                           onPressed: () {}),
-                //                       TextButton(
-                //                           child: const Text("Tafseer"),
-                //                           onPressed: () {}),
-                //                     ]),
-                //               ),
-                //             ],
-                //           ),
-                //         ),
-                //       );
-                //     },
-                //     icon: const Icon(Icons.search))
-              ],
-              bottom: MediaQuery.of(context).size.width > 720
-                  ? null
-                  : const TabBar(
-                      tabs: [
-                        Tab(
-                          child: Text(
-                            "Surah",
-                            style: TextStyle(
-                              fontSize: 20,
-                            ),
-                          ),
-                        ),
-                        Tab(
-                          child: Text(
-                            'Juzs',
-                            style: TextStyle(
-                              fontSize: 20,
-                            ),
-                          ),
-                        ),
-                        // Tab(
-                        //   child: Text(
-                        //     'Pages',
-                        //     style: TextStyle(
-                        //       fontSize: 20,
-                        //     ),
-                        //   ),
-                        // ),
-                      ],
+            drawer: MediaQuery.of(context).size.width > 800
+                ? null
+                : const MyDrawer(),
+            appBar: MediaQuery.of(context).size.width > 800
+                ? null
+                : AppBar(
+                    title: const Text(
+                      "Al Quran",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-            ),
+                    actions: const [
+                      // IconButton(
+                      //     onPressed: () {
+                      //       showDialog(
+                      //         useSafeArea: true,
+                      //         context: context,
+                      //         builder: (context) => AlertDialog(
+                      //           title: const Row(
+                      //             children: [
+                      //               Icon(Icons.search),
+                      //               SizedBox(
+                      //                 width: 15,
+                      //               ),
+                      //               Text("Search")
+                      //             ],
+                      //           ),
+                      //           content: Column(
+                      //             mainAxisAlignment: MainAxisAlignment.center,
+                      //             crossAxisAlignment: CrossAxisAlignment.center,
+                      //             mainAxisSize: MainAxisSize.min,
+                      //             children: [
+                      //               TextFormField(
+                      //                 autofocus: true,
+                      //               ),
+                      //               Padding(
+                      //                 padding: const EdgeInsets.only(top: 8.0),
+                      //                 child: Row(
+                      //                     mainAxisAlignment:
+                      //                         MainAxisAlignment.spaceAround,
+                      //                     children: [
+                      //                       TextButton(
+                      //                         child: const Text("Quran"),
+                      //                         onPressed: () {},
+                      //                       ),
+                      //                       TextButton(
+                      //                           child: const Text("Translation"),
+                      //                           onPressed: () {}),
+                      //                       TextButton(
+                      //                           child: const Text("Tafseer"),
+                      //                           onPressed: () {}),
+                      //                     ]),
+                      //               ),
+                      //             ],
+                      //           ),
+                      //         ),
+                      //       );
+                      //     },
+                      //     icon: const Icon(Icons.search))
+                    ],
+                    bottom: MediaQuery.of(context).size.width > 720
+                        ? null
+                        : const TabBar(
+                            tabs: [
+                              Tab(
+                                child: Text(
+                                  "Surah",
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ),
+                              Tab(
+                                child: Text(
+                                  'Juzs',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ),
+                              // Tab(
+                              //   child: Text(
+                              //     'Pages',
+                              //     style: TextStyle(
+                              //       fontSize: 20,
+                              //     ),
+                              //   ),
+                              // ),
+                            ],
+                          ),
+                  ),
             body: LayoutBuilder(
               builder: (context, constraints) {
                 if (constraints.maxWidth > 720) {
                   return Row(
                     children: [
+                      if (MediaQuery.of(context).size.width > 800) sidebarx,
                       Expanded(
+                        flex: 3,
                         child: ListView(
                           scrollDirection: Axis.vertical,
                           padding: const EdgeInsets.only(bottom: 50),
@@ -1002,6 +1042,7 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
                         ),
                       ),
                       Expanded(
+                        flex: 3,
                         child: ListView(
                           controller: scrollController,
                           scrollDirection: Axis.vertical,
@@ -1179,15 +1220,18 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
           ),
         ),
         Scaffold(
-          drawer: const MyDrawer(),
-          appBar: AppBar(
-            title: const Text(
-              "Audio",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
+          drawer:
+              MediaQuery.of(context).size.width > 800 ? null : const MyDrawer(),
+          appBar: MediaQuery.of(context).size.width > 800
+              ? null
+              : AppBar(
+                  title: const Text(
+                    "Audio",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -1203,6 +1247,7 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      if (MediaQuery.of(context).size.width > 800) sidebarx,
                       Expanded(
                         child: dropdown,
                       ),
@@ -1337,4 +1382,190 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
           : null,
     );
   }
+
+  late Widget sidebarx = SidebarX(
+    controller: _sidebarXController,
+    theme: SidebarXTheme(
+      margin: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: canvasColor,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      hoverColor: scaffoldBackgroundColor,
+      textStyle: TextStyle(color: Colors.white.withOpacity(0.7)),
+      selectedTextStyle: const TextStyle(color: Colors.white),
+      itemTextPadding: const EdgeInsets.only(left: 30),
+      selectedItemTextPadding: const EdgeInsets.only(left: 30),
+      itemDecoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: canvasColor),
+      ),
+      selectedItemDecoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(
+          color: actionColor.withOpacity(0.37),
+        ),
+        gradient: const LinearGradient(
+          colors: [accentCanvasColor, canvasColor],
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.28),
+            blurRadius: 30,
+          )
+        ],
+      ),
+      iconTheme: IconThemeData(
+        color: Colors.white.withOpacity(0.7),
+        size: 20,
+      ),
+      selectedIconTheme: const IconThemeData(
+        color: Color.fromARGB(255, 84, 235, 89),
+        size: 20,
+      ),
+    ),
+    extendedTheme: const SidebarXTheme(
+      width: 200,
+      decoration: BoxDecoration(
+        color: canvasColor,
+      ),
+    ),
+    footerDivider: divider,
+    headerBuilder: isExtended
+        ? (context, extended) {
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                !isLoogedIn
+                    ? Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            TextButton.icon(
+                              onPressed: () {
+                                Get.to(() => const LogIn());
+                              },
+                              label: const Text(
+                                "LogIn",
+                                style: TextStyle(
+                                  color: Colors.green,
+                                  fontSize: 20,
+                                ),
+                              ),
+                              icon: const Icon(
+                                Icons.login,
+                                color: Colors.green,
+                              ),
+                            ),
+                            const Text(
+                              "You Need to login\nfor more Features.",
+                              style: TextStyle(
+                                fontSize: 10,
+                                color: Colors.white,
+                              ),
+                            )
+                          ],
+                        ),
+                      )
+                    : Row(
+                        children: [
+                          CircleAvatar(
+                            radius: 25,
+                            backgroundColor: Colors.green,
+                            child: GetX<AccountInfo>(
+                              builder: (controller) => Text(
+                                controller.name.value.substring(0, 1),
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              GetX<AccountInfo>(
+                                builder: (controller) => Text(
+                                  controller.name.value.length > 10
+                                      ? "${controller.name.value.substring(0, 10)}..."
+                                      : controller.name.value,
+                                  style: const TextStyle(
+                                    fontSize: 26,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              GetX<AccountInfo>(
+                                builder: (controller) => Text(
+                                  controller.email.value.length > 20
+                                      ? "${controller.email.value.substring(0, 15)}...${controller.email.value.substring(controller.email.value.length - 9, controller.email.value.length)}"
+                                      : controller.email.value,
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ),
+                              GetX<AccountInfo>(
+                                builder: (controller) => Text(
+                                  controller.uid.value,
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                themeIconButton,
+              ],
+            );
+          }
+        : null,
+    items: [
+      SidebarXItem(
+        icon: Icons.favorite,
+        label: 'Favorite',
+        onTap: () {
+          Get.to(() => const Favorite());
+        },
+      ),
+      SidebarXItem(
+        icon: Icons.bookmark_added,
+        label: 'BookMark',
+        onTap: () {
+          Get.to(() => const BookMark());
+        },
+      ),
+      SidebarXItem(
+        icon: Icons.note_add,
+        label: 'Notes',
+        onTap: () {
+          Get.to(() => const NotesView());
+        },
+      ),
+      SidebarXItem(
+        icon: Icons.settings,
+        label: 'Settings',
+        onTap: () {
+          Get.to(() => const SettingsWithAppbar());
+        },
+      ),
+    ],
+  );
 }
+
+const primaryColor = Color(0xFF685BFF);
+const canvasColor = Color(0xFF2E2E48);
+const scaffoldBackgroundColor = Color(0xFF464667);
+const accentCanvasColor = Color(0xFF3E3E61);
+const white = Colors.white;
+final actionColor = const Color(0xFF5F5FA7).withOpacity(0.6);
+final divider = Divider(color: white.withOpacity(0.3), height: 1);

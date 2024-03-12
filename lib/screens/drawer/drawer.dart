@@ -1,5 +1,6 @@
 import 'package:al_bayan_quran/auth/account_info/account_info.dart';
 import 'package:al_bayan_quran/auth/login/login.dart';
+import 'package:al_bayan_quran/screens/drawer/settings_with_appbar.dart';
 import 'package:al_bayan_quran/screens/favorite_bookmark_notes/book_mark.dart';
 import 'package:al_bayan_quran/screens/favorite_bookmark_notes/notes_v.dart';
 import 'package:al_bayan_quran/screens/settings/settings.dart';
@@ -240,21 +241,7 @@ class _MyDrawerState extends State<MyDrawer> {
               await Hive.openBox("translation");
               await Hive.openBox(quranScriptType);
 
-              Get.to(
-                () => Scaffold(
-                  appBar: AppBar(
-                    title: const Text(
-                      "Settings",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  body: const Settings(
-                    showNavigator: false,
-                  ),
-                ),
-              );
+              Get.to(() => const SettingsWithAppbar());
             },
             child: const Row(
               children: [
