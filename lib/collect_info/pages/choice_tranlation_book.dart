@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:al_bayan_quran/core/show_twoested_message.dart';
 import 'package:al_bayan_quran/screens/getx_controller.dart';
 import 'package:al_bayan_quran/screens/home_mobile.dart';
@@ -39,7 +38,15 @@ class _ChoiceTranslationStateBook extends State<ChoiceTranslationBook> {
   @override
   void initState() {
     getBooksAsLanguage();
+    setValue();
     super.initState();
+  }
+
+  void setValue() async {
+    await Future.delayed(
+      const Duration(milliseconds: 100),
+    );
+    infoController.isPreviousEnaviled.value = true;
   }
 
   bool downloading = false;
@@ -48,9 +55,9 @@ class _ChoiceTranslationStateBook extends State<ChoiceTranslationBook> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Translation Book",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+        title: Text(
+          "Translation Book ${infoController.translationLanguage.value == "null" ? "" : "for${infoController.translationLanguage.value}"}",
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
         ),
         actions: [
           if (widget.showDownloadOnAppbar == true)

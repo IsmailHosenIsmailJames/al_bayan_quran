@@ -33,13 +33,22 @@ class _TranslationLanguageState extends State<TranslationLanguage> {
   @override
   void initState() {
     getLanguageList();
+    setValue();
     super.initState();
+  }
+
+  void setValue() async {
+    await Future.delayed(
+      const Duration(milliseconds: 100),
+    );
+    translationLanguageController.isPreviousEnaviled.value = false;
   }
 
   final translationLanguageController = Get.put(InfoController());
 
   @override
   Widget build(BuildContext context) {
+    setValue();
     return Scaffold(
       appBar: AppBar(
         title: const Text(

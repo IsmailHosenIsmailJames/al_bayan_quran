@@ -45,7 +45,8 @@ class _SignInState extends State<SignIn> {
     );
 
     if (user.status) {
-      await account.createEmailSession(email: email, password: password);
+      await account.createEmailPasswordSession(
+          email: email, password: password);
       final user = await account.get();
 
       if (user.status) {

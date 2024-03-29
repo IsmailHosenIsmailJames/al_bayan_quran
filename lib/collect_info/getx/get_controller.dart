@@ -14,4 +14,5 @@ class InfoController extends GetxController {
   RxString recitationName = "-1".obs;
   RxString tafsirBookName = "null".obs;
   RxString translationBookName = "null".obs;
+  RxBool isPreviousEnaviled = false.obs;
 }

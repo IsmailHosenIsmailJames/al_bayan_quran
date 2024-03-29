@@ -1,3 +1,4 @@
+import 'package:al_bayan_quran/core/show_twoested_message.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -24,9 +25,14 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
   late PageController pageController;
   late int indexPage;
   String nextButtonText = "Next";
+
   @override
   void initState() {
-    pageController = PageController(initialPage: widget.pageNumber);
+    pageController = PageController(
+      initialPage: widget.pageNumber,
+      keepPage: false,
+    );
+
     indexPage = widget.pageNumber;
     checkPageNumber(widget.pageNumber);
     super.initState();
@@ -90,8 +96,26 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                const SizedBox(
-                  width: 50,
+                Obx(
+                  () => ElevatedButton(
+                    onPressed: infoController.isPreviousEnaviled.value
+                        ? () {
+                            pageController.previousPage(
+                                duration: const Duration(milliseconds: 200),
+                                curve: Curves.bounceIn);
+                            checkPageNumber(pageController.page!.toInt() + 1);
+                          }
+                        : null,
+                    child: Text(
+                      "Previous",
+                      style: TextStyle(
+                        color: infoController.isPreviousEnaviled.value
+                            ? Colors.green
+                            : Colors.grey,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
                 ),
                 Container(
                   padding: const EdgeInsets.only(
@@ -122,19 +146,26 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
                     if (pageController.page! == 0) {
                       if (infoController.selectedOptionTranslation.value ==
                           -1) {
+                        showTwoestedMessage(
+                            "Please Select Quran Translation Language");
                         return;
                       }
                     } else if (pageController.page! == 1) {
                       if (infoController.bookNameIndex.value == -1) {
+                        showTwoestedMessage(
+                            "Please Select Quran Translation Book");
                         return;
                       }
                     }
                     if (pageController.page! == 2) {
                       if (infoController.tafseerIndex.value == -1) {
+                        showTwoestedMessage(
+                            "Please Select Quran Tafsir Language");
                         return;
                       }
                     } else if (pageController.page! == 3) {
                       if (infoController.tafseerBookIndex.value == -1) {
+                        showTwoestedMessage("Please Select Quran Tafsir Book");
                         return;
                       }
                     } else if (pageController.page! == 4) {

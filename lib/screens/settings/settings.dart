@@ -1,6 +1,7 @@
 import 'package:al_bayan_quran/collect_info/pages/choice_recitations.dart';
 import 'package:al_bayan_quran/collect_info/pages/tafseer_language.dart';
 import 'package:al_bayan_quran/collect_info/pages/translation_language.dart';
+import 'package:al_bayan_quran/screens/home_mobile.dart';
 import 'package:al_bayan_quran/theme/theme_controller.dart';
 import 'package:al_bayan_quran/theme/theme_icon_button.dart';
 import 'package:flutter/cupertino.dart';
@@ -342,8 +343,8 @@ class _SettingsState extends State<Settings> {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {
-                  showCupertinoModalPopup(
+                onPressed: () async {
+                  await showCupertinoModalPopup(
                     context: context,
                     builder: (context) {
                       return RecitaionChoice(
@@ -352,6 +353,7 @@ class _SettingsState extends State<Settings> {
                       );
                     },
                   );
+                  Get.offAll(() => const HomeMobile());
                 },
                 child: const Text(
                   "Change",

@@ -1,11 +1,10 @@
 import 'package:al_bayan_quran/collect_info/getx/get_controller.dart';
-import 'package:al_bayan_quran/screens/drawer/drawer.dart';
 import 'package:al_bayan_quran/screens/drawer/settings_with_appbar.dart';
 import 'package:al_bayan_quran/screens/favorite_bookmark_notes/book_mark.dart';
 import 'package:al_bayan_quran/screens/favorite_bookmark_notes/favorite.dart';
 import 'package:al_bayan_quran/screens/favorite_bookmark_notes/notes_v.dart';
+import 'package:appwrite/appwrite.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
@@ -65,7 +64,7 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
 
     currentReciter = info['recitation_ID'];
 
-    player.playerStateStream.listen((event) {
+    player.playerStateStream.listen((event) async {
       if (player.processingState == ProcessingState.completed ||
           player.playing == false) {
         setState(() {
@@ -464,13 +463,23 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
       listSurah.add(
         GestureDetector(
           onTap: () {
-            if (player.playing) {
-              player.pause();
-              setState(() {
-                isPlaying = false;
-              });
+            if (playingIndex == index) {
+              if (player.playing) {
+                player.pause();
+                setState(() {
+                  isPlaying = false;
+                });
+              } else {
+                player.play();
+                setState(() {
+                  isPlaying = true;
+                });
+              }
             } else {
               playAudio(index);
+              setState(() {
+                playingIndex = index;
+              });
             }
           },
           child: Container(
@@ -852,6 +861,288 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    Widget myDrawer = Drawer(
+      child: ListView(
+        padding: const EdgeInsets.only(
+          right: 10,
+          bottom: 20,
+        ),
+        children: [
+          DrawerHeader(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                !isLoogedIn
+                    ? Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            TextButton.icon(
+                              onPressed: () {
+                                Get.to(() => const LogIn());
+                              },
+                              label: const Text(
+                                "LogIn",
+                                style: TextStyle(
+                                  color: Colors.green,
+                                  fontSize: 30,
+                                ),
+                              ),
+                              icon: const Icon(
+                                Icons.login,
+                                color: Colors.green,
+                              ),
+                            ),
+                            const Text(
+                              "You Need to login for more Features.\nFor Example, you can save your notes in\ncloud and access it from any places.",
+                              style: TextStyle(fontSize: 10),
+                            )
+                          ],
+                        ),
+                      )
+                    : Row(
+                        children: [
+                          CircleAvatar(
+                            radius: 25,
+                            backgroundColor: Colors.green,
+                            child: GetX<AccountInfo>(
+                              builder: (controller) => Text(
+                                controller.name.value.substring(0, 1),
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              GetX<AccountInfo>(
+                                builder: (controller) => Text(
+                                  controller.name.value.length > 10
+                                      ? "${controller.name.value.substring(0, 10)}..."
+                                      : controller.name.value,
+                                  style: const TextStyle(
+                                    fontSize: 26,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              GetX<AccountInfo>(
+                                builder: (controller) => Text(
+                                  controller.email.value.length > 20
+                                      ? "${controller.email.value.substring(0, 15)}...${controller.email.value.substring(controller.email.value.length - 9, controller.email.value.length)}"
+                                      : controller.email.value,
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ),
+                              GetX<AccountInfo>(
+                                builder: (controller) => Text(
+                                  controller.uid.value,
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      tooltip: "Close Drawer",
+                      onPressed: () {
+                        Scaffold.of(context).closeDrawer();
+                      },
+                      icon: const Icon(
+                        Icons.close_rounded,
+                      ),
+                    ),
+                    themeIconButton,
+                  ],
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: const Row(
+              children: [
+                Icon(
+                  Icons.home_rounded,
+                  color: Colors.green,
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Text("Home")
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          TextButton(
+            onPressed: () async {
+              await Hive.openBox('quran');
+              await Hive.openBox("translation");
+              await player.dispose();
+              await Get.to(
+                () => const Favorite(),
+              );
+              player = AudioPlayer();
+              setState(() {
+                playingIndex = -1;
+                surahNumber = -1;
+                isPlaying = false;
+              });
+            },
+            child: const Row(
+              children: [
+                Icon(
+                  Icons.favorite_rounded,
+                  color: Colors.green,
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Text("Favorite")
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          TextButton(
+            onPressed: () async {
+              await Hive.openBox('quran');
+              await Hive.openBox("translation");
+              await player.dispose();
+              await Get.to(() => const BookMark());
+              player = AudioPlayer();
+              setState(() {
+                playingIndex = -1;
+                surahNumber = -1;
+                isPlaying = false;
+              });
+            },
+            child: const Row(
+              children: [
+                Icon(
+                  Icons.bookmark_added,
+                  color: Colors.green,
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Text("Book Mark")
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          TextButton(
+            onPressed: () async {
+              await Hive.openBox('quran');
+              await Hive.openBox("translation");
+              await Hive.openBox("notes");
+              await player.dispose();
+              await Get.to(() => const NotesView());
+              player = AudioPlayer();
+              setState(() {
+                playingIndex = -1;
+                surahNumber = -1;
+                isPlaying = false;
+              });
+            },
+            child: const Row(
+              children: [
+                Icon(
+                  Icons.note_add,
+                  color: Colors.green,
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Text("Notes")
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          TextButton(
+            onPressed: () async {
+              await Hive.openBox("translation");
+              await Hive.openBox(quranScriptType);
+              await player.dispose();
+              await Get.to(() => const SettingsWithAppbar());
+            },
+            child: const Row(
+              children: [
+                Icon(
+                  Icons.settings,
+                  color: Colors.green,
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Text("Settings")
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          if (isLoogedIn)
+            TextButton(
+              onPressed: () async {
+                Client client = Client()
+                    .setEndpoint("https://cloud.appwrite.io/v1")
+                    .setProject("albayanquran");
+                Account account = Account(client);
+                await account.deleteSession(sessionId: 'current');
+                setState(() {
+                  isLoogedIn = false;
+                });
+              },
+              child: const Row(
+                children: [
+                  Icon(
+                    Icons.logout,
+                    color: Colors.green,
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Text("Log Out")
+                ],
+              ),
+            ),
+          const SizedBox(
+            height: 10,
+          ),
+        ],
+      ),
+    );
+
     Widget dropdown = Padding(
       padding: const EdgeInsets.only(
         left: 10,
@@ -883,11 +1174,6 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
       ),
     );
 
-    if (MediaQuery.of(context).size.width > 1000) {
-      _sidebarXController.setExtended(true);
-    } else {
-      _sidebarXController.setExtended(false);
-    }
     return Scaffold(
       bottomNavigationBar: MediaQuery.of(context).size.width > 720
           ? null
@@ -935,9 +1221,7 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
         DefaultTabController(
           length: 2,
           child: Scaffold(
-            drawer: MediaQuery.of(context).size.width > 800
-                ? null
-                : const MyDrawer(),
+            drawer: MediaQuery.of(context).size.width > 800 ? null : myDrawer,
             appBar: MediaQuery.of(context).size.width > 800
                 ? null
                 : AppBar(
@@ -1220,8 +1504,7 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
           ),
         ),
         Scaffold(
-          drawer:
-              MediaQuery.of(context).size.width > 800 ? null : const MyDrawer(),
+          drawer: MediaQuery.of(context).size.width > 800 ? null : myDrawer,
           appBar: MediaQuery.of(context).size.width > 800
               ? null
               : AppBar(
@@ -1530,6 +1813,13 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
           }
         : null,
     items: [
+      SidebarXItem(
+        icon: Icons.home,
+        label: 'Home',
+        onTap: () {
+          Get.to(() => const HomeMobile());
+        },
+      ),
       SidebarXItem(
         icon: Icons.favorite,
         label: 'Favorite',

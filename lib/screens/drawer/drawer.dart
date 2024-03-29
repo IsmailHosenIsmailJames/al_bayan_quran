@@ -3,7 +3,7 @@ import 'package:al_bayan_quran/auth/login/login.dart';
 import 'package:al_bayan_quran/screens/drawer/settings_with_appbar.dart';
 import 'package:al_bayan_quran/screens/favorite_bookmark_notes/book_mark.dart';
 import 'package:al_bayan_quran/screens/favorite_bookmark_notes/notes_v.dart';
-import 'package:al_bayan_quran/screens/settings/settings.dart';
+import 'package:al_bayan_quran/screens/home_mobile.dart';
 import 'package:al_bayan_quran/theme/theme_controller.dart';
 import 'package:appwrite/appwrite.dart';
 import 'package:flutter/material.dart';
@@ -140,31 +140,26 @@ class _MyDrawerState extends State<MyDrawer> {
           const SizedBox(
             height: 10,
           ),
-          // TextButton(
-          //   onPressed: () async {
-          //     await Hive.openBox('quran');
-          //     await Hive.openBox("translation");
-
-          //     Get.to(
-          //       () => const Favorite(),
-          //     );
-          //   },
-          //   child: const Row(
-          //     children: [
-          //       Icon(
-          //         FontAwesomeIcons.shuffle,
-          //         color: Colors.green,
-          //       ),
-          //       SizedBox(
-          //         width: 20,
-          //       ),
-          //       Text("Jump to Ayah")
-          //     ],
-          //   ),
-          // ),
-          // const SizedBox(
-          //   height: 5,
-          // ),
+          TextButton(
+            onPressed: () {
+              Get.offAll(() => const HomeMobile());
+            },
+            child: const Row(
+              children: [
+                Icon(
+                  Icons.home_rounded,
+                  color: Colors.green,
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Text("Home")
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 5,
+          ),
           TextButton(
             onPressed: () async {
               await Hive.openBox('quran');

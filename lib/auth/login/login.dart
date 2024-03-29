@@ -29,7 +29,8 @@ class _LogInState extends State<LogIn> {
 
   Future<void> login(String email, String password) async {
     try {
-      await account.createEmailSession(email: email, password: password);
+      await account.createEmailPasswordSession(
+          email: email, password: password);
       showModalBottomSheet(
         // ignore: use_build_context_synchronously
         context: context,

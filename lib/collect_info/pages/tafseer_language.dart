@@ -33,7 +33,16 @@ class _TafseerLanguageState extends State<TafseerLanguage> {
   @override
   void initState() {
     getLanguageList();
+    setValue();
+
     super.initState();
+  }
+
+  void setValue() async {
+    await Future.delayed(
+      const Duration(milliseconds: 100),
+    );
+    tafseerLanguage.isPreviousEnaviled.value = true;
   }
 
   final tafseerLanguage = Get.put(InfoController());
