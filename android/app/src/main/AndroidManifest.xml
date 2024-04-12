@@ -5,6 +5,7 @@
     <!-- ADD THESE TWO PERMISSIONS -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application android:usesCleartextTraffic="true" android:label="Al Quran"
         android:name="${applicationName}" android:icon="@mipmap/launcher_icon">

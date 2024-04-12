@@ -3,6 +3,7 @@ import 'package:al_bayan_quran/screens/drawer/settings_with_appbar.dart';
 import 'package:al_bayan_quran/screens/favorite_bookmark_notes/book_mark.dart';
 import 'package:al_bayan_quran/screens/favorite_bookmark_notes/favorite.dart';
 import 'package:al_bayan_quran/screens/favorite_bookmark_notes/notes_v.dart';
+import 'package:al_bayan_quran/screens/prayer_time/prayer_time.dart';
 import 'package:appwrite/appwrite.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -1184,7 +1185,7 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
               items: [
                 SalomonBottomBarItem(
                   icon: const Padding(
-                    padding: EdgeInsets.only(left: 20, right: 20),
+                    padding: EdgeInsets.only(left: 5, right: 5),
                     child: Icon(
                       FontAwesomeIcons.bookOpen,
                       size: 20,
@@ -1197,7 +1198,17 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
                 ),
                 SalomonBottomBarItem(
                   icon: const Padding(
-                    padding: EdgeInsets.only(left: 20, right: 20),
+                    padding: EdgeInsets.only(left: 5, right: 5),
+                    child: Icon(Icons.access_time),
+                  ),
+                  title: const Text(
+                    "Prayer Time",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  ),
+                ),
+                SalomonBottomBarItem(
+                  icon: const Padding(
+                    padding: EdgeInsets.only(left: 5, right: 5),
                     child: Icon(Icons.audiotrack_outlined),
                   ),
                   title: const Text(
@@ -1207,7 +1218,7 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
                 ),
                 SalomonBottomBarItem(
                   icon: const Padding(
-                    padding: EdgeInsets.only(left: 20, right: 20),
+                    padding: EdgeInsets.only(left: 5, right: 5),
                     child: Icon(Icons.person),
                   ),
                   title: const Text(
@@ -1503,6 +1514,7 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
             ),
           ),
         ),
+        const PrayerTime(),
         Scaffold(
           drawer: MediaQuery.of(context).size.width > 800 ? null : myDrawer,
           appBar: MediaQuery.of(context).size.width > 800
@@ -1650,6 +1662,12 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
                   SalomonBottomBarItem(
                     icon: const Icon(FontAwesomeIcons.book),
                     title: const Text("Quran"),
+                  ),
+                  SalomonBottomBarItem(
+                    icon: const Icon(
+                      Icons.access_time,
+                    ),
+                    title: const Text("Audio"),
                   ),
                   SalomonBottomBarItem(
                     icon: const Icon(Icons.audiotrack_outlined),
