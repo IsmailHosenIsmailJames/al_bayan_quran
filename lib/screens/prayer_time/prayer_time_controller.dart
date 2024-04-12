@@ -5,4 +5,6 @@ class PrayerTimeControllerGetx extends GetxController {
   RxBool gotUserLocation = false.obs;
   RxDouble latitude = 0.0.obs;
   RxDouble longitude = 0.0.obs;
+  RxString countryName = "".obs;
+  RxInt mahod = 3.obs;
 }

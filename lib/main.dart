@@ -26,6 +26,7 @@ Future<void> main() async {
   await Hive.openBox("notes");
   await Hive.openBox("quran");
   await Hive.openBox("translation");
+  await Hive.openBox("prayerTime");
   runApp(const MyApp());
 }
 

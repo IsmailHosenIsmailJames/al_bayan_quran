@@ -1,0 +1,18 @@
+List<String> listOfMethod = [
+  "Shia Ithna-Ashari",
+  "University of Islamic Sciences, Karachi",
+  "Islamic Society of North America",
+  "Muslim World League",
+  "Umm Al-Qura University, Makkah",
+  "Egyptian General Authority of Survey",
+  "Institute of Geophysics, University of Tehran",
+  "Gulf Region",
+  "Kuwait",
+  "Qatar",
+  "Majlis Ugama Islam Singapura, Singapore",
+  "Union Organization islamic de France",
+  "Diyanet İşleri Başkanlığı, Turkey",
+  "Spiritual Administration of Muslims of Russia",
+  "Moonsighting Committee Worldwide (also requires shafaq parameter)",
+  "Dubai (unofficial)",
+];
