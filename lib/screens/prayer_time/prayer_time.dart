@@ -35,14 +35,13 @@ class _PrayerTimeState extends State<PrayerTime> {
     return isEnabled;
   }
 
-  final controllerGetx = Get.put(PrayerTimeControllerGetx());
+  final prayerTimeControllerGetx = Get.put(PrayerTimeControllerGetx());
 
   Future<Position> getLocation() async {
     setState(() {
       loadingLocation = true;
     });
     Position position = await Geolocator.getCurrentPosition();
-    final prayerTimeControllerGetx = Get.put(PrayerTimeControllerGetx());
 
     prayerTimeControllerGetx.latitude.value = position.latitude;
     prayerTimeControllerGetx.longitude.value = position.longitude;
@@ -55,8 +54,8 @@ class _PrayerTimeState extends State<PrayerTime> {
     return position;
   }
 
-  Future<void> getPrayerTimeData(
-      int year, int month, double lat, double lon) async {
+  Future<void> getPrayerTimeData(int year, int month, double lat, double lon,
+      {bool showAleartDialog = true}) async {
     final connectivityResult = await (Connectivity().checkConnectivity());
 
     if (!(connectivityResult.contains(ConnectivityResult.ethernet) ||
@@ -65,23 +64,48 @@ class _PrayerTimeState extends State<PrayerTime> {
       setState(() {
         haveInternetConnection = false;
       });
-      showDialog(
-        // ignore: use_build_context_synchronously
-        context: context,
-        builder: (context) => const AlertDialog(),
-      );
+      if (showAleartDialog) {
+        showDialog(
+          // ignore: use_build_context_synchronously
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text("Need internet connection"),
+            content: const Text(
+                "Need to download required data for the first time."),
+            actions: [
+              TextButton.icon(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                label: const Text("OK"),
+                icon: const Icon(
+                  Icons.close,
+                ),
+              ),
+              TextButton.icon(
+                onPressed: () {
+                  Navigator.pop(context);
+                  getPrayerTimeData(year, month, lat, lon);
+                },
+                label: const Text("Retry"),
+                icon: const Icon(Icons.restore),
+              ),
+            ],
+          ),
+        );
+      }
     } else {
       setState(() {
         haveInternetConnection = true;
       });
       String month1Safi =
-          "https://api.aladhan.com/v1/calendar/$year/$month?latitude=$lat&longitude=$lon&method=${controllerGetx.mahod}";
+          "https://api.aladhan.com/v1/calendar/$year/$month?latitude=$lat&longitude=$lon&method=${prayerTimeControllerGetx.mahod}";
       String month2Safi =
-          "https://api.aladhan.com/v1/calendar/$year/${month + 1}?latitude=$lat&longitude=$lon&method=${controllerGetx.mahod}";
+          "https://api.aladhan.com/v1/calendar/$year/${month + 1}?latitude=$lat&longitude=$lon&method=${prayerTimeControllerGetx.mahod}";
       String month1Hanafi =
-          "https://api.aladhan.com/v1/calendar/$year/$month?latitude=$lat&longitude=$lon&method=${controllerGetx.mahod}&school=1";
+          "https://api.aladhan.com/v1/calendar/$year/$month?latitude=$lat&longitude=$lon&method=${prayerTimeControllerGetx.mahod}&school=1";
       String month2Hanafi =
-          "https://api.aladhan.com/v1/calendar/$year/${month + 1}?latitude=$lat&longitude=$lon&method=${controllerGetx.mahod}&school=1";
+          "https://api.aladhan.com/v1/calendar/$year/${month + 1}?latitude=$lat&longitude=$lon&method=${prayerTimeControllerGetx.mahod}&school=1";
       http.Response dataMonth1Safi = await http.get(Uri.parse(month1Safi));
 
       final box = Hive.box("prayerTime");
@@ -118,9 +142,9 @@ class _PrayerTimeState extends State<PrayerTime> {
   Future<void> getAdvancePrayerTimeOfAMonth(
       int year, int month, double lat, double lon) async {
     String month2Safi =
-        "https://api.aladhan.com/v1/calendar/$year/${month + 1}?latitude=$lat&longitude=$lon&method=${controllerGetx.mahod}";
+        "https://api.aladhan.com/v1/calendar/$year/${month + 1}?latitude=$lat&longitude=$lon&method=${prayerTimeControllerGetx.mahod}";
     String month2Hanafi =
-        "https://api.aladhan.com/v1/calendar/$year/${month + 1}?latitude=$lat&longitude=$lon&method=${controllerGetx.mahod}&school=1";
+        "https://api.aladhan.com/v1/calendar/$year/${month + 1}?latitude=$lat&longitude=$lon&method=${prayerTimeControllerGetx.mahod}&school=1";
     http.Response dataMonth2Safi = await http.get(Uri.parse(month2Safi));
     final box = Hive.box("prayerTime");
     if (dataMonth2Safi.statusCode == 200) {
@@ -137,9 +161,9 @@ class _PrayerTimeState extends State<PrayerTime> {
     final boxinfo = Hive.box("info");
     final location = boxinfo.get("location", defaultValue: null);
     if (location != null) {
-      controllerGetx.latitude.value = location['lat'];
-      controllerGetx.longitude.value = location['lon'];
-      controllerGetx.gotUserLocation.value = true;
+      prayerTimeControllerGetx.latitude.value = location['lat'];
+      prayerTimeControllerGetx.longitude.value = location['lon'];
+      prayerTimeControllerGetx.gotUserLocation.value = true;
       final boxPrayerTime = Hive.box("prayerTime");
       int month = DateTime.now().month;
       int year = DateTime.now().year;
@@ -159,7 +183,8 @@ class _PrayerTimeState extends State<PrayerTime> {
       }
 
       if (dataMonth1Hanafi == null || dataMonth1Safi == null) {
-        getPrayerTimeData(year, month, location['lat'], location['lon']);
+        getPrayerTimeData(year, month, location['lat'], location['lon'],
+            showAleartDialog: false);
       }
       if (boxPrayerTime.get("$year/${month + 1}/safi", defaultValue: null) ==
               null ||
@@ -192,6 +217,10 @@ class _PrayerTimeState extends State<PrayerTime> {
         if ((connectivityResult.contains(ConnectivityResult.ethernet) ||
             connectivityResult.contains(ConnectivityResult.wifi) ||
             connectivityResult.contains(ConnectivityResult.mobile))) {
+          final box = Hive.box("info");
+          box.put("location",
+              {"lat": position.latitude, "lon": position.longitude});
+
           getPrayerTimeData(DateTime.now().year, DateTime.now().month,
               position.latitude, position.longitude);
         }
@@ -205,7 +234,7 @@ class _PrayerTimeState extends State<PrayerTime> {
       body: Padding(
         padding: const EdgeInsets.all(10),
         child: Obx(
-          () => controllerGetx.gotUserLocation.value
+          () => prayerTimeControllerGetx.gotUserLocation.value
               ? Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -407,7 +436,24 @@ class _PrayerTimeState extends State<PrayerTime> {
                           ),
                         ),
                         onPressed: () async {
-                          Get.to(() => const SelectLocationManually());
+                          final result = await Get.to(
+                              () => const SelectLocationManually());
+                          result["lat"] = double.parse(result["lat"]);
+                          result["lon"] = double.parse(result["lon"]);
+                          prayerTimeControllerGetx.latitude.value =
+                              result['lat'];
+                          prayerTimeControllerGetx.longitude.value =
+                              result["lon"];
+                          prayerTimeControllerGetx.gotUserLocation.value = true;
+                          final box = Hive.box("info");
+                          box.put("location",
+                              {"lat": result["lat"], "lon": result["lon"]});
+                          getPrayerTimeData(
+                            DateTime.now().year,
+                            DateTime.now().month,
+                            result['lat'],
+                            result['lon'],
+                          );
                         },
                         icon: const Icon(Icons.edit_location_alt),
                         label: const Text(
