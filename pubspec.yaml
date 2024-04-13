@@ -59,6 +59,7 @@ flutter:
   assets:
     - assets/img/makkah.jpg
     - assets/img/madina.jpeg
+    - assets/img/Mosque-2.png
 
  
   # fonts:

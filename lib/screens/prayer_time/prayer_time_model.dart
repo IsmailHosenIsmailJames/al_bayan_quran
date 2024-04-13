@@ -1,14 +1,14 @@
 import 'dart:convert';
 
 class PrayerTimeModel {
-  int? code;
-  String? status;
-  List<Datum>? data;
+  final int code;
+  final String status;
+  final List<Datum> data;
 
   PrayerTimeModel({
-    this.code,
-    this.status,
-    this.data,
+    required this.code,
+    required this.status,
+    required this.data,
   });
 
   PrayerTimeModel copyWith({
@@ -30,28 +30,25 @@ class PrayerTimeModel {
   factory PrayerTimeModel.fromMap(Map<String, dynamic> json) => PrayerTimeModel(
         code: json["code"],
         status: json["status"],
-        data: json["data"] == null
-            ? []
-            : List<Datum>.from(json["data"]!.map((x) => Datum.fromMap(x))),
+        data: List<Datum>.from(json["data"].map((x) => Datum.fromMap(x))),
       );
 
   Map<String, dynamic> toMap() => {
         "code": code,
         "status": status,
-        "data":
-            data == null ? [] : List<dynamic>.from(data!.map((x) => x.toMap())),
+        "data": List<dynamic>.from(data.map((x) => x.toMap())),
       };
 }
 
 class Datum {
-  Timings? timings;
-  Date? date;
-  Meta? meta;
+  final Timings timings;
+  final Date date;
+  final Meta meta;
 
   Datum({
-    this.timings,
-    this.date,
-    this.meta,
+    required this.timings,
+    required this.date,
+    required this.meta,
   });
 
   Datum copyWith({
@@ -70,30 +67,29 @@ class Datum {
   String toJson() => json.encode(toMap());
 
   factory Datum.fromMap(Map<String, dynamic> json) => Datum(
-        timings:
-            json["timings"] == null ? null : Timings.fromMap(json["timings"]),
-        date: json["date"] == null ? null : Date.fromMap(json["date"]),
-        meta: json["meta"] == null ? null : Meta.fromMap(json["meta"]),
+        timings: Timings.fromMap(json["timings"]),
+        date: Date.fromMap(json["date"]),
+        meta: Meta.fromMap(json["meta"]),
       );
 
   Map<String, dynamic> toMap() => {
-        "timings": timings?.toMap(),
-        "date": date?.toMap(),
-        "meta": meta?.toMap(),
+        "timings": timings.toMap(),
+        "date": date.toMap(),
+        "meta": meta.toMap(),
       };
 }
 
 class Date {
-  String? readable;
-  String? timestamp;
-  Gregorian? gregorian;
-  Hijri? hijri;
+  final String readable;
+  final String timestamp;
+  final Gregorian gregorian;
+  final Hijri hijri;
 
   Date({
-    this.readable,
-    this.timestamp,
-    this.gregorian,
-    this.hijri,
+    required this.readable,
+    required this.timestamp,
+    required this.gregorian,
+    required this.hijri,
   });
 
   Date copyWith({
@@ -116,37 +112,35 @@ class Date {
   factory Date.fromMap(Map<String, dynamic> json) => Date(
         readable: json["readable"],
         timestamp: json["timestamp"],
-        gregorian: json["gregorian"] == null
-            ? null
-            : Gregorian.fromMap(json["gregorian"]),
-        hijri: json["hijri"] == null ? null : Hijri.fromMap(json["hijri"]),
+        gregorian: Gregorian.fromMap(json["gregorian"]),
+        hijri: Hijri.fromMap(json["hijri"]),
       );
 
   Map<String, dynamic> toMap() => {
         "readable": readable,
         "timestamp": timestamp,
-        "gregorian": gregorian?.toMap(),
-        "hijri": hijri?.toMap(),
+        "gregorian": gregorian.toMap(),
+        "hijri": hijri.toMap(),
       };
 }
 
 class Gregorian {
-  String? date;
-  String? format;
-  String? day;
-  GregorianWeekday? weekday;
-  GregorianMonth? month;
-  String? year;
-  Designation? designation;
+  final String date;
+  final String format;
+  final String day;
+  final GregorianWeekday weekday;
+  final GregorianMonth month;
+  final String year;
+  final Designation designation;
 
   Gregorian({
-    this.date,
-    this.format,
-    this.day,
-    this.weekday,
-    this.month,
-    this.year,
-    this.designation,
+    required this.date,
+    required this.format,
+    required this.day,
+    required this.weekday,
+    required this.month,
+    required this.year,
+    required this.designation,
   });
 
   Gregorian copyWith({
@@ -176,36 +170,30 @@ class Gregorian {
         date: json["date"],
         format: json["format"],
         day: json["day"],
-        weekday: json["weekday"] == null
-            ? null
-            : GregorianWeekday.fromMap(json["weekday"]),
-        month: json["month"] == null
-            ? null
-            : GregorianMonth.fromMap(json["month"]),
+        weekday: GregorianWeekday.fromMap(json["weekday"]),
+        month: GregorianMonth.fromMap(json["month"]),
         year: json["year"],
-        designation: json["designation"] == null
-            ? null
-            : Designation.fromMap(json["designation"]),
+        designation: Designation.fromMap(json["designation"]),
       );
 
   Map<String, dynamic> toMap() => {
         "date": date,
         "format": format,
         "day": day,
-        "weekday": weekday?.toMap(),
-        "month": month?.toMap(),
+        "weekday": weekday.toMap(),
+        "month": month.toMap(),
         "year": year,
-        "designation": designation?.toMap(),
+        "designation": designation.toMap(),
       };
 }
 
 class Designation {
-  String? abbreviated;
-  String? expanded;
+  final String abbreviated;
+  final String expanded;
 
   Designation({
-    this.abbreviated,
-    this.expanded,
+    required this.abbreviated,
+    required this.expanded,
   });
 
   Designation copyWith({
@@ -234,12 +222,12 @@ class Designation {
 }
 
 class GregorianMonth {
-  int? number;
-  String? en;
+  final int number;
+  final String en;
 
   GregorianMonth({
-    this.number,
-    this.en,
+    required this.number,
+    required this.en,
   });
 
   GregorianMonth copyWith({
@@ -268,10 +256,10 @@ class GregorianMonth {
 }
 
 class GregorianWeekday {
-  String? en;
+  final String en;
 
   GregorianWeekday({
-    this.en,
+    required this.en,
   });
 
   GregorianWeekday copyWith({
@@ -297,24 +285,24 @@ class GregorianWeekday {
 }
 
 class Hijri {
-  String? date;
-  String? format;
-  String? day;
-  HijriWeekday? weekday;
-  HijriMonth? month;
-  String? year;
-  Designation? designation;
-  List<String>? holidays;
+  final String date;
+  final String format;
+  final String day;
+  final HijriWeekday weekday;
+  final HijriMonth month;
+  final String year;
+  final Designation designation;
+  final List<String> holidays;
 
   Hijri({
-    this.date,
-    this.format,
-    this.day,
-    this.weekday,
-    this.month,
-    this.year,
-    this.designation,
-    this.holidays,
+    required this.date,
+    required this.format,
+    required this.day,
+    required this.weekday,
+    required this.month,
+    required this.year,
+    required this.designation,
+    required this.holidays,
   });
 
   Hijri copyWith({
@@ -346,41 +334,34 @@ class Hijri {
         date: json["date"],
         format: json["format"],
         day: json["day"],
-        weekday: json["weekday"] == null
-            ? null
-            : HijriWeekday.fromMap(json["weekday"]),
-        month: json["month"] == null ? null : HijriMonth.fromMap(json["month"]),
+        weekday: HijriWeekday.fromMap(json["weekday"]),
+        month: HijriMonth.fromMap(json["month"]),
         year: json["year"],
-        designation: json["designation"] == null
-            ? null
-            : Designation.fromMap(json["designation"]),
-        holidays: json["holidays"] == null
-            ? []
-            : List<String>.from(json["holidays"]!.map((x) => x)),
+        designation: Designation.fromMap(json["designation"]),
+        holidays: List<String>.from(json["holidays"].map((x) => x)),
       );
 
   Map<String, dynamic> toMap() => {
         "date": date,
         "format": format,
         "day": day,
-        "weekday": weekday?.toMap(),
-        "month": month?.toMap(),
+        "weekday": weekday.toMap(),
+        "month": month.toMap(),
         "year": year,
-        "designation": designation?.toMap(),
-        "holidays":
-            holidays == null ? [] : List<dynamic>.from(holidays!.map((x) => x)),
+        "designation": designation.toMap(),
+        "holidays": List<dynamic>.from(holidays.map((x) => x)),
       };
 }
 
 class HijriMonth {
-  int? number;
-  String? en;
-  String? ar;
+  final int number;
+  final String en;
+  final String ar;
 
   HijriMonth({
-    this.number,
-    this.en,
-    this.ar,
+    required this.number,
+    required this.en,
+    required this.ar,
   });
 
   HijriMonth copyWith({
@@ -413,12 +394,12 @@ class HijriMonth {
 }
 
 class HijriWeekday {
-  String? en;
-  String? ar;
+  final String en;
+  final String ar;
 
   HijriWeekday({
-    this.en,
-    this.ar,
+    required this.en,
+    required this.ar,
   });
 
   HijriWeekday copyWith({
@@ -447,24 +428,24 @@ class HijriWeekday {
 }
 
 class Meta {
-  double? latitude;
-  double? longitude;
-  String? timezone;
-  Method? method;
-  String? latitudeAdjustmentMethod;
-  String? midnightMode;
-  String? school;
-  Map<String, int>? offset;
+  final double latitude;
+  final double longitude;
+  final String timezone;
+  final Method method;
+  final String latitudeAdjustmentMethod;
+  final String midnightMode;
+  final String school;
+  final Map<String, int> offset;
 
   Meta({
-    this.latitude,
-    this.longitude,
-    this.timezone,
-    this.method,
-    this.latitudeAdjustmentMethod,
-    this.midnightMode,
-    this.school,
-    this.offset,
+    required this.latitude,
+    required this.longitude,
+    required this.timezone,
+    required this.method,
+    required this.latitudeAdjustmentMethod,
+    required this.midnightMode,
+    required this.school,
+    required this.offset,
   });
 
   Meta copyWith({
@@ -497,36 +478,36 @@ class Meta {
         latitude: json["latitude"]?.toDouble(),
         longitude: json["longitude"]?.toDouble(),
         timezone: json["timezone"],
-        method: json["method"] == null ? null : Method.fromMap(json["method"]),
+        method: Method.fromMap(json["method"]),
         latitudeAdjustmentMethod: json["latitudeAdjustmentMethod"],
         midnightMode: json["midnightMode"],
         school: json["school"],
-        offset: Map.from(json["offset"]!)
-            .map((k, v) => MapEntry<String, int>(k, v)),
+        offset:
+            Map.from(json["offset"]).map((k, v) => MapEntry<String, int>(k, v)),
       );
 
   Map<String, dynamic> toMap() => {
         "latitude": latitude,
         "longitude": longitude,
         "timezone": timezone,
-        "method": method?.toMap(),
+        "method": method.toMap(),
         "latitudeAdjustmentMethod": latitudeAdjustmentMethod,
         "midnightMode": midnightMode,
         "school": school,
         "offset":
-            Map.from(offset!).map((k, v) => MapEntry<String, dynamic>(k, v)),
+            Map.from(offset).map((k, v) => MapEntry<String, dynamic>(k, v)),
       };
 }
 
 class Method {
-  int? id;
-  String? name;
-  Params? params;
+  final int id;
+  final String name;
+  final Params params;
 
   Method({
-    this.id,
-    this.name,
-    this.params,
+    required this.id,
+    required this.name,
+    required this.params,
   });
 
   Method copyWith({
@@ -547,23 +528,23 @@ class Method {
   factory Method.fromMap(Map<String, dynamic> json) => Method(
         id: json["id"],
         name: json["name"],
-        params: json["params"] == null ? null : Params.fromMap(json["params"]),
+        params: Params.fromMap(json["params"]),
       );
 
   Map<String, dynamic> toMap() => {
         "id": id,
         "name": name,
-        "params": params?.toMap(),
+        "params": params.toMap(),
       };
 }
 
 class Params {
-  int? fajr;
-  int? isha;
+  final int fajr;
+  final int isha;
 
   Params({
-    this.fajr,
-    this.isha,
+    required this.fajr,
+    required this.isha,
   });
 
   Params copyWith({
@@ -591,26 +572,26 @@ class Params {
 }
 
 class Timings {
-  String? fajr;
-  String? sunrise;
-  String? dhuhr;
-  String? asr;
-  String? sunset;
-  String? maghrib;
-  String? isha;
-  String? imsak;
-  String? midnight;
+  final String fajr;
+  final String sunrise;
+  final String dhuhr;
+  final String asr;
+  final String sunset;
+  final String maghrib;
+  final String isha;
+  final String imsak;
+  final String midnight;
 
   Timings({
-    this.fajr,
-    this.sunrise,
-    this.dhuhr,
-    this.asr,
-    this.sunset,
-    this.maghrib,
-    this.isha,
-    this.imsak,
-    this.midnight,
+    required this.fajr,
+    required this.sunrise,
+    required this.dhuhr,
+    required this.asr,
+    required this.sunset,
+    required this.maghrib,
+    required this.isha,
+    required this.imsak,
+    required this.midnight,
   });
 
   Timings copyWith({

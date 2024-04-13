@@ -1,3 +1,4 @@
+import 'package:al_bayan_quran/screens/drawer/drawer.dart';
 import 'package:al_bayan_quran/screens/prayer_time/prayer_time_controller.dart';
 import 'package:al_bayan_quran/screens/prayer_time/prayer_time_model.dart';
 import 'package:al_bayan_quran/screens/prayer_time/select_location_manually.dart';
@@ -138,6 +139,7 @@ class _PrayerTimeState extends State<PrayerTime> {
 
   PrayerTimeModel? safeiModel;
   PrayerTimeModel? hanafiModel;
+  bool isSafi = true;
 
   Future<void> getAdvancePrayerTimeOfAMonth(
       int year, int month, double lat, double lon) async {
@@ -179,6 +181,12 @@ class _PrayerTimeState extends State<PrayerTime> {
       if (dataMonth1Safi != null) {
         setState(() {
           safeiModel = PrayerTimeModel.fromJson(dataMonth1Safi);
+        });
+      }
+
+      if (boxinfo.get("school", defaultValue: null) != null) {
+        setState(() {
+          isSafi = boxinfo.get("school") == "0";
         });
       }
 
@@ -231,25 +239,81 @@ class _PrayerTimeState extends State<PrayerTime> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Row(
+          children: [
+            const Icon(
+              Icons.location_on_sharp,
+            ),
+            const SizedBox(
+              width: 5,
+            ),
+            Text(
+              safeiModel!.data[DateTime.now().day].meta.timezone
+                  .replaceAll("/", ", "),
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+          ],
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              //TODO: settings to be added with full functionality
+            },
+            tooltip: "Prayer Time Settings",
+            icon: const Icon(
+              Icons.settings,
+            ),
+          ),
+        ],
+      ),
+      drawer: const MyDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(10),
         child: Obx(
           () => prayerTimeControllerGetx.gotUserLocation.value
-              ? Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    safeiModel == null
-                        ? Center(
-                            child: haveInternetConnection
-                                ? const CircularProgressIndicator()
-                                : const Text("Check internet connection."),
-                          )
-                        : const Center(
-                            child: Text("Al Right"),
+              ? safeiModel == null || hanafiModel == null
+                  ? Center(
+                      child: haveInternetConnection
+                          ? const CircularProgressIndicator()
+                          : const Text("Check internet connection."),
+                    )
+                  : ListView(
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.only(
+                            bottom: 10,
                           ),
-                  ],
-                )
+                          height: MediaQuery.of(context).size.width - 150,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                Colors.green.withOpacity(0.01),
+                                Colors.green.withOpacity(0.25),
+                              ],
+                            ),
+                            image: const DecorationImage(
+                              alignment: Alignment.bottomRight,
+                              opacity: 0.5,
+                              image: AssetImage(
+                                "assets/img/Mosque-2.png",
+                              ),
+                            ),
+                          ),
+                          child: const Column(children: [
+                            Text(
+                              "12:00",
+                              style: TextStyle(fontSize: 100),
+                            )
+                          ]),
+                        ),
+                      ],
+                    )
               : Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
