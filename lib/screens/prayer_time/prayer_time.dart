@@ -20,6 +20,7 @@ class _PrayerTimeState extends State<PrayerTime> {
   bool? isLocationEnabled;
   bool loadingLocation = false;
   bool haveInternetConnection = true;
+  int day = DateTime.now().day;
 
   Future<bool> isLocationServiceEnabled() async {
     bool isEnabled = false;
@@ -274,7 +275,7 @@ class _PrayerTimeState extends State<PrayerTime> {
         padding: const EdgeInsets.all(10),
         child: Obx(
           () => prayerTimeControllerGetx.gotUserLocation.value
-              ? safeiModel == null || hanafiModel == null
+              ? safeiModel == null
                   ? Center(
                       child: haveInternetConnection
                           ? const CircularProgressIndicator()
@@ -282,35 +283,85 @@ class _PrayerTimeState extends State<PrayerTime> {
                     )
                   : ListView(
                       children: [
-                        Container(
-                          margin: const EdgeInsets.only(
-                            bottom: 10,
-                          ),
-                          height: MediaQuery.of(context).size.width - 150,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                              colors: [
-                                Colors.green.withOpacity(0.01),
-                                Colors.green.withOpacity(0.25),
-                              ],
-                            ),
-                            image: const DecorationImage(
-                              alignment: Alignment.bottomRight,
-                              opacity: 0.5,
-                              image: AssetImage(
-                                "assets/img/Mosque-2.png",
+                        Row(
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.only(
+                                bottom: 10,
+                              ),
+                              width: MediaQuery.of(context).size.width / 2 - 20,
+                              height:
+                                  MediaQuery.of(context).size.width / 2 - 20,
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.orange),
+                                borderRadius: BorderRadius.circular(20),
+                                gradient: LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: [
+                                    const Color.fromARGB(255, 168, 175, 76)
+                                        .withOpacity(0.01),
+                                    Colors.orange.withOpacity(0.5),
+                                  ],
+                                ),
+                                image: const DecorationImage(
+                                  alignment: Alignment.bottomRight,
+                                  opacity: 0.5,
+                                  image: AssetImage(
+                                    "assets/img/Mosque-2.png",
+                                  ),
+                                ),
+                              ),
+                              padding: const EdgeInsets.only(left: 15),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    "Now time is",
+                                    style: TextStyle(fontSize: 18),
+                                  ),
+                                  Text(getNowSalahName(
+                                      safeiModel!.data[day - 1].timings))
+                                ],
                               ),
                             ),
-                          ),
-                          child: const Column(children: [
-                            Text(
-                              "12:00",
-                              style: TextStyle(fontSize: 100),
-                            )
-                          ]),
+                            const SizedBox(
+                              width: 20,
+                            ),
+                            Container(
+                              margin: const EdgeInsets.only(
+                                bottom: 10,
+                              ),
+                              width: MediaQuery.of(context).size.width / 2 - 20,
+                              height:
+                                  MediaQuery.of(context).size.width / 2 - 20,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                gradient: LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: [
+                                    Colors.green.withOpacity(0.01),
+                                    Colors.green.withOpacity(0.3),
+                                  ],
+                                ),
+                                image: const DecorationImage(
+                                  alignment: Alignment.bottomRight,
+                                  opacity: 0.5,
+                                  image: AssetImage(
+                                    "assets/img/Mosque-2.png",
+                                  ),
+                                ),
+                              ),
+                              child: const Column(children: [
+                                Text(
+                                  "12:00",
+                                  style: TextStyle(fontSize: 80),
+                                )
+                              ]),
+                            ),
+                          ],
                         ),
                       ],
                     )
@@ -531,5 +582,57 @@ class _PrayerTimeState extends State<PrayerTime> {
         ),
       ),
     );
+  }
+
+  String getNowSalahName(Timings timings) {
+    List<String> salahName = [
+      "fajr",
+      "dhuhr",
+      "asr",
+      "sunset",
+      "maghrib",
+      "isha",
+      "midnight",
+      "imsak",
+      "sunrise",
+    ];
+    int indexOfName = getIndexOfNowPrayerTime(timings);
+    print(indexOfName);
+    print(salahName[indexOfName]);
+    return "xyz";
+  }
+
+  int getIndexOfNowPrayerTime(Timings timings) {
+    List<String> listOfTiming = [
+      timings.sunrise,
+      timings.fajr,
+      timings.dhuhr,
+      timings.asr,
+      timings.sunset,
+      timings.maghrib,
+      timings.isha,
+      timings.midnight,
+      timings.imsak,
+    ];
+    List<int> listOfSalahDateTime = [];
+    for (int i = 0; i < listOfTiming.length; i++) {
+      listOfSalahDateTime.add(splitStringToDateTime(listOfTiming[i]));
+    }
+    int now = DateTime.now().hour * 60 * DateTime.now().minute;
+    listOfSalahDateTime.add(now);
+    listOfSalahDateTime.sort();
+    int index = listOfSalahDateTime.indexOf(now);
+    if (index + 1 == listOfSalahDateTime.length) {
+      return index - 1;
+    } else if (listOfSalahDateTime[index + 1] == now) {
+      return index + 1;
+    } else {
+      return index;
+    }
+  }
+
+  int splitStringToDateTime(String s) {
+    List<String> hourAndMin = s.split("(")[0].trim().split(":");
+    return int.parse(hourAndMin[0]) * 60 + int.parse(hourAndMin[1]);
   }
 }
