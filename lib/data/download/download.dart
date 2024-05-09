@@ -24,9 +24,9 @@ class _DownloadDataState extends State<DownloadData> {
     setState(() {
       progressValue = 0.01;
     });
-    if (connectivityResult.contains(ConnectivityResult.ethernet) ||
+    if (!(connectivityResult.contains(ConnectivityResult.ethernet) ||
         connectivityResult.contains(ConnectivityResult.wifi) ||
-        connectivityResult.contains(ConnectivityResult.mobile)) {
+        connectivityResult.contains(ConnectivityResult.mobile))) {
       showDialog(
         // ignore: use_build_context_synchronously
         context: context,
