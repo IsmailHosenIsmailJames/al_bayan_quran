@@ -39,7 +39,7 @@ dependencies:
   audio_video_progress_bar: ^2.0.1
   fluttertoast: ^8.2.4
   regexpattern: ^2.6.0
-  sidebarx: ^0.16.3
+  sidebarx: ^0.17.1
   just_audio_media_kit: ^2.0.4
   flutter_localizations:
     sdk: flutter
@@ -50,7 +50,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^3.0.1
+  flutter_lints: ^4.0.0
   msix: ^3.16.7
 
 flutter:
