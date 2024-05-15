@@ -2,7 +2,7 @@ name: al_bayan_quran
 description: "A new Flutter project."
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.9.2+18
+version: 1.9.6+20
 
 environment:
   sdk: '>=3.2.3 <4.0.0'
