@@ -40,6 +40,9 @@ dependencies:
   fluttertoast: ^8.2.4
   regexpattern: ^2.6.0
   sidebarx: ^0.16.3
+  just_audio_media_kit: ^2.0.4
+  flutter_localizations:
+    sdk: flutter
 
   # google_fonts: ^6.1.0
 

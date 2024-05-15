@@ -435,7 +435,7 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
                             }
                           },
                           style: const ButtonStyle(
-                            backgroundColor: MaterialStatePropertyAll(
+                            backgroundColor: WidgetStatePropertyAll(
                               Colors.green,
                             ),
                           ),
@@ -584,7 +584,7 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
                         IconButton(
                           onPressed: showInfomationOfSurah,
                           style: const ButtonStyle(
-                            backgroundColor: MaterialStatePropertyAll(
+                            backgroundColor: WidgetStatePropertyAll(
                               Colors.green,
                             ),
                           ),
@@ -600,7 +600,7 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
                         IconButton(
                           iconSize: 30,
                           style: const ButtonStyle(
-                            backgroundColor: MaterialStatePropertyAll(
+                            backgroundColor: WidgetStatePropertyAll(
                               Colors.green,
                             ),
                           ),
@@ -901,7 +901,7 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
                         iconSize: 30,
                         color: Colors.green,
                         style: const ButtonStyle(
-                          backgroundColor: MaterialStatePropertyAll(
+                          backgroundColor: WidgetStatePropertyAll(
                             Color.fromARGB(60, 150, 150, 150),
                           ),
                         ),
@@ -928,43 +928,37 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
                   const SizedBox(
                     height: 10,
                   ),
-                  GestureDetector(
-                    behavior: HitTestBehavior.translucent,
-                    onTap: () {
-                      showTafseerOfAyah(index, surahNameArabic, true);
-                    },
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          alignment: Alignment.topRight,
-                          child: Obx(
-                            () => buildArabicText(
-                                controller.quranScriptTypeGetx.value,
-                                "${ayahNumber + firstAyahNumber}",
-                                ayahNumber),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        alignment: Alignment.topRight,
+                        child: Obx(
+                          () => buildArabicText(
+                              controller.quranScriptTypeGetx.value,
+                              "${ayahNumber + firstAyahNumber}",
+                              ayahNumber),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        "Translation : $bookName",
+                        style: const TextStyle(fontSize: 12),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Obx(
+                        () => Text(
+                          ayahTranslation,
+                          style: TextStyle(
+                            fontSize: controller.fontSizeTranslation.value,
                           ),
                         ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        Text(
-                          "Translation : $bookName",
-                          style: const TextStyle(fontSize: 12),
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        Obx(
-                          () => Text(
-                            ayahTranslation,
-                            style: TextStyle(
-                              fontSize: controller.fontSizeTranslation.value,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -1030,6 +1024,7 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
     }
     return Obx(
       () => Text.rich(
+        textAlign: TextAlign.end,
         TextSpan(
           style: TextStyle(
             fontSize: controller.fontSizeArabic.value,
