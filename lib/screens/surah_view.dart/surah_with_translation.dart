@@ -396,6 +396,7 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
 
     if (goRoute) {
       Get.to(() => TafseerVoiceLess(
+            fontS: controller.fontSizeTranslation.value,
             surahName: surahName,
             ayahNumber: ayahNumber,
             surahNumber: widget.surahNumber,
