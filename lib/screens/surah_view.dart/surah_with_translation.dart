@@ -357,10 +357,10 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
                 const Divider(
                   thickness: 3,
                 ),
-                const Text(
+                Text(
                   "In Detail",
                   style: TextStyle(
-                    fontSize: 14,
+                    fontSize: controller.fontSizeTranslation.value,
                     color: Colors.grey,
                     fontWeight: FontWeight.bold,
                   ),
@@ -368,7 +368,12 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
                 const SizedBox(
                   height: 5,
                 ),
-                HtmlWidget(text),
+                HtmlWidget(
+                  text,
+                  textStyle: TextStyle(
+                    fontSize: controller.fontSizeTranslation.value,
+                  ),
+                ),
                 const SizedBox(
                   height: 50,
                 ),
