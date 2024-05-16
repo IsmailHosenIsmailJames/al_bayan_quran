@@ -307,77 +307,79 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
           minChildSize: 0.25,
           maxChildSize: 1,
           builder: (context, scrollController) {
-            return ListView(
-              padding: const EdgeInsets.all(10),
-              children: [
-                Row(
-                  children: [
-                    const Spacer(),
-                    IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: const Icon(Icons.close),
+            return Obx(
+              () => ListView(
+                padding: const EdgeInsets.all(10),
+                children: [
+                  Row(
+                    children: [
+                      const Spacer(),
+                      IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: const Icon(Icons.close),
+                      ),
+                    ],
+                  ),
+                  const Text(
+                    "Source",
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.grey,
+                      fontWeight: FontWeight.bold,
                     ),
-                  ],
-                ),
-                const Text(
-                  "Source",
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.grey,
-                    fontWeight: FontWeight.bold,
                   ),
-                ),
-                Text(
-                  source,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+                  Text(
+                    source,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                const Divider(
-                  thickness: 3,
-                ),
-                const Text(
-                  "Summary",
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.grey,
-                    fontWeight: FontWeight.bold,
+                  const Divider(
+                    thickness: 3,
                   ),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                Text(
-                  shortText,
-                  style: const TextStyle(fontSize: 16),
-                ),
-                const Divider(
-                  thickness: 3,
-                ),
-                Text(
-                  "In Detail",
-                  style: TextStyle(
-                    fontSize: controller.fontSizeTranslation.value,
-                    color: Colors.grey,
-                    fontWeight: FontWeight.bold,
+                  const Text(
+                    "Summary",
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.grey,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                HtmlWidget(
-                  text,
-                  textStyle: TextStyle(
-                    fontSize: controller.fontSizeTranslation.value,
+                  const SizedBox(
+                    height: 5,
                   ),
-                ),
-                const SizedBox(
-                  height: 50,
-                ),
-              ],
+                  Text(
+                    shortText,
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                  const Divider(
+                    thickness: 3,
+                  ),
+                  Text(
+                    "In Detail",
+                    style: TextStyle(
+                      fontSize: controller.fontSizeTranslation.value,
+                      color: Colors.grey,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  HtmlWidget(
+                    text,
+                    textStyle: TextStyle(
+                      fontSize: controller.fontSizeTranslation.value,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                ],
+              ),
             );
           },
         );
