@@ -2,7 +2,7 @@ name: al_bayan_quran
 description: "A new Flutter project."
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.9.7+21
+version: 1.9.8+22
 
 environment:
   sdk: '>=3.2.3 <4.0.0'
@@ -19,7 +19,7 @@ dependencies:
   flutter_widget_from_html_core: ^0.14.11
   archive: ^3.4.10
   google_fonts: ^6.1.0
-  url_launcher: ^6.2.4
+  url_launcher: ^6.2.6
   es_compression: ^2.0.11
   flutter_launcher_icons: ^0.13.1
   connectivity_plus: ^6.0.1

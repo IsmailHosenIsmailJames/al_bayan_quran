@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../theme/theme_icon_button.dart';
 import 'init.dart';
@@ -74,6 +75,15 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
                 ),
               ),
             const Spacer(),
+            TextButton(
+              onPressed: () {
+                launchUrl(
+                  Uri.parse(
+                      "https://www.freeprivacypolicy.com/live/d8c08904-a100-4f0b-94d8-13d86a8c8605"),
+                );
+              },
+              child: const Text("Privacy Policy"),
+            ),
           ],
         ),
         actions: [themeIconButton],

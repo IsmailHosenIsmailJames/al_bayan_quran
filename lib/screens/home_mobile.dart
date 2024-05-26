@@ -12,6 +12,7 @@ import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:sidebarx/sidebarx.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../api/all_recitation.dart';
 import '../api/by_juzs.dart';
@@ -871,11 +872,12 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
           DrawerHeader(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 !isLoogedIn
                     ? Center(
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             TextButton.icon(
@@ -957,21 +959,7 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
                           ),
                         ],
                       ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                      tooltip: "Close Drawer",
-                      onPressed: () {
-                        Scaffold.of(context).closeDrawer();
-                      },
-                      icon: const Icon(
-                        Icons.close_rounded,
-                      ),
-                    ),
-                    themeIconButton,
-                  ],
-                ),
+                themeIconButton,
               ],
             ),
           ),
@@ -1136,8 +1124,26 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
                 ],
               ),
             ),
+          TextButton(
+            onPressed: () {
+              launchUrl(Uri.parse(
+                  "https://www.freeprivacypolicy.com/live/d8c08904-a100-4f0b-94d8-13d86a8c8605"));
+            },
+            child: const Row(
+              children: [
+                Icon(
+                  Icons.privacy_tip,
+                  color: Colors.green,
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Text("Privacy Policy")
+              ],
+            ),
+          ),
           const SizedBox(
-            height: 10,
+            height: 5,
           ),
         ],
       ),
@@ -1846,6 +1852,14 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
         label: 'Settings',
         onTap: () {
           Get.to(() => const SettingsWithAppbar());
+        },
+      ),
+      SidebarXItem(
+        icon: Icons.privacy_tip,
+        label: 'Privacy Policy',
+        onTap: () {
+          launchUrl(Uri.parse(
+              "https://www.freeprivacypolicy.com/live/d8c08904-a100-4f0b-94d8-13d86a8c8605"));
         },
       ),
     ],

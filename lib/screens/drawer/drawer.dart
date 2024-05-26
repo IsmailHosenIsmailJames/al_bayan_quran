@@ -9,6 +9,7 @@ import 'package:appwrite/appwrite.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../theme/theme_icon_button.dart';
 import '../favorite_bookmark_notes/favorite.dart';
@@ -248,6 +249,27 @@ class _MyDrawerState extends State<MyDrawer> {
                   width: 20,
                 ),
                 Text("Settings")
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          TextButton(
+            onPressed: () {
+              launchUrl(Uri.parse(
+                  "https://www.freeprivacypolicy.com/live/d8c08904-a100-4f0b-94d8-13d86a8c8605"));
+            },
+            child: const Row(
+              children: [
+                Icon(
+                  Icons.privacy_tip,
+                  color: Colors.green,
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Text("Privacy Policy")
               ],
             ),
           ),
