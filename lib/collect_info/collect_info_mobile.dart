@@ -1,3 +1,4 @@
+import 'package:al_bayan_quran/collect_info/pages/intro.dart';
 import 'package:al_bayan_quran/core/show_twoested_message.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -75,6 +76,7 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
         children: [
           Expanded(
             child: [
+              const Intro(),
               const TranslationLanguage(),
               const ChoiceTranslationBook(),
               const TafseerLanguage(),
@@ -92,38 +94,32 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Obx(
-                  () => ElevatedButton(
-                    onPressed: infoController.isPreviousEnaviled.value
-                        ? () {
-                            if (pageIndex > 0) {
-                              setState(() {
-                                pageIndex--;
-                              });
-                            }
+                ElevatedButton(
+                  onPressed: pageIndex != 0
+                      ? () {
+                          if (pageIndex > 0) {
+                            setState(() {
+                              pageIndex--;
+                            });
                           }
-                        : null,
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.arrow_back_outlined,
-                          color: infoController.isPreviousEnaviled.value
-                              ? Colors.green
-                              : Colors.grey,
-                          size: 18,
+                        }
+                      : null,
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.arrow_back_outlined,
+                        color: pageIndex != 0 ? Colors.green : Colors.grey,
+                        size: 18,
+                      ),
+                      const Gap(5),
+                      Text(
+                        "Previous",
+                        style: TextStyle(
+                          color: pageIndex != 0 ? Colors.green : Colors.grey,
+                          fontWeight: FontWeight.bold,
                         ),
-                        const Gap(5),
-                        Text(
-                          "Previous",
-                          style: TextStyle(
-                            color: infoController.isPreviousEnaviled.value
-                                ? Colors.green
-                                : Colors.grey,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
                 Row(
@@ -133,35 +129,36 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
                     getPageIndecator(2, pageIndex),
                     getPageIndecator(3, pageIndex),
                     getPageIndecator(4, pageIndex),
+                    getPageIndecator(5, pageIndex),
                   ],
                 ),
                 ElevatedButton(
                   onPressed: () async {
-                    if (pageIndex == 0) {
+                    if (pageIndex == 1) {
                       if (infoController.translationLanguage.value.isEmpty) {
                         showTwoestedMessage(
                             "Please Select Quran Translation Language");
                         return;
                       }
-                    } else if (pageIndex == 1) {
+                    } else if (pageIndex == 2) {
                       if (infoController.bookNameIndex.value == -1) {
                         showTwoestedMessage(
                             "Please Select Quran Translation Book");
                         return;
                       }
                     }
-                    if (pageIndex == 2) {
+                    if (pageIndex == 3) {
                       if (infoController.tafseerIndex.value == -1) {
                         showTwoestedMessage(
                             "Please Select Quran Tafsir Language");
                         return;
                       }
-                    } else if (pageIndex == 3) {
+                    } else if (pageIndex == 4) {
                       if (infoController.tafseerBookIndex.value == -1) {
                         showTwoestedMessage("Please Select Quran Tafsir Book");
                         return;
                       }
-                    } else if (pageIndex == 4) {
+                    } else if (pageIndex == 5) {
                       if (infoController.recitationIndex.value != -1 &&
                           infoController.tafseerBookIndex.value != -1 &&
                           infoController.tafseerIndex.value != -1 &&
@@ -190,7 +187,7 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
                         }
                       }
                     }
-                    if (pageIndex < 4) {
+                    if (pageIndex < 5) {
                       setState(() {
                         pageIndex++;
                       });
@@ -199,7 +196,7 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
                   child: Row(
                     children: [
                       Text(
-                        nextButtonText,
+                        pageIndex == 0 ? "Setup" : nextButtonText,
                         style: const TextStyle(
                           color: Colors.green,
                           fontWeight: FontWeight.bold,

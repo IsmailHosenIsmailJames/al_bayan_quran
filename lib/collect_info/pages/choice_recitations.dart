@@ -39,7 +39,6 @@ class _RecitaionChoiceState extends State<RecitaionChoice> {
         infoController.recitationName.value = allRecitationSearch[index];
       }
     }
-    setValue();
     super.initState();
   }
 
@@ -118,13 +117,6 @@ class _RecitaionChoiceState extends State<RecitaionChoice> {
   }
 
   int playingIndex = -1;
-
-  void setValue() async {
-    await Future.delayed(
-      const Duration(milliseconds: 100),
-    );
-    infoController.isPreviousEnaviled.value = true;
-  }
 
   @override
   void dispose() {

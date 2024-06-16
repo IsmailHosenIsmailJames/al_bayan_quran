@@ -38,16 +38,7 @@ class _ChoiceTafseerBookState extends State<ChoiceTafseerBook> {
   @override
   void initState() {
     getBooksAsLanguage();
-    setValue();
-
     super.initState();
-  }
-
-  void setValue() async {
-    await Future.delayed(
-      const Duration(milliseconds: 100),
-    );
-    infoController.isPreviousEnaviled.value = true;
   }
 
   bool downloading = false;
