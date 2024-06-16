@@ -154,7 +154,7 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
                 ElevatedButton(
                   onPressed: () async {
                     if (pageController.page! == 0) {
-                      if (infoController.selectedOptionTranslation.value ==
+                      if (infoController.selectedOptionTranslationIndex.value ==
                           -1) {
                         showTwoestedMessage(
                             "Please Select Quran Translation Language");
@@ -183,7 +183,7 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
                           infoController.tafseerBookIndex.value != -1 &&
                           infoController.tafseerIndex.value != -1 &&
                           infoController.bookNameIndex.value != -1 &&
-                          infoController.selectedOptionTranslation.value !=
+                          infoController.selectedOptionTranslationIndex.value !=
                               -1) {
                         Map<String, String> info = {
                           "translation_language":

@@ -2,7 +2,7 @@ name: al_bayan_quran
 description: "A new Flutter project."
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.9.8+22
+version: 1.9.9+22
 
 environment:
   sdk: '>=3.2.3 <4.0.0'
@@ -16,7 +16,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   appwrite: ^12.0.1
-  flutter_widget_from_html_core: ^0.14.11
+  flutter_widget_from_html_core: ^0.15.1
   archive: ^3.4.10
   google_fonts: ^6.1.0
   url_launcher: ^6.2.6
@@ -27,7 +27,7 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   http: ^1.0.0
-  get: ^4.6.6
+  get: ^5.0.0-release-candidate-6
   email_validator: ^2.1.17
   clipboard: ^0.1.3
   dart_appwrite: ^11.0.2
@@ -43,6 +43,7 @@ dependencies:
   just_audio_media_kit: ^2.0.4
   flutter_localizations:
     sdk: flutter
+  gap: ^3.0.1
 
   # google_fonts: ^6.1.0
 

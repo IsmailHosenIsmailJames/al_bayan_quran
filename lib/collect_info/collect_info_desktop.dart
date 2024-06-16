@@ -54,7 +54,7 @@ class _CollectInfoDesktopState extends State<CollectInfoDesktop> {
                   infoController.tafseerBookIndex.value != -1 &&
                   infoController.tafseerIndex.value != -1 &&
                   infoController.bookNameIndex.value != -1 &&
-                  infoController.selectedOptionTranslation.value != -1)
+                  infoController.selectedOptionTranslationIndex.value != -1)
               ? () async {
                   {
                     Map<String, String> info = {
@@ -119,7 +119,7 @@ class _CollectInfoDesktopState extends State<CollectInfoDesktop> {
         children: [
           const Expanded(flex: 3, child: TranslationLanguage()),
           Obx(() {
-            if (infoController.selectedOptionTranslation.value != -1) {
+            if (infoController.selectedOptionTranslationIndex.value != -1) {
               return const Expanded(flex: 4, child: ChoiceTranslationBook());
             } else {
               return const SizedBox();
