@@ -56,7 +56,7 @@ class _ChoiceTranslationStateBook extends State<ChoiceTranslationBook> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Translation Book ${infoController.translationLanguage.value == "null" ? "" : "for${infoController.translationLanguage.value}"}",
+          "Translation Book ${infoController.translationLanguage.value == "" ? "" : "for ${infoController.translationLanguage.value}"}",
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
         ),
         actions: [
@@ -179,7 +179,7 @@ class _ChoiceTranslationStateBook extends State<ChoiceTranslationBook> {
               margin: const EdgeInsets.all(2),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: const Color.fromARGB(10, 145, 255, 160),
+                color: Colors.grey.withOpacity(0.07),
               ),
               child: ListTile(
                 titleAlignment: ListTileTitleAlignment.center,

@@ -1,8 +1,8 @@
 import 'package:al_bayan_quran/core/show_twoested_message.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../theme/theme_icon_button.dart';
@@ -23,35 +23,18 @@ class CollectInfoMobile extends StatefulWidget {
 }
 
 class _CollectInfoMobileState extends State<CollectInfoMobile> {
-  late PageController pageController;
   late int indexPage;
   String nextButtonText = "Next";
 
   @override
   void initState() {
-    pageController = PageController(
-      initialPage: widget.pageNumber,
-      keepPage: false,
-    );
-
     indexPage = widget.pageNumber;
-    checkPageNumber(widget.pageNumber);
+    pageIndex = widget.pageNumber;
     super.initState();
   }
 
-  void checkPageNumber(int index) {
-    if (index >= 4) {
-      setState(() {
-        nextButtonText = "Done";
-      });
-    } else {
-      setState(() {
-        nextButtonText = "Next";
-      });
-    }
-  }
-
   final infoController = Get.put(InfoController());
+  int pageIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -88,21 +71,24 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
         ),
         actions: [themeIconButton],
       ),
-      body: Stack(
+      body: Column(
         children: [
-          PageView(
-            scrollDirection: Axis.horizontal,
-            controller: pageController,
-            children: const [
-              TranslationLanguage(),
-              ChoiceTranslationBook(),
-              TafseerLanguage(),
-              ChoiceTafseerBook(),
-              RecitaionChoice(),
-            ],
+          Expanded(
+            child: [
+              const TranslationLanguage(),
+              const ChoiceTranslationBook(),
+              const TafseerLanguage(),
+              const ChoiceTafseerBook(),
+              const RecitaionChoice(),
+            ][pageIndex],
           ),
           Container(
-            alignment: const Alignment(0, 0.85),
+            margin:
+                const EdgeInsets.only(top: 0, bottom: 10, left: 10, right: 10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+              color: Colors.grey.withOpacity(0.2),
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -110,74 +96,72 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
                   () => ElevatedButton(
                     onPressed: infoController.isPreviousEnaviled.value
                         ? () {
-                            pageController.previousPage(
-                                duration: const Duration(milliseconds: 200),
-                                curve: Curves.bounceIn);
-                            checkPageNumber(pageController.page!.toInt() + 1);
+                            if (pageIndex > 0) {
+                              setState(() {
+                                pageIndex--;
+                              });
+                            }
                           }
                         : null,
-                    child: Text(
-                      "Previous",
-                      style: TextStyle(
-                        color: infoController.isPreviousEnaviled.value
-                            ? Colors.green
-                            : Colors.grey,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.arrow_back_outlined,
+                          color: infoController.isPreviousEnaviled.value
+                              ? Colors.green
+                              : Colors.grey,
+                          size: 18,
+                        ),
+                        const Gap(5),
+                        Text(
+                          "Previous",
+                          style: TextStyle(
+                            color: infoController.isPreviousEnaviled.value
+                                ? Colors.green
+                                : Colors.grey,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
-                Container(
-                  padding: const EdgeInsets.only(
-                      left: 10, right: 10, top: 5, bottom: 5),
-                  decoration: const BoxDecoration(
-                    color: Colors.grey,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(20),
-                    ),
-                  ),
-                  child: SmoothPageIndicator(
-                    controller: pageController,
-                    count: 5,
-                    effect: const WormEffect(
-                        dotColor: Colors.black,
-                        activeDotColor: Color.fromARGB(255, 0, 146, 5),
-                        paintStyle: PaintingStyle.stroke),
-                    onDotClicked: (index) {
-                      pageController.jumpToPage(
-                        index,
-                      );
-                      checkPageNumber(index);
-                    },
-                  ),
+                Row(
+                  children: [
+                    getPageIndecator(0, pageIndex),
+                    getPageIndecator(1, pageIndex),
+                    getPageIndecator(2, pageIndex),
+                    getPageIndecator(3, pageIndex),
+                    getPageIndecator(4, pageIndex),
+                  ],
                 ),
                 ElevatedButton(
                   onPressed: () async {
-                    if (pageController.page! == 0) {
+                    if (pageIndex == 0) {
                       if (infoController.translationLanguage.value.isEmpty) {
                         showTwoestedMessage(
                             "Please Select Quran Translation Language");
                         return;
                       }
-                    } else if (pageController.page! == 1) {
+                    } else if (pageIndex == 1) {
                       if (infoController.bookNameIndex.value == -1) {
                         showTwoestedMessage(
                             "Please Select Quran Translation Book");
                         return;
                       }
                     }
-                    if (pageController.page! == 2) {
+                    if (pageIndex == 2) {
                       if (infoController.tafseerIndex.value == -1) {
                         showTwoestedMessage(
                             "Please Select Quran Tafsir Language");
                         return;
                       }
-                    } else if (pageController.page! == 3) {
+                    } else if (pageIndex == 3) {
                       if (infoController.tafseerBookIndex.value == -1) {
                         showTwoestedMessage("Please Select Quran Tafsir Book");
                         return;
                       }
-                    } else if (pageController.page! == 4) {
+                    } else if (pageIndex == 4) {
                       if (infoController.recitationIndex.value != -1 &&
                           infoController.tafseerBookIndex.value != -1 &&
                           infoController.tafseerIndex.value != -1 &&
@@ -206,23 +190,45 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
                         }
                       }
                     }
-                    pageController.nextPage(
-                        duration: const Duration(milliseconds: 200),
-                        curve: Curves.bounceIn);
-                    checkPageNumber(pageController.page!.toInt() + 1);
+                    if (pageIndex < 4) {
+                      setState(() {
+                        pageIndex++;
+                      });
+                    }
                   },
-                  child: Text(
-                    nextButtonText,
-                    style: const TextStyle(
-                      color: Colors.green,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  child: Row(
+                    children: [
+                      Text(
+                        nextButtonText,
+                        style: const TextStyle(
+                          color: Colors.green,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                      const Gap(5),
+                      const Icon(
+                        Icons.arrow_forward_rounded,
+                        color: Colors.green,
+                        size: 18,
+                      )
+                    ],
                   ),
                 ),
               ],
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget getPageIndecator(int index, int page) {
+    return Padding(
+      padding: const EdgeInsets.all(5.0),
+      child: CircleAvatar(
+        radius: index == page ? 9 : 5,
+        backgroundColor: index == page ? Colors.green : Colors.grey,
       ),
     );
   }

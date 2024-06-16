@@ -223,7 +223,6 @@ class _TranslationLanguageState extends State<TranslationLanguage> {
                                 : language[index],
                             style: TextStyle(
                               fontSize: 18,
-                              fontWeight: FontWeight.w500,
                               color: translationLanguageController
                                           .translationLanguage.value ==
                                       language[index]

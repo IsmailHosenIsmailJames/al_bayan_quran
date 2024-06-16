@@ -29,7 +29,7 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace "com.example.al_bayan_quran"
+    namespace "com.ismail_hosen_james.al_bayan_quran"
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 

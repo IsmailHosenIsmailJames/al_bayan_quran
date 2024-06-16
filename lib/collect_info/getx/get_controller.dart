@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 class InfoController extends GetxController {
-  RxString translationLanguage = "null".obs;
+  RxString translationLanguage = "".obs;
   RxString bookIDTranslation = "-1".obs;
   RxInt bookNameIndex = (-1).obs;
   RxInt tafseerIndex = (-1).obs;

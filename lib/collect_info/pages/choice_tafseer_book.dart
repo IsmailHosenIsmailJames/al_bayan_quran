@@ -133,24 +133,6 @@ class _ChoiceTafseerBookState extends State<ChoiceTafseerBook> {
 
                           Get.offAll(() => const HomeMobile());
                           showTwoestedMessage("Successful");
-                        } else {
-                          showDialog(
-                            // ignore: use_build_context_synchronously
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                title: const Text("Select a Book First"),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: const Text("OK"),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
                         }
                       }
                     },
@@ -181,10 +163,10 @@ class _ChoiceTafseerBookState extends State<ChoiceTafseerBook> {
             },
             behavior: HitTestBehavior.translucent,
             child: Container(
-              margin: const EdgeInsets.all(2),
+              margin: const EdgeInsets.all(3),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: const Color.fromARGB(10, 145, 255, 160),
+                color: Colors.grey.withOpacity(0.07),
               ),
               child: ListTile(
                 titleAlignment: ListTileTitleAlignment.center,
