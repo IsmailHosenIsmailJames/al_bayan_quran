@@ -65,8 +65,7 @@ class _ChoiceTranslationStateBook extends State<ChoiceTranslationBook> {
                 ? const CircularProgressIndicator()
                 : TextButton.icon(
                     onPressed: () async {
-                      if (infoController.selectedOptionTranslationIndex.value !=
-                          -1) {
+                      if (infoController.translationLanguage.value.isNotEmpty) {
                         final dataBoox = Hive.box("data");
                         final infoBox = Hive.box("info");
                         String bookTranslationID =

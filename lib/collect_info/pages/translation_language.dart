@@ -192,11 +192,8 @@ class _TranslationLanguageState extends State<TranslationLanguage> {
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () {
-                    int value = index;
-                    translationLanguageController
-                        .selectedOptionTranslationIndex.value = value;
                     translationLanguageController.translationLanguage.value =
-                        language[value];
+                        language[index];
                   },
                   behavior: HitTestBehavior.translucent,
                   child: Obx(
