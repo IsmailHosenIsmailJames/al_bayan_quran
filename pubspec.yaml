@@ -35,11 +35,9 @@ dependencies:
   salomon_bottom_bar: ^3.3.2
   font_awesome_flutter: ^10.7.0
   just_audio_background: ^0.0.1-beta.11
-  audio_video_progress_bar: ^2.0.1
   fluttertoast: ^8.2.4
   regexpattern: ^2.6.0
   sidebarx: ^0.17.1
-  just_audio_media_kit: ^2.0.4
   flutter_localizations:
     sdk: flutter
   gap: ^3.0.1

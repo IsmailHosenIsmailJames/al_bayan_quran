@@ -36,14 +36,17 @@ class Intro extends StatelessWidget {
                   bottomRight: Radius.circular(500),
                 ),
               ),
-              child: Container(
-                margin: const EdgeInsets.all(50),
-                height: 100,
-                width: 100,
-                child: const CircleAvatar(
-                  radius: 100,
-                  backgroundImage: AssetImage(
-                    "assets/img/QuranLogo.jpg",
+              child: Center(
+                child: Container(
+                  height: 300,
+                  width: 300,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(1000),
+                    image: const DecorationImage(
+                      image: AssetImage(
+                        "assets/img/QuranLogo.jpg",
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -176,7 +179,7 @@ class Intro extends StatelessWidget {
                     ),
                   ),
                   TextSpan(
-                    text: "Quran reciter's",
+                    text: "& Quran reciter's",
                     style: TextStyle(fontSize: 20),
                   ),
                   TextSpan(
