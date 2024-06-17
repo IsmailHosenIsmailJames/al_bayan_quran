@@ -1,9 +1,11 @@
 import 'package:al_bayan_quran/auth/account_info/account_info.dart';
+import 'package:al_bayan_quran/core/show_twoested_message.dart';
 import 'package:al_bayan_quran/screens/home_mobile.dart';
 import 'package:al_bayan_quran/theme/theme_icon_button.dart';
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart' as models;
 import 'package:email_validator/email_validator.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -37,34 +39,44 @@ class _SignInState extends State<SignIn> {
 
   Future<void> register(String email, String password, String name) async {
     String userID = ID.unique();
-    final user = await account.create(
-      userId: userID,
-      email: email.trim(),
-      password: password,
-      name: name.trim(),
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => const Center(
+        child: CupertinoActivityIndicator(),
+      ),
     );
-
-    if (user.status) {
-      await account.createEmailPasswordSession(
-          email: email, password: password);
-      final user = await account.get();
+    try {
+      final user = await account.create(
+        userId: userID,
+        email: email.trim(),
+        password: password,
+        name: name.trim(),
+      );
 
       if (user.status) {
-        accountInfo.name.value = name;
-        accountInfo.uid.value = userID;
-        accountInfo.email.value = email;
+        await account.createEmailPasswordSession(
+            email: email, password: password);
+        final user = await account.get();
+        if (user.status) {
+          accountInfo.name.value = name;
+          accountInfo.uid.value = userID;
+          accountInfo.email.value = email;
 
-        final accountInfoHiveBox = await Hive.openBox("accountInfo");
-        accountInfoHiveBox.put("name", name.trim());
-        accountInfoHiveBox.put("uid", userID);
-        accountInfoHiveBox.put("email", email.trim());
+          final accountInfoHiveBox = await Hive.openBox("accountInfo");
+          accountInfoHiveBox.put("name", name.trim());
+          accountInfoHiveBox.put("uid", userID);
+          accountInfoHiveBox.put("email", email.trim());
 
-        setState(() {
-          isLoogedIn = true;
-        });
-
-        Get.offAll(() => const HomeMobile());
+          setState(() {
+            isLoogedIn = true;
+          });
+        }
       }
+      Get.offAll(() => const HomeMobile());
+    } on AppwriteException catch (e) {
+      showTwoestedMessage(e.message ?? "Something went worng");
+    } catch (e) {
+      showTwoestedMessage(e.toString());
     }
   }
 
@@ -168,6 +180,7 @@ class _SignInState extends State<SignIn> {
                               return "Your email is not correct...";
                             }
                           },
+                          keyboardType: TextInputType.emailAddress,
                           focusNode: emailFocusNode,
                           controller: email,
                           autovalidateMode: AutovalidateMode.onUserInteraction,

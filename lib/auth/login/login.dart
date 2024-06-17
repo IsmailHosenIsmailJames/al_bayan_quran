@@ -1,9 +1,11 @@
 import 'dart:convert';
 
+import 'package:al_bayan_quran/core/show_twoested_message.dart';
 import 'package:al_bayan_quran/screens/home_mobile.dart';
 import 'package:al_bayan_quran/theme/theme_controller.dart';
 import 'package:appwrite/appwrite.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
@@ -28,18 +30,19 @@ class _LogInState extends State<LogIn> {
   final accountInfo = Get.put(AccountInfo());
 
   Future<void> login(String email, String password) async {
+    showModalBottomSheet(
+      // ignore: use_build_context_synchronously
+      context: context,
+      builder: (context) => const Center(
+        child: CupertinoActivityIndicator(
+          color: Colors.green,
+        ),
+      ),
+    );
     try {
       await account.createEmailPasswordSession(
           email: email, password: password);
-      showModalBottomSheet(
-        // ignore: use_build_context_synchronously
-        context: context,
-        builder: (context) => const Center(
-          child: CircularProgressIndicator(
-            color: Colors.green,
-          ),
-        ),
-      );
+
       final user = await account.get();
       if (user.status) {
         try {
@@ -94,24 +97,10 @@ class _LogInState extends State<LogIn> {
       } else {
         // print("Failed while login");
       }
+    } on AppwriteException catch (e) {
+      showTwoestedMessage(e.message ?? "something went wrong");
     } catch (e) {
-      showDialog(
-        // ignore: use_build_context_synchronously
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text("An Error Occoured!"),
-          content: const Text(
-              "Make Sure you have stable internet connection or already have an account."),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text("OK"),
-            ),
-          ],
-        ),
-      );
+      showTwoestedMessage(e.toString());
     }
   }
 
@@ -195,6 +184,7 @@ class _LogInState extends State<LogIn> {
                               return "Your email is not correct...";
                             }
                           },
+                          keyboardType: TextInputType.emailAddress,
                           controller: email,
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           decoration: InputDecoration(

@@ -1,5 +1,6 @@
 import 'package:al_bayan_quran/auth/account_info/account_info.dart';
 import 'package:al_bayan_quran/auth/login/login.dart';
+import 'package:al_bayan_quran/collect_info/init.dart';
 import 'package:al_bayan_quran/screens/drawer/settings_with_appbar.dart';
 import 'package:al_bayan_quran/screens/favorite_bookmark_notes/book_mark.dart';
 import 'package:al_bayan_quran/screens/favorite_bookmark_notes/notes_v.dart';
@@ -287,6 +288,9 @@ class _MyDrawerState extends State<MyDrawer> {
                 setState(() {
                   isLoogedIn = false;
                 });
+                Get.offAll(
+                  () => const InIt(),
+                );
               },
               child: const Row(
                 children: [
