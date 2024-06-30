@@ -48,12 +48,30 @@ class _RecitaionChoiceState extends State<RecitaionChoice> {
     super.initState();
   }
 
-  void playIndexFormCache(int i) async {
+  Future<void> playIndexFormCache(int i) async {
     if (i >= listUrl.length) return;
+
     String url = listUrl[i];
-    String path = await getAudioCachedPath(url);
+    String? path = await getAudioCachedPath(url);
+    if (path == null) {
+      showModalBottomSheet(
+        // ignore: use_build_context_synchronously
+        context: context,
+        builder: (context) => const Center(
+          child: Text(
+            "Failed while downloading audio",
+            style: TextStyle(fontSize: 20, color: Colors.red),
+          ),
+        ),
+      );
+      return;
+    }
     await player.setFilePath(path);
     await player.play();
+    i++;
+    if (i >= listUrl.length) return;
+    //just download
+    await getAudioCachedPath(listUrl[i]);
   }
 
   void search(String s) {

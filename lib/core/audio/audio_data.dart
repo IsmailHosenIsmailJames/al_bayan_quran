@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
-Future<String> getAudioCachedPath(String url) async {
+Future<String?> getAudioCachedPath(String url) async {
   final cachedPath = await getApplicationCacheDirectory();
   String audioPath = join(cachedPath.path, url.split("data/").last);
   bool isExits = await File(audioPath).exists();
@@ -15,8 +15,12 @@ Future<String> getAudioCachedPath(String url) async {
   }
 }
 
-Future<String> downloadAudioAndGivePath(String path, String url) async {
+Future<String?> downloadAudioAndGivePath(String path, String url) async {
   final client = Dio();
-  await client.download(url, path);
+  try {
+    await client.download(url, path);
+  } catch (e) {
+    return null;
+  }
   return path;
 }
