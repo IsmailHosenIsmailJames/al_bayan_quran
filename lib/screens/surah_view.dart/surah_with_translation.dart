@@ -12,7 +12,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:just_audio_background/just_audio_background.dart';
 
 import '../../api/colors_tazweed.dart';
 import '../settings/settings.dart';
@@ -169,13 +168,6 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
         audioResourceSource.add(
           LockCachingAudioSource(
             Uri.parse(listOfAudioURL[i]),
-            tag: MediaItem(
-              displayTitle: "$surahNameSimple - ${i + 1}",
-              displaySubtitle: recitorChoice.split("(")[0],
-              id: "$i",
-              title: recitorChoice.split('(')[0],
-              displayDescription: listOfAudioURL[i],
-            ),
           ),
         );
       }

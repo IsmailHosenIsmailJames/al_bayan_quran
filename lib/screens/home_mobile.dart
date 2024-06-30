@@ -9,7 +9,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:just_audio_background/just_audio_background.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:sidebarx/sidebarx.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -399,13 +398,6 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
           audioResourceSource.add(
             LockCachingAudioSource(
               Uri.parse(listOfURL[i]),
-              tag: MediaItem(
-                displayTitle: "$surahNameSimple - ${i + 1} ",
-                displaySubtitle: currentReciter.split("(")[0],
-                id: "$i",
-                title: currentReciter.split('(')[0],
-                displayDescription: listOfURL[i],
-              ),
             ),
           );
         }
