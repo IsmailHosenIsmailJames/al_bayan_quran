@@ -15,3 +15,4 @@ Here are some screenshots :
 ![Screenshot_20240702_123750](https://github.com/IsmailHosenIsmailJames/al_bayan_quran/assets/99122172/343c520b-fedc-4e29-aad3-b4d771e969b7)
 ![Screenshot_20240702_123708](https://github.com/IsmailHosenIsmailJames/al_bayan_quran/assets/99122172/ec63ccff-0e61-48a7-bc05-5c39a12205ca)
 ![Screenshot_20240702_123435](https://github.com/IsmailHosenIsmailJames/al_bayan_quran/assets/99122172/c49499b4-f701-4bc5-acf2-8264161d379f)
+![Screenshot_20240702_124032](https://github.com/IsmailHosenIsmailJames/al_bayan_quran/assets/99122172/f555ea4e-6333-4fa1-aa4e-c1d2678a537a)
