@@ -983,10 +983,11 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
     );
   }
 
-  Widget getTazweedTexSpan(String ayah) {
+  Widget getTazweedTexSpan(String ayah, {bool hideEnd = false}) {
     List<Map<String, String?>> tazweeds = extractWordsGetTazweeds(ayah);
     List<InlineSpan> spanText = [];
-    for (Map<String, String?> taz in tazweeds) {
+    for (int i = 0; i < tazweeds.length; i++) {
+      Map<String, String?> taz = tazweeds[i];
       String word = taz['word'] ?? "";
       String className = taz['class'] ?? "null";
       String tag = taz['tag'] ?? "null";
@@ -995,13 +996,16 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
           TextSpan(text: word),
         );
       } else {
-        if (className == "end") {
+        if (className == "end" && hideEnd != true) {
           spanText.add(
             TextSpan(
-              text: "۝$word",
+              text: "۝$word ",
             ),
           );
         } else {
+          if (hideEnd && word.length == 1 && i == 13) {
+            continue;
+          }
           Color textColor = colorsForTazweed[className] ??
               const Color.fromARGB(255, 121, 85, 72);
           spanText.add(
