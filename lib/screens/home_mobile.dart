@@ -1294,7 +1294,7 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
                                 child: Text(
                                   "Surah",
                                   style: TextStyle(
-                                    fontSize: 20,
+                                    fontSize: 18,
                                   ),
                                 ),
                               ),
@@ -1302,7 +1302,7 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
                                 child: Text(
                                   'Juzs',
                                   style: TextStyle(
-                                    fontSize: 20,
+                                    fontSize: 18,
                                   ),
                                 ),
                               ),

@@ -710,6 +710,9 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
                       ),
                       const Spacer(),
                       PopupMenuButton(
+                        style: IconButton.styleFrom(
+                          backgroundColor: Colors.green.withOpacity(0.1),
+                        ),
                         onSelected: (value) async {
                           if (value == "copy" || value == "copyWithTafseer") {
                             String allToCopy =
@@ -731,10 +734,7 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
                                   surahName: widget.surahName,
                                 ));
                           }
-                          if (value == "continuePlay") {
-                            setState(() {});
-                            playAudioList(getAllAudioUrl(), index - 1);
-                          }
+
                           if (value == "bookmark") {
                             infoBox.put("bookmarkUploaded", false);
                             if (!(bookmarkSurahKey.contains(ayahKey))) {
@@ -792,21 +792,6 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
                                     width: 10,
                                   ),
                                   Text('See Tafsir'),
-                                ],
-                              ),
-                            ),
-                            const PopupMenuItem(
-                              value: 'continuePlay',
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.audiotrack_outlined,
-                                    color: Colors.green,
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text("Contionue Play"),
                                 ],
                               ),
                             ),
