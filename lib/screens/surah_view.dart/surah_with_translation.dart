@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:al_bayan_quran/api/some_api_response.dart';
 import 'package:al_bayan_quran/core/show_twoested_message.dart';
 import 'package:al_bayan_quran/screens/getx_controller.dart';
+import 'package:al_bayan_quran/screens/surah_view.dart/surah_view_reading.dart';
 import 'package:al_bayan_quran/screens/surah_view.dart/tafseer/tafseer.dart';
 import 'package:archive/archive.dart';
 import 'package:clipboard/clipboard.dart';
@@ -391,7 +392,7 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
   Future<String> showTafseerOfAyah(
       int ayahNumber, String? surahName, bool goRoute) async {
     final tafseerBox = await Hive.openBox("tafseer");
-    int ayahCountFromStart = getAyahCountFromStart(ayahNumber - 1);
+    int ayahCountFromStart = getAyahCountFromStart(ayahNumber - 2);
     final infoBox = Hive.box("info");
     final info = infoBox.get("info", defaultValue: false);
 
@@ -511,7 +512,7 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
         child: ListView(
           controller: scrollController,
           padding: const EdgeInsets.only(bottom: 40),
-          children: listOfWidgetOfAyah(listOfAyah.length + 1),
+          children: listOfWidgetOfAyah(listOfAyah.length + 2),
         ),
       ),
     );
@@ -649,16 +650,33 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
               ],
             ),
           ));
+        } else if (index == 1) {
+          listAyahWidget.add(
+            widget.surahNumber != 0
+                ? Container(
+                    height: 50,
+                    padding: const EdgeInsets.all(5),
+                    alignment: Alignment.center,
+                    child: getTazweedTexSpan(
+                      startAyahBismillah(
+                        controller.quranScriptTypeGetx.value,
+                      ),
+                      hideEnd: true,
+                      doBold: true,
+                    ),
+                  )
+                : const SizedBox(),
+          );
         } else {
           final translation = Hive.box("translation");
           final quran = Hive.box('quran');
-          int ayahNumber = listOfAyah[index - 1];
+          int ayahNumber = listOfAyah[index - 2];
           final infoBox = Hive.box("info");
           final info = infoBox.get("info", defaultValue: false);
 
           String arbicAyah = quran.get("${ayahNumber + firstAyahNumber}");
           String ayahTranslation = translation.get(
-              "${info["translation_book_ID"]}/${firstAyahNumber + listOfAyah[index - 1]}",
+              "${info["translation_book_ID"]}/${firstAyahNumber + listOfAyah[index - 2]}",
               defaultValue: "No Found");
           String bookName = "";
           for (var element in allTranslationLanguage) {
@@ -682,7 +700,7 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
 
           listAyahWidget.add(
             Container(
-              key: listOfkey[index - 1],
+              key: listOfkey[index - 2],
               margin: const EdgeInsets.all(8),
               padding: const EdgeInsets.all(10),
               decoration: const BoxDecoration(
@@ -700,7 +718,7 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
                         backgroundColor:
                             const Color.fromARGB(180, 134, 134, 134),
                         child: Text(
-                          (listOfAyah[index - 1] + 1).toString(),
+                          (listOfAyah[index - 2] + 1).toString(),
                           style: const TextStyle(
                             fontSize: 16,
                             color: Colors.white,
@@ -720,6 +738,7 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
 
                             if (value == "copy") {
                               FlutterClipboard.copy(allToCopy);
+                              return;
                             }
 
                             allToCopy +=
@@ -907,12 +926,12 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
                             setState(() {
                               showFloatingControllers = true;
                               isPlaying = true;
-                              playingIndex = index - 1;
+                              playingIndex = index - 2;
                             });
-                            playAudioList(getAllAudioUrl(), index - 1);
+                            playAudioList(getAllAudioUrl(), index - 2);
                           }
                         },
-                        icon: index == playingIndex + 1 && isPlaying
+                        icon: index == playingIndex + 2 && isPlaying
                             ? const Icon(Icons.pause_rounded)
                             : const Icon(Icons.play_arrow_rounded),
                       ),
@@ -983,7 +1002,8 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
     );
   }
 
-  Widget getTazweedTexSpan(String ayah, {bool hideEnd = false}) {
+  Widget getTazweedTexSpan(String ayah,
+      {bool hideEnd = false, bool doBold = false}) {
     List<Map<String, String?>> tazweeds = extractWordsGetTazweeds(ayah);
     List<InlineSpan> spanText = [];
     for (int i = 0; i < tazweeds.length; i++) {
@@ -1022,6 +1042,11 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
     return Obx(
       () => Text.rich(
         textAlign: TextAlign.end,
+        style: doBold
+            ? const TextStyle(
+                fontWeight: FontWeight.bold,
+              )
+            : null,
         TextSpan(
           style: TextStyle(
             fontSize: controller.fontSizeArabic.value,

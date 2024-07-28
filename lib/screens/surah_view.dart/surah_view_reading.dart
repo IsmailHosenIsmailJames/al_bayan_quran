@@ -66,11 +66,6 @@ class _SurahViewReadingState extends State<SurahViewReading> {
     super.initState();
   }
 
-  String startAyahBismillah(String scriptType) {
-    final scriptBox = Hive.box(scriptType);
-    return scriptBox.get("0", defaultValue: "0");
-  }
-
   Future<dynamic> getAllAyahFormBox(String scriptType) async {
     String allAyah = "";
     List<String> listOfAyahScript = [];
@@ -100,7 +95,7 @@ class _SurahViewReadingState extends State<SurahViewReading> {
                 if (snapshot.data!.runtimeType == String) {
                   return SingleChildScrollView(
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(10.0),
                       child: Column(
                         children: [
                           const Gap(15),
@@ -122,7 +117,7 @@ class _SurahViewReadingState extends State<SurahViewReading> {
                   List<String> listOfAyahScript =
                       List<String>.from(snapshot.data);
                   return Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(10.0),
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
@@ -248,4 +243,9 @@ class _SurahViewReadingState extends State<SurahViewReading> {
       ),
     );
   }
+}
+
+String startAyahBismillah(String scriptType) {
+  final scriptBox = Hive.box(scriptType);
+  return scriptBox.get("0", defaultValue: "0");
 }
