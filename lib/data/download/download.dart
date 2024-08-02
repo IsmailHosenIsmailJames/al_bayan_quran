@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:al_bayan_quran/data/download/links.dart';
 import 'package:al_bayan_quran/screens/home_mobile.dart';
@@ -258,7 +259,10 @@ class _DownloadDataState extends State<DownloadData> {
           });
 
           final tafseerBox = await Hive.openBox("tafseer");
-          final url = Uri.parse(tafseerLinks[preferance['tafseer_book_ID']]!);
+          int ran = Random().nextInt(2);
+          final url = Uri.parse(ran == 1
+              ? tafseerLinks2[preferance['tafseer_book_ID']]!
+              : tafseerLinks1[preferance['tafseer_book_ID']]!);
           final headers = {"Accept": "application/json"};
           final response = await http.get(url, headers: headers);
           setState(() {
