@@ -3,7 +3,9 @@ import 'package:al_bayan_quran/screens/drawer/settings_with_appbar.dart';
 import 'package:al_bayan_quran/screens/favorite_bookmark_notes/book_mark.dart';
 import 'package:al_bayan_quran/screens/favorite_bookmark_notes/favorite.dart';
 import 'package:al_bayan_quran/screens/favorite_bookmark_notes/notes_v.dart';
+import 'package:al_bayan_quran/screens/platforms/others_platform.dart';
 import 'package:appwrite/appwrite.dart';
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -1093,6 +1095,31 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
                   width: 20,
                 ),
                 Text("Settings")
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const OthersPlatform(),
+                ),
+              );
+            },
+            child: const Row(
+              children: [
+                Icon(
+                  FluentIcons.phone_laptop_16_filled,
+                  color: Colors.green,
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Text("Others Platforms")
               ],
             ),
           ),
