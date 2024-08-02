@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
 
 import 'collect_info/init.dart';
 import 'theme/theme_controller.dart';
@@ -14,7 +16,8 @@ Future<void> main() async {
       .setProject('albayanquran')
       .setSelfSigned(status: true);
 
-  await Hive.initFlutter("al_bayan_quran");
+  Hive.init(join((await getApplicationCacheDirectory()).path,
+      "al_quran_tafsir_and_audio"));
   await Hive.openBox("info");
   await Hive.openBox("data");
   await Hive.openBox("accountInfo");
