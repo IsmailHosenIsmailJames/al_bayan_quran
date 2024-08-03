@@ -53,7 +53,7 @@ class _SurahViewReadingState extends State<SurahViewReading> {
     int count = 0;
     for (int i = start; i < end; i++) {
       count++;
-      if (count == 10) {
+      if (count == 11) {
         listOfListAyah.add(listOfAyah);
         listOfAyah = [];
         listOfAyah.add(i);
@@ -98,11 +98,11 @@ class _SurahViewReadingState extends State<SurahViewReading> {
       body: ListView.builder(
         padding: const EdgeInsets.all(10),
         itemCount: listOfListAyah.length,
-        itemBuilder: (context, index) {
+        itemBuilder: (context, indexOnList) {
           return Obx(
             () => FutureBuilder(
-              future: getAllAyahFormBox(
-                  controller.quranScriptTypeGetx.value, listOfListAyah[index]),
+              future: getAllAyahFormBox(controller.quranScriptTypeGetx.value,
+                  listOfListAyah[indexOnList]),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   dynamic all10Ayah = snapshot.data;
@@ -110,7 +110,7 @@ class _SurahViewReadingState extends State<SurahViewReading> {
                     return Column(
                       children: [
                         const Gap(15),
-                        if (widget.surahNumber != 0)
+                        if (widget.surahNumber != 0 && indexOnList == 0)
                           getTazweedTexSpan(
                             startAyahBismillah(
                               controller.quranScriptTypeGetx.value,
@@ -128,7 +128,7 @@ class _SurahViewReadingState extends State<SurahViewReading> {
                     return Column(
                       children: [
                         const Gap(15),
-                        if (widget.surahNumber != 0)
+                        if (widget.surahNumber != 0 && indexOnList == 0)
                           Text(
                             startAyahBismillah(
                               controller.quranScriptTypeGetx.value,
@@ -146,7 +146,9 @@ class _SurahViewReadingState extends State<SurahViewReading> {
                               (index) {
                                 return TextSpan(
                                   text:
-                                      "${listOfAyahScript[index]} ${getEndSyambolOfAyah(index.toString())} ",
+                                      "${listOfAyahScript[index]} ${getEndSyambolOfAyah({
+                                    index + 1 + listOfListAyah[indexOnList][0]
+                                  }.toString())} ",
                                   style: TextStyle(
                                     fontSize: controller.fontSizeArabic.value,
                                   ),
