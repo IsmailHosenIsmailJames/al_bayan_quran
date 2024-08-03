@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:simple_icons/simple_icons.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class OthersPlatform extends StatelessWidget {
   const OthersPlatform({super.key});
@@ -68,7 +69,10 @@ class OthersPlatform extends StatelessWidget {
                         right: 30,
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      launchUrl(Uri.parse(
+                          "https://github.com/IsmailHosenIsmailJames/al_bayan_quran/releases/tag/Windows"));
+                    },
                     icon: const Icon(SimpleIcons.windows),
                     label: const Row(
                       children: [
@@ -103,7 +107,10 @@ class OthersPlatform extends StatelessWidget {
                         right: 30,
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      launchUrl(Uri.parse(
+                          "https://github.com/IsmailHosenIsmailJames/al_bayan_quran/releases/tag/Linux"));
+                    },
                     icon: const Icon(SimpleIcons.linux),
                     label: const Row(
                       children: [
@@ -138,7 +145,9 @@ class OthersPlatform extends StatelessWidget {
                         right: 30,
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      launchUrl(Uri.parse("https://alquranwithaudio.web.app/"));
+                    },
                     icon: const Icon(Icons.web),
                     label: const Row(
                       children: [
