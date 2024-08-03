@@ -1,7 +1,4 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -38,8 +35,7 @@ class _SurahViewReadingState extends State<SurahViewReading> {
   late String? surahNameArabic;
   late String? relavencePlace;
 
-  List<int> listOfAyah = [];
-  List<GlobalKey> listOfkey = [];
+  List<List<int>> listOfListAyah = [];
   List<String> bookmarkSurahKey = [];
   List<String> favoriteSurahKey = [];
 
@@ -53,9 +49,21 @@ class _SurahViewReadingState extends State<SurahViewReading> {
     relavencePlace = allChaptersInfo[widget.surahNumber]['revelation_place'];
     int start = widget.start ?? 0;
     int end = widget.end ?? allChaptersInfo[widget.surahNumber]['verses_count'];
+    List<int> listOfAyah = [];
+    int count = 0;
     for (int i = start; i < end; i++) {
-      listOfAyah.add(i);
-      listOfkey.add(GlobalKey());
+      count++;
+      if (count == 10) {
+        listOfListAyah.add(listOfAyah);
+        listOfAyah = [];
+        listOfAyah.add(i);
+        continue;
+      } else {
+        listOfAyah.add(i);
+      }
+    }
+    if (listOfAyah.isNotEmpty) {
+      listOfListAyah.add(listOfAyah);
     }
 
     final box = Hive.box("info");
@@ -66,12 +74,13 @@ class _SurahViewReadingState extends State<SurahViewReading> {
     super.initState();
   }
 
-  Future<dynamic> getAllAyahFormBox(String scriptType) async {
+  Future<dynamic> getAllAyahFormBox(
+      String scriptType, List<int> listOfAyahIndex) async {
     String allAyah = "";
     List<String> listOfAyahScript = [];
     final scriptBox = Hive.box(scriptType);
 
-    for (int i in listOfAyah) {
+    for (int i in listOfAyahIndex) {
       int ayahNumber = i + getAyahCountFromStart(0, widget.surahNumber);
       String ayah = scriptBox.get("$ayahNumber", defaultValue: "0");
       if (scriptType == "quran_tajweed") {
@@ -86,83 +95,79 @@ class _SurahViewReadingState extends State<SurahViewReading> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GetX<ScreenGetxController>(
-        builder: (controller) {
-          return FutureBuilder(
-            future: getAllAyahFormBox(controller.quranScriptTypeGetx.value),
-            builder: (context, snapshot) {
-              if (snapshot.hasData && snapshot.data != null) {
-                if (snapshot.data!.runtimeType == String) {
-                  return SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Column(
-                        children: [
-                          const Gap(15),
-                          if (widget.surahNumber != 0)
-                            getTazweedTexSpan(
-                              startAyahBismillah(
-                                controller.quranScriptTypeGetx.value,
-                              ),
-                              hideEnd: true,
-                              doBold: true,
+      body: ListView.builder(
+        padding: const EdgeInsets.all(10),
+        itemCount: listOfListAyah.length,
+        itemBuilder: (context, index) {
+          return Obx(
+            () => FutureBuilder(
+              future: getAllAyahFormBox(
+                  controller.quranScriptTypeGetx.value, listOfListAyah[index]),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  dynamic all10Ayah = snapshot.data;
+                  if (all10Ayah.runtimeType == String) {
+                    return Column(
+                      children: [
+                        const Gap(15),
+                        if (widget.surahNumber != 0)
+                          getTazweedTexSpan(
+                            startAyahBismillah(
+                              controller.quranScriptTypeGetx.value,
                             ),
-                          const Gap(15),
-                          getTazweedTexSpan(snapshot.data!),
-                        ],
-                      ),
-                    ),
-                  );
-                } else {
-                  List<String> listOfAyahScript =
-                      List<String>.from(snapshot.data);
-                  return Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          const Gap(15),
-                          if (widget.surahNumber != 0)
-                            Text(
-                              startAyahBismillah(
-                                controller.quranScriptTypeGetx.value,
-                              ),
-                              style: TextStyle(
-                                fontSize: controller.fontSizeArabic.value + 4,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          const Gap(15),
-                          Text.rich(
-                            TextSpan(
-                              children: List<InlineSpan>.generate(
-                                listOfAyahScript.length,
-                                (index) {
-                                  return TextSpan(
-                                    text:
-                                        "${listOfAyahScript[index]} ${getEndSyambolOfAyah(index.toString())} ",
-                                    style: TextStyle(
-                                      fontSize: controller.fontSizeArabic.value,
-                                    ),
-                                  );
-                                },
-                              ),
-                            ),
-                            textAlign: TextAlign.end,
+                            hideEnd: true,
+                            doBold: true,
                           ),
-                        ],
-                      ),
+                        const Gap(15),
+                        getTazweedTexSpan(all10Ayah),
+                      ],
+                    );
+                  } else {
+                    List<String> listOfAyahScript =
+                        List<String>.from(all10Ayah);
+                    return Column(
+                      children: [
+                        const Gap(15),
+                        if (widget.surahNumber != 0)
+                          Text(
+                            startAyahBismillah(
+                              controller.quranScriptTypeGetx.value,
+                            ),
+                            style: TextStyle(
+                              fontSize: controller.fontSizeArabic.value + 4,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        const Gap(15),
+                        Text.rich(
+                          TextSpan(
+                            children: List<InlineSpan>.generate(
+                              listOfAyahScript.length,
+                              (index) {
+                                return TextSpan(
+                                  text:
+                                      "${listOfAyahScript[index]} ${getEndSyambolOfAyah(index.toString())} ",
+                                  style: TextStyle(
+                                    fontSize: controller.fontSizeArabic.value,
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                          textAlign: TextAlign.end,
+                        ),
+                      ],
+                    );
+                  }
+                } else {
+                  return const Center(
+                    child: CircularProgressIndicator(
+                      color: Colors.green,
                     ),
                   );
                 }
-              } else {
-                return const Center(
-                  child: CupertinoActivityIndicator(
-                    color: Colors.green,
-                  ),
-                );
-              }
-            },
+              },
+            ),
           );
         },
       ),
@@ -176,16 +181,15 @@ class _SurahViewReadingState extends State<SurahViewReading> {
         box.get(ayahKey, defaultValue: ""),
       );
     }
+
     return Obx(
-      () {
-        return Text(
-          box.get(ayahKey, defaultValue: ""),
-          style: TextStyle(
-            fontSize: controller.fontSizeArabic.value,
-          ),
-          textAlign: TextAlign.right,
-        );
-      },
+      () => Text(
+        box.get(ayahKey, defaultValue: ""),
+        style: TextStyle(
+          fontSize: controller.fontSizeArabic.value,
+        ),
+        textAlign: TextAlign.right,
+      ),
     );
   }
 
