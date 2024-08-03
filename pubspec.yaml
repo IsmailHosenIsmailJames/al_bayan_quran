@@ -42,6 +42,7 @@ dependencies:
     sdk: flutter
   gap: ^3.0.1
   fluentui_system_icons: ^1.1.249
+  simple_icons: ^10.1.3
 
   # google_fonts: ^6.1.0
 
