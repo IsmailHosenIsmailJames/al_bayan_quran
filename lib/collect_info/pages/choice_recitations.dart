@@ -1,9 +1,9 @@
 // import 'package:audioplayers/audioplayers.dart';
+import 'package:al_bayan_quran/core/audio/audio_data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:just_audio_background/just_audio_background.dart';
 
 import '../../api/all_recitation.dart';
 import '../getx/get_controller.dart';
@@ -18,19 +18,25 @@ class RecitaionChoice extends StatefulWidget {
 
 class _RecitaionChoiceState extends State<RecitaionChoice> {
   final infoController = Get.put(InfoController());
-
+  int currentAyahIndex = 0;
   late List<String> allRecitationSearch = [];
 
+  int cheakIsFinished = 0;
+  int ayahIndex = 0;
   @override
   void initState() {
     allRecitationSearch.addAll(allRecitation);
-    player.playerStateStream.listen((event) {
-      if (event.processingState == ProcessingState.completed) {
-        setState(() {
-          playingIndex = -1;
-        });
-      }
-    });
+
+    player.playbackEventStream.listen(
+      (event) {
+        int dif = event.updatePosition.compareTo(Duration.zero);
+        if (dif == 0 && cheakIsFinished != 0) {
+          ayahIndex++;
+          playIndexFormCache(ayahIndex);
+        }
+        cheakIsFinished = dif;
+      },
+    );
     if (widget.previousInfo != null) {
       Map<String, String> temInfo = widget.previousInfo!;
       int index = allRecitationSearch.indexOf(temInfo['recitation_ID'] ?? "");
@@ -40,6 +46,32 @@ class _RecitaionChoiceState extends State<RecitaionChoice> {
       }
     }
     super.initState();
+  }
+
+  Future<void> playIndexFormCache(int i) async {
+    if (i >= listUrl.length) return;
+
+    String url = listUrl[i];
+    String? path = await getAudioCachedPath(url);
+    if (path == null) {
+      showModalBottomSheet(
+        // ignore: use_build_context_synchronously
+        context: context,
+        builder: (context) => const Center(
+          child: Text(
+            "Failed while downloading audio",
+            style: TextStyle(fontSize: 20, color: Colors.red),
+          ),
+        ),
+      );
+      return;
+    }
+    await player.setFilePath(path);
+    await player.play();
+    i++;
+    if (i >= listUrl.length) return;
+    //just download
+    await getAudioCachedPath(listUrl[i]);
   }
 
   void search(String s) {
@@ -65,7 +97,7 @@ class _RecitaionChoiceState extends State<RecitaionChoice> {
   List<String> listUrl = [];
   int playing = 0;
 
-  void playResource(String url, int ayahCount) async {
+  void setPlayResourceURLList(String url, int ayahCount) async {
     playing = 0;
     listUrl = [];
     setState(() {
@@ -78,24 +110,7 @@ class _RecitaionChoiceState extends State<RecitaionChoice> {
       listUrl;
     });
 
-    List<AudioSource> audioResourceSource = [];
-    for (int i = 0; i < 7; i++) {
-      audioResourceSource.add(LockCachingAudioSource(
-        Uri.parse(listUrl[i]),
-        tag: MediaItem(
-          displayTitle: "Surah Fateha",
-          id: "$i",
-          title: url,
-        ),
-      ));
-    }
-    final playlist = ConcatenatingAudioSource(
-      shuffleOrder: DefaultShuffleOrder(),
-      children: audioResourceSource,
-    );
-    await player.setAudioSource(playlist,
-        initialIndex: 0, initialPosition: Duration.zero);
-    await player.play();
+    playIndexFormCache(0);
   }
 
   void resumeOrPuseAudio(bool isPlay) {
@@ -183,7 +198,7 @@ class _RecitaionChoiceState extends State<RecitaionChoice> {
                                     setState(() {
                                       playingIndex = index;
                                       String url = getBaseURLOfAudio(index);
-                                      playResource(url, 7);
+                                      setPlayResourceURLList(url, 7);
                                     });
                                   } else {
                                     setState(() {

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:al_bayan_quran/api/some_api_response.dart';
+import 'package:al_bayan_quran/core/audio/audio_data.dart';
 import 'package:al_bayan_quran/core/show_twoested_message.dart';
 import 'package:al_bayan_quran/screens/getx_controller.dart';
 import 'package:al_bayan_quran/screens/surah_view.dart/surah_view_reading.dart';
@@ -13,7 +14,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:just_audio_background/just_audio_background.dart';
 
 import '../../api/colors_tazweed.dart';
 import '../settings/settings.dart';
@@ -49,7 +49,8 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
   List<GlobalKey> listOfkey = [];
   List<String> bookmarkSurahKey = [];
   List<String> favoriteSurahKey = [];
-
+  int cheakIsFinished = 0;
+  int ayahIndex = 0;
   @override
   void initState() {
     totalAyahInSuarh = allChaptersInfo[widget.surahNumber]['verses_count'];
@@ -129,6 +130,29 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
         });
       }
     });
+    player.playbackEventStream.listen(
+      (event) {
+        int dif = event.updatePosition.compareTo(Duration.zero);
+        if (dif == 0 && cheakIsFinished != 0) {
+          ayahIndex++;
+          setState(() {
+            playingIndex = ayahIndex;
+          });
+          if (listOfkey[playingIndex].currentContext != null &&
+              player.playing &&
+              playingIndex > -1) {
+            Scrollable.ensureVisible(
+              listOfkey[playingIndex].currentContext!,
+              duration: const Duration(milliseconds: 500),
+              alignment: 0.5,
+              curve: Curves.ease,
+            );
+          }
+          playSingleFormCached(allAudioList, ayahIndex);
+        }
+        cheakIsFinished = dif;
+      },
+    );
     if (widget.scrollToAyah != null) scrollToAyahInit(widget.scrollToAyah!);
     super.initState();
   }
@@ -159,34 +183,53 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
   bool isLoading = false;
   bool showFloatingControllers = false;
   bool expandFloatingControllers = true;
+  List<String> allAudioList = [];
+  Future<void> playSingleFormCached(
+      List<String> listOfAudioURL, int index) async {
+    if (index >= listOfAudioURL.length) return;
+    String? path = await getAudioCachedPath(listOfAudioURL[index]);
+    path ?? await getAudioCachedPath(listOfAudioURL[index]);
+    if (path == null) {
+      showModalBottomSheet(
+        // ignore: use_build_context_synchronously
+        context: context,
+        builder: (context) => const Center(
+          child: Text(
+            "Failed while downloading audio",
+            style: TextStyle(fontSize: 20, color: Colors.red),
+          ),
+        ),
+      );
+      return;
+    }
+    await player.setFilePath(path);
+    await player.play();
+  }
+
   void playAudioList(List<String> listOfAudioURL, int index,
       [bool dontPlayNow = false]) async {
+    setState(() {
+      allAudioList = listOfAudioURL;
+      ayahIndex = index;
+    });
     try {
-      final infoBox = Hive.box("info");
-      final info = infoBox.get("info");
-      String recitorChoice = info['recitation_ID'];
-      List<AudioSource> audioResourceSource = [];
-      for (int i = 0; i < listOfAudioURL.length; i++) {
-        audioResourceSource.add(
-          LockCachingAudioSource(
-            Uri.parse(listOfAudioURL[i]),
-            tag: MediaItem(
-              displayTitle: "$surahNameSimple - ${i + 1}",
-              displaySubtitle: recitorChoice.split("(")[0],
-              id: "$i",
-              title: recitorChoice.split('(')[0],
-              displayDescription: listOfAudioURL[i],
+      String? path = await getAudioCachedPath(listOfAudioURL[index]);
+      path ?? await getAudioCachedPath(listOfAudioURL[index]);
+      path ?? await getAudioCachedPath(listOfAudioURL[index]);
+      if (path == null) {
+        showModalBottomSheet(
+          // ignore: use_build_context_synchronously
+          context: context,
+          builder: (context) => const Center(
+            child: Text(
+              "Failed while downloading audio",
+              style: TextStyle(fontSize: 20, color: Colors.red),
             ),
           ),
         );
+        return;
       }
-      final playlist = ConcatenatingAudioSource(
-        shuffleOrder: DefaultShuffleOrder(),
-        children: audioResourceSource,
-      );
-
-      await player.setAudioSource(playlist,
-          initialIndex: index, initialPosition: Duration.zero);
+      await player.setFilePath(path);
       if (!dontPlayNow) {
         await player.play();
       } else {

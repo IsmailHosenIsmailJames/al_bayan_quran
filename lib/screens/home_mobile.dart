@@ -11,7 +11,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:just_audio_background/just_audio_background.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:sidebarx/sidebarx.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -21,6 +20,7 @@ import '../api/by_juzs.dart';
 import '../api/some_api_response.dart';
 import '../auth/account_info/account_info.dart';
 import '../auth/login/login.dart';
+import '../core/audio/audio_data.dart';
 import '../theme/theme_controller.dart';
 import '../theme/theme_icon_button.dart';
 import 'profile/profile.dart';
@@ -52,6 +52,8 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
 
   final infoController = Get.put(InfoController());
   final infoBox = Hive.box("info");
+  int cheakIsFinished = 0;
+  int ayahIndex = 0;
 
   @override
   void initState() {
@@ -85,6 +87,16 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
         }
       }
     });
+    player.playbackEventStream.listen(
+      (event) {
+        int dif = event.updatePosition.compareTo(Duration.zero);
+        if (dif == 0 && cheakIsFinished != 0) {
+          ayahIndex++;
+          playSingleFormCached(allAudioList, ayahIndex);
+        }
+        cheakIsFinished = dif;
+      },
+    );
 
     super.initState();
     for (int i = 0; i < 30; i++) {
@@ -383,42 +395,59 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
     return toReturn;
   }
 
+  List<String> allAudioList = [];
+  Future<void> playSingleFormCached(
+      List<String> listOfAudioURL, int index) async {
+    if (index >= listOfAudioURL.length) return;
+    String? path = await getAudioCachedPath(listOfAudioURL[index]);
+    if (path == null) {
+      showModalBottomSheet(
+        // ignore: use_build_context_synchronously
+        context: context,
+        builder: (context) => const Center(
+          child: Text(
+            "Failed while downloading audio",
+            style: TextStyle(fontSize: 20, color: Colors.red),
+          ),
+        ),
+      );
+      return;
+    }
+    await player.setFilePath(path);
+    await player.play();
+  }
+
   void playAudio(int index, {bool start = false, bool wait = false}) async {
     setState(() {
+      ayahIndex = index;
       surahNumber = index;
     });
 
     List<String> listOfURL = getAllAudioUrl();
+    setState(() {
+      allAudioList = listOfURL;
+    });
     if (playingIndex != index || start) {
       if (wait) {
-        await Future.delayed(const Duration(seconds: 1));
+        await Future.delayed(const Duration(milliseconds: 300));
       }
       try {
-        List<AudioSource> audioResourceSource = [];
-        final surahNameSimple = allChaptersInfo[surahNumber]['name_simple'];
-
-        for (int i = 0; i < listOfURL.length; i++) {
-          audioResourceSource.add(
-            LockCachingAudioSource(
-              Uri.parse(listOfURL[i]),
-              tag: MediaItem(
-                displayTitle: "$surahNameSimple - ${i + 1} ",
-                displaySubtitle: currentReciter.split("(")[0],
-                id: "$i",
-                title: currentReciter.split('(')[0],
-                displayDescription: listOfURL[i],
+        String? path = await getAudioCachedPath(listOfURL[index]);
+        if (path == null) {
+          showModalBottomSheet(
+            // ignore: use_build_context_synchronously
+            context: context,
+            builder: (context) => const Center(
+              child: Text(
+                "Failed while downloading audio",
+                style: TextStyle(fontSize: 20, color: Colors.red),
               ),
             ),
           );
+          return;
         }
-        final playlist = ConcatenatingAudioSource(
-          shuffleOrder: DefaultShuffleOrder(),
-          children: audioResourceSource,
-        );
-        await player.setAudioSource(
-          playlist,
-        );
-        player.play();
+        await player.setFilePath(path);
+        await player.play();
         setState(() {
           playingIndex = index;
           isPlaying = true;

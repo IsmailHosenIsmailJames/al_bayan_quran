@@ -92,6 +92,9 @@ You will find the .exe installer here : https://github.com/IsmailHosenIsmailJame
 ![Screenshot_20240630_200156](https://github.com/IsmailHosenIsmailJames/al_bayan_quran/assets/99122172/29246ca9-fcf3-4299-9ca8-08e15cd04ab0)
 
 
-
-
-
+![Screenshot_20240702_123339](https://github.com/IsmailHosenIsmailJames/al_bayan_quran/assets/99122172/1766fe9b-6b0c-4e6c-9233-7febef8b1abb)
+![Screenshot_20240702_123808](https://github.com/IsmailHosenIsmailJames/al_bayan_quran/assets/99122172/68ad009b-16f0-4a62-8a20-22fdf32a424e)
+![Screenshot_20240702_123750](https://github.com/IsmailHosenIsmailJames/al_bayan_quran/assets/99122172/343c520b-fedc-4e29-aad3-b4d771e969b7)
+![Screenshot_20240702_123708](https://github.com/IsmailHosenIsmailJames/al_bayan_quran/assets/99122172/ec63ccff-0e61-48a7-bc05-5c39a12205ca)
+![Screenshot_20240702_123435](https://github.com/IsmailHosenIsmailJames/al_bayan_quran/assets/99122172/c49499b4-f701-4bc5-acf2-8264161d379f)
+![Screenshot_20240702_124032](https://github.com/IsmailHosenIsmailJames/al_bayan_quran/assets/99122172/f555ea4e-6333-4fa1-aa4e-c1d2678a537a)
