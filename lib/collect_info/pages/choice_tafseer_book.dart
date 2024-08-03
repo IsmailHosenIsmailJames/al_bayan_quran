@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -91,11 +92,12 @@ class _ChoiceTafseerBookState extends State<ChoiceTafseerBook> {
                         setState(() {
                           downloading = true;
                         });
+                        int ran = Random().nextInt(2);
 
-                        var url = Uri.parse(
-                            tafseerLinks[infoController.tafseerBookID.value]!);
-                        debugPrint(
-                            tafseerLinks[infoController.tafseerBookID.value]);
+                        var url = Uri.parse(ran == 0
+                            ? tafseerLinks2[infoController.tafseerBookID.value]!
+                            : tafseerLinks1[
+                                infoController.tafseerBookID.value]!);
 
                         var headers = {"Accept": "application/json"};
 

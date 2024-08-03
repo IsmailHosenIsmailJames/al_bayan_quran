@@ -32,10 +32,20 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Al-Quran',
-      theme: ThemeData.light(),
+      theme: ThemeData.light().copyWith(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.green,
+          brightness: Brightness.light,
+        ),
+      ),
       darkTheme: ThemeData.dark().copyWith(
         floatingActionButtonTheme: FloatingActionButtonThemeData(
-            backgroundColor: Colors.grey.shade800),
+          backgroundColor: Colors.grey.shade800,
+        ),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.green,
+          brightness: Brightness.dark,
+        ),
       ),
       themeMode: ThemeMode.system,
       onInit: () async {
