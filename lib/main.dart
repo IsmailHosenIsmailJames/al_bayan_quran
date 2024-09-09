@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 
-import 'collect_info/init.dart';
-import 'theme/theme_controller.dart';
+import 'src/collect_info/init.dart';
+import 'src/theme/theme_controller.dart';
 import 'package:appwrite/appwrite.dart';
 
 Future<void> main() async {
