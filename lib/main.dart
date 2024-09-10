@@ -57,6 +57,7 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.dark,
         ),
       ),
+      defaultTransition: Transition.leftToRight,
       themeMode: ThemeMode.system,
       locale: Get.deviceLocale,
       fallbackLocale: const ui.Locale("en"),
