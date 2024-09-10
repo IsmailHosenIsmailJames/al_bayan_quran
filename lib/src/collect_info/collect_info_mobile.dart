@@ -66,7 +66,7 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
                       "https://www.freeprivacypolicy.com/live/d8c08904-a100-4f0b-94d8-13d86a8c8605"),
                 );
               },
-              child: const Text("Privacy Policy"),
+              child: Text("Privacy Policy".tr),
             ),
           ],
         ),

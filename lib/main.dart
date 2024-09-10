@@ -7,6 +7,11 @@ import 'src/collect_info/init.dart';
 import 'src/theme/theme_controller.dart';
 import 'package:appwrite/appwrite.dart';
 
+import 'src/translations/language_controller.dart';
+import 'src/translations/map_of_translation.dart';
+
+import 'dart:ui' as ui;
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Client client = Client();
@@ -53,8 +58,20 @@ class MyApp extends StatelessWidget {
         ),
       ),
       themeMode: ThemeMode.system,
+      locale: Get.deviceLocale,
+      fallbackLocale: const ui.Locale("en"),
+      translationsKeys: AppTranslation.translationsKeys,
       onInit: () async {
         final appTheme = Get.put(AppThemeData());
+        final languageController = Get.put(LanguageController());
+        final prefBox = Hive.box("info");
+        String? languageCode = prefBox.get("app_lan", defaultValue: null);
+        if (languageCode == null) {
+          languageCode ??= Get.locale!.languageCode;
+          languageController.changeLanguage = languageCode;
+        } else {
+          languageController.changeLanguage = languageCode;
+        }
         appTheme.initTheme();
       },
       home: const StartUpPage(),
