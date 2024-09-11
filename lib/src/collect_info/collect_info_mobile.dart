@@ -1,4 +1,5 @@
 import 'package:al_bayan_quran/src/collect_info/pages/intro.dart';
+import 'package:al_bayan_quran/src/collect_info/pages/select_langauge.dart';
 import 'package:al_bayan_quran/src/core/show_twoested_message.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -25,7 +26,6 @@ class CollectInfoMobile extends StatefulWidget {
 
 class _CollectInfoMobileState extends State<CollectInfoMobile> {
   late int indexPage;
-  String nextButtonText = "Next";
 
   @override
   void initState() {
@@ -39,14 +39,15 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
 
   @override
   Widget build(BuildContext context) {
+    String nextButtonText = "Next".tr;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         title: Row(
           children: [
-            const Text(
-              "Al Quran",
-              style: TextStyle(
+            Text(
+              "Al Quran".tr,
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -76,6 +77,7 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
         children: [
           Expanded(
             child: [
+              const SelectLangauge(),
               const Intro(),
               const TranslationLanguage(),
               const ChoiceTranslationBook(),
@@ -86,15 +88,18 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
           ),
           Container(
             margin:
-                const EdgeInsets.only(top: 0, bottom: 10, left: 10, right: 10),
+                const EdgeInsets.only(top: 0, bottom: 10, left: 5, right: 5),
+            padding: const EdgeInsets.only(left: 3, right: 3),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30),
               color: Colors.grey.withOpacity(0.2),
             ),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.only(left: 7, right: 7)),
                   onPressed: pageIndex != 0
                       ? () {
                           if (pageIndex > 0) {
@@ -113,7 +118,7 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
                       ),
                       const Gap(5),
                       Text(
-                        "Previous",
+                        "Previous".tr,
                         style: TextStyle(
                           color: pageIndex != 0 ? Colors.green : Colors.grey,
                           fontWeight: FontWeight.bold,
@@ -130,35 +135,44 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
                     getPageIndecator(3, pageIndex),
                     getPageIndecator(4, pageIndex),
                     getPageIndecator(5, pageIndex),
+                    getPageIndecator(6, pageIndex),
                   ],
                 ),
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.only(left: 7, right: 7)),
                   onPressed: () async {
-                    if (pageIndex == 1) {
-                      if (infoController.translationLanguage.value.isEmpty) {
+                    if (pageIndex == 0) {
+                      if (infoController.appLanCode.value.isEmpty) {
                         showTwoestedMessage(
                             "Please Select Quran Translation Language");
                         return;
                       }
                     } else if (pageIndex == 2) {
+                      if (infoController.translationLanguage.value.isEmpty) {
+                        showTwoestedMessage("Please select a language for app");
+
+                        return;
+                      }
+                    } else if (pageIndex == 3) {
                       if (infoController.bookNameIndex.value == -1) {
                         showTwoestedMessage(
                             "Please Select Quran Translation Book");
                         return;
                       }
                     }
-                    if (pageIndex == 3) {
+                    if (pageIndex == 4) {
                       if (infoController.tafseerIndex.value == -1) {
                         showTwoestedMessage(
                             "Please Select Quran Tafsir Language");
                         return;
                       }
-                    } else if (pageIndex == 4) {
+                    } else if (pageIndex == 5) {
                       if (infoController.tafseerBookIndex.value == -1) {
                         showTwoestedMessage("Please Select Quran Tafsir Book");
                         return;
                       }
-                    } else if (pageIndex == 5) {
+                    } else if (pageIndex == 6) {
                       if (infoController.recitationIndex.value != -1 &&
                           infoController.tafseerBookIndex.value != -1 &&
                           infoController.tafseerIndex.value != -1 &&
@@ -187,7 +201,7 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
                         }
                       }
                     }
-                    if (pageIndex < 5) {
+                    if (pageIndex < 6) {
                       setState(() {
                         pageIndex++;
                       });
@@ -196,11 +210,11 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
                   child: Row(
                     children: [
                       Text(
-                        pageIndex == 0 ? "Setup" : nextButtonText,
+                        pageIndex == 0 ? "Setup".tr : nextButtonText,
                         style: const TextStyle(
                           color: Colors.green,
                           fontWeight: FontWeight.bold,
-                          fontSize: 16,
+                          fontSize: 14,
                         ),
                       ),
                       const Gap(5),
@@ -222,7 +236,7 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
 
   Widget getPageIndecator(int index, int page) {
     return Padding(
-      padding: const EdgeInsets.all(5.0),
+      padding: const EdgeInsets.all(2.0),
       child: CircleAvatar(
         radius: index == page ? 9 : 5,
         backgroundColor: index == page ? Colors.green : Colors.grey,

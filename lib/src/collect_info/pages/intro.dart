@@ -1,29 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get_utils/get_utils.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Intro extends StatelessWidget {
   const Intro({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          height: MediaQuery.of(context).size.height * 0.5,
-          width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
-            color: Colors.green.withOpacity(0.2),
-            borderRadius: const BorderRadius.only(
-              bottomRight: Radius.circular(500),
-            ),
-          ),
-          child: Container(
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Container(
             height: MediaQuery.of(context).size.height * 0.5,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               color: Colors.green.withOpacity(0.2),
               borderRadius: const BorderRadius.only(
-                bottomLeft: Radius.circular(500),
+                bottomRight: Radius.circular(500),
               ),
             ),
             child: Container(
@@ -33,18 +27,28 @@ class Intro extends StatelessWidget {
                 color: Colors.green.withOpacity(0.2),
                 borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(500),
-                  bottomRight: Radius.circular(500),
                 ),
               ),
-              child: Center(
-                child: Container(
-                  height: 300,
-                  width: 300,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(1000),
-                    image: const DecorationImage(
-                      image: AssetImage(
-                        "assets/img/QuranLogo.jpg",
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.5,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  color: Colors.green.withOpacity(0.2),
+                  borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.circular(500),
+                    bottomRight: Radius.circular(500),
+                  ),
+                ),
+                child: Center(
+                  child: Container(
+                    height: 300,
+                    width: 300,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(1000),
+                      image: const DecorationImage(
+                        image: AssetImage(
+                          "assets/img/QuranLogo.jpg",
+                        ),
                       ),
                     ),
                   ),
@@ -52,150 +56,58 @@ class Intro extends StatelessWidget {
               ),
             ),
           ),
-        ),
-        const Gap(20),
-        MediaQuery(
-          data: MediaQuery.of(context).copyWith(
-            textScaler: const TextScaler.linear(
-              0.87,
+          const Gap(20),
+          MediaQuery(
+            data: MediaQuery.of(context).copyWith(
+              textScaler: const TextScaler.linear(
+                0.87,
+              ),
             ),
-          ),
-          child: Container(
-            padding: const EdgeInsets.only(left: 10, right: 10),
-            alignment: Alignment.center,
-            child: const Text.rich(
-              textAlign: TextAlign.center,
-              TextSpan(
-                children: <TextSpan>[
-                  TextSpan(
-                    text: "All in one",
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  TextSpan(
-                    text: " Al Quran ",
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.green,
-                    ),
-                  ),
-                  TextSpan(
-                    text: "App with ",
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  TextSpan(
-                    text: "Translation ",
-                    style: TextStyle(
-                      fontSize: 25,
-                      color: Colors.green,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  TextSpan(
-                    text: " in ",
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
-                  ),
-                  TextSpan(
-                      text: "69",
-                      style: TextStyle(
-                        fontSize: 35,
-                        color: Colors.green,
-                        fontWeight: FontWeight.bold,
-                      )),
-                  TextSpan(
-                    text: " languages ",
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
-                  ),
-                  TextSpan(
-                    text: "&",
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
-                  ),
-                  TextSpan(
-                    text: " 180+ ",
-                    style: TextStyle(
-                      fontSize: 35,
-                      color: Colors.green,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  TextSpan(
-                    text: "translation books,",
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
-                  ),
-                  TextSpan(
-                    text: " Tefsir ",
-                    style: TextStyle(
-                      fontSize: 25,
-                      color: Colors.green,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  TextSpan(
-                    text: "in ",
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  TextSpan(
-                    text: "6 ",
-                    style: TextStyle(
-                      fontSize: 30,
-                      color: Colors.green,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  TextSpan(
-                    text: "languages",
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  TextSpan(
-                    text: " with",
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  TextSpan(
-                    text: " 30 ",
-                    style: TextStyle(
-                      fontSize: 30,
-                      color: Colors.green,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  TextSpan(
-                    text: " tafsir books",
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  TextSpan(
-                    text: " 35+ ",
-                    style: TextStyle(
-                      fontSize: 30,
-                      color: Colors.green,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  TextSpan(
-                    text: "& Quran reciter's",
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  TextSpan(
-                    text: " recitation",
-                    style: TextStyle(
-                      fontSize: 25,
-                      color: Colors.green,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Text(
+                "introText".tr,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.grey.shade700,
+                ),
               ),
             ),
           ),
-        ),
-      ],
+          const Gap(10),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "We collected all data form this website".tr,
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.grey.shade700,
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    launchUrl(Uri.parse('https://quran.com'));
+                  },
+                  child: const Text(
+                    "quran.com",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

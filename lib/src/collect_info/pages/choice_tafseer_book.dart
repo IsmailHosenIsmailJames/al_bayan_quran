@@ -48,9 +48,9 @@ class _ChoiceTafseerBookState extends State<ChoiceTafseerBook> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Tafseer Book",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+        title: Text(
+          "Tafseer Books of Quran".tr,
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
         ),
         actions: [
           if (widget.showDownloadOnAppbar == true)

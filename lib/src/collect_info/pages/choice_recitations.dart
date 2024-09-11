@@ -128,9 +128,9 @@ class _RecitaionChoiceState extends State<RecitaionChoice> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Choice Recitation",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+        title: Text(
+          "Choice your favorite Reciter of Quran".tr,
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
         ),
       ),
       body: Column(
