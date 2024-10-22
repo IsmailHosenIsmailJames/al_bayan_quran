@@ -126,7 +126,7 @@ class _LogInState extends State<LogIn> {
             width: 340,
             decoration: BoxDecoration(
               color: const Color.fromARGB(50, 150, 150, 150),
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(7),
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -149,7 +149,7 @@ class _LogInState extends State<LogIn> {
                       decoration: const BoxDecoration(
                         color: Color.fromARGB(120, 76, 175, 79),
                         borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(10),
+                          topRight: Radius.circular(7),
                           bottomLeft: Radius.circular(20),
                         ),
                       ),
@@ -189,7 +189,7 @@ class _LogInState extends State<LogIn> {
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(7),
                               borderSide: const BorderSide(width: 3),
                             ),
                             labelText: "Email",
@@ -216,7 +216,7 @@ class _LogInState extends State<LogIn> {
                           focusNode: passwordFocusNode,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(7),
                             ),
                             labelText: "Password",
                             hintText: "Type your password here...",

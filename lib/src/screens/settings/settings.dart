@@ -218,7 +218,7 @@ class _SettingsState extends State<Settings> {
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             color: const Color.fromARGB(20, 120, 120, 120),
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(7),
           ),
           child: review,
         ),
@@ -286,7 +286,7 @@ class _SettingsState extends State<Settings> {
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             color: const Color.fromARGB(20, 120, 120, 120),
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(7),
           ),
           child: Obx(
             () => Text(
@@ -329,7 +329,7 @@ class _SettingsState extends State<Settings> {
         Container(
           decoration: BoxDecoration(
             color: const Color.fromARGB(20, 120, 120, 120),
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(7),
           ),
           padding: const EdgeInsets.all(5),
           child: Row(
@@ -347,7 +347,7 @@ class _SettingsState extends State<Settings> {
                   await showCupertinoModalPopup(
                     context: context,
                     builder: (context) {
-                      return RecitaionChoice(
+                      return RecitationChoice(
                         previousInfo:
                             Map<String, String>.from(infoBox.get("info")),
                       );
@@ -396,7 +396,7 @@ class _SettingsState extends State<Settings> {
         Container(
           decoration: BoxDecoration(
             color: const Color.fromARGB(20, 120, 120, 120),
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(7),
           ),
           padding: const EdgeInsets.all(5),
           child: Row(
@@ -475,7 +475,7 @@ class _SettingsState extends State<Settings> {
         Container(
           decoration: BoxDecoration(
             color: const Color.fromARGB(20, 120, 120, 120),
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(7),
           ),
           padding: const EdgeInsets.all(5),
           child: Row(

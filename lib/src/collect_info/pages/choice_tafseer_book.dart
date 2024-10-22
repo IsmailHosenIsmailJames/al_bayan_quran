@@ -48,9 +48,9 @@ class _ChoiceTafseerBookState extends State<ChoiceTafseerBook> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Tafseer Book",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+        title: Text(
+          "Tafseer Book in ${infoController.tafseerLanguage.value} Language",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
         ),
         actions: [
           if (widget.showDownloadOnAppbar == true)
@@ -158,10 +158,11 @@ class _ChoiceTafseerBookState extends State<ChoiceTafseerBook> {
             child: Container(
               margin: const EdgeInsets.all(3),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(7),
                 color: Colors.grey.withOpacity(0.07),
               ),
               child: ListTile(
+                horizontalTitleGap: 5,
                 titleAlignment: ListTileTitleAlignment.center,
                 title: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -169,11 +170,11 @@ class _ChoiceTafseerBookState extends State<ChoiceTafseerBook> {
                   children: [
                     Text(
                       books[index][1],
-                      style: const TextStyle(fontSize: 18),
+                      style: const TextStyle(fontSize: 15),
                     ),
                     Text(
                       books[index][0],
-                      style: const TextStyle(fontSize: 14),
+                      style: const TextStyle(fontSize: 12),
                     ),
                   ],
                 ),

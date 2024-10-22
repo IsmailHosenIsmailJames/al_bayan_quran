@@ -507,7 +507,7 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
       body: Scrollbar(
         interactive: true,
         controller: scrollController,
-        radius: const Radius.circular(10),
+        radius: const Radius.circular(7),
         thickness: 10,
         child: ListView(
           controller: scrollController,
@@ -535,7 +535,7 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
             decoration: const BoxDecoration(
               color: Color.fromARGB(15, 120, 120, 120),
               borderRadius: BorderRadius.all(
-                Radius.circular(10),
+                Radius.circular(7),
               ),
             ),
             child: Row(
@@ -556,7 +556,7 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
                         fit: BoxFit.cover,
                       ),
                       borderRadius: const BorderRadius.all(
-                        Radius.circular(10),
+                        Radius.circular(7),
                       ),
                     ),
                   ),
@@ -706,7 +706,7 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
               decoration: const BoxDecoration(
                 color: Color.fromARGB(15, 120, 120, 120),
                 borderRadius: BorderRadius.all(
-                  Radius.circular(10),
+                  Radius.circular(7),
                 ),
               ),
               child: Column(
@@ -899,7 +899,7 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
                                   SizedBox(
                                     width: 10,
                                   ),
-                                  Text("Copy With Tafsser"),
+                                  Text("Copy With Tafsir"),
                                 ],
                               ),
                             ),

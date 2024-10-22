@@ -210,7 +210,7 @@ class _NotesState extends State<Notes> {
           // ignore: use_build_context_synchronously
           context: context,
           builder: (context) => AlertDialog(
-            title: const Text("An Error Occured"),
+            title: const Text("An Error Occurred"),
             content: Text(e.toString()),
             actions: [
               TextButton(
@@ -277,7 +277,7 @@ class _NotesState extends State<Notes> {
               decoration: InputDecoration(
                 labelText: "Title",
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(7),
                 ),
               ),
             ),
@@ -301,7 +301,7 @@ class _NotesState extends State<Notes> {
               decoration: InputDecoration(
                 labelText: "Your note",
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(7),
                 ),
               ),
               controller: controller2,

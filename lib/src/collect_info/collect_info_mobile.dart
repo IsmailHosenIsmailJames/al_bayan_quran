@@ -40,6 +40,7 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+    TextTheme textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: AppBar(
         title: Row(
@@ -54,7 +55,7 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
             if (width > 430)
               const Center(
                 child: Text(
-                  "Choice your preferance",
+                  "Choice your preference",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                 ),
               ),
@@ -81,12 +82,12 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
               const ChoiceTranslationBook(),
               const TafseerLanguage(),
               const ChoiceTafseerBook(),
-              const RecitaionChoice(),
+              const RecitationChoice(),
             ][pageIndex],
           ),
           Container(
-            margin:
-                const EdgeInsets.only(top: 0, bottom: 10, left: 10, right: 10),
+            margin: const EdgeInsets.only(top: 0, bottom: 5, left: 5, right: 5),
+            padding: EdgeInsets.only(left: 5, right: 5),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30),
               color: Colors.grey.withOpacity(0.2),
@@ -95,6 +96,8 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.only(left: 10, right: 10)),
                   onPressed: pageIndex != 0
                       ? () {
                           if (pageIndex > 0) {
@@ -109,12 +112,12 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
                       Icon(
                         Icons.arrow_back_outlined,
                         color: pageIndex != 0 ? Colors.green : Colors.grey,
-                        size: 18,
+                        size: 15,
                       ),
                       const Gap(5),
                       Text(
                         "Previous",
-                        style: TextStyle(
+                        style: textTheme.bodyMedium!.copyWith(
                           color: pageIndex != 0 ? Colors.green : Colors.grey,
                           fontWeight: FontWeight.bold,
                         ),
@@ -122,17 +125,21 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
                     ],
                   ),
                 ),
+                Spacer(),
                 Row(
                   children: [
-                    getPageIndecator(0, pageIndex),
-                    getPageIndecator(1, pageIndex),
-                    getPageIndecator(2, pageIndex),
-                    getPageIndecator(3, pageIndex),
-                    getPageIndecator(4, pageIndex),
-                    getPageIndecator(5, pageIndex),
+                    getPageIndicator(0, pageIndex),
+                    getPageIndicator(1, pageIndex),
+                    getPageIndicator(2, pageIndex),
+                    getPageIndicator(3, pageIndex),
+                    getPageIndicator(4, pageIndex),
+                    getPageIndicator(5, pageIndex),
                   ],
                 ),
+                Spacer(),
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.only(left: 10, right: 10)),
                   onPressed: () async {
                     if (pageIndex == 1) {
                       if (infoController.translationLanguage.value.isEmpty) {
@@ -197,10 +204,9 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
                     children: [
                       Text(
                         pageIndex == 0 ? "Setup" : nextButtonText,
-                        style: const TextStyle(
+                        style: textTheme.bodyMedium!.copyWith(
                           color: Colors.green,
                           fontWeight: FontWeight.bold,
-                          fontSize: 16,
                         ),
                       ),
                       const Gap(5),
@@ -220,11 +226,11 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
     );
   }
 
-  Widget getPageIndecator(int index, int page) {
+  Widget getPageIndicator(int index, int page) {
     return Padding(
-      padding: const EdgeInsets.all(5.0),
+      padding: const EdgeInsets.all(3.0),
       child: CircleAvatar(
-        radius: index == page ? 9 : 5,
+        radius: index == page ? 7 : 4,
         backgroundColor: index == page ? Colors.green : Colors.grey,
       ),
     );

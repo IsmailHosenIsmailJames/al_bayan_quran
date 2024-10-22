@@ -1,4 +1,5 @@
 // import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
@@ -8,15 +9,15 @@ import 'package:just_audio_background/just_audio_background.dart';
 import '../../api/all_recitation.dart';
 import '../getx/get_controller.dart';
 
-class RecitaionChoice extends StatefulWidget {
+class RecitationChoice extends StatefulWidget {
   final Map<String, String>? previousInfo;
-  const RecitaionChoice({super.key, this.previousInfo});
+  const RecitationChoice({super.key, this.previousInfo});
 
   @override
-  State<RecitaionChoice> createState() => _RecitaionChoiceState();
+  State<RecitationChoice> createState() => _RecitationChoiceState();
 }
 
-class _RecitaionChoiceState extends State<RecitaionChoice> {
+class _RecitationChoiceState extends State<RecitationChoice> {
   final infoController = Get.put(InfoController());
 
   late List<String> allRecitationSearch = [];
@@ -98,7 +99,7 @@ class _RecitaionChoiceState extends State<RecitaionChoice> {
     await player.play();
   }
 
-  void resumeOrPuseAudio(bool isPlay) {
+  void resumeOrPauseAudio(bool isPlay) {
     if (isPlay) {
       player.play();
     } else {
@@ -130,7 +131,7 @@ class _RecitaionChoiceState extends State<RecitaionChoice> {
       appBar: AppBar(
         title: const Text(
           "Choice Recitation",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
         ),
       ),
       body: Column(
@@ -138,15 +139,9 @@ class _RecitaionChoiceState extends State<RecitaionChoice> {
           Padding(
             padding:
                 const EdgeInsets.only(left: 5.0, right: 5, bottom: 2, top: 2),
-            child: TextFormField(
+            child: CupertinoSearchTextField(
               autofocus: false,
               onChanged: (value) => search(value),
-              decoration: InputDecoration(
-                prefixIcon: const Icon(Icons.search),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
             ),
           ),
           Expanded(
@@ -166,38 +161,44 @@ class _RecitaionChoiceState extends State<RecitaionChoice> {
                   child: Container(
                     margin: const EdgeInsets.all(3),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(7),
                       color: Colors.grey.withOpacity(0.07),
                     ),
                     child: ListTile(
+                      horizontalTitleGap: 0,
                       titleAlignment: ListTileTitleAlignment.center,
                       title: SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: Row(
                           children: [
                             Container(
-                              margin: const EdgeInsets.only(right: 5),
-                              child: IconButton(
-                                onPressed: () async {
-                                  if (playingIndex != index) {
-                                    setState(() {
-                                      playingIndex = index;
-                                      String url = getBaseURLOfAudio(index);
-                                      playResource(url, 7);
-                                    });
-                                  } else {
-                                    setState(() {
-                                      playingIndex = -1;
-                                    });
-                                    resumeOrPuseAudio(false);
-                                  }
-                                },
-                                icon: Icon(playingIndex == index
-                                    ? Icons.pause
-                                    : Icons.play_arrow),
-                                style: IconButton.styleFrom(
-                                  backgroundColor:
-                                      const Color.fromARGB(108, 0, 140, 255),
+                              margin: const EdgeInsets.only(right: 7),
+                              child: SizedBox(
+                                height: 35,
+                                width: 35,
+                                child: IconButton(
+                                  iconSize: 18,
+                                  onPressed: () async {
+                                    if (playingIndex != index) {
+                                      setState(() {
+                                        playingIndex = index;
+                                        String url = getBaseURLOfAudio(index);
+                                        playResource(url, 7);
+                                      });
+                                    } else {
+                                      setState(() {
+                                        playingIndex = -1;
+                                      });
+                                      resumeOrPauseAudio(false);
+                                    }
+                                  },
+                                  icon: Icon(playingIndex == index
+                                      ? Icons.pause
+                                      : Icons.play_arrow),
+                                  style: IconButton.styleFrom(
+                                    backgroundColor:
+                                        const Color.fromARGB(108, 0, 140, 255),
+                                  ),
                                 ),
                               ),
                             ),
@@ -206,7 +207,7 @@ class _RecitaionChoiceState extends State<RecitaionChoice> {
                               children: [
                                 Text(
                                   allRecitationSearch[index],
-                                  style: const TextStyle(fontSize: 18),
+                                  style: const TextStyle(fontSize: 14),
                                 ),
                               ],
                             ),

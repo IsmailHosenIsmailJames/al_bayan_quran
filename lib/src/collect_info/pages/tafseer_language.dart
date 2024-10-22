@@ -17,15 +17,15 @@ class TafseerLanguage extends StatefulWidget {
 class _TafseerLanguageState extends State<TafseerLanguage> {
   late List<String> language;
   void getLanguageList() {
-    Set<String> temLangauge = {};
+    Set<String> temLanguages = {};
     for (int index = 0; index < allTafseer.length; index++) {
       String lanName = "${allTafseer[index]["language_name"]}";
       String tem = lanName[0];
       tem = tem.toUpperCase();
       lanName = tem + lanName.substring(1);
-      temLangauge.add(lanName);
+      temLanguages.add(lanName);
     }
-    List<String> x = temLangauge.toList();
+    List<String> x = temLanguages.toList();
     x.sort();
     language = x;
   }
@@ -43,8 +43,8 @@ class _TafseerLanguageState extends State<TafseerLanguage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Tafseer",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+          "Tafsir Language of Quran",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
         ),
         actions: [
           if (widget.showAppBarNextButton == true)
@@ -87,11 +87,13 @@ class _TafseerLanguageState extends State<TafseerLanguage> {
             child: Container(
               margin: const EdgeInsets.all(2),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(7),
                 color: Colors.grey.withOpacity(0.07),
               ),
               child: ListTile(
-                title: Text(language[index]),
+                horizontalTitleGap: 5,
+                title:
+                    Text(language[index], style: const TextStyle(fontSize: 14)),
                 leading: Obx(
                   () => Radio(
                     activeColor: Colors.green,

@@ -20,16 +20,16 @@ class TranslationLanguage extends StatefulWidget {
 class _TranslationLanguageState extends State<TranslationLanguage> {
   late List<String> language;
   void getLanguageList() {
-    Set<String> temLangauge = {};
+    Set<String> temLanguages = {};
     for (int index = 0; index < allTranslationLanguage.length; index++) {
       String langName = "${allTranslationLanguage[index]["language_name"]}";
       // if()
       String tem = langName[0];
       tem = tem.toUpperCase();
       langName = tem + langName.substring(1);
-      temLangauge.add(langName);
+      temLanguages.add(langName);
     }
-    List<String> tem = temLangauge.toList();
+    List<String> tem = temLanguages.toList();
     tem.sort();
     language = tem;
     log(language.toString());
@@ -118,8 +118,8 @@ class _TranslationLanguageState extends State<TranslationLanguage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Translation of Quran",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+          "Translation Language of Quran",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
         ),
         actions: [
           if (widget.showNextButtonOnAppBar == true)
@@ -195,7 +195,7 @@ class _TranslationLanguageState extends State<TranslationLanguage> {
                       margin: const EdgeInsets.all(3),
                       padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(7),
                         color: Colors.grey.withOpacity(0.07),
                       ),
                       child: Row(
@@ -216,7 +216,7 @@ class _TranslationLanguageState extends State<TranslationLanguage> {
                                 ? nativeName[language[index]] ?? ""
                                 : language[index],
                             style: TextStyle(
-                              fontSize: 18,
+                              fontSize: 13,
                               color: translationLanguageController
                                           .translationLanguage.value ==
                                       language[index]

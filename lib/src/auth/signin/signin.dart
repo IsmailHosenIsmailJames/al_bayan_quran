@@ -98,7 +98,7 @@ class _SignInState extends State<SignIn> {
             width: 340,
             decoration: BoxDecoration(
               color: const Color.fromARGB(50, 150, 150, 150),
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(7),
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -121,7 +121,7 @@ class _SignInState extends State<SignIn> {
                         decoration: const BoxDecoration(
                           color: Color.fromARGB(120, 76, 175, 79),
                           borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(10),
+                            topRight: Radius.circular(7),
                             bottomLeft: Radius.circular(20),
                           ),
                         ),
@@ -158,7 +158,7 @@ class _SignInState extends State<SignIn> {
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(7),
                               borderSide: const BorderSide(width: 3),
                             ),
                             labelText: "Name",
@@ -186,7 +186,7 @@ class _SignInState extends State<SignIn> {
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(7),
                               borderSide: const BorderSide(width: 3),
                             ),
                             labelText: "Email",
@@ -214,7 +214,7 @@ class _SignInState extends State<SignIn> {
                           obscureText: true,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(7),
                               borderSide: const BorderSide(width: 3),
                             ),
                             labelText: "Password",
@@ -243,7 +243,7 @@ class _SignInState extends State<SignIn> {
                           obscureText: true,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(7),
                               borderSide: const BorderSide(width: 3),
                             ),
                             labelText: "Confirm Password",

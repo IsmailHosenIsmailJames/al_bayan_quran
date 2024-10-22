@@ -134,7 +134,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
         // ignore: use_build_context_synchronously
         context: context,
         builder: (context) => AlertDialog(
-          title: const Text("An Error Occured"),
+          title: const Text("An Error Occurred"),
           content: Text(e.toString()),
           actions: [
             TextButton(
@@ -345,7 +345,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
               decoration: const BoxDecoration(
                 color: Color.fromARGB(50, 119, 119, 119),
                 borderRadius: BorderRadius.all(
-                  Radius.circular(10),
+                  Radius.circular(7),
                 ),
               ),
               child: Row(
@@ -354,7 +354,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                   const Text(
                     "Notes",
                     style: TextStyle(
-                      fontSize: 30,
+                      fontSize: 18,
                       color: Colors.green,
                       fontWeight: FontWeight.bold,
                     ),
@@ -372,7 +372,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
           Container(
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(
-                Radius.circular(10),
+                Radius.circular(7),
               ),
             ),
             child: SizeTransition(
@@ -400,7 +400,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
               decoration: const BoxDecoration(
                 color: Color.fromARGB(50, 119, 119, 119),
                 borderRadius: BorderRadius.all(
-                  Radius.circular(10),
+                  Radius.circular(7),
                 ),
               ),
               child: Row(
@@ -409,7 +409,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                   const Text(
                     "Favorite",
                     style: TextStyle(
-                      fontSize: 30,
+                      fontSize: 18,
                       color: Colors.green,
                       fontWeight: FontWeight.bold,
                     ),
@@ -427,7 +427,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
           Container(
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(
-                Radius.circular(10),
+                Radius.circular(7),
               ),
             ),
             child: SizeTransition(
@@ -455,7 +455,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
               decoration: const BoxDecoration(
                 color: Color.fromARGB(50, 119, 119, 119),
                 borderRadius: BorderRadius.all(
-                  Radius.circular(10),
+                  Radius.circular(7),
                 ),
               ),
               child: Row(
@@ -464,7 +464,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                   const Text(
                     "Book Mark",
                     style: TextStyle(
-                      fontSize: 30,
+                      fontSize: 18,
                       color: Colors.green,
                       fontWeight: FontWeight.bold,
                     ),
@@ -482,7 +482,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
           Container(
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(
-                Radius.circular(10),
+                Radius.circular(7),
               ),
             ),
             child: SizeTransition(

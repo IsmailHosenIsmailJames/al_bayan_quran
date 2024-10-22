@@ -27,12 +27,9 @@ class _MyDrawerState extends State<MyDrawer> {
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
-        padding: const EdgeInsets.only(
-          right: 10,
-          bottom: 20,
-        ),
         children: [
           DrawerHeader(
+            decoration: BoxDecoration(color: Colors.green.withOpacity(0.15)),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -50,7 +47,7 @@ class _MyDrawerState extends State<MyDrawer> {
                                 "LogIn",
                                 style: TextStyle(
                                   color: Colors.green,
-                                  fontSize: 30,
+                                  fontSize: 20,
                                 ),
                               ),
                               icon: const Icon(
@@ -58,9 +55,12 @@ class _MyDrawerState extends State<MyDrawer> {
                                 color: Colors.green,
                               ),
                             ),
-                            const Text(
-                              "You Need to login for more Features.\nFor Example, you can save your notes in\ncloud and access it from any places.",
-                              style: TextStyle(fontSize: 10),
+                            SizedBox(
+                              width: 210,
+                              child: const Text(
+                                "You Need to login for more Features. For Example, you can save your notes in cloud and access it from any places.",
+                                style: TextStyle(fontSize: 10),
+                              ),
                             )
                           ],
                         ),
