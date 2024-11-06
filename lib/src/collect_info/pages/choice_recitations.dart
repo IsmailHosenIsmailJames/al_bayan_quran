@@ -1,4 +1,5 @@
 // import 'package:audioplayers/audioplayers.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -94,9 +95,47 @@ class _RecitationChoiceState extends State<RecitationChoice> {
       shuffleOrder: DefaultShuffleOrder(),
       children: audioResourceSource,
     );
-    await player.setAudioSource(playlist,
-        initialIndex: 0, initialPosition: Duration.zero);
-    await player.play();
+    try {
+      await player.setAudioSource(playlist,
+          initialIndex: 0, initialPosition: Duration.zero);
+      await player.play();
+    } catch (e) {
+      final connectivityResult = await Connectivity().checkConnectivity();
+
+      showDialog(
+        // ignore: use_build_context_synchronously
+        context: context,
+        builder: (context) =>
+            (connectivityResult.contains(ConnectivityResult.mobile) ||
+                    connectivityResult.contains(ConnectivityResult.wifi) ||
+                    connectivityResult.contains(ConnectivityResult.ethernet))
+                ? AlertDialog(
+                    title: const Text("Oops! Audio temporarily unavailable!"),
+                    content: const Text(
+                      "Thank you for using our app! It looks like the audio files are currently offline. We’re working hard to get everything back up and running smoothly. Please check back soon, and thank you for your patience and understanding!",
+                    ),
+                    actions: [
+                      TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text("OK"))
+                    ],
+                  )
+                : AlertDialog(
+                    title: const Text("Oops! You have no internet connection"),
+                    content: const Text(
+                        "Note: When you play any ayah for the first time it will get downloaded from internet. Then it will stored as cached data in your local memory. You need internet connection now for play this audio."),
+                    actions: [
+                      TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text("OK"))
+                    ],
+                  ),
+      );
+    }
   }
 
   void resumeOrPauseAudio(bool isPlay) {
