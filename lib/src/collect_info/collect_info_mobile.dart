@@ -90,7 +90,6 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
           Container(
             margin: const EdgeInsets.only(top: 0, bottom: 5, left: 5, right: 5),
             padding: EdgeInsets.only(left: 5, right: 5),
-
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30),
               color: Colors.grey.withOpacity(0.2),
@@ -101,7 +100,6 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.only(left: 10, right: 10)),
-
                   onPressed: pageIndex != 0
                       ? () {
                           if (pageIndex > 0) {
@@ -122,7 +120,6 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
                       Text(
                         "Previous",
                         style: textTheme.bodyMedium!.copyWith(
-
                           color: pageIndex != 0 ? Colors.green : Colors.grey,
                           fontWeight: FontWeight.bold,
                         ),
@@ -133,23 +130,19 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
                 Spacer(),
                 Row(
                   children: [
-
-                    getPageIndecator(0, pageIndex),
-                    getPageIndecator(1, pageIndex),
-                    getPageIndecator(2, pageIndex),
-                    getPageIndecator(3, pageIndex),
-                    getPageIndecator(4, pageIndex),
-                    getPageIndecator(5, pageIndex),
-                    getPageIndecator(6, pageIndex),
-
+                    getPageIndicator(0, pageIndex),
+                    getPageIndicator(1, pageIndex),
+                    getPageIndicator(2, pageIndex),
+                    getPageIndicator(3, pageIndex),
+                    getPageIndicator(4, pageIndex),
+                    getPageIndicator(5, pageIndex),
+                    getPageIndicator(6, pageIndex),
                   ],
                 ),
                 Spacer(),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-
                       padding: const EdgeInsets.only(left: 7, right: 7)),
-
                   onPressed: () async {
                     if (pageIndex == 0) {
                       if (infoController.appLanCode.value.isEmpty) {
@@ -219,13 +212,11 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
                   child: Row(
                     children: [
                       Text(
-
                         pageIndex == 0 ? "Setup".tr : nextButtonText,
                         style: const TextStyle(
                           color: Colors.green,
                           fontWeight: FontWeight.bold,
                           fontSize: 14,
-
                         ),
                       ),
                       const Gap(5),
@@ -247,9 +238,7 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
 
   Widget getPageIndicator(int index, int page) {
     return Padding(
-
       padding: const EdgeInsets.all(2.0),
-
       child: CircleAvatar(
         radius: index == page ? 7 : 4,
         backgroundColor: index == page ? Colors.green : Colors.grey,
