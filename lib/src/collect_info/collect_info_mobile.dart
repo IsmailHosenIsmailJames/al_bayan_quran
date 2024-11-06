@@ -1,4 +1,5 @@
 import 'package:al_bayan_quran/src/collect_info/pages/intro.dart';
+import 'package:al_bayan_quran/src/collect_info/pages/select_langauge.dart';
 import 'package:al_bayan_quran/src/core/show_twoested_message.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -25,7 +26,6 @@ class CollectInfoMobile extends StatefulWidget {
 
 class _CollectInfoMobileState extends State<CollectInfoMobile> {
   late int indexPage;
-  String nextButtonText = "Next";
 
   @override
   void initState() {
@@ -39,15 +39,16 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
 
   @override
   Widget build(BuildContext context) {
+    String nextButtonText = "Next".tr;
     double width = MediaQuery.of(context).size.width;
     TextTheme textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: AppBar(
         title: Row(
           children: [
-            const Text(
-              "Al Quran",
-              style: TextStyle(
+            Text(
+              "Al Quran".tr,
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -67,7 +68,7 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
                       "https://www.freeprivacypolicy.com/live/d8c08904-a100-4f0b-94d8-13d86a8c8605"),
                 );
               },
-              child: const Text("Privacy Policy"),
+              child: Text("Privacy Policy".tr),
             ),
           ],
         ),
@@ -77,6 +78,7 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
         children: [
           Expanded(
             child: [
+              const SelectLangauge(),
               const Intro(),
               const TranslationLanguage(),
               const ChoiceTranslationBook(),
@@ -88,16 +90,18 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
           Container(
             margin: const EdgeInsets.only(top: 0, bottom: 5, left: 5, right: 5),
             padding: EdgeInsets.only(left: 5, right: 5),
+
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30),
               color: Colors.grey.withOpacity(0.2),
             ),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.only(left: 10, right: 10)),
+
                   onPressed: pageIndex != 0
                       ? () {
                           if (pageIndex > 0) {
@@ -118,6 +122,7 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
                       Text(
                         "Previous",
                         style: textTheme.bodyMedium!.copyWith(
+
                           color: pageIndex != 0 ? Colors.green : Colors.grey,
                           fontWeight: FontWeight.bold,
                         ),
@@ -128,44 +133,55 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
                 Spacer(),
                 Row(
                   children: [
-                    getPageIndicator(0, pageIndex),
-                    getPageIndicator(1, pageIndex),
-                    getPageIndicator(2, pageIndex),
-                    getPageIndicator(3, pageIndex),
-                    getPageIndicator(4, pageIndex),
-                    getPageIndicator(5, pageIndex),
+
+                    getPageIndecator(0, pageIndex),
+                    getPageIndecator(1, pageIndex),
+                    getPageIndecator(2, pageIndex),
+                    getPageIndecator(3, pageIndex),
+                    getPageIndecator(4, pageIndex),
+                    getPageIndecator(5, pageIndex),
+                    getPageIndecator(6, pageIndex),
+
                   ],
                 ),
                 Spacer(),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.only(left: 10, right: 10)),
+
+                      padding: const EdgeInsets.only(left: 7, right: 7)),
+
                   onPressed: () async {
-                    if (pageIndex == 1) {
-                      if (infoController.translationLanguage.value.isEmpty) {
+                    if (pageIndex == 0) {
+                      if (infoController.appLanCode.value.isEmpty) {
                         showTwoestedMessage(
                             "Please Select Quran Translation Language");
                         return;
                       }
                     } else if (pageIndex == 2) {
+                      if (infoController.translationLanguage.value.isEmpty) {
+                        showTwoestedMessage("Please select a language for app");
+
+                        return;
+                      }
+                    } else if (pageIndex == 3) {
                       if (infoController.bookNameIndex.value == -1) {
                         showTwoestedMessage(
                             "Please Select Quran Translation Book");
                         return;
                       }
                     }
-                    if (pageIndex == 3) {
+                    if (pageIndex == 4) {
                       if (infoController.tafseerIndex.value == -1) {
                         showTwoestedMessage(
                             "Please Select Quran Tafsir Language");
                         return;
                       }
-                    } else if (pageIndex == 4) {
+                    } else if (pageIndex == 5) {
                       if (infoController.tafseerBookIndex.value == -1) {
                         showTwoestedMessage("Please Select Quran Tafsir Book");
                         return;
                       }
-                    } else if (pageIndex == 5) {
+                    } else if (pageIndex == 6) {
                       if (infoController.recitationIndex.value != -1 &&
                           infoController.tafseerBookIndex.value != -1 &&
                           infoController.tafseerIndex.value != -1 &&
@@ -194,7 +210,7 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
                         }
                       }
                     }
-                    if (pageIndex < 5) {
+                    if (pageIndex < 6) {
                       setState(() {
                         pageIndex++;
                       });
@@ -203,10 +219,13 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
                   child: Row(
                     children: [
                       Text(
-                        pageIndex == 0 ? "Setup" : nextButtonText,
-                        style: textTheme.bodyMedium!.copyWith(
+
+                        pageIndex == 0 ? "Setup".tr : nextButtonText,
+                        style: const TextStyle(
                           color: Colors.green,
                           fontWeight: FontWeight.bold,
+                          fontSize: 14,
+
                         ),
                       ),
                       const Gap(5),
@@ -228,7 +247,9 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
 
   Widget getPageIndicator(int index, int page) {
     return Padding(
-      padding: const EdgeInsets.all(3.0),
+
+      padding: const EdgeInsets.all(2.0),
+
       child: CircleAvatar(
         radius: index == page ? 7 : 4,
         backgroundColor: index == page ? Colors.green : Colors.grey,

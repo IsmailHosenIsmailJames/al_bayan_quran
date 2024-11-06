@@ -48,7 +48,8 @@ class _ChoiceTranslationStateBook extends State<ChoiceTranslationBook> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Translation Book ${infoController.translationLanguage.value == "" ? "" : "for ${infoController.translationLanguage.value}"} Language",
+
+          "Translation Book".tr,
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
         ),
         actions: [

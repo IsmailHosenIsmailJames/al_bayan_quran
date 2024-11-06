@@ -117,9 +117,9 @@ class _TranslationLanguageState extends State<TranslationLanguage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Translation Language of Quran",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+        title: Text(
+          "Translation of Quran".tr,
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
         ),
         actions: [
           if (widget.showNextButtonOnAppBar == true)

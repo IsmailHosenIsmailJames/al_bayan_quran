@@ -49,8 +49,9 @@ class _ChoiceTafseerBookState extends State<ChoiceTafseerBook> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Tafseer Book in ${infoController.tafseerLanguage.value} Language",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          "Tafseer Books of Quran".tr,
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+
         ),
         actions: [
           if (widget.showDownloadOnAppbar == true)

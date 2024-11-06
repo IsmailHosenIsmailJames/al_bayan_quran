@@ -42,9 +42,10 @@ class _TafseerLanguageState extends State<TafseerLanguage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Tafsir Language of Quran",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+
+        title: Text(
+          "Select language for Quran's Tafseer".tr,
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
         ),
         actions: [
           if (widget.showAppBarNextButton == true)

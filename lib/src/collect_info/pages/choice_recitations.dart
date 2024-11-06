@@ -171,6 +171,7 @@ class _RecitationChoiceState extends State<RecitationChoice> {
         title: const Text(
           "Choice Recitation",
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+
         ),
       ),
       body: Column(

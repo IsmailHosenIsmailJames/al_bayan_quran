@@ -16,6 +16,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   appwrite: ^13.0.0
+
   flutter_widget_from_html_core: ^0.15.2
   archive: ^3.6.1
   google_fonts: ^6.2.1
@@ -73,6 +74,7 @@ flutter:
 
 icons_launcher:
   image_path: "assets/img/QuranLogo.jpg"
+
   platforms:
     android:
       enable: true

@@ -4,9 +4,15 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 
+import 'src/collect_info/getx/get_controller.dart';
 import 'src/collect_info/init.dart';
 import 'src/theme/theme_controller.dart';
 import 'package:appwrite/appwrite.dart';
+
+import 'src/translations/language_controller.dart';
+import 'src/translations/map_of_translation.dart';
+
+import 'dart:ui' as ui;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -61,8 +67,24 @@ class MyApp extends StatelessWidget {
       ),
       defaultTransition: Transition.leftToRight,
       themeMode: ThemeMode.system,
+      locale: Get.deviceLocale,
+      fallbackLocale: const ui.Locale("en"),
+      translationsKeys: AppTranslation.translationsKeys,
       onInit: () async {
         final appTheme = Get.put(AppThemeData());
+        final infoController = Get.put(InfoController());
+
+        final languageController = Get.put(LanguageController());
+        final prefBox = Hive.box("info");
+        String? languageCode = prefBox.get("app_lan", defaultValue: null);
+        if (languageCode == null) {
+          languageCode ??= Get.locale?.languageCode;
+          infoController.appLanCode.value = languageCode ?? '';
+          languageController.changeLanguage = languageCode ?? 'en';
+        } else {
+          languageController.changeLanguage = languageCode;
+          infoController.appLanCode.value = languageCode;
+        }
         appTheme.initTheme();
       },
       home: const StartUpPage(),

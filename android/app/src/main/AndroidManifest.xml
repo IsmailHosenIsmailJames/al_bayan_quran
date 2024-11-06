@@ -7,7 +7,9 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application android:usesCleartextTraffic="true" android:label="Al Quran"
+
         android:name="${applicationName}" android:icon="@mipmap/ic_launcher">
+
         <activity android:name="com.linusu.flutter_web_auth_2.CallbackActivity"
             android:exported="true">
             <intent-filter android:label="flutter_web_auth_2">
