@@ -105,7 +105,7 @@ class _CollectInfoDesktopState extends State<CollectInfoDesktop> {
             Spacer(),
             Center(
               child: Text(
-                "Choice your preferance",
+                "Choice your preference",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               ),
             ),
@@ -135,7 +135,7 @@ class _CollectInfoDesktopState extends State<CollectInfoDesktop> {
               }
             },
           ),
-          const Expanded(flex: 4, child: RecitaionChoice()),
+          const Expanded(flex: 4, child: RecitationChoice()),
         ],
       ),
     );

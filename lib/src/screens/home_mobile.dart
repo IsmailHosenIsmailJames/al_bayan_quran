@@ -8,6 +8,7 @@ import 'package:appwrite/appwrite.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:just_audio/just_audio.dart';
@@ -55,11 +56,11 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
 
   @override
   void initState() {
-    for (String recitor in allRecitation) {
+    for (String rector in allRecitation) {
       dropdownList.add(
         DropdownMenuEntry(
-          value: recitor,
-          label: recitor.split("(")[0],
+          value: rector,
+          label: rector.split("(")[0],
         ),
       );
     }
@@ -429,7 +430,7 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
           context: context,
           builder: (context) => AlertDialog(
             title: const Text(
-              "An error occoured",
+              "An error occurred",
             ),
             content: const Text(
                 "Need stable internet connection for play audio for the first time."),
@@ -496,28 +497,27 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
               children: [
                 Row(
                   children: [
-                    CircleAvatar(
-                      radius: 16,
-                      backgroundColor: const Color.fromARGB(195, 0, 133, 4),
-                      child: Center(
-                        child: Text(
-                          (index + 1).toString(),
-                          style: const TextStyle(color: Colors.white),
-                        ),
+                    Text(
+                      (index + 1).toString(),
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
+                    Gap(15),
+                    CircleAvatar(
+                      radius: 17,
+                      backgroundColor: const Color.fromARGB(255, 0, 140, 255),
                       child: playingIndex == index && isPlaying
                           ? const Icon(
                               Icons.pause_rounded,
-                              size: 30,
-                              color: Color.fromARGB(195, 0, 133, 4),
+                              size: 25,
+                              color: Colors.white,
                             )
                           : const Icon(
                               Icons.play_arrow_rounded,
-                              size: 30,
-                              color: Color.fromARGB(195, 0, 133, 4),
+                              size: 25,
+                              color: Colors.white,
                             ),
                     ),
                     Container(
@@ -789,7 +789,7 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
                 children: [
                   CircleAvatar(
                     radius: 25,
-                    backgroundColor: const Color.fromARGB(195, 0, 168, 6),
+                    backgroundColor: Colors.grey.shade700,
                     child: Center(
                       child: Text(
                         (surahNumber + 1).toString(),
@@ -876,7 +876,7 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                !isLoogedIn
+                !isLoggedIn
                     ? Center(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -900,7 +900,7 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
                             ),
                             const Text(
                               "You Need to login for more Features.\nFor Example, you can save your notes in\ncloud and access it from any places.",
-                              style: TextStyle(fontSize: 10),
+                              style: TextStyle(fontSize: 9),
                             )
                           ],
                         ),
@@ -1126,7 +1126,7 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
           const SizedBox(
             height: 5,
           ),
-          if (isLoogedIn)
+          if (isLoggedIn)
             TextButton(
               onPressed: () async {
                 Client client = Client()
@@ -1135,7 +1135,7 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
                 Account account = Account(client);
                 await account.deleteSession(sessionId: 'current');
                 setState(() {
-                  isLoogedIn = false;
+                  isLoggedIn = false;
                 });
               },
               child: const Row(
@@ -1186,7 +1186,7 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
       child: DropdownMenu(
         inputDecorationTheme: InputDecorationTheme(
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(7),
           ),
         ),
         menuHeight: 300,
@@ -1216,36 +1216,42 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
               onTap: (i) => setState(() => currentIndex = i),
               items: [
                 SalomonBottomBarItem(
-                  icon: const Padding(
-                    padding: EdgeInsets.only(left: 20, right: 20),
+                  icon: Padding(
+                    padding: EdgeInsets.only(
+                        left: currentIndex == 0 ? 0 : 15,
+                        right: currentIndex == 0 ? 0 : 15),
                     child: Icon(
                       FontAwesomeIcons.bookOpen,
                       size: 20,
                     ),
                   ),
                   title: const Text(
-                    "Quran",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    " Quran",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                   ),
                 ),
                 SalomonBottomBarItem(
-                  icon: const Padding(
-                    padding: EdgeInsets.only(left: 20, right: 20),
+                  icon: Padding(
+                    padding: EdgeInsets.only(
+                        left: currentIndex == 1 ? 0 : 15,
+                        right: currentIndex == 1 ? 0 : 15),
                     child: Icon(Icons.audiotrack_outlined),
                   ),
                   title: const Text(
                     "Audio",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                   ),
                 ),
                 SalomonBottomBarItem(
-                  icon: const Padding(
-                    padding: EdgeInsets.only(left: 20, right: 20),
+                  icon: Padding(
+                    padding: EdgeInsets.only(
+                        left: currentIndex == 2 ? 0 : 15,
+                        right: currentIndex == 2 ? 0 : 15),
                     child: Icon(Icons.person),
                   ),
                   title: const Text(
                     "Profile",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                   ),
                 ),
               ],
@@ -1374,7 +1380,7 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
                     children: [
                       Scrollbar(
                         interactive: true,
-                        radius: const Radius.circular(10),
+                        radius: const Radius.circular(7),
                         thickness: 10,
                         child: ListView(
                           scrollDirection: Axis.vertical,
@@ -1578,7 +1584,7 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
               Text(currentReciter.split("(")[0]),
               Container(
                 margin: const EdgeInsets.only(left: 10, right: 10),
-                height: 80,
+                height: 60,
                 decoration: const BoxDecoration(
                   color: Color.fromARGB(30, 125, 125, 125),
                   borderRadius: BorderRadius.all(
@@ -1598,7 +1604,7 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
                             },
                       icon: const Icon(
                         Icons.navigate_before_rounded,
-                        size: 40,
+                        size: 35,
                       ),
                     ),
                     IconButton(
@@ -1608,7 +1614,7 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
                       },
                       icon: const Icon(
                         Icons.skip_previous_rounded,
-                        size: 40,
+                        size: 35,
                       ),
                     ),
                     IconButton(
@@ -1633,11 +1639,11 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
                       icon: isPlaying
                           ? const Icon(
                               Icons.pause_rounded,
-                              size: 55,
+                              size: 40,
                             )
                           : const Icon(
                               Icons.play_arrow_rounded,
-                              size: 55,
+                              size: 40,
                             ),
                     ),
                     IconButton(
@@ -1647,7 +1653,7 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
                       },
                       icon: const Icon(
                         Icons.skip_next_rounded,
-                        size: 40,
+                        size: 35,
                       ),
                     ),
                     IconButton(
@@ -1659,7 +1665,7 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
                             },
                       icon: const Icon(
                         Icons.navigate_next_rounded,
-                        size: 40,
+                        size: 35,
                       ),
                     ),
                   ],
@@ -1713,11 +1719,11 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
       itemTextPadding: const EdgeInsets.only(left: 30),
       selectedItemTextPadding: const EdgeInsets.only(left: 30),
       itemDecoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(7),
         border: Border.all(color: canvasColor),
       ),
       selectedItemDecoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(7),
         border: Border.all(
           color: actionColor.withOpacity(0.37),
         ),
@@ -1752,7 +1758,7 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
             return Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                !isLoogedIn
+                !isLoggedIn
                     ? Center(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,

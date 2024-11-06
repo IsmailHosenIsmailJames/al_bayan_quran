@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
           seedColor: Colors.green,
           brightness: Brightness.light,
         ),
+        textTheme: GoogleFonts.poppinsTextTheme(),
       ),
       darkTheme: ThemeData.dark().copyWith(
         floatingActionButtonTheme: FloatingActionButtonThemeData(
@@ -56,6 +58,11 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.green,
           brightness: Brightness.dark,
+        ),
+        textTheme: GoogleFonts.poppinsTextTheme().apply(
+          bodyColor: Colors.white,
+          displayColor: Colors.white,
+          decorationColor: Colors.white,
         ),
       ),
       defaultTransition: Transition.leftToRight,

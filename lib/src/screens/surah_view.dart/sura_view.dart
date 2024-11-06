@@ -29,7 +29,7 @@ class SuraView extends StatelessWidget {
         appBar: AppBar(
           title: Center(
             child: Text(
-              surahName ?? "Al Bayan Quran",
+              surahName ?? "Al Quran",
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ),

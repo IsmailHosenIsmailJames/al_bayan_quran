@@ -5,6 +5,7 @@ import 'package:al_bayan_quran/src/data/download/links.dart';
 import 'package:al_bayan_quran/src/screens/home_mobile.dart';
 import 'package:al_bayan_quran/src/theme/theme_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
@@ -305,16 +306,14 @@ class _DownloadDataState extends State<DownloadData> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Text(
-              "Please Wait\nDownloading...\nIt will take around 30 sec.",
+              "Downloading...",
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(
-              height: 30,
-            ),
+            Gap(10),
             CircularProgressIndicator(
               value: progressValue,
               backgroundColor: Colors.grey.shade200,

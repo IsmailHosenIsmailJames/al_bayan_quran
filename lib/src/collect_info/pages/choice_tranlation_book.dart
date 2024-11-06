@@ -20,17 +20,17 @@ class ChoiceTranslationBook extends StatefulWidget {
 
 class _ChoiceTranslationStateBook extends State<ChoiceTranslationBook> {
   final infoController = Get.put(InfoController());
-  final fontHandeler = Get.put(ScreenGetxController());
+  final fontHandler = Get.put(ScreenGetxController());
   List<List<String>> books = [];
   void getBooksAsLanguage() {
     for (int i = 0; i < allTranslationLanguage.length; i++) {
       Map<String, dynamic> book = allTranslationLanguage[i];
       if (book['language_name'].toString().toLowerCase() ==
           infoController.translationLanguage.value.toLowerCase()) {
-        String autor = book['author_name'];
+        String author = book['author_name'];
         String bookName = book['name'];
         String id = book['id'].toString();
-        books.add([autor, bookName, id]);
+        books.add([author, bookName, id]);
       }
     }
   }
@@ -48,8 +48,9 @@ class _ChoiceTranslationStateBook extends State<ChoiceTranslationBook> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
+
           "Translation Book".tr,
-          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
         ),
         actions: [
           if (widget.showDownloadOnAppbar == true)
@@ -58,7 +59,7 @@ class _ChoiceTranslationStateBook extends State<ChoiceTranslationBook> {
                 : TextButton.icon(
                     onPressed: () async {
                       if (infoController.translationLanguage.value.isNotEmpty) {
-                        final dataBoox = Hive.box("data");
+                        final dataBox = Hive.box("data");
                         final infoBox = Hive.box("info");
                         String bookTranslationID =
                             infoController.bookIDTranslation.value;
@@ -68,7 +69,7 @@ class _ChoiceTranslationStateBook extends State<ChoiceTranslationBook> {
                             context: context,
                             builder: (context) {
                               return AlertDialog(
-                                title: const Text("Worng Selection"),
+                                title: const Text("Wrong Selection"),
                                 content: const Text(
                                     "Your selection can't matched with the previous selection."),
                                 actions: [
@@ -85,7 +86,7 @@ class _ChoiceTranslationStateBook extends State<ChoiceTranslationBook> {
                           return;
                         }
 
-                        dataBoox.put("translation", false);
+                        dataBox.put("translation", false);
                         setState(() {
                           downloading = true;
                         });
@@ -117,7 +118,7 @@ class _ChoiceTranslationStateBook extends State<ChoiceTranslationBook> {
                         info['translation_language'] =
                             infoController.translationLanguage.value;
                         infoBox.put("info", info);
-                        dataBoox.put("translation", true);
+                        dataBox.put("translation", true);
                         infoBox.put('translation', bookTranslationID);
 
                         Get.offAll(() => const HomeMobile());
@@ -170,10 +171,11 @@ class _ChoiceTranslationStateBook extends State<ChoiceTranslationBook> {
             child: Container(
               margin: const EdgeInsets.all(2),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(7),
                 color: Colors.grey.withOpacity(0.07),
               ),
               child: ListTile(
+                horizontalTitleGap: 5,
                 titleAlignment: ListTileTitleAlignment.center,
                 title: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -181,11 +183,11 @@ class _ChoiceTranslationStateBook extends State<ChoiceTranslationBook> {
                   children: [
                     Text(
                       books[index][1],
-                      style: const TextStyle(fontSize: 18),
+                      style: const TextStyle(fontSize: 15),
                     ),
                     Text(
                       books[index][0],
-                      style: const TextStyle(fontSize: 14),
+                      style: const TextStyle(fontSize: 11),
                     ),
                   ],
                 ),

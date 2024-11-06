@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
-bool isLoogedIn = false;
+bool isLoggedIn = false;
 String quranScriptType = "quran_tajweed";
 
 class AppThemeData extends GetxController {
@@ -16,7 +16,7 @@ class AppThemeData extends GetxController {
     final accountController = Get.put(AccountInfo());
     accountController.email.value = accountBox.get("email") ?? "";
 
-    isLoogedIn =
+    isLoggedIn =
         accountBox.get("email") != "" && accountBox.get("email") != null;
     accountController.name.value = accountBox.get("name") ?? "";
     accountController.uid.value = accountBox.get("uid") ?? "";

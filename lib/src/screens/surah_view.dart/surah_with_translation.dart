@@ -7,6 +7,7 @@ import 'package:al_bayan_quran/src/screens/surah_view.dart/surah_view_reading.da
 import 'package:al_bayan_quran/src/screens/surah_view.dart/tafseer/tafseer.dart';
 import 'package:archive/archive.dart';
 import 'package:clipboard/clipboard.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -204,21 +205,39 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
         showFloatingControllers = false;
         playingIndex = -1;
       });
+      final connectivityResult = await Connectivity().checkConnectivity();
       showDialog(
         // ignore: use_build_context_synchronously
         context: context,
-        builder: (context) => AlertDialog(
-          title: const Text("Need Internet Connection"),
-          content: const Text(
-              "Note: When you play any ayah for the first time it will get downloaded from internet. Then it will stored as cached data in your local memory. You need internet connection now for play this audio."),
-          actions: [
-            TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text("OK"))
-          ],
-        ),
+        builder: (context) =>
+            (connectivityResult.contains(ConnectivityResult.mobile) ||
+                    connectivityResult.contains(ConnectivityResult.wifi) ||
+                    connectivityResult.contains(ConnectivityResult.ethernet))
+                ? AlertDialog(
+                    title: const Text("Oops! Audio temporarily unavailable!"),
+                    content: const Text(
+                      "Thank you for using our app! It looks like the audio files are currently offline. We’re working hard to get everything back up and running smoothly. Please check back soon, and thank you for your patience and understanding!",
+                    ),
+                    actions: [
+                      TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text("OK"))
+                    ],
+                  )
+                : AlertDialog(
+                    title: const Text("Oops! You have no internet connection"),
+                    content: const Text(
+                        "Note: When you play any ayah for the first time it will get downloaded from internet. Then it will stored as cached data in your local memory. You need internet connection now for play this audio."),
+                    actions: [
+                      TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text("OK"))
+                    ],
+                  ),
       );
     }
   }
@@ -233,8 +252,8 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
     return listOfURL;
   }
 
-  String getBaseURLOfAudio(String recitor) {
-    List<String> splited = recitor.split("(");
+  String getBaseURLOfAudio(String rector) {
+    List<String> splited = rector.split("(");
     String urlID = splited[1].replaceAll(")", "");
     String audioBaseURL = "https://everyayah.com/data/$urlID";
     return audioBaseURL;
@@ -507,7 +526,7 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
       body: Scrollbar(
         interactive: true,
         controller: scrollController,
-        radius: const Radius.circular(10),
+        radius: const Radius.circular(7),
         thickness: 10,
         child: ListView(
           controller: scrollController,
@@ -535,7 +554,7 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
             decoration: const BoxDecoration(
               color: Color.fromARGB(15, 120, 120, 120),
               borderRadius: BorderRadius.all(
-                Radius.circular(10),
+                Radius.circular(7),
               ),
             ),
             child: Row(
@@ -556,7 +575,7 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
                         fit: BoxFit.cover,
                       ),
                       borderRadius: const BorderRadius.all(
-                        Radius.circular(10),
+                        Radius.circular(7),
                       ),
                     ),
                   ),
@@ -706,7 +725,7 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
               decoration: const BoxDecoration(
                 color: Color.fromARGB(15, 120, 120, 120),
                 borderRadius: BorderRadius.all(
-                  Radius.circular(10),
+                  Radius.circular(7),
                 ),
               ),
               child: Column(
@@ -899,7 +918,7 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
                                   SizedBox(
                                     width: 10,
                                   ),
-                                  Text("Copy With Tafsser"),
+                                  Text("Copy With Tafsir"),
                                 ],
                               ),
                             ),

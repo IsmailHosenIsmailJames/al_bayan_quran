@@ -47,10 +47,11 @@ class OthersPlatform extends StatelessWidget {
                       ],
                     ),
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 12,
                     ),
+                    textAlign: TextAlign.justify,
                   ),
-                  const Gap(30),
+                  const Gap(50),
                   const Padding(
                     padding: EdgeInsets.only(left: 20),
                     child: Text(

@@ -85,7 +85,7 @@ List<Widget> buildWidgetForFavBook(String name) {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(
-              Radius.circular(10),
+              Radius.circular(7),
             ),
             color: const Color.fromARGB(255, 103, 134, 105).withOpacity(0.1),
           ),
