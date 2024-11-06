@@ -55,7 +55,7 @@ class _LogInState extends State<LogIn> {
           accountInfoHiveBox.put("uid", user.$id);
           accountInfoHiveBox.put("email", email.trim());
           setState(() {
-            isLoogedIn = true;
+            isLoggedIn = true;
           });
           Databases databases = Databases(client);
           final document = await databases.getDocument(

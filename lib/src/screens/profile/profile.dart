@@ -230,7 +230,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
       body: ListView(
         padding: const EdgeInsets.all(5),
         children: [
-          !isLoogedIn
+          !isLoggedIn
               ? Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,

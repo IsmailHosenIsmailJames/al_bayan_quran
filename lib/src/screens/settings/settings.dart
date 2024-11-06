@@ -87,7 +87,7 @@ class _SettingsState extends State<Settings> {
               const Text(
                 "Settings",
                 style: TextStyle(
-                  fontSize: 24,
+                  fontSize: 20,
                   color: Colors.green,
                   fontWeight: FontWeight.bold,
                 ),
@@ -118,7 +118,7 @@ class _SettingsState extends State<Settings> {
             Text(
               "Quran Font",
               style: TextStyle(
-                fontSize: 20,
+                fontSize: 16,
                 color: Colors.green,
                 fontWeight: FontWeight.bold,
               ),
@@ -126,12 +126,12 @@ class _SettingsState extends State<Settings> {
           ],
         ),
         const SizedBox(
-          height: 10,
+          height: 15,
         ),
         const Text(
           "Font Size Of Quran",
           style: TextStyle(
-            fontSize: 16,
+            fontSize: 14,
             color: Colors.green,
             fontWeight: FontWeight.bold,
           ),
@@ -165,7 +165,7 @@ class _SettingsState extends State<Settings> {
         const Text(
           "Script Type",
           style: TextStyle(
-              fontSize: 18, color: Colors.green, fontWeight: FontWeight.bold),
+              fontSize: 14, color: Colors.green, fontWeight: FontWeight.bold),
         ),
         const SizedBox(
           height: 8,
@@ -241,7 +241,7 @@ class _SettingsState extends State<Settings> {
             Text(
               "Translation Font",
               style: TextStyle(
-                fontSize: 20,
+                fontSize: 16,
                 color: Colors.green,
                 fontWeight: FontWeight.bold,
               ),
@@ -254,7 +254,7 @@ class _SettingsState extends State<Settings> {
         const Text(
           "Font Size Of Translation",
           style: TextStyle(
-            fontSize: 16,
+            fontSize: 14,
             color: Colors.green,
             fontWeight: FontWeight.bold,
           ),
@@ -316,7 +316,7 @@ class _SettingsState extends State<Settings> {
             Text(
               "Quran Reciter",
               style: TextStyle(
-                fontSize: 22,
+                fontSize: 16,
                 color: Colors.green,
                 fontWeight: FontWeight.bold,
               ),
@@ -338,7 +338,7 @@ class _SettingsState extends State<Settings> {
               Text(
                 recitor.split("(")[0],
                 style: const TextStyle(
-                  fontSize: 20,
+                  fontSize: 12,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -358,7 +358,7 @@ class _SettingsState extends State<Settings> {
                 child: const Text(
                   "Change",
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 14,
                     color: Colors.green,
                     fontWeight: FontWeight.bold,
                   ),
@@ -383,7 +383,7 @@ class _SettingsState extends State<Settings> {
             Text(
               "Quran Translation Language & Book",
               style: TextStyle(
-                fontSize: 20,
+                fontSize: 16,
                 color: Colors.green,
                 fontWeight: FontWeight.bold,
               ),
@@ -410,7 +410,7 @@ class _SettingsState extends State<Settings> {
                   Text(
                     "Language : ${info['translation_language']}",
                     style: const TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.bold),
+                        fontSize: 12, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(
                     height: 3,
@@ -418,7 +418,7 @@ class _SettingsState extends State<Settings> {
                   Text(
                     "Book Name : ${bookName.length > 20 ? "${bookName.substring(0, 18)}..." : bookName}",
                     style: const TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.bold),
+                        fontSize: 12, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
@@ -436,7 +436,7 @@ class _SettingsState extends State<Settings> {
                 child: const Text(
                   "Change",
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 14,
                     color: Colors.green,
                     fontWeight: FontWeight.bold,
                   ),
@@ -462,7 +462,7 @@ class _SettingsState extends State<Settings> {
             Text(
               "Quran Tafsir Language & Book",
               style: TextStyle(
-                fontSize: 20,
+                fontSize: 16,
                 color: Colors.green,
                 fontWeight: FontWeight.bold,
               ),
@@ -489,7 +489,7 @@ class _SettingsState extends State<Settings> {
                   Text(
                     "Language : ${info['tafseer_language']}",
                     style: const TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.bold),
+                        fontSize: 12, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(
                     height: 3,
@@ -497,7 +497,7 @@ class _SettingsState extends State<Settings> {
                   Text(
                     "Book Name : ${tafsirBookName.length > 20 ? "${tafsirBookName.substring(0, 18)}..." : tafsirBookName}",
                     style: const TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.bold),
+                        fontSize: 12, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
@@ -513,7 +513,7 @@ class _SettingsState extends State<Settings> {
                 child: const Text(
                   "Change",
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 14,
                     color: Colors.green,
                     fontWeight: FontWeight.bold,
                   ),

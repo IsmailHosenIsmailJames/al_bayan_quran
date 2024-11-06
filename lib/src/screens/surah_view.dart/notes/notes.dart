@@ -110,7 +110,7 @@ class _NotesState extends State<Notes> {
   }
 
   void uploadNotes() async {
-    if (isLoogedIn == false) {
+    if (isLoggedIn == false) {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(

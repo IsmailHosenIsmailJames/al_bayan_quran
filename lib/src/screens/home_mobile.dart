@@ -789,7 +789,7 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
                 children: [
                   CircleAvatar(
                     radius: 25,
-                    backgroundColor: const Color.fromARGB(195, 0, 168, 6),
+                    backgroundColor: Colors.grey.shade700,
                     child: Center(
                       child: Text(
                         (surahNumber + 1).toString(),
@@ -876,7 +876,7 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                !isLoogedIn
+                !isLoggedIn
                     ? Center(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -900,7 +900,7 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
                             ),
                             const Text(
                               "You Need to login for more Features.\nFor Example, you can save your notes in\ncloud and access it from any places.",
-                              style: TextStyle(fontSize: 10),
+                              style: TextStyle(fontSize: 9),
                             )
                           ],
                         ),
@@ -1126,7 +1126,7 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
           const SizedBox(
             height: 5,
           ),
-          if (isLoogedIn)
+          if (isLoggedIn)
             TextButton(
               onPressed: () async {
                 Client client = Client()
@@ -1135,7 +1135,7 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
                 Account account = Account(client);
                 await account.deleteSession(sessionId: 'current');
                 setState(() {
-                  isLoogedIn = false;
+                  isLoggedIn = false;
                 });
               },
               child: const Row(
@@ -1216,36 +1216,42 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
               onTap: (i) => setState(() => currentIndex = i),
               items: [
                 SalomonBottomBarItem(
-                  icon: const Padding(
-                    padding: EdgeInsets.only(left: 20, right: 20),
+                  icon: Padding(
+                    padding: EdgeInsets.only(
+                        left: currentIndex == 0 ? 0 : 15,
+                        right: currentIndex == 0 ? 0 : 15),
                     child: Icon(
                       FontAwesomeIcons.bookOpen,
                       size: 20,
                     ),
                   ),
                   title: const Text(
-                    "Quran",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    " Quran",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                   ),
                 ),
                 SalomonBottomBarItem(
-                  icon: const Padding(
-                    padding: EdgeInsets.only(left: 20, right: 20),
+                  icon: Padding(
+                    padding: EdgeInsets.only(
+                        left: currentIndex == 1 ? 0 : 15,
+                        right: currentIndex == 1 ? 0 : 15),
                     child: Icon(Icons.audiotrack_outlined),
                   ),
                   title: const Text(
                     "Audio",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                   ),
                 ),
                 SalomonBottomBarItem(
-                  icon: const Padding(
-                    padding: EdgeInsets.only(left: 20, right: 20),
+                  icon: Padding(
+                    padding: EdgeInsets.only(
+                        left: currentIndex == 2 ? 0 : 15,
+                        right: currentIndex == 2 ? 0 : 15),
                     child: Icon(Icons.person),
                   ),
                   title: const Text(
                     "Profile",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                   ),
                 ),
               ],
@@ -1752,7 +1758,7 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
             return Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                !isLoogedIn
+                !isLoggedIn
                     ? Center(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,

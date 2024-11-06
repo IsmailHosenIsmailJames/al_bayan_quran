@@ -33,7 +33,7 @@ class _MyDrawerState extends State<MyDrawer> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                !isLoogedIn
+                !isLoggedIn
                     ? Center(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -277,7 +277,7 @@ class _MyDrawerState extends State<MyDrawer> {
           const SizedBox(
             height: 5,
           ),
-          if (isLoogedIn)
+          if (isLoggedIn)
             TextButton(
               onPressed: () async {
                 Client client = Client()
@@ -286,7 +286,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 Account account = Account(client);
                 await account.deleteSession(sessionId: 'current');
                 setState(() {
-                  isLoogedIn = false;
+                  isLoggedIn = false;
                 });
                 Get.offAll(
                   () => const InIt(),

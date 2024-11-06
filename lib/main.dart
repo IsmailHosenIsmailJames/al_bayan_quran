@@ -59,6 +59,7 @@ class MyApp extends StatelessWidget {
           decorationColor: Colors.white,
         ),
       ),
+      defaultTransition: Transition.leftToRight,
       themeMode: ThemeMode.system,
       onInit: () async {
         final appTheme = Get.put(AppThemeData());

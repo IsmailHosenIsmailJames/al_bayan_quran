@@ -68,7 +68,7 @@ class _SignInState extends State<SignIn> {
           accountInfoHiveBox.put("email", email.trim());
 
           setState(() {
-            isLoogedIn = true;
+            isLoggedIn = true;
           });
         }
       }
