@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:al_bayan_quran/src/collect_info/pages/choice_tranlation_book.dart';
+import 'package:al_quran/src/collect_info/pages/choice_tranlation_book.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';

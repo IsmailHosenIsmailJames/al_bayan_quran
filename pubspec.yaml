@@ -1,4 +1,4 @@
-name: al_bayan_quran
+name: al_quran
 description: "All in one Al Quran App with Translation, Tefsir, Quran Audiobook & Notes Backup"
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
@@ -64,7 +64,7 @@ flutter:
   assets:
     - assets/img/makkah.jpg
     - assets/img/madina.jpeg
-    - assets/img/QuranLogo.jpg
+    - assets/img/QuranLogo.png
 
  
   # fonts:
@@ -73,7 +73,7 @@ flutter:
   #       - asset: assets/fonts/Al Qalam Quran.ttf
 
 icons_launcher:
-  image_path: "assets/img/QuranLogo.jpg"
+  image_path: "assets/img/QuranLogo.png"
 
   platforms:
     android:

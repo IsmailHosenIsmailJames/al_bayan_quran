@@ -25,7 +25,7 @@ class Intro extends StatelessWidget {
               ],
               image: const DecorationImage(
                 image: AssetImage(
-                  "assets/img/QuranLogo.jpg",
+                  "assets/img/QuranLogo.png",
                 ),
               ),
             ),

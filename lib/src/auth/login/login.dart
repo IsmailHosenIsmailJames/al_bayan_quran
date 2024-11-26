@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:al_bayan_quran/src/core/show_twoested_message.dart';
-import 'package:al_bayan_quran/src/screens/home_mobile.dart';
-import 'package:al_bayan_quran/src/theme/theme_controller.dart';
+import 'package:al_quran/src/core/show_twoested_message.dart';
+import 'package:al_quran/src/screens/home_mobile.dart';
+import 'package:al_quran/src/theme/theme_controller.dart';
 import 'package:appwrite/appwrite.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';

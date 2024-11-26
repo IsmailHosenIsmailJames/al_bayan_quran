@@ -1,9 +1,9 @@
-import 'package:al_bayan_quran/src/collect_info/pages/choice_recitations.dart';
-import 'package:al_bayan_quran/src/collect_info/pages/tafseer_language.dart';
-import 'package:al_bayan_quran/src/collect_info/pages/translation_language.dart';
-import 'package:al_bayan_quran/src/screens/home_mobile.dart';
-import 'package:al_bayan_quran/src/theme/theme_controller.dart';
-import 'package:al_bayan_quran/src/theme/theme_icon_button.dart';
+import 'package:al_quran/src/collect_info/pages/choice_recitations.dart';
+import 'package:al_quran/src/collect_info/pages/tafseer_language.dart';
+import 'package:al_quran/src/collect_info/pages/translation_language.dart';
+import 'package:al_quran/src/screens/home_mobile.dart';
+import 'package:al_quran/src/theme/theme_controller.dart';
+import 'package:al_quran/src/theme/theme_icon_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

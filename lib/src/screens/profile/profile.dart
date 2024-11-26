@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:al_bayan_quran/src/screens/drawer/drawer.dart';
-import 'package:al_bayan_quran/src/screens/favorite_bookmark_notes/get_data.dart';
-import 'package:al_bayan_quran/src/screens/favorite_bookmark_notes/notes_get_data.dart';
+import 'package:al_quran/src/screens/drawer/drawer.dart';
+import 'package:al_quran/src/screens/favorite_bookmark_notes/get_data.dart';
+import 'package:al_quran/src/screens/favorite_bookmark_notes/notes_get_data.dart';
 import 'package:appwrite/appwrite.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

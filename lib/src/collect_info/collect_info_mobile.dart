@@ -1,6 +1,6 @@
-import 'package:al_bayan_quran/src/collect_info/pages/intro.dart';
-import 'package:al_bayan_quran/src/collect_info/pages/select_langauge.dart';
-import 'package:al_bayan_quran/src/core/show_twoested_message.dart';
+import 'package:al_quran/src/collect_info/pages/intro.dart';
+import 'package:al_quran/src/collect_info/pages/select_langauge.dart';
+import 'package:al_quran/src/core/show_twoested_message.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
@@ -40,7 +40,6 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
   @override
   Widget build(BuildContext context) {
     String nextButtonText = "Next".tr;
-    double width = MediaQuery.of(context).size.width;
     TextTheme textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: AppBar(
@@ -52,14 +51,6 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const Spacer(),
-            if (width > 430)
-              const Center(
-                child: Text(
-                  "Choice your preference",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                ),
-              ),
             const Spacer(),
             TextButton(
               onPressed: () {
@@ -78,7 +69,7 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
         children: [
           Expanded(
             child: [
-              const SelectLangauge(),
+              const SelectLanguage(),
               const Intro(),
               const TranslationLanguage(),
               const ChoiceTranslationBook(),
@@ -231,6 +222,7 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
               ],
             ),
           ),
+          Gap(10)
         ],
       ),
     );

@@ -1,7 +1,7 @@
-import 'package:al_bayan_quran/src/auth/account_info/account_info.dart';
-import 'package:al_bayan_quran/src/core/show_twoested_message.dart';
-import 'package:al_bayan_quran/src/screens/home_mobile.dart';
-import 'package:al_bayan_quran/src/theme/theme_icon_button.dart';
+import 'package:al_quran/src/auth/account_info/account_info.dart';
+import 'package:al_quran/src/core/show_twoested_message.dart';
+import 'package:al_quran/src/screens/home_mobile.dart';
+import 'package:al_quran/src/theme/theme_icon_button.dart';
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart' as models;
 import 'package:email_validator/email_validator.dart';

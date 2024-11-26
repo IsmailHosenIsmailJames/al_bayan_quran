@@ -1,5 +1,5 @@
-import 'package:al_bayan_quran/src/auth/account_info/account_info.dart';
-import 'package:al_bayan_quran/src/screens/getx_controller.dart';
+import 'package:al_quran/src/auth/account_info/account_info.dart';
+import 'package:al_quran/src/screens/getx_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';

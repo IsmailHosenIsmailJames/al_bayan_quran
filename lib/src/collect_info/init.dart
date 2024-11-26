@@ -1,5 +1,5 @@
-import 'package:al_bayan_quran/src/collect_info/collect_info_layout_responsive.dart';
-import 'package:al_bayan_quran/src/screens/home_mobile.dart';
+import 'package:al_quran/src/collect_info/collect_info_layout_responsive.dart';
+import 'package:al_quran/src/screens/home_mobile.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 

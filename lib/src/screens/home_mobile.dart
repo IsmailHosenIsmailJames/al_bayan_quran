@@ -1,9 +1,9 @@
-import 'package:al_bayan_quran/src/collect_info/getx/get_controller.dart';
-import 'package:al_bayan_quran/src/screens/drawer/settings_with_appbar.dart';
-import 'package:al_bayan_quran/src/screens/favorite_bookmark_notes/book_mark.dart';
-import 'package:al_bayan_quran/src/screens/favorite_bookmark_notes/favorite.dart';
-import 'package:al_bayan_quran/src/screens/favorite_bookmark_notes/notes_v.dart';
-import 'package:al_bayan_quran/src/screens/platforms/others_platform.dart';
+import 'package:al_quran/src/collect_info/getx/get_controller.dart';
+import 'package:al_quran/src/screens/drawer/settings_with_appbar.dart';
+import 'package:al_quran/src/screens/favorite_bookmark_notes/book_mark.dart';
+import 'package:al_quran/src/screens/favorite_bookmark_notes/favorite.dart';
+import 'package:al_quran/src/screens/favorite_bookmark_notes/notes_v.dart';
+import 'package:al_quran/src/screens/platforms/others_platform.dart';
 import 'package:appwrite/appwrite.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';

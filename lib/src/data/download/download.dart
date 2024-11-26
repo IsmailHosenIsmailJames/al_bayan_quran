@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:al_bayan_quran/src/data/download/links.dart';
-import 'package:al_bayan_quran/src/screens/home_mobile.dart';
-import 'package:al_bayan_quran/src/theme/theme_controller.dart';
+import 'package:al_quran/src/data/download/links.dart';
+import 'package:al_quran/src/screens/home_mobile.dart';
+import 'package:al_quran/src/theme/theme_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
@@ -52,7 +52,7 @@ class _DownloadDataState extends State<DownloadData> {
       final infoBox = Hive.box("info");
       final info = infoBox.get("info", defaultValue: false);
       if (info != false) {
-        Map<String, String> preferance = {
+        Map<String, String> preference = {
           "translation_language": info['translation_language'],
           "translation_book_ID": info["translation_book_ID"],
           "tafseer_language": info['tafseer_language'],
@@ -64,7 +64,7 @@ class _DownloadDataState extends State<DownloadData> {
           setState(() {
             progressValue = 0.02;
           });
-          final quraninforbox = await Hive.openBox("quran_info");
+          final quranInfoBox = await Hive.openBox("quran_info");
           var url = Uri.parse(
               "https://raw.githubusercontent.com/IsmailHosenIsmailJames/quran_backend/main/public/infos.txt");
           var headers = {"Accept": "application/json"};
@@ -80,13 +80,13 @@ class _DownloadDataState extends State<DownloadData> {
               ),
             );
             jsonBody.forEach((key, value) {
-              quraninforbox.put(
-                "info_${preferance['translation_book_ID']}/$key/text",
+              quranInfoBox.put(
+                "info_${preference['translation_book_ID']}/$key/text",
                 jsonDecode(value),
               );
             });
-            final dataBoox = Hive.box("data");
-            dataBoox.put("quran_info", true);
+            final dataBox = Hive.box("data");
+            dataBox.put("quran_info", true);
             infoBox.put('quran_info', true);
           }
         }
@@ -199,8 +199,8 @@ class _DownloadDataState extends State<DownloadData> {
             }
           }
 
-          final dataBoox = Hive.box("data");
-          dataBoox.put("quran", true);
+          final dataBox = Hive.box("data");
+          dataBox.put("quran", true);
           infoBox.put('quran', true);
         } else {
           setState(() {
@@ -210,9 +210,9 @@ class _DownloadDataState extends State<DownloadData> {
 
         if (infoBox.get('translation', defaultValue: false) == false ||
             infoBox.get('translation', defaultValue: false) !=
-                preferance['translation_book_ID']) {
+                preference['translation_book_ID']) {
           var url = Uri.parse(
-              "https://api.quran.com/api/v4/quran/translations/${preferance['translation_book_ID']}");
+              "https://api.quran.com/api/v4/quran/translations/${preference['translation_book_ID']}");
           var headers = {"Accept": "application/json"};
 
           var response = await http.get(url, headers: headers);
@@ -233,7 +233,7 @@ class _DownloadDataState extends State<DownloadData> {
 
             for (int i = 0; i < translation.length; i++) {
               translationBox.put(
-                "${preferance['translation_book_ID']}/$i",
+                "${preference['translation_book_ID']}/$i",
                 translation[i]['text'].toString(),
               );
             }
@@ -241,9 +241,9 @@ class _DownloadDataState extends State<DownloadData> {
               progressValue = 0.85;
             });
 
-            final dataBoox = Hive.box("data");
-            dataBoox.put("translation", true);
-            infoBox.put('translation', preferance['translation_book_ID']);
+            final dataBox = Hive.box("data");
+            dataBox.put("translation", true);
+            infoBox.put('translation', preference['translation_book_ID']);
           } else {
             setState(() {});
           }
@@ -254,7 +254,7 @@ class _DownloadDataState extends State<DownloadData> {
         }
         if (infoBox.get('tafseer', defaultValue: false) == false ||
             infoBox.get('tafseer', defaultValue: false) !=
-                preferance['tafseer_book_ID']) {
+                preference['tafseer_book_ID']) {
           setState(() {
             progressValue = 0.90;
           });
@@ -262,8 +262,8 @@ class _DownloadDataState extends State<DownloadData> {
           final tafseerBox = await Hive.openBox("tafseer");
           int ran = Random().nextInt(2);
           final url = Uri.parse(ran == 1
-              ? tafseerLinks2[preferance['tafseer_book_ID']]!
-              : tafseerLinks1[preferance['tafseer_book_ID']]!);
+              ? tafseerLinks2[preference['tafseer_book_ID']]!
+              : tafseerLinks1[preference['tafseer_book_ID']]!);
           final headers = {"Accept": "application/json"};
           final response = await http.get(url, headers: headers);
           setState(() {
@@ -275,14 +275,14 @@ class _DownloadDataState extends State<DownloadData> {
               String? ayah = tafseer['$i'];
               if (ayah != null) {
                 tafseerBox.put(
-                  "${preferance['tafseer_book_ID']}/$i",
+                  "${preference['tafseer_book_ID']}/$i",
                   tafseer["$i"],
                 );
               }
             }
-            final dataBoox = Hive.box("data");
-            dataBoox.put("tafseer", true);
-            infoBox.put('tafseer', preferance['tafseer_book_ID']);
+            final dataBox = Hive.box("data");
+            dataBox.put("tafseer", true);
+            infoBox.put('tafseer', preference['tafseer_book_ID']);
           }
         }
         AppThemeData().initTheme();

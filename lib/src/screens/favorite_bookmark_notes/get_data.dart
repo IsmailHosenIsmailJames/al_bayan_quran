@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:al_bayan_quran/src/screens/surah_view.dart/sura_view.dart';
-import 'package:al_bayan_quran/src/screens/surah_view.dart/tafseer/tafseer.dart';
+import 'package:al_quran/src/screens/surah_view.dart/sura_view.dart';
+import 'package:al_quran/src/screens/surah_view.dart/tafseer/tafseer.dart';
 import 'package:archive/archive.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:al_bayan_quran/src/auth/login/login.dart';
-import 'package:al_bayan_quran/src/theme/theme_controller.dart';
+import 'package:al_quran/src/auth/login/login.dart';
+import 'package:al_quran/src/theme/theme_controller.dart';
 import 'package:appwrite/appwrite.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

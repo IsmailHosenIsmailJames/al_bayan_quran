@@ -1,4 +1,4 @@
-import 'package:al_bayan_quran/src/theme/theme_icon_button.dart';
+import 'package:al_quran/src/theme/theme_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/adapters.dart';

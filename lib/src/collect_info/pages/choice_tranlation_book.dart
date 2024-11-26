@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'package:al_bayan_quran/src/core/show_twoested_message.dart';
-import 'package:al_bayan_quran/src/screens/getx_controller.dart';
-import 'package:al_bayan_quran/src/screens/home_mobile.dart';
+import 'package:al_quran/src/core/show_twoested_message.dart';
+import 'package:al_quran/src/screens/getx_controller.dart';
+import 'package:al_quran/src/screens/home_mobile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
@@ -48,7 +48,6 @@ class _ChoiceTranslationStateBook extends State<ChoiceTranslationBook> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-
           "Translation Book".tr,
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
         ),

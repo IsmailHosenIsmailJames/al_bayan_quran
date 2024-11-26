@@ -1,4 +1,4 @@
-import 'package:al_bayan_quran/src/collect_info/getx/get_controller.dart';
+import 'package:al_quran/src/collect_info/getx/get_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
@@ -7,14 +7,14 @@ import 'package:hive/hive.dart';
 import '../../translations/language_controller.dart';
 import '../../translations/map_of_translation.dart';
 
-class SelectLangauge extends StatefulWidget {
-  const SelectLangauge({super.key});
+class SelectLanguage extends StatefulWidget {
+  const SelectLanguage({super.key});
 
   @override
-  State<SelectLangauge> createState() => _SelectLangaugeState();
+  State<SelectLanguage> createState() => _SelectLangaugeState();
 }
 
-class _SelectLangaugeState extends State<SelectLangauge> {
+class _SelectLangaugeState extends State<SelectLanguage> {
   final languageController = Get.put(LanguageController());
   final infoController = Get.put(InfoController());
 

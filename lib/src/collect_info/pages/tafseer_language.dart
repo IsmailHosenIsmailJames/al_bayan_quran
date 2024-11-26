@@ -1,4 +1,4 @@
-import 'package:al_bayan_quran/src/collect_info/pages/choice_tafseer_book.dart';
+import 'package:al_quran/src/collect_info/pages/choice_tafseer_book.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -42,7 +42,6 @@ class _TafseerLanguageState extends State<TafseerLanguage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-
         title: Text(
           "Select language for Quran's Tafseer".tr,
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),

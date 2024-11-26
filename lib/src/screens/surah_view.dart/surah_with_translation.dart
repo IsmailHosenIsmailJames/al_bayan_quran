@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:al_bayan_quran/src/api/some_api_response.dart';
-import 'package:al_bayan_quran/src/core/show_twoested_message.dart';
-import 'package:al_bayan_quran/src/screens/getx_controller.dart';
-import 'package:al_bayan_quran/src/screens/surah_view.dart/surah_view_reading.dart';
-import 'package:al_bayan_quran/src/screens/surah_view.dart/tafseer/tafseer.dart';
+import 'package:al_quran/src/api/some_api_response.dart';
+import 'package:al_quran/src/core/show_twoested_message.dart';
+import 'package:al_quran/src/screens/getx_controller.dart';
+import 'package:al_quran/src/screens/surah_view.dart/surah_view_reading.dart';
+import 'package:al_quran/src/screens/surah_view.dart/tafseer/tafseer.dart';
 import 'package:archive/archive.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';

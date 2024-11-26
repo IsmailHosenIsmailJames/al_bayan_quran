@@ -1,7 +1,7 @@
-import 'package:al_bayan_quran/src/screens/settings/settings.dart';
-import 'package:al_bayan_quran/src/screens/surah_view.dart/surah_view_reading.dart';
-import 'package:al_bayan_quran/src/screens/surah_view.dart/surah_with_translation.dart';
-import 'package:al_bayan_quran/src/theme/theme_controller.dart';
+import 'package:al_quran/src/screens/settings/settings.dart';
+import 'package:al_quran/src/screens/surah_view.dart/surah_view_reading.dart';
+import 'package:al_quran/src/screens/surah_view.dart/surah_with_translation.dart';
+import 'package:al_quran/src/theme/theme_controller.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
