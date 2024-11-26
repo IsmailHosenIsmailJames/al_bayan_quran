@@ -157,49 +157,54 @@ class _ChoiceTranslationStateBook extends State<ChoiceTranslationBook> {
       ),
       body: ListView.builder(
         scrollDirection: Axis.vertical,
-        padding: const EdgeInsets.only(bottom: 100, top: 10, left: 3, right: 3),
+        padding:
+            const EdgeInsets.only(bottom: 100, top: 10, left: 10, right: 10),
         itemCount: books.length,
         itemBuilder: (context, index) {
-          return GestureDetector(
-            onTap: () {
-              int value = index;
-              infoController.bookNameIndex.value = value;
-              infoController.bookIDTranslation.value = books[value][2];
-            },
-            behavior: HitTestBehavior.translucent,
-            child: Container(
-              margin: const EdgeInsets.all(2),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(7),
-                color: Colors.grey.withOpacity(0.07),
-              ),
-              child: ListTile(
-                horizontalTitleGap: 5,
-                titleAlignment: ListTileTitleAlignment.center,
-                title: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      books[index][1],
-                      style: const TextStyle(fontSize: 15),
-                    ),
-                    Text(
-                      books[index][0],
-                      style: const TextStyle(fontSize: 11),
-                    ),
-                  ],
+          return Container(
+            margin: EdgeInsets.only(top: 5, bottom: 5),
+            child: TextButton(
+              style: TextButton.styleFrom(
+                padding:
+                    EdgeInsets.only(left: 10, right: 10, bottom: 5, top: 5),
+                backgroundColor: Colors.green.shade400.withOpacity(0.1),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(7),
                 ),
-                leading: Obx(
-                  () => Radio(
-                    activeColor: Colors.green,
-                    value: index,
-                    groupValue: infoController.bookNameIndex.value,
-                    onChanged: (value) {
-                      infoController.bookNameIndex.value = value!;
-                      infoController.bookIDTranslation.value = books[value][2];
-                    },
-                  ),
+              ),
+              onPressed: () {
+                int value = index;
+                infoController.bookNameIndex.value = value;
+                infoController.bookIDTranslation.value = books[value][2];
+              },
+              child: Obx(
+                () => Row(
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          books[index][1],
+                          style: const TextStyle(fontSize: 15),
+                        ),
+                        Text(
+                          books[index][0],
+                          style: const TextStyle(fontSize: 11),
+                        ),
+                      ],
+                    ),
+                    Spacer(),
+                    if (infoController.bookNameIndex.value == index)
+                      CircleAvatar(
+                        radius: 15,
+                        backgroundColor: Colors.green,
+                        child: Icon(
+                          Icons.done,
+                          color: Colors.white,
+                        ),
+                      ),
+                  ],
                 ),
               ),
             ),

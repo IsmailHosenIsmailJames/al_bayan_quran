@@ -74,37 +74,38 @@ class _TafseerLanguageState extends State<TafseerLanguage> {
       ),
       body: ListView.builder(
         scrollDirection: Axis.vertical,
-        padding: const EdgeInsets.only(bottom: 100, top: 10, left: 3, right: 3),
+        padding:
+            const EdgeInsets.only(bottom: 100, top: 10, left: 10, right: 10),
         itemCount: language.length,
         itemBuilder: (context, index) {
-          return GestureDetector(
-            onTap: () {
+          return TextButton(
+            style: TextButton.styleFrom(
+              padding: EdgeInsets.only(left: 10, right: 10, bottom: 5, top: 5),
+              backgroundColor: Colors.green.shade400.withOpacity(0.1),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(7),
+              ),
+            ),
+            onPressed: () {
               int value = index;
               tafseerLanguage.tafseerIndex.value = value;
               tafseerLanguage.tafseerLanguage.value = language[value];
             },
-            behavior: HitTestBehavior.translucent,
-            child: Container(
-              margin: const EdgeInsets.all(2),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(7),
-                color: Colors.grey.withOpacity(0.07),
-              ),
-              child: ListTile(
-                horizontalTitleGap: 5,
-                title:
-                    Text(language[index], style: const TextStyle(fontSize: 14)),
-                leading: Obx(
-                  () => Radio(
-                    activeColor: Colors.green,
-                    value: index,
-                    groupValue: tafseerLanguage.tafseerIndex.value,
-                    onChanged: (value) {
-                      tafseerLanguage.tafseerIndex.value = value!;
-                      tafseerLanguage.tafseerLanguage.value = language[value];
-                    },
-                  ),
-                ),
+            child: Obx(
+              () => Row(
+                children: [
+                  Text(language[index], style: const TextStyle(fontSize: 14)),
+                  Spacer(),
+                  if (tafseerLanguage.tafseerIndex.value == index)
+                    CircleAvatar(
+                      radius: 15,
+                      backgroundColor: Colors.green,
+                      child: Icon(
+                        Icons.done,
+                        color: Colors.white,
+                      ),
+                    ),
+                ],
               ),
             ),
           );

@@ -51,7 +51,6 @@ class _ChoiceTafseerBookState extends State<ChoiceTafseerBook> {
         title: Text(
           "Tafseer Books of Quran".tr,
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-
         ),
         actions: [
           if (widget.showDownloadOnAppbar == true)
@@ -64,7 +63,7 @@ class _ChoiceTafseerBookState extends State<ChoiceTafseerBook> {
                             infoController.tafseerBookID.value;
                         debugPrint(tafsirBookID);
                         // return;
-                        final dataBoox = Hive.box("data");
+                        final dataBox = Hive.box("data");
                         final infoBox = Hive.box("info");
                         if (tafsirBookID ==
                             infoBox.get("info")['tafseer_book_ID']) {
@@ -72,7 +71,7 @@ class _ChoiceTafseerBookState extends State<ChoiceTafseerBook> {
                             context: context,
                             builder: (context) {
                               return AlertDialog(
-                                title: const Text("Worng Selection"),
+                                title: const Text("Wrong Selection"),
                                 content: const Text(
                                     "Your selection can't matched with the previous selection."),
                                 actions: [
@@ -89,7 +88,7 @@ class _ChoiceTafseerBookState extends State<ChoiceTafseerBook> {
                           return;
                         }
 
-                        dataBoox.put("tafseer", false);
+                        dataBox.put("tafseer", false);
                         setState(() {
                           downloading = true;
                         });
@@ -121,7 +120,7 @@ class _ChoiceTafseerBookState extends State<ChoiceTafseerBook> {
                           info['tafseer_language'] =
                               infoController.tafseerLanguage.value;
                           infoBox.put("info", info);
-                          dataBoox.put("tafseer", true);
+                          dataBox.put("tafseer", true);
                           infoBox.put(
                               'tafseer', infoController.tafseerBookID.value);
 
@@ -149,46 +148,50 @@ class _ChoiceTafseerBookState extends State<ChoiceTafseerBook> {
         padding: const EdgeInsets.only(bottom: 100, top: 10, left: 3, right: 3),
         itemCount: books.length,
         itemBuilder: (context, index) {
-          return GestureDetector(
-            onTap: () {
-              int value = index;
-              infoController.tafseerBookIndex.value = value;
-              infoController.tafseerBookID.value = books[value][2];
-            },
-            behavior: HitTestBehavior.translucent,
-            child: Container(
-              margin: const EdgeInsets.all(3),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(7),
-                color: Colors.grey.withOpacity(0.07),
-              ),
-              child: ListTile(
-                horizontalTitleGap: 5,
-                titleAlignment: ListTileTitleAlignment.center,
-                title: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      books[index][1],
-                      style: const TextStyle(fontSize: 15),
-                    ),
-                    Text(
-                      books[index][0],
-                      style: const TextStyle(fontSize: 12),
-                    ),
-                  ],
+          return Container(
+            margin: EdgeInsets.only(top: 5, bottom: 5),
+            child: TextButton(
+              style: TextButton.styleFrom(
+                padding:
+                    EdgeInsets.only(left: 10, right: 10, bottom: 5, top: 5),
+                backgroundColor: Colors.green.shade400.withOpacity(0.1),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(7),
                 ),
-                leading: Obx(
-                  () => Radio(
-                    activeColor: Colors.green,
-                    value: index,
-                    groupValue: infoController.tafseerBookIndex.value,
-                    onChanged: (value) {
-                      infoController.tafseerBookIndex.value = value!;
-                      infoController.tafseerBookID.value = books[value][2];
-                    },
-                  ),
+              ),
+              onPressed: () {
+                int value = index;
+                infoController.tafseerBookIndex.value = value;
+                infoController.tafseerBookID.value = books[value][2];
+              },
+              child: Obx(
+                () => Row(
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          books[index][1],
+                          style: const TextStyle(fontSize: 15),
+                        ),
+                        Text(
+                          books[index][0],
+                          style: const TextStyle(fontSize: 12),
+                        ),
+                      ],
+                    ),
+                    Spacer(),
+                    if (infoController.tafseerBookIndex.value == index)
+                      CircleAvatar(
+                        radius: 15,
+                        backgroundColor: Colors.green,
+                        child: Icon(
+                          Icons.done,
+                          color: Colors.white,
+                        ),
+                      ),
+                  ],
                 ),
               ),
             ),

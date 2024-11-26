@@ -50,6 +50,11 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.light,
         ),
         textTheme: GoogleFonts.poppinsTextTheme(),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            shadowColor: Colors.transparent,
+          ),
+        ),
       ),
       darkTheme: ThemeData.dark().copyWith(
         floatingActionButtonTheme: FloatingActionButtonThemeData(
@@ -63,6 +68,11 @@ class MyApp extends StatelessWidget {
           bodyColor: Colors.white,
           displayColor: Colors.white,
           decorationColor: Colors.white,
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            shadowColor: Colors.transparent,
+          ),
         ),
       ),
       defaultTransition: Transition.leftToRight,

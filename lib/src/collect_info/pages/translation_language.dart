@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:al_quran/src/collect_info/pages/choice_tranlation_book.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
 import '../../api/some_api_response.dart';
@@ -151,7 +150,7 @@ class _TranslationLanguageState extends State<TranslationLanguage> {
         children: [
           Container(
             padding: const EdgeInsets.only(top: 5, left: 10, right: 10),
-            height: 50,
+            height: 45,
             child: CupertinoSearchTextField(
               onChanged: (value) {
                 value = value.toLowerCase();
@@ -184,46 +183,51 @@ class _TranslationLanguageState extends State<TranslationLanguage> {
                   bottom: 100, top: 10, left: 10, right: 10),
               itemCount: language.length,
               itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    translationLanguageController.translationLanguage.value =
-                        language[index];
-                  },
-                  behavior: HitTestBehavior.translucent,
-                  child: Obx(
-                    () => Container(
-                      margin: const EdgeInsets.all(3),
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
+                return Container(
+                  margin: EdgeInsets.only(top: 5, bottom: 5),
+                  height: 40,
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      padding: EdgeInsets.only(
+                          left: 10, right: 10, bottom: 5, top: 5),
+                      backgroundColor: Colors.green.shade400.withOpacity(0.1),
+                      shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(7),
-                        color: Colors.grey.withOpacity(0.07),
                       ),
-                      child: Row(
+                    ),
+                    onPressed: () {
+                      translationLanguageController.translationLanguage.value =
+                          language[index];
+                    },
+                    child: Obx(
+                      () => Row(
                         children: [
-                          translationLanguageController
-                                      .translationLanguage.value ==
-                                  language[index]
-                              ? const Icon(
-                                  Icons.radio_button_checked,
-                                  color: Colors.green,
-                                )
-                              : const Icon(
-                                  Icons.radio_button_unchecked,
-                                ),
-                          const Gap(15),
                           Text(
                             nativeName.keys.contains(language[index])
                                 ? nativeName[language[index]] ?? ""
                                 : language[index],
                             style: TextStyle(
-                              fontSize: 13,
+                              fontSize: 14,
                               color: translationLanguageController
                                           .translationLanguage.value ==
                                       language[index]
                                   ? Colors.green.shade700
                                   : null,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
+                          Spacer(),
+                          if (translationLanguageController
+                                  .translationLanguage.value ==
+                              language[index])
+                            CircleAvatar(
+                              radius: 15,
+                              backgroundColor: Colors.green,
+                              child: Icon(
+                                Icons.done,
+                                color: Colors.white,
+                              ),
+                            ),
                         ],
                       ),
                     ),

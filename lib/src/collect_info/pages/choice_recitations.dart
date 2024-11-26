@@ -2,6 +2,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:just_audio/just_audio.dart';
@@ -171,7 +172,6 @@ class _RecitationChoiceState extends State<RecitationChoice> {
         title: const Text(
           "Choice Recitation",
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-
         ),
       ),
       body: Column(
@@ -190,80 +190,89 @@ class _RecitationChoiceState extends State<RecitationChoice> {
                   bottom: 100, top: 10, left: 1, right: 1),
               itemCount: allRecitationSearch.length,
               itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    int value = index;
-                    infoController.recitationName.value =
-                        allRecitationSearch[value];
-                    select();
-                  },
-                  behavior: HitTestBehavior.translucent,
-                  child: Container(
-                    margin: const EdgeInsets.all(3),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(7),
-                      color: Colors.grey.withOpacity(0.07),
+                return Container(
+                  margin: EdgeInsets.only(top: 5, bottom: 5),
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      padding: EdgeInsets.only(
+                          left: 10, right: 10, bottom: 5, top: 5),
+                      backgroundColor: Colors.green.shade400.withOpacity(0.1),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(7),
+                      ),
                     ),
-                    child: ListTile(
-                      horizontalTitleGap: 0,
-                      titleAlignment: ListTileTitleAlignment.center,
-                      title: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
+                    onPressed: () {
+                      int value = index;
+                      infoController.recitationName.value =
+                          allRecitationSearch[value];
+                      select();
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(top: 5, bottom: 5),
+                      child: Obx(
+                        () => Stack(
                           children: [
-                            Container(
-                              margin: const EdgeInsets.only(right: 7),
-                              child: SizedBox(
-                                height: 35,
-                                width: 35,
-                                child: IconButton(
-                                  iconSize: 18,
-                                  onPressed: () async {
-                                    if (playingIndex != index) {
-                                      setState(() {
-                                        playingIndex = index;
-                                        String url = getBaseURLOfAudio(index);
-                                        playResource(url, 7);
-                                      });
-                                    } else {
-                                      setState(() {
-                                        playingIndex = -1;
-                                      });
-                                      resumeOrPauseAudio(false);
-                                    }
-                                  },
-                                  icon: Icon(playingIndex == index
-                                      ? Icons.pause
-                                      : Icons.play_arrow),
-                                  style: IconButton.styleFrom(
-                                    backgroundColor:
-                                        const Color.fromARGB(108, 0, 140, 255),
+                            Align(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    height: 30,
+                                    width: 30,
+                                    child: IconButton(
+                                      iconSize: 18,
+                                      onPressed: () async {
+                                        if (playingIndex != index) {
+                                          setState(() {
+                                            playingIndex = index;
+                                            String url =
+                                                getBaseURLOfAudio(index);
+                                            playResource(url, 7);
+                                          });
+                                        } else {
+                                          setState(() {
+                                            playingIndex = -1;
+                                          });
+                                          resumeOrPauseAudio(false);
+                                        }
+                                      },
+                                      icon: Icon(playingIndex == index
+                                          ? Icons.pause
+                                          : Icons.play_arrow),
+                                      style: IconButton.styleFrom(
+                                        padding: EdgeInsets.zero,
+                                        backgroundColor: Colors.blue.shade800,
+                                        foregroundColor: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                  Gap(10),
+                                  Expanded(
+                                    child: SingleChildScrollView(
+                                      scrollDirection: Axis.horizontal,
+                                      child: Text(
+                                        allRecitationSearch[index],
+                                        style: const TextStyle(fontSize: 14),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            if (infoController.recitationIndex.value == index)
+                              Align(
+                                alignment: Alignment.centerRight,
+                                child: CircleAvatar(
+                                  radius: 15,
+                                  backgroundColor: Colors.green,
+                                  child: Icon(
+                                    Icons.done,
+                                    color: Colors.white,
                                   ),
                                 ),
                               ),
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  allRecitationSearch[index],
-                                  style: const TextStyle(fontSize: 14),
-                                ),
-                              ],
-                            ),
                           ],
-                        ),
-                      ),
-                      leading: Obx(
-                        () => Radio(
-                          activeColor: Colors.green,
-                          value: index,
-                          groupValue: infoController.recitationIndex.value,
-                          onChanged: (value) {
-                            infoController.recitationName.value =
-                                allRecitationSearch[value!];
-                            select();
-                          },
                         ),
                       ),
                     ),
