@@ -22,7 +22,6 @@ dependencies:
   google_fonts: ^6.2.1
   url_launcher: ^6.3.1
   es_compression: ^2.0.13
-  flutter_launcher_icons: ^0.14.1
   connectivity_plus: ^6.1.0
   hive: ^2.2.3
   hive_flutter: ^1.1.0
