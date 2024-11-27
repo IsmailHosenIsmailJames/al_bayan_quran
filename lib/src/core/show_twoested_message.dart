@@ -1,15 +1,8 @@
-import 'dart:io';
-
-import 'package:flutter/foundation.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter/material.dart';
+import 'package:toastification/toastification.dart';
 
 void showTwoestedMessage(String message) {
-  if (Platform.isAndroid || Platform.isIOS || kIsWeb) {
-    Fluttertoast.showToast(
-      msg: message,
-      toastLength: Toast.LENGTH_LONG,
-      timeInSecForIosWeb: 2,
-      fontSize: 14.0,
-    );
-  }
+  toastification.show(
+    title: Text(message),
+  );
 }
