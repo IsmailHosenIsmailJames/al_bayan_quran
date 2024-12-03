@@ -1,14 +1,17 @@
 // import 'package:audioplayers/audioplayers.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
+import 'dart:convert';
+import 'dart:developer';
+
+import 'package:al_quran/src/core/audio/controller/audio_controller.dart';
+import 'package:al_quran/src/core/audio/play_quran_audio.dart';
+import 'package:al_quran/src/core/recitation_info/recitation_info_model.dart';
+import 'package:al_quran/src/core/recitation_info/recitations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:hive/hive.dart';
-import 'package:just_audio/just_audio.dart';
-import 'package:just_audio_background/just_audio_background.dart';
+import 'package:hive_flutter/adapters.dart';
 
-import '../../api/all_recitation.dart';
 import '../getx/get_controller.dart';
 
 class RecitationChoice extends StatefulWidget {
@@ -21,148 +24,34 @@ class RecitationChoice extends StatefulWidget {
 
 class _RecitationChoiceState extends State<RecitationChoice> {
   final infoController = Get.put(InfoController());
-
-  late List<String> allRecitationSearch = [];
+  late List<RecitationInfoModel> allRecitationSearch = [];
 
   @override
   void initState() {
-    allRecitationSearch.addAll(allRecitation);
-    player.playerStateStream.listen((event) {
-      if (event.processingState == ProcessingState.completed) {
-        setState(() {
-          playingIndex = -1;
-        });
-      }
-    });
-    if (widget.previousInfo != null) {
-      Map<String, String> temInfo = widget.previousInfo!;
-      int index = allRecitationSearch.indexOf(temInfo['recitation_ID'] ?? "");
-      if (index != -1) {
-        infoController.recitationIndex.value = index;
-        infoController.recitationName.value = allRecitationSearch[index];
-      }
+    for (var element in recitationsInfoList) {
+      allRecitationSearch.add(RecitationInfoModel.fromMap(element));
     }
     super.initState();
   }
 
-  void search(String s) {
+  void select(int index) {
+    infoController.recitationIndex.value = allRecitationSearch[index];
+  }
+
+  void searchOnList(String text) {
+    List<RecitationInfoModel> matched = [];
+    for (var element in recitationsInfoList) {
+      final tem = RecitationInfoModel.fromMap(element);
+      if (tem.name?.toLowerCase().contains(text) == true ||
+          tem.subfolder?.toLowerCase().contains(text) == true) {
+        matched.add(RecitationInfoModel.fromMap(element));
+      }
+    }
+    log(text);
+    log(matched.length.toString());
     setState(() {
-      allRecitationSearch = allRecitation.where((element) {
-        return element.toLowerCase().contains(s.toLowerCase());
-      }).toList();
+      allRecitationSearch = matched;
     });
-    select();
-  }
-
-  void select() {
-    infoController.recitationIndex.value =
-        allRecitationSearch.indexOf(infoController.recitationName.value);
-    if (widget.previousInfo != null) {
-      Map<String, String> temInfo = widget.previousInfo!;
-      temInfo["recitation_ID"] = infoController.recitationName.value;
-      final temInfoBox = Hive.box("info");
-      temInfoBox.put("info", temInfo);
-    }
-  }
-
-  List<String> listUrl = [];
-  int playing = 0;
-
-  void playResource(String url, int ayahCount) async {
-    playing = 0;
-    listUrl = [];
-    setState(() {
-      listUrl;
-    });
-    for (int i = 1; i <= 7; i++) {
-      listUrl.add("$url/00100$i.mp3");
-    }
-    setState(() {
-      listUrl;
-    });
-
-    List<AudioSource> audioResourceSource = [];
-    for (int i = 0; i < 7; i++) {
-      audioResourceSource.add(LockCachingAudioSource(
-        Uri.parse(listUrl[i]),
-        tag: MediaItem(
-          displayTitle: "Surah Fateha",
-          id: "$i",
-          title: url,
-        ),
-      ));
-    }
-    final playlist = ConcatenatingAudioSource(
-      shuffleOrder: DefaultShuffleOrder(),
-      children: audioResourceSource,
-    );
-    try {
-      await player.setAudioSource(playlist,
-          initialIndex: 0, initialPosition: Duration.zero);
-      await player.play();
-    } catch (e) {
-      final connectivityResult = await Connectivity().checkConnectivity();
-
-      showDialog(
-        // ignore: use_build_context_synchronously
-        context: context,
-        builder: (context) =>
-            (connectivityResult.contains(ConnectivityResult.mobile) ||
-                    connectivityResult.contains(ConnectivityResult.wifi) ||
-                    connectivityResult.contains(ConnectivityResult.ethernet))
-                ? AlertDialog(
-                    title: const Text("Oops! Audio temporarily unavailable!"),
-                    content: const Text(
-                      "Thank you for using our app! It looks like the audio files are currently offline. We’re working hard to get everything back up and running smoothly. Please check back soon, and thank you for your patience and understanding!",
-                    ),
-                    actions: [
-                      TextButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: const Text("OK"))
-                    ],
-                  )
-                : AlertDialog(
-                    title: const Text("Oops! You have no internet connection"),
-                    content: const Text(
-                        "Note: When you play any ayah for the first time it will get downloaded from internet. Then it will stored as cached data in your local memory. You need internet connection now for play this audio."),
-                    actions: [
-                      TextButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: const Text("OK"))
-                    ],
-                  ),
-      );
-    }
-  }
-
-  void resumeOrPauseAudio(bool isPlay) {
-    if (isPlay) {
-      player.play();
-    } else {
-      player.pause();
-    }
-  }
-
-  AudioPlayer player = AudioPlayer();
-
-  String getBaseURLOfAudio(int value) {
-    String recitor = allRecitationSearch[value];
-    List<String> splited = recitor.split("(");
-    String urlID = splited[1].replaceAll(")", "");
-    String audioBaseURL = "https://everyayah.com/data/$urlID";
-    return audioBaseURL;
-  }
-
-  int playingIndex = -1;
-
-  @override
-  void dispose() {
-    player.dispose();
-    super.dispose();
   }
 
   @override
@@ -180,8 +69,11 @@ class _RecitationChoiceState extends State<RecitationChoice> {
             padding:
                 const EdgeInsets.only(left: 5.0, right: 5, bottom: 2, top: 2),
             child: CupertinoSearchTextField(
+              style: Theme.of(context).textTheme.bodyMedium,
               autofocus: false,
-              onChanged: (value) => search(value),
+              onChanged: (value) {
+                searchOnList(value.toLowerCase());
+              },
             ),
           ),
           Expanded(
@@ -202,10 +94,7 @@ class _RecitationChoiceState extends State<RecitationChoice> {
                       ),
                     ),
                     onPressed: () {
-                      int value = index;
-                      infoController.recitationName.value =
-                          allRecitationSearch[value];
-                      select();
+                      select(index);
                     },
                     child: Container(
                       margin: EdgeInsets.only(top: 5, bottom: 5),
@@ -220,30 +109,35 @@ class _RecitationChoiceState extends State<RecitationChoice> {
                                   SizedBox(
                                     height: 30,
                                     width: 30,
-                                    child: IconButton(
-                                      iconSize: 18,
-                                      onPressed: () async {
-                                        if (playingIndex != index) {
-                                          setState(() {
-                                            playingIndex = index;
-                                            String url =
-                                                getBaseURLOfAudio(index);
-                                            playResource(url, 7);
-                                          });
-                                        } else {
-                                          setState(() {
-                                            playingIndex = -1;
-                                          });
-                                          resumeOrPauseAudio(false);
-                                        }
-                                      },
-                                      icon: Icon(playingIndex == index
-                                          ? Icons.pause
-                                          : Icons.play_arrow),
-                                      style: IconButton.styleFrom(
-                                        padding: EdgeInsets.zero,
-                                        backgroundColor: Colors.blue.shade800,
-                                        foregroundColor: Colors.white,
+                                    child: GetX<AudioController>(
+                                      builder: (controller) => IconButton(
+                                        iconSize: 18,
+                                        onPressed: () async {
+                                          controller.currentRecitation.value =
+                                              allRecitationSearch[index];
+                                          await Hive.box('info').put(
+                                              'reciter',
+                                              allRecitationSearch[index]
+                                                  .toJson());
+                                          ManageQuranAudio
+                                              .playMultipleAyahOfSurah(
+                                            surahNumber: 1,
+                                          );
+                                        },
+                                        icon: Icon(
+                                          (controller.isPlaying.value &&
+                                                  controller.currentRecitation
+                                                          .value.subfolder ==
+                                                      allRecitationSearch[index]
+                                                          .subfolder)
+                                              ? Icons.pause
+                                              : Icons.play_arrow,
+                                        ),
+                                        style: IconButton.styleFrom(
+                                          padding: EdgeInsets.zero,
+                                          backgroundColor: Colors.blue.shade800,
+                                          foregroundColor: Colors.white,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -252,7 +146,7 @@ class _RecitationChoiceState extends State<RecitationChoice> {
                                     child: SingleChildScrollView(
                                       scrollDirection: Axis.horizontal,
                                       child: Text(
-                                        allRecitationSearch[index],
+                                        allRecitationSearch[index].name ?? "",
                                         style: const TextStyle(fontSize: 14),
                                       ),
                                     ),
@@ -260,7 +154,9 @@ class _RecitationChoiceState extends State<RecitationChoice> {
                                 ],
                               ),
                             ),
-                            if (infoController.recitationIndex.value == index)
+                            if (infoController
+                                    .recitationIndex.value.subfolder ==
+                                allRecitationSearch[index].subfolder)
                               Align(
                                 alignment: Alignment.centerRight,
                                 child: CircleAvatar(

@@ -103,6 +103,9 @@ Map<String, String> zh = {
   "Select language for Quran's Tafseer": "选择古兰经的塔夫西尔语言",
   "Tafseer Books of Quran": "古兰经的塔夫西尔书籍",
   "Choice your favorite Reciter of Quran": "选择您最喜欢的古兰经朗读者",
+  "intro_text":
+      "多合一的古兰经应用程序，支持69种语言翻译和180多种翻译书籍，6种语言的塔夫西尔和30多本塔夫西尔书籍，以及古兰经朗诵者的朗诵",
+  "previous": "上一个",
   //
 };
 Map<String, String> hi = {
@@ -123,6 +126,9 @@ Map<String, String> hi = {
   "Tafseer Books of Quran": "कुरान की तफ्सीर की किताबें",
   "Choice your favorite Reciter of Quran":
       "कुरान के अपने पसंदीदा पाठक का चयन करें",
+  "intro_text":
+      "सभी एक में अल कुरान ऐप 69 भाषाओं में अनुवाद और 180+ अनुवाद पुस्तकों, 6 भाषाओं में तफ़सीर और 30+ तफ़सीर पुस्तकों और कुरान पाठक के पाठ के साथ",
+  "previous": "पिछला",
   //
 };
 Map<String, String> en = {
@@ -143,6 +149,9 @@ Map<String, String> en = {
   "Tafseer Books of Quran": "Tafseer Books of Quran",
   "Choice your favorite Reciter of Quran":
       "Choose your favorite Reciter of Quran",
+  "intro_text":
+      "All-in-one Al Quran App with Translation in 69 languages & 180+ translation books, Tafsir in 6 languages with 30+ Tafsir books & Quran reciter's recitation",
+  "previous": "Previous",
   //
 };
 Map<String, String> es = {
@@ -164,6 +173,9 @@ Map<String, String> es = {
   "Tafseer Books of Quran": "Libros de Tafsir del Corán",
   "Choice your favorite Reciter of Quran":
       "Elija su recitador favorito del Corán",
+  "intro_text":
+      "Aplicación Al Corán todo en uno con traducción en 69 idiomas y más de 180 libros de traducción, Tafsir en 6 idiomas con más de 30 libros de Tafsir y recitación del recitador del Corán",
+  "previous": "Anterior",
   //
 };
 Map<String, String> ar = {
@@ -182,6 +194,9 @@ Map<String, String> ar = {
   "Select language for Quran's Tafseer": "اختر اللغة لتفسير القرآن",
   "Tafseer Books of Quran": "كتب التفسير للقرآن",
   "Choice your favorite Reciter of Quran": "اختر قارئ القرآن المفضل لديك",
+  "intro_text":
+      "تطبيق القرآن الكريم الشامل مع ترجمة 69 لغة وأكثر من 180 كتاب ترجمة وتفسير بـ 6 لغات وأكثر من 30 كتاب تفسير وتلاوة قارئ القرآن الكريم",
+  "previous": "السابق",
   //
 };
 Map<String, String> bn = {
@@ -203,6 +218,9 @@ Map<String, String> bn = {
   "Tafseer Books of Quran": "কুরআনের তাফসীরের বই",
   "Choice your favorite Reciter of Quran":
       "আপনার প্রিয় কুরআন পাঠক নির্বাচন করুন",
+  "intro_text":
+      "সবকিছু এক জায়গায় আল কুরআন অ্যাপ, 69টি ভাষায় অনুবাদ এবং 180+ অনুবাদ বই, 6টি ভাষায় তাফসীর এবং 30+ তাফসীর বই এবং কুরআন পাঠকের পাঠের সাথে",
+  "previous": "পূর্ববর্তী",
   //
 };
 Map<String, String> pt = {
@@ -224,6 +242,9 @@ Map<String, String> pt = {
   "Tafseer Books of Quran": "Livros de Tafsir do Alcorão",
   "Choice your favorite Reciter of Quran":
       "Escolha seu recitador favorito do Alcorão",
+  "intro_text":
+      "Aplicativo Alcorão tudo em um com tradução em 69 idiomas e mais de 180 livros de tradução, Tafsir em 6 idiomas com mais de 30 livros de Tafsir e recitação do recitador do Alcorão",
+  "previous": "Anterior",
   //
 };
 Map<String, String> ru = {
@@ -244,6 +265,9 @@ Map<String, String> ru = {
   "Tafseer Books of Quran": "Книги Тафсира Корана",
   "Choice your favorite Reciter of Quran":
       "Выберите вашего любимого чтеца Корана",
+  "intro_text":
+      "Все в одном приложении Коран с переводом на 69 языков и более 180 книг переводов, Тафсир на 6 языках с более чем 30 книгами Тафсира и чтением Корана чтецом Корана",
+  "previous": "Предыдущий",
   //
 };
 Map<String, String> ja = {
@@ -262,6 +286,9 @@ Map<String, String> ja = {
   "Select language for Quran's Tafseer": "コーランのタフスィールの言語を選択してください",
   "Tafseer Books of Quran": "コーランのタフスィール書籍",
   "Choice your favorite Reciter of Quran": "お気に入りのクルアーン朗読者を選んでください",
+  "intro_text":
+      "オールインワンのアル・クルアーンアプリ、69言語の翻訳と180以上の翻訳書籍、6言語のタフシールと30以上のタフシール書籍、およびクルアーン朗読者の朗読",
+  "previous": "前",
   //
 };
 Map<String, String> pa = {
@@ -281,6 +308,9 @@ Map<String, String> pa = {
   "Select language for Quran's Tafseer": "ਕੁਰਾਨ ਦੀ ਤਫ਼ਸੀਰ ਲਈ ਭਾਸ਼ਾ ਚੁਣੋ",
   "Tafseer Books of Quran": "ਕੁਰਾਨ ਦੀ ਤਫ਼ਸੀਰ ਦੀਆਂ ਪੁਸਤਕਾਂ",
   "Choice your favorite Reciter of Quran": "ਆਪਣੇ ਮਨਪਸੰਦ ਕੁਰਾਨ ਪਾਠਕ ਦੀ ਚੋਣ ਕਰੋ",
+  "intro_text":
+      "ਸਾਰੇ ਇੱਕ ਵਿੱਚ ਅਲ ਕੁਰਾਨ ਐਪ 69 ਭਾਸ਼ਾਵਾਂ ਵਿੱਚ ਅਨੁਵਾਦ ਅਤੇ 180+ ਅਨੁਵਾਦ ਕਿਤਾਬਾਂ, 6 ਭਾਸ਼ਾਵਾਂ ਵਿੱਚ ਤਫ਼ਸੀਰ ਅਤੇ 30+ ਤਫ਼ਸੀਰ ਕਿਤਾਬਾਂ ਅਤੇ ਕੁਰਾਨ ਪਾਠਕ ਦੇ ਪਾਠ ਦੇ ਨਾਲ",
+  "previous": "ਪਿਛਲਾ",
   //
 };
 Map<String, String> de = {
@@ -302,6 +332,9 @@ Map<String, String> de = {
   "Tafseer Books of Quran": "Tafsir-Bücher des Korans",
   "Choice your favorite Reciter of Quran":
       "Wählen Sie Ihren bevorzugten Koranrezitator aus",
+  "intro_text":
+      "All-in-one Al Quran App mit Übersetzung in 69 Sprachen & 180+ Übersetzungsbüchern, Tafsir in 6 Sprachen mit 30+ Tafsir-Büchern & Koranleser-Rezitation",
+  "previous": "Vorheriger",
   //
 };
 Map<String, String> fr = {
@@ -323,6 +356,9 @@ Map<String, String> fr = {
   "Tafseer Books of Quran": "Livres de Tafsir du Coran",
   "Choice your favorite Reciter of Quran":
       "Choisissez votre réciteur préféré du Coran",
+  "intro_text":
+      "Application Coran tout-en-un avec traduction en 69 langues et plus de 180 livres de traduction, Tafsir en 6 langues avec plus de 30 livres de Tafsir et récitation du récitant du Coran",
+  "previous": "Précédent",
   //
 };
 Map<String, String> id = {
@@ -343,6 +379,9 @@ Map<String, String> id = {
   "Tafseer Books of Quran": "Buku Tafsir Al-Qur'an",
   "Choice your favorite Reciter of Quran":
       "Pilih pembaca Al-Qur'an favorit Anda",
+  "intro_text":
+      "Aplikasi Al-Qur'an All-in-one dengan Terjemahan dalam 69 bahasa & 180+ buku terjemahan, Tafsir dalam 6 bahasa dengan 30+ buku Tafsir & pembacaan Qari Al-Qur'an",
+  "previous": "Sebelumnya",
   //
 };
 Map<String, String> ur = {
@@ -363,6 +402,9 @@ Map<String, String> ur = {
   "Tafseer Books of Quran": "قرآن کی تفسیر کی کتابیں",
   "Choice your favorite Reciter of Quran":
       "اپنے پسندیدہ قرآن قاری کا انتخاب کریں",
+  "intro_text":
+      "القرآن الشامل في تطبيق واحد مع ترجمة 69 لغة وأكثر من 180 كتاب ترجمة وتفسير بـ 6 لغات وأكثر من 30 كتاب تفسير وتلاوة قارئ القرآن الكريم",
+  "previous": "پچھلا",
   //
 };
 Map<String, String> sw = {
@@ -383,6 +425,9 @@ Map<String, String> sw = {
   "Tafseer Books of Quran": "Vitabu vya Tafsiri ya Quran",
   "Choice your favorite Reciter of Quran":
       "Chagua msomaji wako mwenye kupenda wa Quran",
+  "intro_text":
+      "Programu kamili ya Al Quran yenye Tafsiri kwa lugha 69 na vitabu vya tafsiri zaidi ya 180, Tafsiri kwa lugha 6 na vitabu vya Tafsiri zaidi ya 30, na Qur'an msomaji wa Qur'an",
+  "previous": "Uliopita",
   //
 };
 Map<String, String> ko = {
@@ -401,6 +446,9 @@ Map<String, String> ko = {
   "Select language for Quran's Tafseer": "꾸란의 타프시르 언어를 선택하세요",
   "Tafseer Books of Quran": "꾸란의 타프시르 책",
   "Choice your favorite Reciter of Quran": "선호하는 꾸란 낭독자를 선택하세요",
+  "intro_text":
+      "올인원 알 꾸르안 앱, 69개 언어로 번역 및 180+권의 번역 책, 6개 언어로 타프시르 및 30+권의 타프시르 책, 그리고 꾸르안 암송자의 암송",
+  "previous": "이전",
   //
 };
 Map<String, String> tr = {
@@ -419,6 +467,9 @@ Map<String, String> tr = {
   "Select language for Quran's Tafseer": "Kuran'ın Tefsiri için dili seçin",
   "Tafseer Books of Quran": "Kuran'ın Tefsir Kitapları",
   "Choice your favorite Reciter of Quran": "Favori Kur'an okuyucunuzu seçin",
+  "intro_text":
+      "Tümleşik Kur'an-ı Kerim Uygulaması, 69 dilde çeviri ve 180+ çeviri kitabı, 6 dilde Tefsir ve 30+ Tefsir kitabı ve Kur'an-ı Kerim okuru'nun tilaveti ile",
+  "previous": "Önceki",
   //
 };
 Map<String, String> vi = {
@@ -439,6 +490,9 @@ Map<String, String> vi = {
   "Tafseer Books of Quran": "Sách Tafseer của Quran",
   "Choice your favorite Reciter of Quran":
       "Chọn người đọc Quran yêu thích của bạn",
+  "intro_text":
+      "Ứng dụng Al Quran All-in-one với Dịch thuật 69 ngôn ngữ & hơn 180 cuốn sách dịch thuật, Tafsir 6 ngôn ngữ với hơn 30 cuốn sách Tafsir & đọc tụng của người đọc kinh Qur'an",
+  "previous": "Trước đó",
   //
 };
 Map<String, String> ta = {
@@ -460,6 +514,9 @@ Map<String, String> ta = {
   "Tafseer Books of Quran": "குர்ஆனின் தஃப்ஸீர் புத்தகங்கள்",
   "Choice your favorite Reciter of Quran":
       "உங்கள் பிடித்த குர்ஆன் வாசகரை தேர்ந்தெடுக்கவும்",
+  "intro_text":
+      "அனைத்தும் ஒன்றாகும் அல்குர்ஆன் ஆப், 69 மொழிகளில் மொழிபெயர்ப்பு மற்றும் 180+ மொழிபெயர்ப்பு புத்தகங்கள், 6 மொழிகளில் தஃப்ஸீர் மற்றும் 30+ தஃப்ஸீர் புத்தகங்கள் மற்றும் குர்ஆன் ஓதுபவரின் ஓதுதல்",
+  "previous": "முந்தைய",
   //
 };
 Map<String, String> it = {
@@ -481,5 +538,8 @@ Map<String, String> it = {
   "Tafseer Books of Quran": "Libri di Tafsir del Corano",
   "Choice your favorite Reciter of Quran":
       "Scegli il tuo recitatore preferito del Corano",
+  "intro_text":
+      "App Al Corano tutto in uno con traduzione in 69 lingue e oltre 180 libri di traduzione, Tafsir in 6 lingue con oltre 30 libri di Tafsir e recitazione del recitatore del Corano",
+  "previous": "Precedente",
   //
 };

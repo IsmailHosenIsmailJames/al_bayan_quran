@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 
@@ -35,7 +36,7 @@ class Intro extends StatelessWidget {
           padding: const EdgeInsets.only(left: 10, right: 10),
           alignment: Alignment.center,
           child: Text(
-            "All in one Al Quran App with Translation  in 69 languages & 180+ translation books, Tafsir in 6 languages with 30  tafsir books 35+ & Quran reciter's recitation",
+            "intro_text".tr,
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.bodySmall,
           ),

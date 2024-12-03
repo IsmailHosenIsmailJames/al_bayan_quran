@@ -119,7 +119,7 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
                               ),
                               const Gap(5),
                               Text(
-                                "Previous",
+                                "previous".tr,
                                 style: textTheme.bodyMedium!.copyWith(
                                   color: pageIndex != 0
                                       ? Colors.green

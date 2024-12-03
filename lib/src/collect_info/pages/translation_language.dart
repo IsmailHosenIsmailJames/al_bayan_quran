@@ -152,6 +152,7 @@ class _TranslationLanguageState extends State<TranslationLanguage> {
             padding: const EdgeInsets.only(top: 5, left: 10, right: 10),
             height: 45,
             child: CupertinoSearchTextField(
+              style: Theme.of(context).textTheme.bodyMedium,
               onChanged: (value) {
                 value = value.toLowerCase();
                 Set<String> languageSetForSearch = {};

@@ -1,3 +1,4 @@
+import 'package:al_quran/src/core/audio/controller/audio_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -85,6 +86,7 @@ class MyApp extends StatelessWidget {
         onInit: () async {
           final appTheme = Get.put(AppThemeData());
           final infoController = Get.put(InfoController());
+          Get.put(AudioController());
 
           final languageController = Get.put(LanguageController());
           final prefBox = Hive.box("info");
