@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
           seedColor: Colors.green,
           brightness: Brightness.light,
         ),
-        textTheme: GoogleFonts.poppinsTextTheme(),
+        textTheme: GoogleFonts.notoSansTextTheme(),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             shadowColor: Colors.transparent,
@@ -64,7 +64,7 @@ class MyApp extends StatelessWidget {
           seedColor: Colors.green,
           brightness: Brightness.dark,
         ),
-        textTheme: GoogleFonts.poppinsTextTheme().apply(
+        textTheme: GoogleFonts.notoSansTextTheme().apply(
           bodyColor: Colors.white,
           displayColor: Colors.white,
           decorationColor: Colors.white,
