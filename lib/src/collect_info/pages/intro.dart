@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
-import 'package:get/get_utils/get_utils.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 
@@ -66,10 +64,9 @@ class Intro extends StatelessWidget {
                   },
                   child: Text("everyayah.com")),
             ],
-
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
