@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:just_audio_background/just_audio_background.dart';
+import 'package:toastification/toastification.dart';
 
 import 'src/collect_info/getx/get_controller.dart';
 import 'src/collect_info/init.dart';
@@ -41,63 +42,65 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Al-Quran',
-      theme: ThemeData.light().copyWith(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.green,
-          brightness: Brightness.light,
-        ),
-        textTheme: GoogleFonts.notoSansTextTheme(),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            shadowColor: Colors.transparent,
+    return ToastificationWrapper(
+      child: GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Al-Quran',
+        theme: ThemeData.light().copyWith(
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: Colors.green,
+            brightness: Brightness.light,
+          ),
+          textTheme: GoogleFonts.notoSansTextTheme(),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              shadowColor: Colors.transparent,
+            ),
           ),
         ),
-      ),
-      darkTheme: ThemeData.dark().copyWith(
-        floatingActionButtonTheme: FloatingActionButtonThemeData(
-          backgroundColor: Colors.grey.shade800,
-        ),
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.green,
-          brightness: Brightness.dark,
-        ),
-        textTheme: GoogleFonts.notoSansTextTheme().apply(
-          bodyColor: Colors.white,
-          displayColor: Colors.white,
-          decorationColor: Colors.white,
-        ),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            shadowColor: Colors.transparent,
+        darkTheme: ThemeData.dark().copyWith(
+          floatingActionButtonTheme: FloatingActionButtonThemeData(
+            backgroundColor: Colors.grey.shade800,
+          ),
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: Colors.green,
+            brightness: Brightness.dark,
+          ),
+          textTheme: GoogleFonts.notoSansTextTheme().apply(
+            bodyColor: Colors.white,
+            displayColor: Colors.white,
+            decorationColor: Colors.white,
+          ),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              shadowColor: Colors.transparent,
+            ),
           ),
         ),
-      ),
-      defaultTransition: Transition.leftToRight,
-      themeMode: ThemeMode.system,
-      locale: Get.deviceLocale,
-      fallbackLocale: const ui.Locale("en"),
-      translationsKeys: AppTranslation.translationsKeys,
-      onInit: () async {
-        final appTheme = Get.put(AppThemeData());
-        final infoController = Get.put(InfoController());
+        defaultTransition: Transition.leftToRight,
+        themeMode: ThemeMode.system,
+        locale: Get.deviceLocale,
+        fallbackLocale: const ui.Locale("en"),
+        translationsKeys: AppTranslation.translationsKeys,
+        onInit: () async {
+          final appTheme = Get.put(AppThemeData());
+          final infoController = Get.put(InfoController());
 
-        final languageController = Get.put(LanguageController());
-        final prefBox = Hive.box("info");
-        String? languageCode = prefBox.get("app_lan", defaultValue: null);
-        if (languageCode == null) {
-          languageCode ??= Get.locale?.languageCode;
-          infoController.appLanCode.value = languageCode ?? '';
-          languageController.changeLanguage = languageCode ?? 'en';
-        } else {
-          languageController.changeLanguage = languageCode;
-          infoController.appLanCode.value = languageCode;
-        }
-        appTheme.initTheme();
-      },
-      home: const StartUpPage(),
+          final languageController = Get.put(LanguageController());
+          final prefBox = Hive.box("info");
+          String? languageCode = prefBox.get("app_lan", defaultValue: null);
+          if (languageCode == null) {
+            languageCode ??= Get.locale?.languageCode;
+            infoController.appLanCode.value = languageCode ?? '';
+            languageController.changeLanguage = languageCode ?? 'en';
+          } else {
+            languageController.changeLanguage = languageCode;
+            infoController.appLanCode.value = languageCode;
+          }
+          appTheme.initTheme();
+        },
+        home: const StartUpPage(),
+      ),
     );
   }
 }
