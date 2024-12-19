@@ -136,9 +136,9 @@ class _LogInState extends State<LogIn> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Spacer(),
-                    const Text(
-                      "Login",
-                      style: TextStyle(
+                    Text(
+                      "Login".tr,
+                      style: const TextStyle(
                         color: Colors.green,
                         fontSize: 40,
                         fontWeight: FontWeight.w900,
@@ -236,9 +236,9 @@ class _LogInState extends State<LogIn> {
                           onPressed: () async {
                             await login(email.text, password.text);
                           },
-                          child: const Text(
-                            "LogIn",
-                            style: TextStyle(
+                          child: Text(
+                            "LogIn".tr,
+                            style: const TextStyle(
                               fontSize: 26,
                               color: Colors.green,
                               fontWeight: FontWeight.bold,

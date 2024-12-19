@@ -220,9 +220,9 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
       appBar: MediaQuery.of(context).size.width > 800
           ? null
           : AppBar(
-              title: const Text(
-                "Profile",
-                style: TextStyle(
+              title: Text(
+                "Profile".tr,
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -239,9 +239,9 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                       onPressed: () {
                         Get.to(() => const LogIn());
                       },
-                      label: const Text(
-                        "LogIn",
-                        style: TextStyle(
+                      label: Text(
+                        "LogIn".tr,
+                        style: const TextStyle(
                           color: Colors.green,
                           fontSize: 30,
                         ),
@@ -251,13 +251,16 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                         color: Colors.green,
                       ),
                     ),
-                    const Center(
-                      child: Text(
-                        "You Need to login for more Features.\nFor Example, you can save your notes in\ncloud and access it from any places.\nYour Favorite and Book Mark can be uploaded\nto Cloud and download them after login.",
-                        style: TextStyle(
-                          fontSize: 12,
+                    Center(
+                      child: SizedBox(
+                        width: 210,
+                        child: Text(
+                          "loginReason".tr,
+                          style: const TextStyle(
+                            fontSize: 12,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
-                        textAlign: TextAlign.center,
                       ),
                     )
                   ],
@@ -351,9 +354,9 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
-                    "Notes",
-                    style: TextStyle(
+                  Text(
+                    "Notes".tr,
+                    style: const TextStyle(
                       fontSize: 18,
                       color: Colors.green,
                       fontWeight: FontWeight.bold,
@@ -406,9 +409,9 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
-                    "Favorite",
-                    style: TextStyle(
+                  Text(
+                    "Favorite".tr,
+                    style: const TextStyle(
                       fontSize: 18,
                       color: Colors.green,
                       fontWeight: FontWeight.bold,
@@ -461,9 +464,9 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
-                    "Book Mark",
-                    style: TextStyle(
+                  Text(
+                    "Book Mark".tr,
+                    style: const TextStyle(
                       fontSize: 18,
                       color: Colors.green,
                       fontWeight: FontWeight.bold,

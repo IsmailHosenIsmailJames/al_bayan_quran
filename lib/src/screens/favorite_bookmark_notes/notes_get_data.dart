@@ -157,10 +157,10 @@ List<Widget> buildListOfWidgetForNotes() {
                 ),
               ),
               const Divider(),
-              const Center(
+              Center(
                 child: Text(
-                  "Notes",
-                  style: TextStyle(
+                  "Notes".tr,
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: Colors.green,

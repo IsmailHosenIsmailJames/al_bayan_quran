@@ -1,5 +1,4 @@
 // import 'package:audioplayers/audioplayers.dart';
-import 'dart:convert';
 import 'dart:developer';
 
 import 'package:al_quran/src/core/audio/controller/audio_controller.dart';
@@ -83,10 +82,10 @@ class _RecitationChoiceState extends State<RecitationChoice> {
               itemCount: allRecitationSearch.length,
               itemBuilder: (context, index) {
                 return Container(
-                  margin: EdgeInsets.only(top: 5, bottom: 5),
+                  margin: const EdgeInsets.only(top: 5, bottom: 5),
                   child: TextButton(
                     style: TextButton.styleFrom(
-                      padding: EdgeInsets.only(
+                      padding: const EdgeInsets.only(
                           left: 10, right: 10, bottom: 5, top: 5),
                       backgroundColor: Colors.green.shade400.withOpacity(0.1),
                       shape: RoundedRectangleBorder(
@@ -97,7 +96,7 @@ class _RecitationChoiceState extends State<RecitationChoice> {
                       select(index);
                     },
                     child: Container(
-                      margin: EdgeInsets.only(top: 5, bottom: 5),
+                      margin: const EdgeInsets.only(top: 5, bottom: 5),
                       child: Obx(
                         () => Stack(
                           children: [
@@ -141,7 +140,7 @@ class _RecitationChoiceState extends State<RecitationChoice> {
                                       ),
                                     ),
                                   ),
-                                  Gap(10),
+                                  const Gap(10),
                                   Expanded(
                                     child: SingleChildScrollView(
                                       scrollDirection: Axis.horizontal,
@@ -157,7 +156,7 @@ class _RecitationChoiceState extends State<RecitationChoice> {
                             if (infoController
                                     .recitationIndex.value.subfolder ==
                                 allRecitationSearch[index].subfolder)
-                              Align(
+                              const Align(
                                 alignment: Alignment.centerRight,
                                 child: CircleAvatar(
                                   radius: 15,

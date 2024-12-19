@@ -78,13 +78,13 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
             const RecitationChoice(),
           ][pageIndex],
           Align(
-            alignment: Alignment(0, 1),
+            alignment: const Alignment(0, 1),
             child: GetX<AppThemeData>(
               builder: (controller) => Container(
                 height: 40,
                 margin:
                     const EdgeInsets.only(top: 0, bottom: 5, left: 5, right: 5),
-                padding: EdgeInsets.only(left: 2.5, right: 2.5),
+                padding: const EdgeInsets.only(left: 2.5, right: 2.5),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
                   color: controller.isDark.value
@@ -99,7 +99,8 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
                         height: 35,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              padding: EdgeInsets.only(left: 10, right: 10)),
+                              padding:
+                                  const EdgeInsets.only(left: 10, right: 10)),
                           onPressed: pageIndex != 0
                               ? () {
                                   if (pageIndex > 0) {
@@ -131,7 +132,7 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
                           ),
                         ),
                       ),
-                      Spacer(),
+                      const Spacer(),
                       Row(
                         children: [
                           getPageIndicator(0, pageIndex),
@@ -143,7 +144,7 @@ class _CollectInfoMobileState extends State<CollectInfoMobile> {
                           getPageIndicator(6, pageIndex),
                         ],
                       ),
-                      Spacer(),
+                      const Spacer(),
                       SizedBox(
                         height: 35,
                         child: ElevatedButton(

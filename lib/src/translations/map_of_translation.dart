@@ -106,7 +106,22 @@ Map<String, String> zh = {
   "intro_text":
       "多合一的古兰经应用程序，支持69种语言翻译和180多种翻译书籍，6种语言的塔夫西尔和30多本塔夫西尔书籍，以及古兰经朗诵者的朗诵",
   "previous": "上一个",
-  //
+  "Surah": "蘇拉",
+  "Juzs": "章节",
+
+  "LogIn": "登录",
+  "Home": "首页",
+  "Favorite": "收藏",
+  "Book Mark": "书签",
+  "Notes": "笔记",
+  "Settings": "设置",
+  "Others Platforms": "其他平台",
+  "loginReason": "您需要登录以使用更多功能。例如，您可以将笔记保存到云端并在任何地方访问它们。",
+  "Audio": "音频",
+  "Profile": "个人资料",
+  "All Reciters List": "所有诵读者列表",
+
+//
 };
 Map<String, String> hi = {
   "Translation of Quran": "क़ुरान का अनुवाद",
@@ -129,7 +144,23 @@ Map<String, String> hi = {
   "intro_text":
       "सभी एक में अल कुरान ऐप 69 भाषाओं में अनुवाद और 180+ अनुवाद पुस्तकों, 6 भाषाओं में तफ़सीर और 30+ तफ़सीर पुस्तकों और कुरान पाठक के पाठ के साथ",
   "previous": "पिछला",
-  //
+  "Surah": "सूरा",
+  "Juzs": "जूज़",
+
+  "LogIn": "लॉगिन",
+  "Home": "मुख्य पृष्ठ",
+  "Favorite": "पसंदीदा",
+  "Book Mark": "बुकमार्क",
+  "Notes": "नोट्स",
+  "Settings": "सेटिंग्स",
+  "Others Platforms": "अन्य प्लेटफॉर्म",
+  "loginReason":
+      "अधिक सुविधाओं के लिए आपको लॉगिन करना होगा। उदाहरण के लिए, आप अपने नोट्स को क्लाउड में सहेज सकते हैं और उन्हें किसी भी स्थान से एक्सेस कर सकते हैं।",
+  "Audio": "ऑडियो",
+  "Profile": "प्रोफ़ाइल",
+  "All Reciters List": "सभी क़ारियों की सूची",
+
+//
 };
 Map<String, String> en = {
   "Translation of Quran": "Translation of Quran",
@@ -152,7 +183,23 @@ Map<String, String> en = {
   "intro_text":
       "All-in-one Al Quran App with Translation in 69 languages & 180+ translation books, Tafsir in 6 languages with 30+ Tafsir books & Quran reciter's recitation",
   "previous": "Previous",
-  //
+  "Surah": "Surah",
+  "Juzs": "Juzs",
+
+  "LogIn": "Login",
+  "Home": "Home",
+  "Favorite": "Favorite",
+  "Book Mark": "Bookmark",
+  "Notes": "Notes",
+  "Settings": "Settings",
+  "Others Platforms": "Other Platforms",
+  "loginReason":
+      "You Need to login for more Features. For Example, you can save your notes in cloud and access it from any places.",
+  "Audio": "Audio",
+  "Profile": "Profile",
+  "All Reciters List": "All Reciters List",
+
+//
 };
 Map<String, String> es = {
   "Translation of Quran": "Traducción del Corán",
@@ -176,7 +223,23 @@ Map<String, String> es = {
   "intro_text":
       "Aplicación Al Corán todo en uno con traducción en 69 idiomas y más de 180 libros de traducción, Tafsir en 6 idiomas con más de 30 libros de Tafsir y recitación del recitador del Corán",
   "previous": "Anterior",
-  //
+  "Surah": "Sura",
+  "Juzs": "Partes",
+
+  "LogIn": "Iniciar sesión",
+  "Home": "Inicio",
+  "Favorite": "Favorito",
+  "Book Mark": "Marcadores",
+  "Notes": "Notas",
+  "Settings": "Ajustes",
+  "Others Platforms": "Otras Plataformas",
+  "loginReason":
+      "Necesitas iniciar sesión para más funciones. Por ejemplo, puedes guardar tus notas en la nube y acceder a ellas desde cualquier lugar.",
+  "Audio": "Audio",
+  "Profile": "Perfil",
+  "All Reciters List": "Lista de Todos los Recitadores",
+
+//
 };
 Map<String, String> ar = {
   "Translation of Quran": "ترجمة القرآن",
@@ -197,7 +260,23 @@ Map<String, String> ar = {
   "intro_text":
       "تطبيق القرآن الكريم الشامل مع ترجمة 69 لغة وأكثر من 180 كتاب ترجمة وتفسير بـ 6 لغات وأكثر من 30 كتاب تفسير وتلاوة قارئ القرآن الكريم",
   "previous": "السابق",
-  //
+  "Surah": "سورة",
+  "Juzs": "أجزاء",
+
+  "LogIn": "تسجيل الدخول",
+  "Home": "الرئيسية",
+  "Favorite": "مفضل",
+  "Book Mark": "إشارة مرجعية",
+  "Notes": "ملاحظات",
+  "Settings": "الإعدادات",
+  "Others Platforms": "منصات أخرى",
+  "loginReason":
+      "تحتاج إلى تسجيل الدخول للحصول على المزيد من الميزات. على سبيل المثال، يمكنك حفظ ملاحظاتك في السحابة والوصول إليها من أي مكان.",
+  "Audio": "صوت",
+  "Profile": "الملف الشخصي",
+  "All Reciters List": "قائمة جميع القراء",
+
+//
 };
 Map<String, String> bn = {
   "Translation of Quran": "কুরআনের অনুবাদ",
@@ -221,7 +300,22 @@ Map<String, String> bn = {
   "intro_text":
       "সবকিছু এক জায়গায় আল কুরআন অ্যাপ, 69টি ভাষায় অনুবাদ এবং 180+ অনুবাদ বই, 6টি ভাষায় তাফসীর এবং 30+ তাফসীর বই এবং কুরআন পাঠকের পাঠের সাথে",
   "previous": "পূর্ববর্তী",
-  //
+  "Surah": "সূরা",
+  "Juzs": "অংশ",
+  "LogIn": "লগইন",
+  "Home": "হোম",
+  "Favorite": "প্রিয়",
+  "Book Mark": "বুকমার্ক",
+  "Notes": "নোট",
+  "Settings": "সেটিংস",
+  "Others Platforms": "অন্যান্য প্ল্যাটফর্ম",
+  "loginReason":
+      "আপনাকে আরও বৈশিষ্ট্যের জন্য লগইন করতে হবে। উদাহরণস্বরূপ, আপনি আপনার নোটগুলি ক্লাউডে সংরক্ষণ করতে পারেন এবং যে কোনও জায়গা থেকে অ্যাক্সেস করতে পারেন।",
+  "Audio": "অডিও",
+  "Profile": "প্রোফাইল",
+  "All Reciters List": "সকল কিরাতকারের তালিকা",
+
+//
 };
 Map<String, String> pt = {
   "Translation of Quran": "Tradução do Alcorão",
@@ -245,7 +339,23 @@ Map<String, String> pt = {
   "intro_text":
       "Aplicativo Alcorão tudo em um com tradução em 69 idiomas e mais de 180 livros de tradução, Tafsir em 6 idiomas com mais de 30 livros de Tafsir e recitação do recitador do Alcorão",
   "previous": "Anterior",
-  //
+  "Surah": "Sura",
+  "Juzs": "Partes",
+
+  "LogIn": "Login",
+  "Home": "Início",
+  "Favorite": "Favorito",
+  "Book Mark": "Marcador",
+  "Notes": "Notas",
+  "Settings": "Configurações",
+  "Others Platforms": "Outras Plataformas",
+  "loginReason":
+      "Você precisa fazer login para mais recursos. Por exemplo, você pode salvar suas notas na nuvem e acessá-las de qualquer lugar.",
+  "Audio": "Áudio",
+  "Profile": "Perfil",
+  "All Reciters List": "Lista de Todos os Recitadores",
+
+//
 };
 Map<String, String> ru = {
   "Translation of Quran": "Перевод Корана",
@@ -268,7 +378,23 @@ Map<String, String> ru = {
   "intro_text":
       "Все в одном приложении Коран с переводом на 69 языков и более 180 книг переводов, Тафсир на 6 языках с более чем 30 книгами Тафсира и чтением Корана чтецом Корана",
   "previous": "Предыдущий",
-  //
+  "Surah": "Сура",
+  "Juzs": "Части",
+
+  "LogIn": "Вход",
+  "Home": "Главная",
+  "Favorite": "Избранное",
+  "Book Mark": "Закладка",
+  "Notes": "Заметки",
+  "Settings": "Настройки",
+  "Others Platforms": "Другие Платформы",
+  "loginReason":
+      "Вам нужно войти в систему, чтобы получить больше функций. Например, вы можете сохранить свои заметки в облаке и получить к ним доступ из любого места.",
+  "Audio": "Аудио",
+  "Profile": "Профиль",
+  "All Reciters List": "Список Всех Чтецов Корана",
+
+//
 };
 Map<String, String> ja = {
   "Translation of Quran": "コーランの翻訳",
@@ -289,7 +415,23 @@ Map<String, String> ja = {
   "intro_text":
       "オールインワンのアル・クルアーンアプリ、69言語の翻訳と180以上の翻訳書籍、6言語のタフシールと30以上のタフシール書籍、およびクルアーン朗読者の朗読",
   "previous": "前",
-  //
+  "Surah": "スーラ",
+  "Juzs": "部分",
+
+  "LogIn": "ログイン",
+  "Home": "ホーム",
+  "Favorite": "お気に入り",
+  "Book Mark": "ブックマーク",
+  "Notes": "ノート",
+  "Settings": "設定",
+  "Others Platforms": "他のプラットフォーム",
+  "loginReason":
+      "より多くの機能を利用するにはログインする必要があります。たとえば、ノートをクラウドに保存して、どこからでもアクセスできます。",
+  "Audio": "オーディオ",
+  "Profile": "プロフィール",
+  "All Reciters List": "すべての暗唱者のリスト",
+
+//
 };
 Map<String, String> pa = {
   "Translation of Quran": "ਕੁਰਾਨ ਦਾ ਅਨੁਵਾਦ",
@@ -311,7 +453,23 @@ Map<String, String> pa = {
   "intro_text":
       "ਸਾਰੇ ਇੱਕ ਵਿੱਚ ਅਲ ਕੁਰਾਨ ਐਪ 69 ਭਾਸ਼ਾਵਾਂ ਵਿੱਚ ਅਨੁਵਾਦ ਅਤੇ 180+ ਅਨੁਵਾਦ ਕਿਤਾਬਾਂ, 6 ਭਾਸ਼ਾਵਾਂ ਵਿੱਚ ਤਫ਼ਸੀਰ ਅਤੇ 30+ ਤਫ਼ਸੀਰ ਕਿਤਾਬਾਂ ਅਤੇ ਕੁਰਾਨ ਪਾਠਕ ਦੇ ਪਾਠ ਦੇ ਨਾਲ",
   "previous": "ਪਿਛਲਾ",
-  //
+  "Surah": "ਸੂਰਾ",
+  "Juzs": "ਹਿੱਸੇ",
+
+  "LogIn": "ਲਾਗਇਨ",
+  "Home": "ਮੁੱਖ ਪੰਨਾ",
+  "Favorite": "ਪਸੰਦੀਦਾ",
+  "Book Mark": "ਬੁੱਕਮਾਰਕ",
+  "Notes": "ਨੋਟਸ",
+  "Settings": "ਸੈਟਿੰਗਜ਼",
+  "Others Platforms": "ਹੋਰ ਪਲੇਟਫਾਰਮ",
+  "loginReason":
+      "ਵਧੇਰੇ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਲਈ ਤੁਹਾਨੂੰ ਲੌਗਇਨ ਕਰਨ ਦੀ ਲੋੜ ਹੈ. ਉਦਾਹਰਣ ਲਈ, ਤੁਸੀਂ ਆਪਣੇ ਨੋਟਸ ਨੂੰ ਕਲਾਉਡ ਵਿੱਚ ਸੇਵ ਕਰ ਸਕਦੇ ਹੋ ਅਤੇ ਕਿਸੇ ਵੀ ਜਗ੍ਹਾ ਤੋਂ ਇਹਨਾਂ ਤੱਕ ਪਹੁੰਚ ਕਰ ਸਕਦੇ ਹੋ.",
+  "Audio": "ਆਡੀਓ",
+  "Profile": "ਪ੍ਰੋਫਾਈਲ",
+  "All Reciters List": "ਸਾਰੇ ਕਾਰੀਆਂ ਦੀ ਸੂਚੀ",
+
+//
 };
 Map<String, String> de = {
   "Translation of Quran": "Übersetzung des Korans",
@@ -335,7 +493,23 @@ Map<String, String> de = {
   "intro_text":
       "All-in-one Al Quran App mit Übersetzung in 69 Sprachen & 180+ Übersetzungsbüchern, Tafsir in 6 Sprachen mit 30+ Tafsir-Büchern & Koranleser-Rezitation",
   "previous": "Vorheriger",
-  //
+  "Surah": "Sure",
+  "Juzs": "Teile",
+
+  "LogIn": "Anmelden",
+  "Home": "Startseite",
+  "Favorite": "Favorit",
+  "Book Mark": "Lesezeichen",
+  "Notes": "Notizen",
+  "Settings": "Einstellungen",
+  "Others Platforms": "Andere Plattformen",
+  "loginReason":
+      "Sie müssen sich anmelden, um weitere Funktionen nutzen zu können. Zum Beispiel können Sie Ihre Notizen in der Cloud speichern und von überall darauf zugreifen.",
+  "Audio": "Audio",
+  "Profile": "Profil",
+  "All Reciters List": "Liste aller Rezitatoren",
+
+//
 };
 Map<String, String> fr = {
   "Translation of Quran": "Traduction du Coran",
@@ -359,7 +533,23 @@ Map<String, String> fr = {
   "intro_text":
       "Application Coran tout-en-un avec traduction en 69 langues et plus de 180 livres de traduction, Tafsir en 6 langues avec plus de 30 livres de Tafsir et récitation du récitant du Coran",
   "previous": "Précédent",
-  //
+  "Surah": "Sourate",
+  "Juzs": "Parties",
+
+  "LogIn": "Connexion",
+  "Home": "Accueil",
+  "Favorite": "Favoris",
+  "Book Mark": "Signet",
+  "Notes": "Notes",
+  "Settings": "Paramètres",
+  "Others Platforms": "Autres Plateformes",
+  "loginReason":
+      "Vous devez vous connecter pour bénéficier de plus de fonctionnalités. Par exemple, vous pouvez enregistrer vos notes dans le cloud et y accéder depuis n'importe où.",
+  "Audio": "Audio",
+  "Profile": "Profil",
+  "All Reciters List": "Liste de Tous les Réciteurs",
+
+//
 };
 Map<String, String> id = {
   "Translation of Quran": "Terjemahan Al-Qur'an",
@@ -382,7 +572,23 @@ Map<String, String> id = {
   "intro_text":
       "Aplikasi Al-Qur'an All-in-one dengan Terjemahan dalam 69 bahasa & 180+ buku terjemahan, Tafsir dalam 6 bahasa dengan 30+ buku Tafsir & pembacaan Qari Al-Qur'an",
   "previous": "Sebelumnya",
-  //
+  "Surah": "Surah",
+  "Juzs": "Bagian",
+
+  "LogIn": "Login",
+  "Home": "Beranda",
+  "Favorite": "Favorit",
+  "Book Mark": "Bookmark",
+  "Notes": "Catatan",
+  "Settings": "Pengaturan",
+  "Others Platforms": "Platform Lainnya",
+  "loginReason":
+      "Anda perlu login untuk fitur lebih lanjut. Misalnya, Anda dapat menyimpan catatan Anda di cloud dan mengaksesnya dari mana saja.",
+  "Audio": "Audio",
+  "Profile": "Profil",
+  "All Reciters List": "Daftar Semua Qari",
+
+//
 };
 Map<String, String> ur = {
   "Translation of Quran": "قرآن کا ترجمہ",
@@ -405,7 +611,23 @@ Map<String, String> ur = {
   "intro_text":
       "القرآن الشامل في تطبيق واحد مع ترجمة 69 لغة وأكثر من 180 كتاب ترجمة وتفسير بـ 6 لغات وأكثر من 30 كتاب تفسير وتلاوة قارئ القرآن الكريم",
   "previous": "پچھلا",
-  //
+  "Surah": "سورہ",
+  "Juzs": "حصے",
+
+  "LogIn": "لاگ ان",
+  "Home": "گھر",
+  "Favorite": "پسندیدہ",
+  "Book Mark": "بک مارک",
+  "Notes": "نوٹس",
+  "Settings": "سیٹنگز",
+  "Others Platforms": "دیگر پلیٹ فارم",
+  "loginReason":
+      "مزید خصوصیات کے لیے آپ کو لاگ ان کرنے کی ضرورت ہے۔ مثال کے طور پر، آپ اپنے نوٹس کو کلاؤڈ میں محفوظ کر سکتے ہیں اور ان تک کسی بھی جگہ سے رسائی حاصل کر سکتے ہیں۔",
+  "Audio": "آڈیو",
+  "Profile": "پروفائل",
+  "All Reciters List": "تمام قاریوں کی فہرست",
+
+//
 };
 Map<String, String> sw = {
   "Translation of Quran": "Tafsiri ya Quran",
@@ -428,7 +650,23 @@ Map<String, String> sw = {
   "intro_text":
       "Programu kamili ya Al Quran yenye Tafsiri kwa lugha 69 na vitabu vya tafsiri zaidi ya 180, Tafsiri kwa lugha 6 na vitabu vya Tafsiri zaidi ya 30, na Qur'an msomaji wa Qur'an",
   "previous": "Uliopita",
-  //
+  "Surah": "Sura",
+  "Juzs": "Sehemu",
+
+  "LogIn": "Ingia",
+  "Home": "Nyumbani",
+  "Favorite": "Kipendwa",
+  "Book Mark": "Alamisho",
+  "Notes": "Maelezo",
+  "Settings": "Mipangilio",
+  "Others Platforms": "Jukwaa Nyingine",
+  "loginReason":
+      "Unahitaji kuingia ili kupata huduma zaidi. Kwa mfano, unaweza kuhifadhi maelezo yako kwenye wingu na kuyapata kutoka mahali popote.",
+  "Audio": "Sauti",
+  "Profile": "Profaili",
+  "All Reciters List": "Orodha ya Wasomaji Wote wa Qur'an",
+
+//
 };
 Map<String, String> ko = {
   "Translation of Quran": "코란 번역",
@@ -449,7 +687,23 @@ Map<String, String> ko = {
   "intro_text":
       "올인원 알 꾸르안 앱, 69개 언어로 번역 및 180+권의 번역 책, 6개 언어로 타프시르 및 30+권의 타프시르 책, 그리고 꾸르안 암송자의 암송",
   "previous": "이전",
-  //
+  "Surah": "수라",
+  "Juzs": "부분",
+
+  "LogIn": "로그인",
+  "Home": "홈",
+  "Favorite": "즐겨찾기",
+  "Book Mark": "책갈피",
+  "Notes": "노트",
+  "Settings": "설정",
+  "Others Platforms": "다른 플랫폼",
+  "loginReason":
+      "더 많은 기능을 사용하려면 로그인해야 합니다. 예를 들어, 노트를 클라우드에 저장하고 어디서나 액세스할 수 있습니다.",
+  "Audio": "오디오",
+  "Profile": "프로필",
+  "All Reciters List": "모든 암송자 목록",
+
+//
 };
 Map<String, String> tr = {
   "Translation of Quran": "Kuran'ın Tercümesi",
@@ -470,7 +724,23 @@ Map<String, String> tr = {
   "intro_text":
       "Tümleşik Kur'an-ı Kerim Uygulaması, 69 dilde çeviri ve 180+ çeviri kitabı, 6 dilde Tefsir ve 30+ Tefsir kitabı ve Kur'an-ı Kerim okuru'nun tilaveti ile",
   "previous": "Önceki",
-  //
+  "Surah": "Sure",
+  "Juzs": "Kısımlar",
+
+  "LogIn": "Giriş yap",
+  "Home": "Anasayfa",
+  "Favorite": "Favoriler",
+  "Book Mark": "Yer İmi",
+  "Notes": "Notlar",
+  "Settings": "Ayarlar",
+  "Others Platforms": "Diğer Platformlar",
+  "loginReason":
+      "Daha fazla özellik için giriş yapmanız gerekir. Örneğin, notlarınızı buluta kaydedebilir ve her yerden erişebilirsiniz.",
+  "Audio": "Ses",
+  "Profile": "Profil",
+  "All Reciters List": "Tüm Kur'an Okuma Üstatları Listesi",
+
+//
 };
 Map<String, String> vi = {
   "Translation of Quran": "Bản dịch của kinh Quran",
@@ -493,7 +763,23 @@ Map<String, String> vi = {
   "intro_text":
       "Ứng dụng Al Quran All-in-one với Dịch thuật 69 ngôn ngữ & hơn 180 cuốn sách dịch thuật, Tafsir 6 ngôn ngữ với hơn 30 cuốn sách Tafsir & đọc tụng của người đọc kinh Qur'an",
   "previous": "Trước đó",
-  //
+  "Surah": "Sura",
+  "Juzs": "Phần",
+
+  "LogIn": "Đăng nhập",
+  "Home": "Trang chủ",
+  "Favorite": "Yêu thích",
+  "Book Mark": "Dấu trang",
+  "Notes": "Ghi chú",
+  "Settings": "Cài đặt",
+  "Others Platforms": "Nền Tảng Khác",
+  "loginReason":
+      "Bạn cần đăng nhập để sử dụng nhiều tính năng hơn. Ví dụ: bạn có thể lưu trữ ghi chú của mình trên đám mây và truy cập chúng từ bất kỳ đâu.",
+  "Audio": "Âm thanh",
+  "Profile": "Hồ sơ",
+  "All Reciters List": "Danh sách Tất cả Độc Kinh",
+
+//
 };
 Map<String, String> ta = {
   "Translation of Quran": "குர்ஆன் மொழிபெயர்ப்பு",
@@ -517,7 +803,23 @@ Map<String, String> ta = {
   "intro_text":
       "அனைத்தும் ஒன்றாகும் அல்குர்ஆன் ஆப், 69 மொழிகளில் மொழிபெயர்ப்பு மற்றும் 180+ மொழிபெயர்ப்பு புத்தகங்கள், 6 மொழிகளில் தஃப்ஸீர் மற்றும் 30+ தஃப்ஸீர் புத்தகங்கள் மற்றும் குர்ஆன் ஓதுபவரின் ஓதுதல்",
   "previous": "முந்தைய",
-  //
+  "Surah": "சூரா",
+  "Juzs": "பகுதிகள்",
+
+  "LogIn": "உள்நுழை",
+  "Home": "முகப்பு",
+  "Favorite": "பிடித்தவை",
+  "Book Mark": "புத்தகக் குறியீடு",
+  "Notes": "குறிப்புகள்",
+  "Settings": "அமைப்புகள்",
+  "Others Platforms": "மற்ற தளங்கள்",
+  "loginReason":
+      "மேலும் சிறப்பம்சங்களைப் பயன்படுத்த நீங்கள் உள்நுழைய வேண்டும். உதாரணமாக, நீங்கள் உங்கள் குறிப்புகளை மேகத்தில் சேமித்து எந்த இடத்திலிருந்தும் அணுகலாம்.",
+  "Audio": "ஆடியோ",
+  "Profile": "பிரொபைல்",
+  "All Reciters List": "அனைத்து ஓதுபவர்கள் பட்டியல்",
+
+//
 };
 Map<String, String> it = {
   "Translation of Quran": "Traduzione del Corano",
@@ -541,5 +843,21 @@ Map<String, String> it = {
   "intro_text":
       "App Al Corano tutto in uno con traduzione in 69 lingue e oltre 180 libri di traduzione, Tafsir in 6 lingue con oltre 30 libri di Tafsir e recitazione del recitatore del Corano",
   "previous": "Precedente",
-  //
+  "Surah": "Sura",
+  "Juzs": "Parti",
+
+  "LogIn": "Accedi",
+  "Home": "Home",
+  "Favorite": "Preferiti",
+  "Book Mark": "Segnalibro",
+  "Notes": "Note",
+  "Settings": "Impostazioni",
+  "Others Platforms": "Altre Piattaforme",
+  "loginReason":
+      "Devi accedere per utilizzare più funzioni. Ad esempio, puoi salvare le tue note nel cloud e accedervi da qualsiasi luogo.",
+  "Audio": "Audio",
+  "Profile": "Profilo",
+  "All Reciters List": "Elenco di Tutti i Recitatori"
+
+//
 };

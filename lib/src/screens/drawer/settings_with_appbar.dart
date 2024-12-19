@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../theme/theme_icon_button.dart';
 import '../settings/settings.dart';
@@ -10,8 +11,8 @@ class SettingsWithAppbar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Settings",
+        title: Text(
+          "Settings".tr,
           style: TextStyle(
             fontWeight: FontWeight.bold,
           ),

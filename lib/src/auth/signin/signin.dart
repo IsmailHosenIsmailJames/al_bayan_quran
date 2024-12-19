@@ -285,9 +285,9 @@ class _SignInState extends State<SignIn> {
                               onPressed: () {
                                 Get.off(() => const LogIn());
                               },
-                              child: const Text(
-                                "Login",
-                                style: TextStyle(
+                              child: Text(
+                                "Login".tr,
+                                style: const TextStyle(
                                   color: Colors.green,
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,

@@ -43,9 +43,9 @@ class _MyDrawerState extends State<MyDrawer> {
                               onPressed: () {
                                 Get.to(() => const LogIn());
                               },
-                              label: const Text(
-                                "LogIn",
-                                style: TextStyle(
+                              label: Text(
+                                "LogIn".tr,
+                                style: const TextStyle(
                                   color: Colors.green,
                                   fontSize: 20,
                                 ),
@@ -57,8 +57,8 @@ class _MyDrawerState extends State<MyDrawer> {
                             ),
                             SizedBox(
                               width: 210,
-                              child: const Text(
-                                "You Need to login for more Features. For Example, you can save your notes in cloud and access it from any places.",
+                              child: Text(
+                                "loginReason".tr,
                                 style: TextStyle(fontSize: 10),
                               ),
                             )
@@ -146,16 +146,16 @@ class _MyDrawerState extends State<MyDrawer> {
             onPressed: () {
               Get.offAll(() => const HomeMobile());
             },
-            child: const Row(
+            child: Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.home_rounded,
                   color: Colors.green,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
-                Text("Home")
+                Text("Home".tr),
               ],
             ),
           ),
@@ -171,16 +171,16 @@ class _MyDrawerState extends State<MyDrawer> {
                 () => const Favorite(),
               );
             },
-            child: const Row(
+            child: Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.favorite_rounded,
                   color: Colors.green,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
-                Text("Favorite")
+                Text("Favorite".tr)
               ],
             ),
           ),
@@ -194,16 +194,16 @@ class _MyDrawerState extends State<MyDrawer> {
 
               Get.to(() => const BookMark());
             },
-            child: const Row(
+            child: Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.bookmark_added,
                   color: Colors.green,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
-                Text("Book Mark")
+                Text("Book Mark".tr)
               ],
             ),
           ),
@@ -217,16 +217,16 @@ class _MyDrawerState extends State<MyDrawer> {
               await Hive.openBox("notes");
               Get.to(() => const NotesView());
             },
-            child: const Row(
+            child: Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.note_add,
                   color: Colors.green,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
-                Text("Notes")
+                Text("Notes".tr)
               ],
             ),
           ),
@@ -240,16 +240,16 @@ class _MyDrawerState extends State<MyDrawer> {
 
               Get.to(() => const SettingsWithAppbar());
             },
-            child: const Row(
+            child: Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.settings,
                   color: Colors.green,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
-                Text("Settings")
+                Text("Settings".tr)
               ],
             ),
           ),
@@ -261,16 +261,16 @@ class _MyDrawerState extends State<MyDrawer> {
               launchUrl(Uri.parse(
                   "https://www.freeprivacypolicy.com/live/d8c08904-a100-4f0b-94d8-13d86a8c8605"));
             },
-            child: const Row(
+            child: Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.privacy_tip,
                   color: Colors.green,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
-                Text("Privacy Policy")
+                Text("Privacy Policy".tr)
               ],
             ),
           ),

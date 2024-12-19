@@ -149,11 +149,11 @@ class _ChoiceTafseerBookState extends State<ChoiceTafseerBook> {
         itemCount: books.length,
         itemBuilder: (context, index) {
           return Container(
-            margin: EdgeInsets.only(top: 5, bottom: 5),
+            margin: const EdgeInsets.only(top: 5, bottom: 5),
             child: TextButton(
               style: TextButton.styleFrom(
-                padding:
-                    EdgeInsets.only(left: 10, right: 10, bottom: 5, top: 5),
+                padding: const EdgeInsets.only(
+                    left: 10, right: 10, bottom: 5, top: 5),
                 backgroundColor: Colors.green.shade400.withOpacity(0.1),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(7),
@@ -181,9 +181,9 @@ class _ChoiceTafseerBookState extends State<ChoiceTafseerBook> {
                         ),
                       ],
                     ),
-                    Spacer(),
+                    const Spacer(),
                     if (infoController.tafseerBookIndex.value == index)
-                      CircleAvatar(
+                      const CircleAvatar(
                         radius: 15,
                         backgroundColor: Colors.green,
                         child: Icon(

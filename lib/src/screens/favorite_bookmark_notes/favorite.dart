@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../drawer/drawer.dart';
 import 'get_data.dart';
@@ -11,7 +12,7 @@ class Favorite extends StatelessWidget {
     List<Widget> list = buildWidgetForFavBook("favorite");
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Favorite"),
+        title: Text("Favorite".tr),
       ),
       drawer: const MyDrawer(),
       body: ListView(

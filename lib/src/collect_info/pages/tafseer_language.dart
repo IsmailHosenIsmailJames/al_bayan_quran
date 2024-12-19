@@ -80,7 +80,8 @@ class _TafseerLanguageState extends State<TafseerLanguage> {
         itemBuilder: (context, index) {
           return TextButton(
             style: TextButton.styleFrom(
-              padding: EdgeInsets.only(left: 10, right: 10, bottom: 5, top: 5),
+              padding:
+                  const EdgeInsets.only(left: 10, right: 10, bottom: 5, top: 5),
               backgroundColor: Colors.green.shade400.withOpacity(0.1),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(7),
@@ -95,9 +96,9 @@ class _TafseerLanguageState extends State<TafseerLanguage> {
               () => Row(
                 children: [
                   Text(language[index], style: const TextStyle(fontSize: 14)),
-                  Spacer(),
+                  const Spacer(),
                   if (tafseerLanguage.tafseerIndex.value == index)
-                    CircleAvatar(
+                    const CircleAvatar(
                       radius: 15,
                       backgroundColor: Colors.green,
                       child: Icon(

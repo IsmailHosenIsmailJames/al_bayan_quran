@@ -84,9 +84,9 @@ class _SettingsState extends State<Settings> {
               const SizedBox(
                 width: 10,
               ),
-              const Text(
-                "Settings",
-                style: TextStyle(
+              Text(
+                "Settings".tr,
+                style: const TextStyle(
                   fontSize: 20,
                   color: Colors.green,
                   fontWeight: FontWeight.bold,

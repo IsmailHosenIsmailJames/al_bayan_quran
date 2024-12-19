@@ -94,22 +94,22 @@ class _CollectInfoDesktopState extends State<CollectInfoDesktop> {
         ),
       ),
       appBar: AppBar(
-        title: const Row(
+        title: Row(
           children: [
             Text(
-              "Al Quran",
-              style: TextStyle(
+              "Al Quran".tr,
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Spacer(),
-            Center(
+            const Spacer(),
+            const Center(
               child: Text(
                 "Choice your preference",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               ),
             ),
-            Spacer(),
+            const Spacer(),
           ],
         ),
         actions: [themeIconButton],

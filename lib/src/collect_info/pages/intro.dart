@@ -43,27 +43,27 @@ class Intro extends StatelessWidget {
         ),
         MediaQuery(
           data: MediaQuery.of(context).copyWith(
-            textScaler: TextScaler.linear(0.7),
+            textScaler: const TextScaler.linear(0.7),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text("Data collected from :"),
+              const Text("Data collected from :"),
               TextButton(
                 onPressed: () {
                   launchUrl(Uri.parse("https://quran.com/"),
                       mode: LaunchMode.externalApplication);
                 },
-                child: Text("quran.com"),
+                child: const Text("quran.com"),
               ),
-              Text("and"),
+              const Text("and"),
               TextButton(
                   onPressed: () {
                     launchUrl(Uri.parse("https://everyayah.com/"),
                         mode: LaunchMode.externalApplication);
                   },
-                  child: Text("everyayah.com")),
+                  child: const Text("everyayah.com")),
             ],
           ),
         ),

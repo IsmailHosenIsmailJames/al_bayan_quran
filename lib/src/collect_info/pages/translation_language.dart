@@ -185,11 +185,11 @@ class _TranslationLanguageState extends State<TranslationLanguage> {
               itemCount: language.length,
               itemBuilder: (context, index) {
                 return Container(
-                  margin: EdgeInsets.only(top: 5, bottom: 5),
+                  margin: const EdgeInsets.only(top: 5, bottom: 5),
                   height: 40,
                   child: TextButton(
                     style: TextButton.styleFrom(
-                      padding: EdgeInsets.only(
+                      padding: const EdgeInsets.only(
                           left: 10, right: 10, bottom: 5, top: 5),
                       backgroundColor: Colors.green.shade400.withOpacity(0.1),
                       shape: RoundedRectangleBorder(
@@ -217,11 +217,11 @@ class _TranslationLanguageState extends State<TranslationLanguage> {
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          Spacer(),
+                          const Spacer(),
                           if (translationLanguageController
                                   .translationLanguage.value ==
                               language[index])
-                            CircleAvatar(
+                            const CircleAvatar(
                               radius: 15,
                               backgroundColor: Colors.green,
                               child: Icon(

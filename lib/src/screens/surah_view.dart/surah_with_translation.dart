@@ -855,18 +855,18 @@ class _SurahWithTranslationState extends State<SurahWithTranslation> {
                                 ],
                               ),
                             ),
-                            const PopupMenuItem(
+                            PopupMenuItem(
                               value: 'note',
                               child: Row(
                                 children: [
-                                  Icon(
+                                  const Icon(
                                     Icons.note_add,
                                     color: Colors.green,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 10,
                                   ),
-                                  Text("Notes"),
+                                  Text("Notes".tr),
                                 ],
                               ),
                             ),

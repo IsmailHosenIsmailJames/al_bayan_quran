@@ -124,10 +124,10 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
     for (int index = -1; index < length; index++) {
       if (index == -1) {
         listSurah.add(
-          const Center(
+          Center(
             child: Text(
-              "Surah",
-              style: TextStyle(
+              "Surah".tr,
+              style: const TextStyle(
                 fontSize: 20,
               ),
             ),
@@ -499,12 +499,12 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
                   children: [
                     Text(
                       (index + 1).toString(),
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Gap(15),
+                    const Gap(15),
                     CircleAvatar(
                       radius: 17,
                       backgroundColor: const Color.fromARGB(255, 0, 140, 255),
@@ -886,9 +886,9 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
                               onPressed: () {
                                 Get.to(() => const LogIn());
                               },
-                              label: const Text(
-                                "LogIn",
-                                style: TextStyle(
+                              label: Text(
+                                "LogIn".tr,
+                                style: const TextStyle(
                                   color: Colors.green,
                                   fontSize: 30,
                                 ),
@@ -898,9 +898,12 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
                                 color: Colors.green,
                               ),
                             ),
-                            const Text(
-                              "You Need to login for more Features.\nFor Example, you can save your notes in\ncloud and access it from any places.",
-                              style: TextStyle(fontSize: 9),
+                            SizedBox(
+                              width: 210,
+                              child: Text(
+                                "loginReason".tr,
+                                style: const TextStyle(fontSize: 9),
+                              ),
                             )
                           ],
                         ),
@@ -972,16 +975,16 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
             onPressed: () {
               Navigator.pop(context);
             },
-            child: const Row(
+            child: Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.home_rounded,
                   color: Colors.green,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
-                Text("Home")
+                Text("Home".tr)
               ],
             ),
           ),
@@ -1003,16 +1006,16 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
                 isPlaying = false;
               });
             },
-            child: const Row(
+            child: Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.favorite_rounded,
                   color: Colors.green,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
-                Text("Favorite")
+                Text("Favorite".tr)
               ],
             ),
           ),
@@ -1032,16 +1035,16 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
                 isPlaying = false;
               });
             },
-            child: const Row(
+            child: Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.bookmark_added,
                   color: Colors.green,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
-                Text("Book Mark")
+                Text("Book Mark".tr)
               ],
             ),
           ),
@@ -1062,16 +1065,16 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
                 isPlaying = false;
               });
             },
-            child: const Row(
+            child: Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.note_add,
                   color: Colors.green,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
-                Text("Notes")
+                Text("Notes".tr)
               ],
             ),
           ),
@@ -1085,16 +1088,16 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
               await player.dispose();
               await Get.to(() => const SettingsWithAppbar());
             },
-            child: const Row(
+            child: Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.settings,
                   color: Colors.green,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
-                Text("Settings")
+                Text("Settings".tr)
               ],
             ),
           ),
@@ -1110,16 +1113,16 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
                 ),
               );
             },
-            child: const Row(
+            child: Row(
               children: [
-                Icon(
+                const Icon(
                   FluentIcons.phone_laptop_16_filled,
                   color: Colors.green,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
-                Text("Others Platforms")
+                Text("Others Platforms".tr)
               ],
             ),
           ),
@@ -1156,16 +1159,16 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
               launchUrl(Uri.parse(
                   "https://www.freeprivacypolicy.com/live/d8c08904-a100-4f0b-94d8-13d86a8c8605"));
             },
-            child: const Row(
+            child: Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.privacy_tip,
                   color: Colors.green,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
-                Text("Privacy Policy")
+                Text("Privacy Policy".tr)
               ],
             ),
           ),
@@ -1190,7 +1193,7 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
           ),
         ),
         menuHeight: 300,
-        label: const Text("All Reciters List"),
+        label: Text("All Reciters List".tr),
         onSelected: (value) {
           Map<String, String> temInfoMap =
               Map<String, String>.from(infoBox.get("info"));
@@ -1220,14 +1223,15 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
                     padding: EdgeInsets.only(
                         left: currentIndex == 0 ? 0 : 15,
                         right: currentIndex == 0 ? 0 : 15),
-                    child: Icon(
+                    child: const Icon(
                       FontAwesomeIcons.bookOpen,
                       size: 20,
                     ),
                   ),
-                  title: const Text(
-                    " Quran",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                  title: Text(
+                    "Al Quran".tr,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 15),
                   ),
                 ),
                 SalomonBottomBarItem(
@@ -1235,11 +1239,12 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
                     padding: EdgeInsets.only(
                         left: currentIndex == 1 ? 0 : 15,
                         right: currentIndex == 1 ? 0 : 15),
-                    child: Icon(Icons.audiotrack_outlined),
+                    child: const Icon(Icons.audiotrack_outlined),
                   ),
-                  title: const Text(
-                    "Audio",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                  title: Text(
+                    "Audio".tr,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 15),
                   ),
                 ),
                 SalomonBottomBarItem(
@@ -1247,11 +1252,12 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
                     padding: EdgeInsets.only(
                         left: currentIndex == 2 ? 0 : 15,
                         right: currentIndex == 2 ? 0 : 15),
-                    child: Icon(Icons.person),
+                    child: const Icon(Icons.person),
                   ),
-                  title: const Text(
-                    "Profile",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                  title: Text(
+                    "Profile".tr,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 15),
                   ),
                 ),
               ],
@@ -1264,9 +1270,9 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
             appBar: MediaQuery.of(context).size.width > 800
                 ? null
                 : AppBar(
-                    title: const Text(
-                      "Al Quran",
-                      style: TextStyle(
+                    title: Text(
+                      "Al Quran".tr,
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -1321,20 +1327,20 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
                     ],
                     bottom: MediaQuery.of(context).size.width > 720
                         ? null
-                        : const TabBar(
+                        : TabBar(
                             tabs: [
                               Tab(
                                 child: Text(
-                                  "Surah",
-                                  style: TextStyle(
+                                  "Surah".tr,
+                                  style: const TextStyle(
                                     fontSize: 18,
                                   ),
                                 ),
                               ),
                               Tab(
                                 child: Text(
-                                  'Juzs',
-                                  style: TextStyle(
+                                  'Juzs'.tr,
+                                  style: const TextStyle(
                                     fontSize: 18,
                                   ),
                                 ),
@@ -1547,9 +1553,9 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
           appBar: MediaQuery.of(context).size.width > 800
               ? null
               : AppBar(
-                  title: const Text(
-                    "Audio",
-                    style: TextStyle(
+                  title: Text(
+                    "Audio".tr,
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -1688,11 +1694,11 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
                 items: [
                   SalomonBottomBarItem(
                     icon: const Icon(FontAwesomeIcons.book),
-                    title: const Text("Quran"),
+                    title: Text("Al Quran".tr),
                   ),
                   SalomonBottomBarItem(
                     icon: const Icon(Icons.audiotrack_outlined),
-                    title: const Text("Audio"),
+                    title: Text("Audio".tr),
                   ),
                   SalomonBottomBarItem(
                     icon: const Icon(Icons.person),
@@ -1768,9 +1774,9 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
                               onPressed: () {
                                 Get.to(() => const LogIn());
                               },
-                              label: const Text(
-                                "LogIn",
-                                style: TextStyle(
+                              label: Text(
+                                "LogIn".tr,
+                                style: const TextStyle(
                                   color: Colors.green,
                                   fontSize: 20,
                                 ),
@@ -1780,11 +1786,14 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
                                 color: Colors.green,
                               ),
                             ),
-                            const Text(
-                              "You Need to login\nfor more Features.",
-                              style: TextStyle(
-                                fontSize: 10,
-                                color: Colors.white,
+                            SizedBox(
+                              width: 210,
+                              child: Text(
+                                "loginReason".tr,
+                                style: const TextStyle(
+                                  fontSize: 10,
+                                  color: Colors.white,
+                                ),
                               ),
                             )
                           ],

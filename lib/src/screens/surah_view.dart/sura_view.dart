@@ -5,6 +5,7 @@ import 'package:al_quran/src/theme/theme_controller.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
 class SuraView extends StatelessWidget {
@@ -29,7 +30,7 @@ class SuraView extends StatelessWidget {
         appBar: AppBar(
           title: Center(
             child: Text(
-              surahName ?? "Al Quran",
+              surahName ?? "Al Quran".tr,
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
