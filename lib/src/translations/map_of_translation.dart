@@ -108,7 +108,6 @@ Map<String, String> zh = {
   "previous": "上一个",
   "Surah": "蘇拉",
   "Juzs": "章节",
-
   "LogIn": "登录",
   "Home": "首页",
   "Favorite": "收藏",
@@ -120,8 +119,8 @@ Map<String, String> zh = {
   "Audio": "音频",
   "Profile": "个人资料",
   "All Reciters List": "所有诵读者列表",
-
   "No Book Mark Found": "未找到书签",
+  "Empty": "空",
 
 //
 };
@@ -148,7 +147,6 @@ Map<String, String> hi = {
   "previous": "पिछला",
   "Surah": "सूरा",
   "Juzs": "जूज़",
-
   "LogIn": "लॉगिन",
   "Home": "मुख्य पृष्ठ",
   "Favorite": "पसंदीदा",
@@ -161,8 +159,8 @@ Map<String, String> hi = {
   "Audio": "ऑडियो",
   "Profile": "प्रोफ़ाइल",
   "All Reciters List": "सभी क़ारियों की सूची",
-
   "No Book Mark Found": "कोई बुकमार्क नहीं मिला",
+  "Empty": "खाली",
 
 //
 };
@@ -189,7 +187,6 @@ Map<String, String> en = {
   "previous": "Previous",
   "Surah": "Surah",
   "Juzs": "Juzs",
-
   "LogIn": "Login",
   "Home": "Home",
   "Favorite": "Favorite",
@@ -202,8 +199,8 @@ Map<String, String> en = {
   "Audio": "Audio",
   "Profile": "Profile",
   "All Reciters List": "All Reciters List",
-
   "No Book Mark Found": "No Book Mark Found",
+  "Empty": "Empty",
 
 //
 };
@@ -231,7 +228,6 @@ Map<String, String> es = {
   "previous": "Anterior",
   "Surah": "Sura",
   "Juzs": "Partes",
-
   "LogIn": "Iniciar sesión",
   "Home": "Inicio",
   "Favorite": "Favorito",
@@ -244,8 +240,8 @@ Map<String, String> es = {
   "Audio": "Audio",
   "Profile": "Perfil",
   "All Reciters List": "Lista de Todos los Recitadores",
-
   "No Book Mark Found": "No se Encontraron Marcadores",
+  "Empty": "Vacío",
 
 //
 };
@@ -270,7 +266,6 @@ Map<String, String> ar = {
   "previous": "السابق",
   "Surah": "سورة",
   "Juzs": "أجزاء",
-
   "LogIn": "تسجيل الدخول",
   "Home": "الرئيسية",
   "Favorite": "مفضل",
@@ -283,8 +278,8 @@ Map<String, String> ar = {
   "Audio": "صوت",
   "Profile": "الملف الشخصي",
   "All Reciters List": "قائمة جميع القراء",
-
   "No Book Mark Found": "لم يتم العثور على أي إشارة مرجعية",
+  "Empty": "فارغ",
 
 //
 };
@@ -324,8 +319,8 @@ Map<String, String> bn = {
   "Audio": "অডিও",
   "Profile": "প্রোফাইল",
   "All Reciters List": "সকল কিরাতকারের তালিকা",
-
   "No Book Mark Found": "কোন বুকমার্ক পাওয়া যায়নি",
+  "Empty": "খালি",
 
 //
 };
@@ -353,7 +348,6 @@ Map<String, String> pt = {
   "previous": "Anterior",
   "Surah": "Sura",
   "Juzs": "Partes",
-
   "LogIn": "Login",
   "Home": "Início",
   "Favorite": "Favorito",
@@ -366,8 +360,8 @@ Map<String, String> pt = {
   "Audio": "Áudio",
   "Profile": "Perfil",
   "All Reciters List": "Lista de Todos os Recitadores",
-
   "No Book Mark Found": "Nenhum Marcador Encontrado",
+  "Empty": "Vazio",
 
 //
 };
@@ -394,7 +388,6 @@ Map<String, String> ru = {
   "previous": "Предыдущий",
   "Surah": "Сура",
   "Juzs": "Части",
-
   "LogIn": "Вход",
   "Home": "Главная",
   "Favorite": "Избранное",
@@ -407,8 +400,8 @@ Map<String, String> ru = {
   "Audio": "Аудио",
   "Profile": "Профиль",
   "All Reciters List": "Список Всех Чтецов Корана",
-
   "No Book Mark Found": "Закладки не найдены",
+  "Empty": "Пустой",
 
 //
 };
@@ -433,7 +426,6 @@ Map<String, String> ja = {
   "previous": "前",
   "Surah": "スーラ",
   "Juzs": "部分",
-
   "LogIn": "ログイン",
   "Home": "ホーム",
   "Favorite": "お気に入り",
@@ -446,8 +438,8 @@ Map<String, String> ja = {
   "Audio": "オーディオ",
   "Profile": "プロフィール",
   "All Reciters List": "すべての暗唱者のリスト",
-
   "No Book Mark Found": "ブックマークが見つかりません",
+  "Empty": "空",
 
 //
 };
@@ -473,7 +465,6 @@ Map<String, String> pa = {
   "previous": "ਪਿਛਲਾ",
   "Surah": "ਸੂਰਾ",
   "Juzs": "ਹਿੱਸੇ",
-
   "LogIn": "ਲਾਗਇਨ",
   "Home": "ਮੁੱਖ ਪੰਨਾ",
   "Favorite": "ਪਸੰਦੀਦਾ",
@@ -486,8 +477,8 @@ Map<String, String> pa = {
   "Audio": "ਆਡੀਓ",
   "Profile": "ਪ੍ਰੋਫਾਈਲ",
   "All Reciters List": "ਸਾਰੇ ਕਾਰੀਆਂ ਦੀ ਸੂਚੀ",
-
   "No Book Mark Found": "ਕੋਈ ਬੁੱਕਮਾਰਕ ਨਹੀਂ ਮਿਲਿਆ",
+  "Empty": "ਖਾਲੀ",
 
 //
 };
@@ -515,7 +506,6 @@ Map<String, String> de = {
   "previous": "Vorheriger",
   "Surah": "Sure",
   "Juzs": "Teile",
-
   "LogIn": "Anmelden",
   "Home": "Startseite",
   "Favorite": "Favorit",
@@ -528,8 +518,8 @@ Map<String, String> de = {
   "Audio": "Audio",
   "Profile": "Profil",
   "All Reciters List": "Liste aller Rezitatoren",
-
   "No Book Mark Found": "Keine Lesezeichen gefunden",
+  "Empty": "Leer",
 
 //
 };
@@ -557,7 +547,6 @@ Map<String, String> fr = {
   "previous": "Précédent",
   "Surah": "Sourate",
   "Juzs": "Parties",
-
   "LogIn": "Connexion",
   "Home": "Accueil",
   "Favorite": "Favoris",
@@ -570,8 +559,8 @@ Map<String, String> fr = {
   "Audio": "Audio",
   "Profile": "Profil",
   "All Reciters List": "Liste de Tous les Réciteurs",
-
   "No Book Mark Found": "Aucun Signet Trouvé",
+  "Empty": "Vide",
 
 //
 };
@@ -598,7 +587,6 @@ Map<String, String> id = {
   "previous": "Sebelumnya",
   "Surah": "Surah",
   "Juzs": "Bagian",
-
   "LogIn": "Login",
   "Home": "Beranda",
   "Favorite": "Favorit",
@@ -611,8 +599,8 @@ Map<String, String> id = {
   "Audio": "Audio",
   "Profile": "Profil",
   "All Reciters List": "Daftar Semua Qari",
-
   "No Book Mark Found": "Tidak Ditemukan Bookmark",
+  "Empty": "Kosong",
 
 //
 };
@@ -639,7 +627,6 @@ Map<String, String> ur = {
   "previous": "پچھلا",
   "Surah": "سورہ",
   "Juzs": "حصے",
-
   "LogIn": "لاگ ان",
   "Home": "گھر",
   "Favorite": "پسندیدہ",
@@ -652,8 +639,8 @@ Map<String, String> ur = {
   "Audio": "آڈیو",
   "Profile": "پروفائل",
   "All Reciters List": "تمام قاریوں کی فہرست",
-
   "No Book Mark Found": "کوئی بک مارک نہیں ملا",
+  "Empty": "خالی",
 
 //
 };
@@ -680,7 +667,6 @@ Map<String, String> sw = {
   "previous": "Uliopita",
   "Surah": "Sura",
   "Juzs": "Sehemu",
-
   "LogIn": "Ingia",
   "Home": "Nyumbani",
   "Favorite": "Kipendwa",
@@ -693,8 +679,8 @@ Map<String, String> sw = {
   "Audio": "Sauti",
   "Profile": "Profaili",
   "All Reciters List": "Orodha ya Wasomaji Wote wa Qur'an",
-
   "No Book Mark Found": "Hakuna Alamisho Yoyopatikana",
+  "Empty": "Tupu",
 
 //
 };
@@ -719,7 +705,6 @@ Map<String, String> ko = {
   "previous": "이전",
   "Surah": "수라",
   "Juzs": "부분",
-
   "LogIn": "로그인",
   "Home": "홈",
   "Favorite": "즐겨찾기",
@@ -732,8 +717,8 @@ Map<String, String> ko = {
   "Audio": "오디오",
   "Profile": "프로필",
   "All Reciters List": "모든 암송자 목록",
-
   "No Book Mark Found": "북마크를 찾을 수 없습니다",
+  "Empty": "빈",
 
 //
 };
@@ -758,7 +743,6 @@ Map<String, String> tr = {
   "previous": "Önceki",
   "Surah": "Sure",
   "Juzs": "Kısımlar",
-
   "LogIn": "Giriş yap",
   "Home": "Anasayfa",
   "Favorite": "Favoriler",
@@ -771,8 +755,8 @@ Map<String, String> tr = {
   "Audio": "Ses",
   "Profile": "Profil",
   "All Reciters List": "Tüm Kur'an Okuma Üstatları Listesi",
-
   "No Book Mark Found": "Hiç Yer İmi Bulunamadı",
+  "Empty": "Boş",
 
 //
 };
@@ -799,7 +783,6 @@ Map<String, String> vi = {
   "previous": "Trước đó",
   "Surah": "Sura",
   "Juzs": "Phần",
-
   "LogIn": "Đăng nhập",
   "Home": "Trang chủ",
   "Favorite": "Yêu thích",
@@ -812,8 +795,8 @@ Map<String, String> vi = {
   "Audio": "Âm thanh",
   "Profile": "Hồ sơ",
   "All Reciters List": "Danh sách Tất cả Độc Kinh",
-
   "No Book Mark Found": "Không Tìm Thấy Dấu Trang",
+  "Empty": "Trống",
 
 //
 };
@@ -841,7 +824,6 @@ Map<String, String> ta = {
   "previous": "முந்தைய",
   "Surah": "சூரா",
   "Juzs": "பகுதிகள்",
-
   "LogIn": "உள்நுழை",
   "Home": "முகப்பு",
   "Favorite": "பிடித்தவை",
@@ -854,8 +836,8 @@ Map<String, String> ta = {
   "Audio": "ஆடியோ",
   "Profile": "பிரொபைல்",
   "All Reciters List": "அனைத்து ஓதுபவர்கள் பட்டியல்",
-
   "No Book Mark Found": "புத்தகக் குறியீடு எதுவும் காணப்படவில்லை",
+  "Empty": "காலி",
 
 //
 };
@@ -883,7 +865,6 @@ Map<String, String> it = {
   "previous": "Precedente",
   "Surah": "Sura",
   "Juzs": "Parti",
-
   "LogIn": "Accedi",
   "Home": "Home",
   "Favorite": "Preferiti",
@@ -896,8 +877,8 @@ Map<String, String> it = {
   "Audio": "Audio",
   "Profile": "Profilo",
   "All Reciters List": "Elenco di Tutti i Recitatori",
-
   "No Book Mark Found": "Nessun Segnalibro Trovato",
+  "Empty": "Vuoto"
 
 //
 };

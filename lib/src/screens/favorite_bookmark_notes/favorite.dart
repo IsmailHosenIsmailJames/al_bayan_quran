@@ -15,15 +15,13 @@ class Favorite extends StatelessWidget {
         title: Text("Favorite".tr),
       ),
       drawer: const MyDrawer(),
-      body: ListView(
-        children: list.isEmpty
-            ? [
-                const Center(
-                  child: Text("No Favorite Found."),
-                )
-              ]
-            : list,
-      ),
+      body: list.isEmpty
+          ? Center(
+              child: Text("Empty".tr),
+            )
+          : ListView(
+              children: list,
+            ),
     );
   }
 }

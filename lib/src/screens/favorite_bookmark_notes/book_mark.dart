@@ -17,15 +17,11 @@ class BookMark extends StatelessWidget {
         title: Text("Book Mark".tr),
       ),
       drawer: const MyDrawer(),
-      body: ListView(
-        children: list.isEmpty
-            ? [
-                Center(
-                  child: Text("No Book Mark Found".tr),
-                ),
-              ]
-            : list,
-      ),
+      body: list.isEmpty
+          ? Center(
+              child: Text("Empty".tr),
+            )
+          : ListView(),
     );
   }
 }

@@ -15,15 +15,13 @@ class NotesView extends StatelessWidget {
       appBar: AppBar(
         title: Text("Notes".tr),
       ),
-      body: ListView(
-        children: list.isEmpty
-            ? [
-                const Center(
-                  child: Text("No Notes found"),
-                )
-              ]
-            : list,
-      ),
+      body: list.isEmpty
+          ? Center(
+              child: Text("Empty".tr),
+            )
+          : ListView(
+              children: list,
+            ),
     );
   }
 }
