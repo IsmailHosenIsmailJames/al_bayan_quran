@@ -121,6 +121,8 @@ Map<String, String> zh = {
   "Profile": "个人资料",
   "All Reciters List": "所有诵读者列表",
 
+  "No Book Mark Found": "未找到书签",
+
 //
 };
 Map<String, String> hi = {
@@ -160,6 +162,8 @@ Map<String, String> hi = {
   "Profile": "प्रोफ़ाइल",
   "All Reciters List": "सभी क़ारियों की सूची",
 
+  "No Book Mark Found": "कोई बुकमार्क नहीं मिला",
+
 //
 };
 Map<String, String> en = {
@@ -198,6 +202,8 @@ Map<String, String> en = {
   "Audio": "Audio",
   "Profile": "Profile",
   "All Reciters List": "All Reciters List",
+
+  "No Book Mark Found": "No Book Mark Found",
 
 //
 };
@@ -239,6 +245,8 @@ Map<String, String> es = {
   "Profile": "Perfil",
   "All Reciters List": "Lista de Todos los Recitadores",
 
+  "No Book Mark Found": "No se Encontraron Marcadores",
+
 //
 };
 Map<String, String> ar = {
@@ -275,6 +283,8 @@ Map<String, String> ar = {
   "Audio": "صوت",
   "Profile": "الملف الشخصي",
   "All Reciters List": "قائمة جميع القراء",
+
+  "No Book Mark Found": "لم يتم العثور على أي إشارة مرجعية",
 
 //
 };
@@ -314,6 +324,8 @@ Map<String, String> bn = {
   "Audio": "অডিও",
   "Profile": "প্রোফাইল",
   "All Reciters List": "সকল কিরাতকারের তালিকা",
+
+  "No Book Mark Found": "কোন বুকমার্ক পাওয়া যায়নি",
 
 //
 };
@@ -355,6 +367,8 @@ Map<String, String> pt = {
   "Profile": "Perfil",
   "All Reciters List": "Lista de Todos os Recitadores",
 
+  "No Book Mark Found": "Nenhum Marcador Encontrado",
+
 //
 };
 Map<String, String> ru = {
@@ -394,6 +408,8 @@ Map<String, String> ru = {
   "Profile": "Профиль",
   "All Reciters List": "Список Всех Чтецов Корана",
 
+  "No Book Mark Found": "Закладки не найдены",
+
 //
 };
 Map<String, String> ja = {
@@ -430,6 +446,8 @@ Map<String, String> ja = {
   "Audio": "オーディオ",
   "Profile": "プロフィール",
   "All Reciters List": "すべての暗唱者のリスト",
+
+  "No Book Mark Found": "ブックマークが見つかりません",
 
 //
 };
@@ -468,6 +486,8 @@ Map<String, String> pa = {
   "Audio": "ਆਡੀਓ",
   "Profile": "ਪ੍ਰੋਫਾਈਲ",
   "All Reciters List": "ਸਾਰੇ ਕਾਰੀਆਂ ਦੀ ਸੂਚੀ",
+
+  "No Book Mark Found": "ਕੋਈ ਬੁੱਕਮਾਰਕ ਨਹੀਂ ਮਿਲਿਆ",
 
 //
 };
@@ -509,6 +529,8 @@ Map<String, String> de = {
   "Profile": "Profil",
   "All Reciters List": "Liste aller Rezitatoren",
 
+  "No Book Mark Found": "Keine Lesezeichen gefunden",
+
 //
 };
 Map<String, String> fr = {
@@ -549,6 +571,8 @@ Map<String, String> fr = {
   "Profile": "Profil",
   "All Reciters List": "Liste de Tous les Réciteurs",
 
+  "No Book Mark Found": "Aucun Signet Trouvé",
+
 //
 };
 Map<String, String> id = {
@@ -587,6 +611,8 @@ Map<String, String> id = {
   "Audio": "Audio",
   "Profile": "Profil",
   "All Reciters List": "Daftar Semua Qari",
+
+  "No Book Mark Found": "Tidak Ditemukan Bookmark",
 
 //
 };
@@ -627,6 +653,8 @@ Map<String, String> ur = {
   "Profile": "پروفائل",
   "All Reciters List": "تمام قاریوں کی فہرست",
 
+  "No Book Mark Found": "کوئی بک مارک نہیں ملا",
+
 //
 };
 Map<String, String> sw = {
@@ -666,6 +694,8 @@ Map<String, String> sw = {
   "Profile": "Profaili",
   "All Reciters List": "Orodha ya Wasomaji Wote wa Qur'an",
 
+  "No Book Mark Found": "Hakuna Alamisho Yoyopatikana",
+
 //
 };
 Map<String, String> ko = {
@@ -703,6 +733,8 @@ Map<String, String> ko = {
   "Profile": "프로필",
   "All Reciters List": "모든 암송자 목록",
 
+  "No Book Mark Found": "북마크를 찾을 수 없습니다",
+
 //
 };
 Map<String, String> tr = {
@@ -739,6 +771,8 @@ Map<String, String> tr = {
   "Audio": "Ses",
   "Profile": "Profil",
   "All Reciters List": "Tüm Kur'an Okuma Üstatları Listesi",
+
+  "No Book Mark Found": "Hiç Yer İmi Bulunamadı",
 
 //
 };
@@ -778,6 +812,8 @@ Map<String, String> vi = {
   "Audio": "Âm thanh",
   "Profile": "Hồ sơ",
   "All Reciters List": "Danh sách Tất cả Độc Kinh",
+
+  "No Book Mark Found": "Không Tìm Thấy Dấu Trang",
 
 //
 };
@@ -819,6 +855,8 @@ Map<String, String> ta = {
   "Profile": "பிரொபைல்",
   "All Reciters List": "அனைத்து ஓதுபவர்கள் பட்டியல்",
 
+  "No Book Mark Found": "புத்தகக் குறியீடு எதுவும் காணப்படவில்லை",
+
 //
 };
 Map<String, String> it = {
@@ -857,7 +895,9 @@ Map<String, String> it = {
       "Devi accedere per utilizzare più funzioni. Ad esempio, puoi salvare le tue note nel cloud e accedervi da qualsiasi luogo.",
   "Audio": "Audio",
   "Profile": "Profilo",
-  "All Reciters List": "Elenco di Tutti i Recitatori"
+  "All Reciters List": "Elenco di Tutti i Recitatori",
+
+  "No Book Mark Found": "Nessun Segnalibro Trovato",
 
 //
 };

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../drawer/drawer.dart';
 import 'get_data.dart';
@@ -13,15 +14,15 @@ class BookMark extends StatelessWidget {
     );
     return Scaffold(
       appBar: AppBar(
-        title: const Text("BookMark"),
+        title: Text("Book Mark".tr),
       ),
       drawer: const MyDrawer(),
       body: ListView(
         children: list.isEmpty
             ? [
-                const Center(
-                  child: Text("No Book Mark Found"),
-                )
+                Center(
+                  child: Text("No Book Mark Found".tr),
+                ),
               ]
             : list,
       ),
