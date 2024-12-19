@@ -1587,7 +1587,9 @@ class _HomeMobileState extends State<HomeMobile> with TickerProviderStateMixin {
                     ],
                   ),
                 ),
-              Text(currentReciter.split("(")[0]),
+              currentReciter.split("(")[0] != "-1"
+                  ? Text(currentReciter.split("(")[0])
+                  : const Gap(5),
               Container(
                 margin: const EdgeInsets.only(left: 10, right: 10),
                 height: 60,
